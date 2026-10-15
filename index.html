@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>werf – Stellenbosch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF; --ink:#000000; --grey:#7A7A7A; --soft:#F1F1EE;
+  --duene:#E4561B;                 /* Wüstenorange: einziger Akzent */
+  --wein:98,18,38;                 /* Weinrot der Glasnavigation (RGB) */
+  --f:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --g:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--f);font-variation-settings:"wdth" 100;font-size:16px;line-height:1.45;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit;background:none;border:0;border-radius:0}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{color:inherit;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--duene);outline-offset:2px}
+.wrap{padding-left:var(--g);padding-right:var(--g);max-width:1200px;margin:0 auto}
+.view{display:none}.view.on{display:block}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);column-gap:var(--g)}
+@media(min-width:900px){.grid{grid-template-columns:repeat(12,1fr)}}
+.cond{font-variation-settings:"wdth" 68;font-weight:800;letter-spacing:-.035em;line-height:.86}
+.small{font-size:13px;line-height:1.35}
+.grey{color:var(--grey)}
+.btn{display:inline-block;font-weight:650;font-size:15px;padding:13px 18px;background:var(--ink);color:var(--paper);text-decoration:none;transition:transform .1s ease-out}
+.btn:active{transform:scale(.96)}
+.btn.line{background:var(--soft);color:var(--ink)}
+
+/* Wörter, die beim Erscheinen aus einer Maske gleiten */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.w>span{display:inline-block;transform:translateY(108%);transition:transform 1s cubic-bezier(.2,.9,.1,1) var(--d,0ms)}
+.in .w>span{transform:none}
+
+/* ---------- Kopfleiste: Kanteneffekt statt Linie ---------- */
+.topbar{position:fixed;z-index:30;top:0;left:0;right:0;padding:calc(10px + env(safe-area-inset-top)) var(--g) 22px;display:flex;justify-content:space-between;align-items:baseline;background:linear-gradient(#fff 55%,rgba(255,255,255,0));pointer-events:none;opacity:0;transform:translateY(-12px);transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1)}
+.topbar.on{opacity:1;transform:none}
+.topbar b{font-variation-settings:"wdth" 68;font-weight:800;font-size:24px;letter-spacing:-.03em;line-height:1}
+.topbar span{font-size:13px}
+
+/* ---------- Titel ---------- */
+.hero{position:relative;height:100svh;min-height:600px;display:flex;flex-direction:column}
+.hero-meta{padding-top:calc(14px + env(safe-area-inset-top))}
+.sky{position:relative;flex:1;overflow:hidden}
+.glow{position:absolute;inset:0;background:radial-gradient(120% 60% at 50% 100%,rgba(228,86,27,.28),rgba(228,86,27,0) 70%);opacity:var(--glow,1)}
+.sun{position:absolute;left:50%;bottom:0;width:min(78vw,560px);aspect-ratio:1;border-radius:50%;background:var(--duene);transform:translate(-50%,calc(50% + var(--set,0px)));animation:rise 1.8s cubic-bezier(.25,0,.1,1) .15s backwards;will-change:transform}
+@keyframes rise{from{transform:translate(-50%,108%)}}
+.word{position:absolute;left:var(--g);right:var(--g);bottom:-.075em;line-height:.8}
+.word .in2{display:inline-block;white-space:nowrap;font-variation-settings:"wdth" 62;font-weight:900;letter-spacing:-.06em}
+.word .ch{display:inline-block;animation:drop 1.1s cubic-bezier(.34,1.45,.5,1) backwards;animation-delay:calc(.9s + var(--i) * 90ms);transform:translateY(var(--sink,0px))}
+@keyframes drop{from{transform:translateY(-120%);opacity:0}}
+.horizon{height:3px;background:var(--ink)}
+.land{background:var(--ink);color:var(--paper);padding:18px var(--g) calc(110px + env(safe-area-inset-bottom))}
+.land p{font-size:19px;line-height:1.3;font-weight:500;max-width:24ch}
+.land .small{margin-top:14px;color:#9a9a9a}
+
+.facts4{padding-top:22px;padding-bottom:8px}
+.facts4 b{display:block;font-variation-settings:"wdth" 68;font-weight:800;font-size:46px;line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.facts4 span{font-size:12px}
+
+.shead{padding-top:70px;padding-bottom:6px}
+.shead h2{font-size:clamp(56px,18vw,180px)}
+
+/* ---------- Bilder und Tafeln ---------- */
+.ph{position:relative;overflow:hidden;background:var(--soft)}
+.ph img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(1.03)}
+.plate{position:relative;overflow:hidden;background:var(--ink);color:var(--paper)}
+.plate svg{position:absolute;inset:0;width:100%;height:100%}
+.plate span{position:absolute;left:12px;bottom:-.12em;font-variation-settings:"wdth" 62;font-weight:900;font-size:clamp(150px,56vw,500px);line-height:.8;letter-spacing:-.06em}
+.plate i{position:absolute;right:16px;top:16px;width:18%;aspect-ratio:1;border-radius:50%;background:var(--duene);box-shadow:0 0 30px rgba(228,86,27,.6)}
+
+/* ---------- Ausgabe ---------- */
+.feat{padding-bottom:40px}
+.feat .num{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-end;padding:30px 0 10px}
+.feat .num b{font-variation-settings:"wdth" 62;font-weight:900;font-size:96px;line-height:.78;letter-spacing:-.05em;color:var(--duene);transform:translateY(calc((1 - var(--p,1)) * 60px))}
+.feat .media{grid-column:1/-1;margin:0 calc(var(--g) * -1);aspect-ratio:4/5;cursor:pointer}
+.feat .media > *{width:100%;height:100%}
+.feat .media img{clip-path:inset(0 0 calc((1 - var(--p,1)) * 100%) 0);transform:scale(calc(1.2 - var(--p,1) * .2)) translateY(calc((1 - var(--p,1)) * -30px))}
+.feat h3{grid-column:1/-1;font-size:clamp(58px,19vw,190px);margin:18px 0 18px;overflow-wrap:anywhere}
+.feat dl{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,1fr);column-gap:var(--g);row-gap:10px}
+.feat dt{font-size:12px;color:var(--grey)}
+.feat dd{font-size:15px;font-weight:550}
+.feat .lead{grid-column:1/-1;font-size:20px;line-height:1.3;font-weight:500;margin:22px 0 22px;max-width:30em}
+.feat .btn{grid-column:1/-1;justify-self:start}
+.feat .txt{display:contents}
+@media(min-width:900px){
+  .feat .media{grid-column:1/8;margin:0}
+  .feat .txt{grid-column:8/13;display:grid;grid-template-columns:repeat(5,1fr);column-gap:var(--g);align-content:start}
+  .feat h3{font-size:110px;margin-top:0}
+}
+
+/* ---------- Strecke ---------- */
+.strecke{position:relative;background:var(--ink);color:var(--paper);margin-top:40px}
+.st-sticky{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:26px;padding-bottom:70px}
+.st-head{padding:0 var(--g)}
+.st-head h2{font-size:clamp(52px,16vw,160px)}
+.st-head p{margin-top:10px;color:#9a9a9a;max-width:28em}
+.track{display:flex;padding:0 var(--g);will-change:transform;position:relative}
+.stop{flex:0 0 min(72vw,330px);margin-right:calc(var(--g) * 1.5);transform-origin:50% 60%;will-change:transform,opacity}
+.stop .t{font-variation-settings:"wdth" 62;font-weight:900;font-size:64px;line-height:.85;letter-spacing:-.04em}
+.stop .t em{font-style:normal;color:var(--duene)}
+.stop h4{font-size:22px;font-weight:750;margin:8px 0 4px}
+.stop p{font-size:15px;color:#bdbdbd}
+.stop .media{aspect-ratio:3/2;margin-top:12px}
+.stop .media > *{width:100%;height:100%}
+.stop>button{display:block;width:100%;text-align:left}
+.st-line{position:absolute;left:var(--g);top:-16px;height:3px;border-radius:2px;background:rgba(255,255,255,.12)}
+.st-line i{display:block;height:100%;background:var(--duene);transform-origin:left;transform:scaleX(var(--p,0));box-shadow:0 0 12px rgba(228,86,27,.8)}
+.to-reg{padding-top:70px;padding-bottom:150px}
+.to-reg h2{font-size:clamp(56px,18vw,180px)}
+.to-reg p{font-size:20px;font-weight:500;margin:14px 0 24px;max-width:22em}
+
+/* ---------- Register ---------- */
+.page{padding-top:calc(58px + env(safe-area-inset-top));padding-bottom:150px}
+.page h1{font-size:clamp(64px,22vw,220px);padding-bottom:4px}
+.search{position:sticky;top:calc(44px + env(safe-area-inset-top));z-index:5;background:linear-gradient(#fff 80%,rgba(255,255,255,0));padding:12px 0 14px}
+.search input{width:100%;font-size:20px;font-weight:550;padding:12px 16px;background:var(--soft);border-radius:14px;outline:none;transition:box-shadow .2s}
+.search input:focus{box-shadow:0 0 0 2px var(--duene)}
+.search input::placeholder{color:#9d9d9d}
+.chips{display:flex;overflow-x:auto;scrollbar-width:none;margin:8px calc(var(--g) * -1) 0;padding:0 var(--g)}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:0 0 auto;font-size:14px;font-weight:600;padding:9px 14px 9px 0;margin-right:12px;display:flex;align-items:center;gap:7px}
+.chips button::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--soft);transition:background .25s,box-shadow .25s,transform .35s cubic-bezier(.34,1.6,.5,1)}
+.chips button[aria-pressed="true"]::before{background:var(--duene);box-shadow:0 0 10px rgba(228,86,27,.7);transform:scale(1.25)}
+.count{font-size:13px;color:var(--grey);padding:4px 0 6px}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;background:var(--ink);color:var(--paper);padding:8px var(--g);margin:26px calc(var(--g) * -1) 6px;font-weight:700;font-size:15px}
+.ghead span{font-weight:500;color:#9a9a9a}
+.rows{list-style:none}
+.row{width:100%;display:grid;grid-template-columns:3.2em 1fr auto;align-items:baseline;gap:8px;text-align:left;padding:11px 0;transition:transform .12s ease-out,background-color .12s}
+.row:active{transform:scale(.985);background:var(--soft)}
+.row .n{font-size:13px;color:var(--grey);font-variant-numeric:tabular-nums}
+.row .nm{font-variation-settings:"wdth" 80;font-weight:750;font-size:22px;line-height:1.05;letter-spacing:-.01em}
+.row .tg i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--duene)}
+.empty{padding:24px 0;font-size:18px;font-weight:500;max-width:22em}
+.empty .btn{margin-top:14px}
+
+/* ---------- Karte mit Höhenlinien ---------- */
+.mapbox{position:relative;overflow:hidden;height:min(68svh,600px);margin-top:14px;background:#fff;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.mapbox:active{cursor:grabbing}
+.mapbox svg{position:absolute;left:0;top:0;will-change:transform}
+.mapbox .c{fill:none;stroke:#000;stroke-width:.55;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.mapbox .c.idx{stroke-width:1.2}
+.mapbox .area{font-size:9px;font-weight:800;fill:#000;paint-order:stroke;stroke:#fff;stroke-width:4px;letter-spacing:.02em}
+.mapbox .route{fill:none;stroke:var(--duene);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.mapbox .dot circle.v{fill:#000;stroke:#fff;stroke-width:1.5}
+.mapbox .dot.det circle.v{fill:#fff;stroke:#000;stroke-width:2}
+.mapbox .dot.sel circle.v{fill:var(--duene);stroke:#fff;stroke-width:2}
+.mapbox .dot g{transform-box:fill-box;transform-origin:center}
+.mapbox .ring{fill:none;stroke:var(--duene);stroke-width:2}
+.maphint{position:absolute;left:12px;top:10px;font-size:12px;font-weight:600;background:rgba(255,255,255,.85);padding:4px 8px;border-radius:8px;pointer-events:none;transition:opacity .4s}
+.legend{list-style:none;max-width:720px;margin-top:16px}
+.legend button{width:100%;display:flex;justify-content:space-between;padding:10px 0;font-size:17px;font-weight:650;text-align:left;transition:transform .12s}
+.legend button:active{transform:translateX(6px)}
+.legend span{color:var(--grey);font-weight:500;font-variant-numeric:tabular-nums}
+.mapcard{position:fixed;z-index:35;left:12px;right:12px;bottom:calc(92px + env(safe-area-inset-bottom));max-width:420px;margin:0 auto;background:#fff;border-radius:22px;padding:14px 14px 14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 18px 50px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.08);transform:translateY(var(--y,160px));opacity:var(--o,0);pointer-events:none}
+.mapcard.on{pointer-events:auto}
+.mapcard b{display:block;font-variation-settings:"wdth" 80;font-weight:800;font-size:22px;line-height:1}
+.mapcard span{font-size:13px;color:var(--grey)}
+.mapcard .btn{border-radius:14px}
+
+/* ---------- Glas-Navigation ---------- */
+.nav{position:fixed;z-index:40;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;padding:7px;border-radius:40px;
+  background:rgba(var(--wein),.6);backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%);
+  box-shadow:0 12px 34px rgba(60,0,15,.35),inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(255,255,255,.08);
+  touch-action:none;user-select:none;-webkit-user-select:none;animation:navIn .9s cubic-bezier(.2,.9,.2,1) 1.6s backwards}
+@keyframes navIn{from{transform:translate(-50%,40px) scale(.9);opacity:0;filter:blur(8px)}}
+.nav button{position:relative;z-index:2;width:62px;height:52px;display:grid;place-items:center;color:#fff}
+.nav svg{width:25px;height:25px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .14s ease-out}
+.nav button.press svg{transform:scale(.82)}
+.nav .sun{position:absolute;z-index:1;left:0;top:50%;width:46px;height:46px;margin-top:-23px;border-radius:50%;
+  background:radial-gradient(circle at 38% 34%,#FFC08A 0%,#F7793A 38%,#E4561B 72%);
+  box-shadow:0 0 16px 3px rgba(255,110,40,.7),0 0 44px 12px rgba(255,90,30,.32);will-change:transform}
+.nav .badge{position:absolute;top:5px;right:9px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:#fff;color:rgb(var(--wein));font-size:11px;font-weight:800;display:grid;place-items:center;transform:scale(var(--b,1))}
+.nav .badge:empty{display:none}
+@media (prefers-reduced-transparency:reduce){.nav{background:rgb(var(--wein));backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+/* ---------- Eintrag ---------- */
+.scrim{position:fixed;inset:0;z-index:48;background:#000;opacity:0;pointer-events:none}
+.sheet{position:fixed;inset:0;z-index:50;background:var(--paper);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;visibility:hidden;will-change:transform,clip-path}
+.sheet.open{visibility:visible}
+.sinner{will-change:transform,opacity}
+.sbar{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:calc(8px + env(safe-area-inset-top)) var(--g) 18px;background:linear-gradient(#fff 60%,rgba(255,255,255,0))}
+.sbar button{font-size:15px;font-weight:650;padding:6px 0;display:flex;align-items:center;gap:8px}
+.sbar .grab{position:absolute;left:50%;top:calc(6px + env(safe-area-inset-top));width:38px;height:5px;margin-left:-19px;border-radius:3px;background:#d3d3d0}
+.sbar .dotm{width:11px;height:11px;border-radius:50%;background:var(--soft);transition:background .2s,box-shadow .2s}
+.sbar [aria-pressed="true"] .dotm{background:var(--duene);box-shadow:0 0 10px rgba(228,86,27,.8)}
+.smedia{aspect-ratio:4/5;max-height:76svh;width:100%;overflow:hidden}
+.smedia > *{width:100%;height:100%}
+.sbody{padding-bottom:140px;max-width:760px}
+.sbody .loc{font-size:13px;padding-top:14px}
+.sbody h2{font-size:clamp(58px,19vw,150px);margin:6px 0 16px;overflow-wrap:anywhere}
+.sbody .lead{font-size:20px;line-height:1.3;font-weight:500;margin-bottom:24px}
+.tbl{display:grid;gap:10px}
+.tbl div{display:grid;grid-template-columns:8.5em 1fr;gap:10px;font-size:15px}
+.tbl dt{color:var(--grey)}
+.tbl dd{font-weight:550}
+.sbody .btn{margin-top:22px}
+.sect{margin-top:34px}
+.sect h3{font-size:13px;color:var(--grey);font-weight:600;margin-bottom:6px}
+.sect p{font-size:18px;line-height:1.4}
+.note{font-size:17px;margin-bottom:22px;max-width:28em}
+.bild{margin-top:46px;background:var(--soft);padding:18px;border-radius:18px}
+.bild h3{font-size:20px;font-weight:750}
+.bild p{font-size:15px;color:var(--grey);margin:4px 0 14px;max-width:32em}
+.bild .acts{display:flex;flex-wrap:wrap;gap:10px}
+.bild .btn{border-radius:12px;margin-top:0}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:100px}
+.urlrow{display:flex;gap:10px;margin-top:12px}
+.urlrow input{flex:1;min-width:0;font-size:15px;padding:11px 12px;background:#fff;border-radius:12px;outline:none}
+.status{font-size:14px;margin-top:10px;min-height:1.4em}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:var(--g);margin-top:44px}
+.pager button{text-align:left;padding:10px 0;font-size:17px;font-weight:700}
+.pager button:last-child{text-align:right}
+.pager small{display:block;font-size:12px;color:var(--grey);font-weight:500}
+.swipehint{font-size:12px;color:var(--grey);text-align:center;margin-top:10px}
+
+/* Merken-Flug */
+.fly{position:fixed;z-index:60;left:0;top:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--duene);box-shadow:0 0 14px rgba(228,86,27,.9);pointer-events:none}
+.burst{position:fixed;z-index:59;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;border:2px solid var(--duene);pointer-events:none}
+
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){
+  .sun,.word .ch,.nav{animation:none}
+  .w>span{transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar" id="topbar" aria-hidden="true"><b>werf</b><span id="topTitle">Ausgabe 01</span></header>
+
+<main>
+<!-- ================= AUSGABE ================= -->
+<div class="view on" id="v-ausgabe">
+  <section class="hero">
+    <div class="hero-meta wrap grid small">
+      <div style="grid-column:1/3">Ausgabe 01<br>Oktober 2026</div>
+      <div style="grid-column:3/5">Stellenbosch und Umgebung, Südafrika</div>
+    </div>
+    <div class="sky" id="sky">
+      <div class="glow" id="glow"></div>
+      <div class="sun" id="sun"></div>
+      <div class="word" aria-label="werf"><span class="in2" id="wordIn">werf</span></div>
+    </div>
+    <div class="horizon"></div>
+    <div class="land">
+      <p>Architektur, Kunst, Gärten und Küche der Weingüter. Ohne Wein.</p>
+      <div class="small">Werf: Afrikaans für den Hof eines kapholländischen Guts</div>
+    </div>
+  </section>
+
+  <div class="wrap grid facts4" id="facts4"></div>
+
+  <div class="wrap shead"><h2 class="cond rv">In dieser Ausgabe</h2></div>
+  <div id="feats"></div>
+
+  <section class="strecke" id="strecke">
+    <div class="st-sticky">
+      <div class="st-head"><h2 class="cond rv">Skulpturen an einem Tag</h2><p>Vier Güter, eine Route. Von den Gärten am Morgen bis zur Galerie am späten Nachmittag.</p></div>
+      <div class="track" id="track"><div class="st-line" id="stLine"><i></i></div></div>
+    </div>
+  </section>
+
+  <section class="wrap to-reg">
+    <h2 class="cond rv">Register</h2>
+    <p id="regTeaser"></p>
+    <button class="btn" data-view="register">Register öffnen</button>
+  </section>
+</div>
+
+<!-- ================= REGISTER ================= -->
+<div class="view" id="v-register">
+  <section class="wrap page">
+    <h1 class="cond rv">Register</h1>
+    <div class="search">
+      <input id="q" type="search" placeholder="Weingut oder Gebiet suchen" autocomplete="off" aria-label="Weingut oder Gebiet suchen">
+      <div class="chips" id="chips" role="group" aria-label="Nach Schwerpunkt filtern"></div>
+    </div>
+    <p class="count" id="count" aria-live="polite"></p>
+    <div id="groups"></div>
+  </section>
+</div>
+
+<!-- ================= KARTE ================= -->
+<div class="view" id="v-karte">
+  <section class="wrap page">
+    <h1 class="cond rv">Karte</h1>
+    <p class="small grey" style="margin-top:8px;max-width:30em">Schematisch, funktioniert offline. Weiße Punkte haben einen ausführlichen Eintrag, die orange Linie ist die Tagesroute.</p>
+    <div class="mapbox" id="mapbox"><svg id="map" aria-label="Höhenlinienkarte aller Weingüter" role="img"></svg><div class="maphint" id="maphint">Karte mit dem Finger verschieben</div></div>
+    <ul class="legend" id="legend"></ul>
+  </section>
+</div>
+
+<!-- ================= MERKLISTE ================= -->
+<div class="view" id="v-merkliste">
+  <section class="wrap page">
+    <h1 class="cond rv">Merkliste</h1>
+    <div id="savedList"></div>
+  </section>
+</div>
+</main>
+
+<div class="mapcard" id="mapcard" aria-live="polite"><div><b id="mcName"></b><span id="mcArea"></span></div><button class="btn" id="mcOpen">Öffnen</button></div>
+
+<nav class="nav" id="nav" aria-label="Navigation">
+  <div class="sun" id="navSun" aria-hidden="true"></div>
+  <button data-tab="ausgabe" aria-label="Ausgabe"><svg viewBox="0 0 24 24"><rect x="4.5" y="3" width="15" height="18" rx="1.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></button>
+  <button data-tab="register" aria-label="Register"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.6" cy="6" r=".9" fill="#fff"/><circle cx="4.6" cy="12" r=".9" fill="#fff"/><circle cx="4.6" cy="18" r=".9" fill="#fff"/></svg></button>
+  <button data-tab="karte" aria-label="Karte"><svg viewBox="0 0 24 24"><path d="M12 3c5.2 0 9 3.6 9 8.6S16.6 21 12 21 3 16.4 3 11.3 6.8 3 12 3z"/><path d="M12.2 7.6c2.7 0 4.6 1.9 4.6 4.2s-2 4.6-4.6 4.6-4.8-2.2-4.8-4.5 2.1-4.3 4.8-4.3z"/><circle cx="12" cy="12" r="1" fill="#fff"/></svg></button>
+  <button data-tab="merkliste" aria-label="Merkliste"><svg viewBox="0 0 24 24"><path d="M6.5 3.5h11v17L12 16.4l-5.5 4.1z"/></svg><span class="badge" id="badge"></span></button>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Eintrag"><div class="sinner" id="sinner"></div></div>
+
+<script>
+/* =========================================================
+   DATEN – später aus der Excel (eine Zeile = ein Gut)
+   ========================================================= */
+const RESSORTS={architektur:"Architektur",kunst:"Kunst",garten:"Garten",kueche:"Küche"};
+const TBD="Folgt aus der Tabelle";
+const GEBIETE={
+  simonsberg:{name:"Simonsberg",lat:-33.865,lng:18.885},
+  helshoogte:{name:"Helshoogte und Banghoek",lat:-33.912,lng:18.935},
+  jonkershoek:{name:"Stadt und Jonkershoek",lat:-33.940,lng:18.885},
+  bottelary:{name:"Bottelary und Devon Valley",lat:-33.895,lng:18.775},
+  west:{name:"Polkadraai und Stellenbosch-West",lat:-33.965,lng:18.765},
+  annandale:{name:"Annandale und Blaauwklippen",lat:-33.995,lng:18.860},
+  helderberg:{name:"Helderberg und Somerset West",lat:-34.055,lng:18.885},
+};
+const DETAIL=[
+ {id:"delaire",name:"Delaire Graff",gebiet:"helshoogte",ort:"Helshoogte-Pass",lat:-33.920,lng:18.922,
+  bild:"https://afar.brightspotcdn.com/dims4/default/7b6c89b/2147483647/strip/true/crop/1800x900+0+73/resize/1440x720!/quality/90/?url=https%3A%2F%2Fk3-prod-afar-media.s3.us-west-2.amazonaws.com%2Fbrightspot%2F82%2Fff%2F59c8c7d3a37ec3f2f858922d7e40%2Foriginal-fa60c4f5feef4592aa7be285fa40c2ad.jpg",
+  lead:"Ein Gut wie eine Galerie mit Aussicht. Hoch am Helshoogte-Pass treffen zeitgenössische Bauten auf eine der großen Kunstsammlungen des Landes.",
+  architektur:"Zeitgenössische Baukörper, die sich in den Hang legen und den Blick über das Tal rahmen.",
+  kunst:"Im Garten stehen Skulpturen von Anton Smit und Dylan Lewis. In Lounge und Restaurants hängen unter anderem Werke von William Kentridge und Deborah Bell.",
+  garten:"Angelegte Gärten zwischen den Skulpturen, offen zu den Weinbergen.",
+  kueche:"Mehrere Restaurants auf dem Gut. Ein Tisch sollte vorab reserviert werden.",
+  adresse:"Helshoogte Pass (R310), Stellenbosch",zeiten:TBD,reservierung:"Empfohlen",kinder:TBD},
+ {id:"tokara",name:"Tokara",gebiet:"helshoogte",ort:"Kuppe des Helshoogte-Passes",lat:-33.915,lng:18.913,
+  bild:"https://media.timeout.com/images/106003665/image.jpg",
+  lead:"Klare Glasarchitektur ganz oben am Pass, mit Blick zurück über das Tal und einer Kunstsammlung, die schon am Eingang beginnt.",
+  architektur:"Große Glasflächen geben den Blick in die Kellerei frei. Das Haus öffnet sich zum Tal.",
+  kunst:"Das Restaurant hat eine eigene Galerie. Im Garten stehen großformatige Skulpturen.",
+  garten:"Üppige, grüne Gärten voller Skulpturen, für alle Besucher zugänglich.",
+  kueche:"Tokara Restaurant mit Weinlounge.",
+  adresse:"Helshoogte Pass (R310), Stellenbosch",zeiten:TBD,reservierung:"Empfohlen",kinder:TBD},
+ {id:"spier",name:"Spier",gebiet:"west",ort:"Lynedoch",lat:-33.973,lng:18.783,
+  bild:"https://afar.brightspotcdn.com/dims4/default/b691135/2147483647/strip/true/crop/1800x900+0+150/resize/1440x720!/quality/90/?url=https%3A%2F%2Fk3-prod-afar-media.s3.us-west-2.amazonaws.com%2Fbrightspot%2F91%2Fbb%2F46f60b84fd9daa975088ba5b4354%2Foriginal-bc0a1983a731b28f21aa908e4a837978.jpg",
+  lead:"Eines der ältesten Güter der Region, gegründet 1692. Gekalkte Bauten unter Eichen, eine eigene Sammlung und viel Platz zum Draußensein.",
+  architektur:"Historische kapholländische Gebäude mit gekalkten Wänden und geschwungenen Giebeln.",
+  kunst:"Die Spier Art Collection: Skulpturen und Arbeiten sind über das ganze Gelände verteilt.",
+  garten:"Weitläufiges Gelände für Picknick und lange Spaziergänge.",
+  kueche:"Picknick im Grünen und Restaurant.",
+  adresse:"Baden Powell Drive (R310), Lynedoch",zeiten:TBD,reservierung:TBD,kinder:TBD},
+ {id:"blaauwklippen",name:"Blaauwklippen",gebiet:"annandale",ort:"Am südlichen Stadtrand",lat:-33.977,lng:18.848,
+  lead:"Ein entspanntes Familiengut mit kapholländischem Ensemble und einer Galerie mitten im Verkostungshaus.",
+  architektur:"Historische Gebäude im kapholländischen Stil unter alten Bäumen.",
+  kunst:"Die IS Art Gallery im Tasting House lohnt den Besuch für sich allein.",
+  kueche:"Unkomplizierte Küche und Pairings.",
+  adresse:"Blaauwklippen Road (R44), Stellenbosch",zeiten:TBD,reservierung:TBD,kinder:"Ja, ausdrücklich familienfreundlich"},
+ {id:"lanzerac",name:"Lanzerac",gebiet:"jonkershoek",ort:"Eingang zum Jonkershoek-Tal",lat:-33.938,lng:18.893,
+  bild:"https://www.sleepermagazine.com/wp-content/uploads/2016/09/Lanzerac-2.jpg",
+  lead:"Das klassische Bild der Winelands: ein kapholländisches Herrenhaus unter Eichen, eingerahmt von den Jonkershoek-Bergen.",
+  architektur:"Gekalkte Wände, geschwungene Giebel, grüne Fensterläden.",
+  garten:"Hotelgärten mit altem Baumbestand vor der Bergkulisse.",
+  kueche:"Restaurant im historischen Hotel.",
+  adresse:"Jonkershoek Road, Stellenbosch",zeiten:TBD,reservierung:TBD,kinder:TBD},
+ {id:"waterford",name:"Waterford",gebiet:"annandale",ort:"Blaauwklippen-Tal",lat:-33.998,lng:18.873,
+  lead:"Gebaut wie ein kleines Dorf um einen Innenhof mit Brunnen. Hier zählt vor allem der Ort selbst.",
+  architektur:"Ein Hof mit Brunnen, umgeben von Arkaden und warmen Putzfassaden.",
+  kueche:"Bekannt für das Pairing mit Schokolade.",
+  adresse:"Blaauwklippen Road, Stellenbosch",zeiten:TBD,reservierung:TBD,kinder:TBD},
+ {id:"cavalli",name:"Cavalli",gebiet:"helderberg",ort:"Richtung Somerset West",lat:-34.022,lng:18.850,
+  bild:"https://mapmyway.co.za/wp-content/uploads/2023/03/southern_guild_cavalli_estate_on_lines_and_lineage.jpg",
+  lead:"Ein junges Gut mit Pferdezucht, ruhiger moderner Architektur und einer Galerie für südafrikanische Kunst.",
+  architektur:"Klare, flache Baukörper in der offenen Landschaft.",
+  kunst:"Die Galerie ist architektonisch von Cy Twomblys Galerie in Houston inspiriert. Gezeigt wird südafrikanische Kunst.",
+  kueche:"Restaurant mit Blick in die Landschaft.",
+  adresse:"R44, zwischen Stellenbosch und Somerset West",zeiten:TBD,reservierung:TBD,kinder:TBD},
+];
+const TEST={
+  simonsberg:["Kanonkop","Warwick","Muratie","Delheim","Rustenberg","Glenelly","Le Bonheur","Remhoogte","Uitkyk","Knorhoek"],
+  helshoogte:["Thelema","Oldenburg","Rainbow's End","Camberley","Zorgvliet"],
+  jonkershoek:["Stark-Condé","Neil Ellis"],
+  bottelary:["Simonsig","Hartenberg","Kaapzicht","Mooiplaas","Bellevue","Beyerskloof","Clos Malverne","Stellenrust","Hazendal"],
+  west:["Neethlingshof","Jordan","Asara","Saxenburg","Meerlust","Kleine Zalze","Mulderbosch"],
+  annandale:["Rust en Vrede","Dornier","Ernie Els","Haskell","Alto","Peter Falke"],
+  helderberg:["Vergelegen","Morgenster","Lourensford","Waterkloof","Ken Forrester","Avontuur","Uva Mira","Cordoba"],
+};
+const FEATURED=["delaire","tokara","lanzerac"];
+const ROUTE=[
+ {id:"delaire",zeit:"09:30",text:"Gärten und Skulpturen im Morgenlicht, bevor es voll wird."},
+ {id:"tokara",zeit:"11:30",text:"Zwei Minuten weiter: Skulpturengarten, danach Mittag mit Galerie."},
+ {id:"spier",zeit:"14:30",text:"Die Sammlung über das ganze Gelände verteilt, gut zu Fuß."},
+ {id:"cavalli",zeit:"16:30",text:"Zum Schluss die Galerie, wenn das Licht flacher wird."},
+];
+
+/* ---------- Hilfen ---------- */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const f=n=>Math.round(n*10)/10;
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const pad=(n,l=3)=>String(n).padStart(l,"0");
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),ease=p=>1-Math.pow(1-p,3),lerp=(a,b,t)=>a+(b-a)*t;
+function hash(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function rng(seed){let s=seed>>>0;return()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296}}
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const ESTATES=[...DETAIL];
+for(const [g,names] of Object.entries(TEST))for(const name of names){
+  const id=norm(name).replace(/[^a-z0-9]+/g,"-"),r=rng(hash(id));
+  ESTATES.push({id,name,gebiet:g,ort:GEBIETE[g].name,test:true,lat:GEBIETE[g].lat+(r()-.5)*.035,lng:GEBIETE[g].lng+(r()-.5)*.04,adresse:TBD,zeiten:TBD,reservierung:TBD,kinder:TBD});
+}
+ESTATES.sort((a,b)=>a.name.localeCompare(b.name,"de"));
+ESTATES.forEach((e,i)=>{e.nr=i+1;e.ressorts=Object.keys(RESSORTS).filter(k=>e[k]);e.key=norm(e.name+" "+GEBIETE[e.gebiet].name+" "+(e.ort||""))});
+const byId=Object.fromEntries(ESTATES.map(e=>[e.id,e]));
+
+/* =========================================================
+   FEDERPHYSIK (Apple: Dämpfung + Antwortzeit statt Masse/Steifigkeit)
+   ========================================================= */
+const running=new Set();let rafOn=false,lastT=0;
+function loop(t){const dt=Math.min(.034,(t-lastT)/1000||.016);lastT=t;
+  for(const s of [...running]){s.step(dt);s.cb?.(s.x,s.v);if(s.done){running.delete(s);const d=s.onDone;s.onDone=null;d?.()}}
+  if(running.size)requestAnimationFrame(loop);else rafOn=false}
+class Spring{
+  constructor(x,o={}){this.x=x;this.v=0;this.t=x;this.eps=o.eps??.3;this.cb=o.onUpdate;this.cfg(o.response??.4,o.damping??1)}
+  cfg(r,d){this.r=r;this.dz=d;this.k=(2*Math.PI/r)**2;this.c=4*Math.PI*d/r;return this}
+  to(t,o={}){this.t=t;if(o.velocity!=null)this.v=o.velocity;this.cfg(o.response??this.r,o.damping??this.dz);this.onDone=o.onDone;this.done=false;
+    if(RM){this.x=t;this.v=0;this.cb?.(t,0);const d=this.onDone;this.onDone=null;d?.();return this}
+    running.add(this);if(!rafOn){rafOn=true;lastT=performance.now();requestAnimationFrame(loop)}return this}
+  set(x){this.x=x;this.t=x;this.v=0;running.delete(this);this.cb?.(x,0);return this}
+  step(dt){const n=Math.max(1,Math.ceil(dt/.004)),h=dt/n;for(let i=0;i<n;i++){const a=-this.k*(this.x-this.t)-this.c*this.v;this.v+=a*h;this.x+=this.v*h}
+    if(Math.abs(this.x-this.t)<this.eps&&Math.abs(this.v)<this.eps*4){this.x=this.t;this.v=0;this.done=true}}
+}
+/* Schwung voraussagen (Apple-Projektionsfunktion) */
+const project=(v,d=.998)=>v/1000*d/(1-d);
+/* Gummiband an Grenzen */
+const rubber=(o,dim,c=.55)=>o*dim*c/(dim+c*Math.abs(o));
+/* Geschwindigkeit aus den letzten Bewegungen */
+class Tracker{constructor(){this.h=[]}add(x,y){const t=performance.now();this.h.push({x,y,t});while(this.h.length>2&&t-this.h[0].t>100)this.h.shift()}
+  vel(){const h=this.h;if(h.length<2)return{x:0,y:0};const a=h[0],b=h[h.length-1],dt=Math.max(.008,(b.t-a.t)/1000);return{x:(b.x-a.x)/dt,y:(b.y-a.y)/dt}}reset(){this.h=[]}}
+
+/* =========================================================
+   GELÄNDE UND HÖHENLINIEN
+   ========================================================= */
+const PEAKS=[[-33.852,18.935,1,.028],[-33.968,18.952,.95,.032],[-34.055,18.925,.9,.028],[-33.893,18.956,.6,.022],[-33.935,18.842,.22,.009],[-33.892,18.742,.42,.026],[-34.02,18.79,.18,.03]];
+function terrain(lat,lng){let h=0;for(const [a,b,H,s] of PEAKS){const d2=((lat-a)/s)**2+((lng-b)/(s*1.15))**2;h+=H*Math.exp(-d2/2)}
+  return h+.018*Math.sin(lng*160+lat*70)+.012*Math.sin(lat*210-lng*95)}
+/* Marching Squares: Liniensegmente je Höhenstufe, als Pfad */
+const CASES={1:[[3,2]],2:[[2,1]],3:[[3,1]],4:[[0,1]],5:[[3,2],[0,1]],6:[[0,2]],7:[[3,0]],8:[[3,0]],9:[[0,2]],10:[[3,0],[2,1]],11:[[0,1]],12:[[3,1]],13:[[2,1]],14:[[3,2]]};
+function contours(fn,nx,ny,levels,toX,toY){
+  const V=[];for(let j=0;j<ny;j++){V[j]=[];for(let i=0;i<nx;i++)V[j][i]=fn(i/(nx-1),j/(ny-1))}
+  let mn=Infinity,mx=-Infinity;for(const r of V)for(const v of r){if(v<mn)mn=v;if(v>mx)mx=v}
+  const out=[];
+  for(let l=1;l<=levels;l++){const L=mn+(mx-mn)*l/(levels+1);let d="";
+    for(let j=0;j<ny-1;j++)for(let i=0;i<nx-1;i++){
+      const a=V[j][i],b=V[j][i+1],c=V[j+1][i+1],e=V[j+1][i];
+      const k=(a>L?8:0)|(b>L?4:0)|(c>L?2:0)|(e>L?1:0);if(!k||k===15)continue;
+      const P=[[i+(L-a)/(b-a),j],[i+1,j+(L-b)/(c-b)],[i+(L-e)/(c-e),j+1],[i,j+(L-a)/(e-a)]];
+      for(const [p,q] of CASES[k])d+=`M${f(toX(P[p][0]))} ${f(toY(P[p][1]))}L${f(toX(P[q][0]))} ${f(toY(P[q][1]))}`;
+    }
+    out.push({d,idx:l%4===0});
+  }
+  return out;
+}
+/* Tafel: lokale Höhenlinien rund um das Gut, Anfangsbuchstabe, Sonne */
+const plateCache={};
+function plateSvg(e){
+  if(plateCache[e.id])return plateCache[e.id];
+  const W=400,H=500,s=.03;
+  const cs=contours((u,v)=>terrain(e.lat+s*(.5-v)*1.25,e.lng+s*(u-.5)),34,42,11,i=>i/33*W,j=>j/41*H);
+  return plateCache[e.id]=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${cs.map(c=>`<path d="${c.d}" fill="none" stroke="#fff" stroke-opacity="${c.idx?.55:.28}" stroke-width="${c.idx?1.4:.8}"/>`).join("")}</svg>`;
+}
+
+/* ---------- Bilder ---------- */
+const IMG={};
+const src=e=>IMG[e.id]||e.bild||"";
+const plate=e=>`<div class="plate" data-plate="${e.id}">${plateSvg(e)}<span>${esc(e.name[0])}</span><i></i></div>`;
+const media=e=>src(e)?`<div class="ph" data-id="${e.id}"><img src="${esc(src(e))}" alt="${esc(e.name)}" referrerpolicy="no-referrer" decoding="async"></div>`:plate(e);
+document.addEventListener("error",ev=>{const im=ev.target;if(im.tagName==="IMG"&&im.parentNode?.classList.contains("ph")){im.parentNode.outerHTML=plate(byId[im.parentNode.dataset.id])}},true);
+
+/* ---------- Speicher ---------- */
+let saved=[];
+try{saved=JSON.parse(localStorage.getItem("werf-merkliste")||"[]")}catch(_){saved=[]}
+const DB={db:null,
+  open(){return new Promise(res=>{try{const r=indexedDB.open("werf",2);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains("bilder"))r.result.createObjectStore("bilder")};r.onsuccess=()=>{this.db=r.result;res()};r.onerror=()=>res();r.onblocked=()=>res()}catch(_){res()}})},
+  store(m){try{return this.db.transaction("bilder",m).objectStore("bilder")}catch(_){return null}},
+  all(){return new Promise(res=>{const s=this.store("readonly"),out={};if(!s)return res(out);try{const c=s.openCursor();c.onsuccess=()=>{const k=c.result;if(k){out[k.key]=k.value;k.continue()}else res(out)};c.onerror=()=>res(out)}catch(_){res(out)}})},
+  put(k,v){return new Promise(res=>{const s=this.store("readwrite");if(!s)return res(false);try{const r=s.put(v,k);r.onsuccess=()=>res(true);r.onerror=()=>res(false)}catch(_){res(false)}})},
+  del(k){return new Promise(res=>{const s=this.store("readwrite");if(!s)return res(false);try{const r=s.delete(k);r.onsuccess=()=>res(true);r.onerror=()=>res(false)}catch(_){res(false)}})},
+};
+
+/* =========================================================
+   WORT-REVEALS (Überschriften gleiten aus einer Maske)
+   ========================================================= */
+function split(el){if(el.dataset.split)return;el.dataset.split=1;el.innerHTML=el.textContent.trim().split(/\s+/).map((w,i)=>`<span class="w"><span style="--d:${i*80}ms">${esc(w)}</span></span>`).join(" ")}
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target)}}),{threshold:.25});
+function reveal(root=document){root.querySelectorAll(".rv").forEach(el=>{split(el);if(RM)el.classList.add("in");else if(!el.classList.contains("in"))io.observe(el)})}
+
+/* =========================================================
+   AUSGABE
+   ========================================================= */
+$("#wordIn").innerHTML=[..."werf"].map((c,i)=>`<span class="ch" style="--i:${i}">${c}</span>`).join("");
+$("#facts4").innerHTML=[[1,"Ausgabe"],[FEATURED.length,"Beiträge"],[ESTATES.length,"Güter im Register"],[Object.keys(GEBIETE).length,"Gebiete"]]
+  .map(([n,l])=>`<div><b data-count="${n}">00</b><span>${l}</span></div>`).join("");
+/* Zahlen zählen hoch, sobald sie sichtbar werden */
+const ioCount=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;ioCount.unobserve(en.target);const el=en.target,n=+el.dataset.count;
+  if(RM){el.textContent=pad(n,2);return}new Spring(0,{response:.9,damping:1,eps:.05,onUpdate:x=>el.textContent=pad(Math.round(x),2)}).to(n)}),{threshold:.6});
+$$("[data-count]").forEach(el=>ioCount.observe(el));
+$("#regTeaser").textContent=`Alle ${ESTATES.length} Weingüter, durchsuchbar und nach Gebiet geordnet.`;
+
+function renderAusgabe(){
+  $("#feats").innerHTML=FEATURED.map((id,i)=>{const e=byId[id];return `<article class="feat wrap grid" data-scrub>
+    <div class="num"><b>${pad(i+1,2)}</b><span class="small">${esc(GEBIETE[e.gebiet].name)}</span></div>
+    <div class="media" data-open="${e.id}">${media(e)}</div>
+    <div class="txt">
+      <h3 class="cond rv">${esc(e.name)}</h3>
+      <dl><div><dt>Lage</dt><dd>${esc(e.ort)}</dd></div><div><dt>Schwerpunkte</dt><dd>${e.ressorts.map(k=>RESSORTS[k]).join(", ")}</dd></div></dl>
+      <p class="lead">${esc(e.lead)}</p>
+      <button class="btn" data-open="${e.id}" data-from=".media">Eintrag öffnen</button>
+    </div></article>`}).join("");
+  $$("#track .stop").forEach(n=>n.remove());
+  $("#track").insertAdjacentHTML("beforeend",ROUTE.map(s=>{const e=byId[s.id];const [h,m]=s.zeit.split(":");return `<div class="stop"><button data-open="${e.id}" data-from=".media">
+    <div class="t">${h}<em>:</em>${m}</div><h4>${esc(e.name)}</h4><p>${esc(s.text)}</p><div class="media">${media(e)}</div></button></div>`}).join(""));
+  reveal($("#v-ausgabe"));layout();
+}
+
+/* =========================================================
+   REGISTER
+   ========================================================= */
+let filter="alle",query="",visibleIds=ESTATES.map(e=>e.id);
+$("#chips").innerHTML=[["alle","Alle"],...Object.entries(RESSORTS)].map(([k,v])=>`<button data-f="${k}" aria-pressed="${k==="alle"}">${v}</button>`).join("");
+const row=e=>`<li><button class="row" data-open="${e.id}"><span class="n">${pad(e.nr)}</span><span class="nm">${esc(e.name)}</span><span class="tg">${e.test?"":"<i title='Ausführlicher Eintrag'></i>"}</span></button></li>`;
+function stagger(nodes,max=18){if(RM)return;nodes.slice(0,max).forEach((n,i)=>n.animate([{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],{duration:560,delay:i*26,easing:"cubic-bezier(.2,.9,.2,1)",fill:"backwards"}))}
+function renderRegister(){
+  const q=norm(query.trim());
+  const list=ESTATES.filter(e=>(filter==="alle"||e.ressorts.includes(filter))&&(!q||e.key.includes(q)));
+  visibleIds=list.map(e=>e.id);
+  $("#count").textContent=(q||filter!=="alle")?`${list.length} von ${ESTATES.length} Weingütern`:`${ESTATES.length} Weingüter in ${Object.keys(GEBIETE).length} Gebieten. Orange markiert: ausführlicher Eintrag.`;
+  if(!list.length){$("#groups").innerHTML=`<div class="empty">Kein Weingut gefunden. Prüfe die Schreibweise oder setze den Filter zurück.<br><button class="btn line" id="reset">Filter zurücksetzen</button></div>`;return}
+  $("#groups").innerHTML=Object.entries(GEBIETE).map(([g,G])=>{const items=list.filter(e=>e.gebiet===g);if(!items.length)return "";
+    return `<section id="grp-${g}"><div class="ghead">${esc(G.name)}<span>${items.length}</span></div><ul class="rows">${items.map(row).join("")}</ul></section>`}).join("");
+  stagger($$("#groups .ghead, #groups .row"));
+}
+$("#q").addEventListener("input",ev=>{query=ev.target.value;renderRegister()});
+$("#chips").addEventListener("click",ev=>{const b=ev.target.closest("[data-f]");if(!b)return;filter=b.dataset.f;$$("#chips [data-f]").forEach(c=>c.setAttribute("aria-pressed",c===b));renderRegister()});
+$("#groups").addEventListener("click",ev=>{if(ev.target.id==="reset"){filter="alle";query="";$("#q").value="";$$("#chips [data-f]").forEach(c=>c.setAttribute("aria-pressed",c.dataset.f==="alle"));renderRegister()}});
+
+/* =========================================================
+   KARTE: Höhenlinien, mit dem Finger verschiebbar, mit Schwung
+   ========================================================= */
+const MW=560,MH=740,B={n:-33.84,s:-34.09,w:18.72,e:18.97};
+const X=lng=>(lng-B.w)/(B.e-B.w)*MW,Y=lat=>(B.n-lat)/(B.n-B.s)*MH;
+let mapBuilt=false,picked=null;
+function buildMap(){
+  const cs=contours((u,v)=>terrain(lerp(B.n,B.s,v),lerp(B.w,B.e,u)),70,92,13,i=>i/69*MW,j=>j/91*MH);
+  let s=`<rect width="${MW}" height="${MH}" fill="#fff"/>`;
+  s+=cs.map((c,i)=>`<path class="c${c.idx?" idx":""}" pathLength="1" style="--k:${i}" d="${c.d}"/>`).join("");
+  Object.values(GEBIETE).forEach(G=>{s+=`<text class="area" x="${f(X(G.lng))}" y="${f(Y(G.lat)-30)}" text-anchor="middle">${esc(G.name.split(" und ")[0])}</text>`});
+  s+=`<path class="route" pathLength="1" d="M${ROUTE.map(st=>{const e=byId[st.id];return f(X(e.lng))+" "+f(Y(e.lat))}).join(" L")}"/>`;
+  s+=`<g id="rings"></g>`;
+  ESTATES.slice().sort((a,b)=>!a.test-!b.test).forEach(e=>{const x=f(X(e.lng)),y=f(Y(e.lat)),det=!e.test;
+    s+=`<g class="dot${det?" det":""}" data-pick="${e.id}" role="button" tabindex="0" aria-label="${esc(e.name)}"><g><circle class="hit" cx="${x}" cy="${y}" r="16" fill="transparent"/><circle class="v" cx="${x}" cy="${y}" r="${det?7:5}"/></g></g>`});
+  const svg=$("#map");svg.setAttribute("viewBox",`0 0 ${MW} ${MH}`);svg.setAttribute("width",MW);svg.setAttribute("height",MH);svg.innerHTML=s;
+  $("#legend").innerHTML=Object.entries(GEBIETE).map(([g,G])=>`<li><button data-area="${g}">${esc(G.name)}<span>${pad(ESTATES.filter(e=>e.gebiet===g).length,2)}</span></button></li>`).join("");
+  mapBuilt=true;
+}
+/* Kartenposition als zwei unabhängige Federn (X und Y) */
+const mapS={x:0,y:0};
+const panX=new Spring(0,{onUpdate:v=>{mapS.x=v;applyPan()}}),panY=new Spring(0,{onUpdate:v=>{mapS.y=v;applyPan()}});
+function applyPan(){$("#map").style.transform=`translate3d(${mapS.x}px,${mapS.y}px,0)`}
+function bounds(){const box=$("#mapbox");return{minX:Math.min(0,box.clientWidth-MW),minY:Math.min(0,box.clientHeight-MH)}}
+function centerOn(lat,lng,anim=true){const box=$("#mapbox"),b=bounds();const tx=clamp(box.clientWidth/2-X(lng),b.minX,0),ty=clamp(box.clientHeight/2-Y(lat),b.minY,0);
+  if(anim){panX.to(tx,{response:.55});panY.to(ty,{response:.55})}else{panX.set(tx);panY.set(ty)}}
+function enterMap(){
+  if(!mapBuilt)buildMap();
+  centerOn(-33.94,18.86,false);
+  if(RM){$$("#map .c,#map .route").forEach(p=>p.style.strokeDashoffset=0);return}
+  /* Höhenlinien zeichnen sich wie ein Plotter, dann die Route, dann ploppen die Punkte auf */
+  $$("#map .c").forEach((p,i)=>p.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:1500,delay:i*55,easing:"cubic-bezier(.5,0,.2,1)",fill:"forwards"}));
+  $("#map .route").animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:1200,delay:900,easing:"cubic-bezier(.6,0,.2,1)",fill:"forwards"});
+  const cx=MW*.55,cy=MH*.45;
+  $$("#map .dot>g").forEach(g=>{const c=g.querySelector(".v"),d=Math.hypot(c.cx.baseVal.value-cx,c.cy.baseVal.value-cy);
+    g.animate([{transform:"scale(0)"},{transform:"scale(1.35)",offset:.6},{transform:"scale(1)"}],{duration:520,delay:500+d*2.2,easing:"cubic-bezier(.3,1.3,.5,1)",fill:"backwards"})});
+}
+/* Ziehen mit 1:1-Verfolgung, Gummiband und Schwung */
+(()=>{const box=$("#mapbox"),tr=new Tracker();let st=null;
+  box.addEventListener("pointerdown",e=>{box.setPointerCapture(e.pointerId);running.delete(panX);running.delete(panY);
+    st={x0:e.clientX,y0:e.clientY,mx:mapS.x,my:mapS.y,moved:false,dot:e.target.closest("[data-pick]")};tr.reset();tr.add(e.clientX,e.clientY);
+    if(st.dot)st.dot.firstElementChild.animate([{transform:"scale(1)"},{transform:"scale(1.4)"}],{duration:140,fill:"forwards",easing:"ease-out"})});
+  box.addEventListener("pointermove",e=>{if(!st)return;const dx=e.clientX-st.x0,dy=e.clientY-st.y0;
+    if(!st.moved&&Math.hypot(dx,dy)>8){st.moved=true;$("#maphint").style.opacity=0}
+    if(!st.moved)return;tr.add(e.clientX,e.clientY);const b=bounds();
+    let x=st.mx+dx,y=st.my+dy;
+    if(x>0)x=rubber(x,box.clientWidth);if(x<b.minX)x=b.minX+rubber(x-b.minX,box.clientWidth);
+    if(y>0)y=rubber(y,box.clientHeight);if(y<b.minY)y=b.minY+rubber(y-b.minY,box.clientHeight);
+    panX.set(x);panY.set(y)});
+  const end=e=>{if(!st)return;const s=st;st=null;
+    if(s.dot)s.dot.firstElementChild.animate([{transform:"scale(1.4)"},{transform:"scale(1)"}],{duration:380,fill:"forwards",easing:"cubic-bezier(.3,1.6,.5,1)"});
+    if(!s.moved){if(s.dot)pick(s.dot.dataset.pick);return}
+    const v=tr.vel(),b=bounds();
+    const tx=clamp(mapS.x+project(v.x,.995),b.minX,0),ty=clamp(mapS.y+project(v.y,.995),b.minY,0);
+    panX.to(tx,{velocity:v.x,response:.6,damping:.9});panY.to(ty,{velocity:v.y,response:.6,damping:.9})};
+  box.addEventListener("pointerup",end);box.addEventListener("pointercancel",end);
+})();
+/* Punkt wählen: Puls in Orange, Karte folgt, Karte schwebt herein */
+const mcY=new Spring(160,{onUpdate:v=>{const c=$("#mapcard");c.style.setProperty("--y",v+"px");c.style.setProperty("--o",clamp(1-v/140))}});
+function pick(id){
+  picked=id;$$("#map .dot").forEach(d=>d.classList.toggle("sel",d.dataset.pick===id));
+  const e=byId[id];$("#mcName").textContent=e.name;$("#mcArea").textContent=GEBIETE[e.gebiet].name;
+  $("#mapcard").classList.add("on");mcY.set(Math.max(mcY.x,60)).to(0,{response:.42,damping:.78});
+  centerOn(e.lat,e.lng);
+  if(RM)return;const cx=X(e.lng),cy=Y(e.lat),g=$("#rings");
+  [0,160].forEach(dl=>{const c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("class","ring");c.setAttribute("cx",cx);c.setAttribute("cy",cy);c.setAttribute("r",8);c.style.transformBox="fill-box";c.style.transformOrigin="center";g.appendChild(c);
+    c.animate([{transform:"scale(1)",opacity:1},{transform:"scale(5.5)",opacity:0}],{duration:900,delay:dl,easing:"cubic-bezier(.2,.8,.2,1)",fill:"backwards"}).onfinish=()=>c.remove()});
+}
+function unpick(){if(!picked)return;picked=null;$$("#map .dot").forEach(d=>d.classList.remove("sel"));mcY.to(160,{response:.35,onDone:()=>$("#mapcard").classList.remove("on")})}
+$("#mcOpen").addEventListener("click",()=>picked&&openEstate(picked,{from:$("#mapcard")}));
+
+/* =========================================================
+   MERKLISTE
+   ========================================================= */
+function renderSaved(){const list=saved.map(id=>byId[id]).filter(Boolean);
+  $("#savedList").innerHTML=list.length?`<ul class="rows" style="margin-top:14px">${list.map(row).join("")}</ul>`:`<p class="empty">Noch nichts gemerkt. Öffne ein Weingut und tippe auf „Merken“. Der Punkt fliegt dann hierher.</p>`;
+  stagger($$("#savedList .row"))}
+const badgeS=new Spring(1,{eps:.002,onUpdate:v=>$("#badge").style.setProperty("--b",v)});
+function persist(bump){try{localStorage.setItem("werf-merkliste",JSON.stringify(saved))}catch(_){}$("#badge").textContent=saved.length||"";
+  if(bump&&!RM){badgeS.set(1.7).to(1,{response:.45,damping:.45})}}
+
+/* =========================================================
+   GLAS-NAVIGATION: Sonne folgt Tipp und Finger, mit Schwung
+   ========================================================= */
+const TABS=["ausgabe","register","karte","merkliste"],nav=$("#nav"),navSun=$("#navSun");
+const centers=()=>$$("#nav [data-tab]").map(b=>b.offsetLeft+b.offsetWidth/2);
+const sunS=new Spring(0,{response:.42,onUpdate:(x,v)=>{const st=1+Math.min(.45,Math.abs(v)/2200);navSun.style.transform=`translateX(${x-23}px) scale(${st},${1/Math.sqrt(st)})`}});
+(()=>{const tr=new Tracker();let st=null;
+  nav.addEventListener("pointerdown",e=>{nav.setPointerCapture(e.pointerId);const b=e.target.closest("[data-tab]");b?.classList.add("press");
+    st={x0:e.clientX,sx:sunS.x,btn:b,moved:false};tr.reset();tr.add(e.clientX,0);running.delete(sunS)});
+  nav.addEventListener("pointermove",e=>{if(!st)return;const dx=e.clientX-st.x0;
+    if(!st.moved&&Math.abs(dx)>8){st.moved=true;st.btn?.classList.remove("press")}
+    if(!st.moved)return;tr.add(e.clientX,0);const c=centers(),lo=c[0],hi=c[c.length-1];let x=st.sx+dx;
+    if(x<lo)x=lo+rubber(x-lo,120);if(x>hi)x=hi+rubber(x-hi,120);sunS.set(x)});
+  const end=()=>{if(!st)return;const s=st;st=null;s.btn?.classList.remove("press");const c=centers();
+    if(!s.moved){if(s.btn)go(s.btn.dataset.tab);else sunS.to(c[TABS.indexOf(view)]);return}
+    const v=tr.vel().x,p=sunS.x+project(v,.99);let i=0;c.forEach((cx,k)=>{if(Math.abs(cx-p)<Math.abs(c[i]-p))i=k});
+    sunS.to(c[i],{velocity:v,damping:.72,response:.42});go(TABS[i],{keepSun:true})};
+  nav.addEventListener("pointerup",end);nav.addEventListener("pointercancel",end);
+  nav.addEventListener("keydown",e=>{const b=e.target.closest("[data-tab]");if(b&&(e.key==="Enter"||e.key===" ")){e.preventDefault();go(b.dataset.tab)}});
+})();
+
+/* =========================================================
+   ANSICHTEN
+   ========================================================= */
+let view="ausgabe";
+const TITLES={ausgabe:"Ausgabe 01",register:"Register",karte:"Karte",merkliste:"Merkliste"};
+function go(v,opts={}){
+  const prev=view;view=v;if(sheet.classList.contains("open"))closeSheet(true);
+  $$(".view").forEach(n=>n.classList.toggle("on",n.id==="v-"+v));
+  $$("#nav [data-tab]").forEach(b=>b.dataset.tab===v?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
+  if(!opts.keepSun)sunS.to(centers()[TABS.indexOf(v)],{damping:.8});
+  $("#topTitle").textContent=TITLES[v];unpick();
+  scrollTo(0,0);
+  if(v==="register")renderRegister();if(v==="merkliste")renderSaved();if(v==="ausgabe")layout();
+  reveal($("#v-"+v));
+  if(v==="karte"&&prev!=="karte")requestAnimationFrame(enterMap);
+  if(prev!==v&&!RM)$("#v-"+v).animate([{opacity:0,transform:"scale(.985)",filter:"blur(8px)"},{opacity:1,transform:"none",filter:"blur(0)"}],{duration:480,easing:"cubic-bezier(.2,.8,.2,1)"});
+  if(opts.area)requestAnimationFrame(()=>{const el=document.getElementById("grp-"+opts.area);if(el)scrollTo({top:el.getBoundingClientRect().top+scrollY-140,behavior:RM?"auto":"smooth"})});
+  requestTick();
+}
+
+/* =========================================================
+   EINTRAG: öffnet aus dem angetippten Element, schließt dorthin zurück
+   Nach unten ziehen schließt, seitlich ziehen blättert
+   ========================================================= */
+const sheet=$("#sheet"),sinner=$("#sinner"),scrim=$("#scrim");
+let current=null,srcEl=null,lastFocus=null,srcRect=null;
+const openS=new Spring(0,{eps:.001,onUpdate:p=>{
+  const r=srcRect,vw=innerWidth,vh=innerHeight;
+  if(r){const t=r.top*(1-p),ri=(vw-r.right)*(1-p),b=(vh-r.bottom)*(1-p),l=r.left*(1-p);sheet.style.clipPath=`inset(${t}px ${ri}px ${b}px ${l}px round ${f(22*(1-p))}px)`}
+  else sheet.style.transform=`translateY(${(1-p)*vh}px)`;
+  sinner.style.opacity=clamp(p*1.6-.25);sinner.style.transform=`translateY(${(1-p)*30}px)`;scrim.style.opacity=.4*p}});
+const dragY=new Spring(0,{onUpdate:y=>{const vh=innerHeight,k=clamp(y/vh);sheet.style.transform=`translateY(${y}px) scale(${1-k*.08})`;sheet.style.borderRadius=`${f(Math.min(1,y/60)*26)}px`;scrim.style.opacity=.4*(1-k)}});
+const pageX=new Spring(0,{onUpdate:x=>{sinner.style.transform=`translateX(${x}px)`;sinner.style.opacity=1-Math.min(.6,Math.abs(x)/innerWidth*.8)}});
+
+function buildSheet(id){
+  const e=byId[id];
+  const seq=(view==="register"&&visibleIds.includes(id))?visibleIds:ESTATES.map(x=>x.id);
+  const i=seq.indexOf(id),prev=byId[seq[(i-1+seq.length)%seq.length]],next=byId[seq[(i+1)%seq.length]];
+  const on=saved.includes(id);
+  sinner.innerHTML=`<div class="sbar"><span class="grab"></span><button data-close>Schließen</button><button data-save aria-pressed="${on}"><span class="dotm"></span><span>${on?"Gemerkt":"Merken"}</span></button></div>
+  <div class="smedia" id="smedia">${media(e)}</div>
+  <div class="wrap sbody">
+    <div class="loc grid"><span style="grid-column:1/2" class="grey">${pad(e.nr)}</span><span style="grid-column:2/5">${esc(GEBIETE[e.gebiet].name)}</span></div>
+    <h2 class="cond rv">${esc(e.name)}</h2>
+    ${e.test?`<p class="note">Für dieses Gut liegen noch keine Texte vor. Name und Gebiet sind Testdaten.</p>`:`<p class="lead">${esc(e.lead)}</p>`}
+    <dl class="tbl"><div><dt>Adresse</dt><dd>${esc(e.adresse)}</dd></div><div><dt>Öffnungszeiten</dt><dd>${esc(e.zeiten)}</dd></div><div><dt>Reservierung</dt><dd>${esc(e.reservierung)}</dd></div><div><dt>Mit Kindern</dt><dd>${esc(e.kinder)}</dd></div></dl>
+    <a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.name+" Stellenbosch")}" target="_blank" rel="noopener">In Karten öffnen</a>
+    ${e.ressorts.map(k=>`<div class="sect"><h3>${RESSORTS[k]}</h3><p>${esc(e[k])}</p></div>`).join("")}
+    <div class="bild">
+      <h3>Bild</h3>
+      <p>Wähle ein Foto vom Gerät oder füge einen Bildlink ein. Die App zeigt jedes Bild in derselben Schwarzweiß-Behandlung.</p>
+      <div class="acts">
+        <label class="btn filebtn">Foto wählen<input type="file" accept="image/*" id="bFile"></label>
+        ${IMG[id]?`<button class="btn line" id="bRemove">Eigenes Bild entfernen</button>`:""}
+      </div>
+      <div class="urlrow"><input type="url" id="bUrl" placeholder="https://… Bildlink" aria-label="Bildlink"><button class="btn line" id="bUrlOk">Übernehmen</button></div>
+      <p class="status" id="bStatus" aria-live="polite"></p>
+    </div>
+    <div class="pager"><button data-page="-1" data-id="${prev.id}"><small>Vorheriges</small>${esc(prev.name)}</button><button data-page="1" data-id="${next.id}"><small>Nächstes</small>${esc(next.name)}</button></div>
+    <p class="swipehint">Seitlich wischen zum Blättern, nach unten ziehen zum Schließen</p>
+  </div>`;
+  current=id;reveal(sinner);
+}
+function openEstate(id,o={}){
+  if(sheet.classList.contains("open")){page(id,o.dir||1);return}
+  unpick();lastFocus=document.activeElement;
+  srcEl=o.from||null;srcRect=srcEl?srcEl.getBoundingClientRect():null;
+  buildSheet(id);sheet.scrollTop=0;
+  sheet.style.transform="";sheet.style.borderRadius="";sheet.style.clipPath="";dragY.set(0);pageX.set(0);
+  sheet.classList.add("open");document.body.style.overflow="hidden";scrim.style.pointerEvents="auto";
+  openS.set(0).to(1,{response:.5,damping:1,onDone:()=>{sheet.style.clipPath="";sheet.style.transform=""}});
+  setTimeout(()=>sheet.querySelector("[data-close]")?.focus({preventScroll:true}),80);
+}
+function closeSheet(instant){
+  if(!sheet.classList.contains("open"))return;
+  const finish=()=>{sheet.classList.remove("open");sheet.style.clipPath="";sheet.style.transform="";sheet.style.borderRadius="";scrim.style.opacity=0;scrim.style.pointerEvents="none";document.body.style.overflow="";current=null;lastFocus?.focus?.({preventScroll:true})};
+  if(instant||RM){openS.set(0);finish();return}
+  /* zurück zum Ursprung, wenn er noch sichtbar ist (gleicher Weg hinein und hinaus) */
+  const r=srcEl&&srcEl.isConnected?srcEl.getBoundingClientRect():null;
+  if(r&&r.bottom>0&&r.top<innerHeight&&r.width>0&&dragY.x<4){srcRect=r;sheet.scrollTop=0;openS.to(0,{response:.42,damping:1,onDone:finish})}
+  else{srcRect=null;dragY.to(innerHeight,{response:.38,damping:1,onDone:()=>{dragY.set(0);finish()}})}
+}
+/* Blättern: die nächste Seite kommt von dort, wohin der Finger zeigt */
+function page(id,dir){
+  const vw=innerWidth;
+  pageX.to(-dir*vw,{response:.3,damping:1,onDone:()=>{buildSheet(id);sheet.scrollTop=0;pageX.set(dir*vw*.6);pageX.to(0,{response:.42,damping:.85})}});
+}
+scrim.addEventListener("click",()=>closeSheet());
+
+/* Gesten im Eintrag */
+(()=>{const tr=new Tracker();let s=null;
+  sheet.addEventListener("touchstart",e=>{if(e.target.closest(".bild,input,a"))return s=null;const t=e.touches[0];s={x0:t.clientX,y0:t.clientY,top:sheet.scrollTop,axis:null};tr.reset();tr.add(t.clientX,t.clientY)},{passive:true});
+  sheet.addEventListener("touchmove",e=>{if(!s)return;const t=e.touches[0],dx=t.clientX-s.x0,dy=t.clientY-s.y0;
+    if(!s.axis&&Math.hypot(dx,dy)>10){
+      if(Math.abs(dy)>Math.abs(dx)&&dy>0&&s.top<=0&&sheet.scrollTop<=0)s.axis="y";
+      else if(Math.abs(dx)>Math.abs(dy)*1.3)s.axis="x";else s.axis="none"}
+    if(s.axis==="y"){e.preventDefault();tr.add(t.clientX,t.clientY);running.delete(dragY);dragY.set(Math.max(0,dy))}
+    if(s.axis==="x"){e.preventDefault();tr.add(t.clientX,t.clientY);running.delete(pageX);pageX.set(dx)}},{passive:false});
+  sheet.addEventListener("touchend",()=>{if(!s)return;const a=s.axis;s=null;const v=tr.vel();
+    if(a==="y"){const proj=dragY.x+project(v.y);
+      if(proj>innerHeight*.3&&v.y>-50){srcRect=null;dragY.to(innerHeight,{velocity:v.y,response:.38,damping:1,onDone:()=>{dragY.set(0);sheet.classList.remove("open");scrim.style.opacity=0;scrim.style.pointerEvents="none";document.body.style.overflow="";current=null}})}
+      else dragY.to(0,{velocity:v.y,response:.4,damping:.75})}
+    if(a==="x"){const proj=pageX.x+project(v.x),dir=proj<0?1:-1;
+      if(Math.abs(proj)>innerWidth*.3){const btn=sinner.querySelector(`[data-page="${dir}"]`);const vw=innerWidth;
+        pageX.to(-dir*vw,{velocity:v.x,response:.3,damping:1,onDone:()=>{buildSheet(btn.dataset.id);sheet.scrollTop=0;pageX.set(dir*vw*.6);pageX.to(0,{response:.42,damping:.85})}})}
+      else pageX.to(0,{velocity:v.x,response:.4,damping:.75})}
+  });
+})();
+
+/* Merken: orangener Punkt fliegt in einem Bogen zur Merkliste */
+function flyToNav(fromEl){
+  if(RM)return persist(true);
+  const a=fromEl.getBoundingClientRect(),tb=$('#nav [data-tab="merkliste"]').getBoundingClientRect();
+  const x0=a.left+14,y0=a.top+a.height/2,x1=tb.left+tb.width/2,y1=tb.top+tb.height/2,cx=(x0+x1)/2+60,cy=Math.min(y0,y1)-160;
+  const burst=document.createElement("div");burst.className="burst";document.body.appendChild(burst);
+  burst.animate([{transform:`translate(${x0}px,${y0}px) scale(1)`,opacity:1},{transform:`translate(${x0}px,${y0}px) scale(5)`,opacity:0}],{duration:600,easing:"cubic-bezier(.2,.8,.2,1)"}).onfinish=()=>burst.remove();
+  const dot=document.createElement("div");dot.className="fly";document.body.appendChild(dot);
+  const kf=[];for(let i=0;i<=24;i++){const t=i/24,x=(1-t)**2*x0+2*(1-t)*t*cx+t*t*x1,y=(1-t)**2*y0+2*(1-t)*t*cy+t*t*y1;kf.push({transform:`translate(${x}px,${y}px) scale(${1+Math.sin(t*Math.PI)*.8})`,offset:t})}
+  dot.animate(kf,{duration:820,easing:"cubic-bezier(.45,0,.2,1)"}).onfinish=()=>{dot.remove();persist(true);
+    navSun.animate([{boxShadow:"0 0 16px 3px rgba(255,110,40,.7),0 0 44px 12px rgba(255,90,30,.32)"},{boxShadow:"0 0 30px 10px rgba(255,140,60,.9),0 0 80px 30px rgba(255,90,30,.5)"},{boxShadow:"0 0 16px 3px rgba(255,110,40,.7),0 0 44px 12px rgba(255,90,30,.32)"}],{duration:700,easing:"ease-out"})};
+}
+
+/* Fotos */
+const say=t=>{const s=$("#bStatus");if(s)s.textContent=t};
+function readPhoto(file){return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=()=>rej("lesen");
+  fr.onload=()=>{const im=new Image();im.onload=()=>{const M=1400,s=Math.min(1,M/Math.max(im.naturalWidth,im.naturalHeight));const c=document.createElement("canvas");c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);try{res(c.toDataURL("image/jpeg",.82))}catch(_){res(fr.result)}};im.onerror=()=>rej("format");im.src=fr.result};
+  fr.readAsDataURL(file)})}
+async function setImage(id,value,ok){IMG[id]=value;const stored=await DB.put(id,value);$("#smedia").innerHTML=media(byId[id]);
+  if(!RM)$("#smedia").firstElementChild.animate([{clipPath:"inset(0 0 100% 0)"},{clipPath:"inset(0 0 0 0)"}],{duration:900,easing:"cubic-bezier(.2,.9,.1,1)"});
+  say(stored?ok:"Bild übernommen. Speichern ist in dieser Ansicht nicht möglich, nach dem Neuladen fehlt es wieder. Öffne die Datei in Safari.");
+  if(FEATURED.includes(id)||ROUTE.some(r=>r.id===id))renderAusgabe()}
+sheet.addEventListener("change",async ev=>{if(ev.target.id!=="bFile"||!ev.target.files?.[0]||!current)return;say("Foto wird verarbeitet …");
+  try{await setImage(current,await readPhoto(ev.target.files[0]),"Foto übernommen und auf diesem Gerät gespeichert.")}
+  catch(err){say(err==="format"?"Dieses Format kann der Browser nicht öffnen. Wähle ein JPG oder PNG.":"Das Foto ließ sich nicht lesen. Versuche es erneut.")}});
+
+/* =========================================================
+   KLICKS
+   ========================================================= */
+document.addEventListener("click",async ev=>{
+  const t=ev.target;
+  if(t.closest("#nav")||t.closest("#mapbox"))return;
+  const pg=t.closest("[data-page]");if(pg){page(pg.dataset.id,+pg.dataset.page);return}
+  const o=t.closest("[data-open]");if(o){const from=o.dataset.from?o.closest(".feat,.stop")?.querySelector(o.dataset.from):o;openEstate(o.dataset.open,{from});return}
+  const v=t.closest("[data-view]");if(v){go(v.dataset.view);return}
+  const a=t.closest("[data-area]");if(a){go("register",{area:a.dataset.area});return}
+  if(t.closest("[data-close]")){closeSheet();return}
+  const sv=t.closest("[data-save]");
+  if(sv&&current){const was=saved.includes(current);saved=was?saved.filter(x=>x!==current):[...saved,current];const on=!was;
+    sv.setAttribute("aria-pressed",on);sv.lastElementChild.textContent=on?"Gemerkt":"Merken";
+    if(on)flyToNav(sv);else persist(false);if(view==="merkliste")renderSaved();return}
+  if(t.id==="bUrlOk"&&current){const u=$("#bUrl").value.trim();if(!/^https?:\/\//i.test(u)){say("Füge einen vollständigen Bildlink ein, der mit https:// beginnt.");return}await setImage(current,u,"Bildlink übernommen. Lädt das Bild nicht, erscheint wieder die Tafel.");return}
+  if(t.id==="bRemove"&&current){delete IMG[current];await DB.del(current);$("#smedia").innerHTML=media(byId[current]);t.remove();say("Eigenes Bild entfernt.");return}
+});
+document.addEventListener("keydown",ev=>{
+  if(ev.key==="Escape"){if(sheet.classList.contains("open"))closeSheet();else unpick()}
+  if((ev.key==="Enter"||ev.key===" ")&&ev.target.matches("[data-pick]")){ev.preventDefault();pick(ev.target.dataset.pick)}
+});
+
+/* =========================================================
+   SCROLL: Sonnenuntergang, Buchstaben sinken, Bildaufbau, Strecke mit Tiefe
+   ========================================================= */
+const sun=$("#sun"),glow=$("#glow"),strecke=$("#strecke"),track=$("#track"),stLine=$("#stLine");
+function fitWord(){const w=$("#wordIn"),box=w.parentNode.clientWidth;w.style.fontSize="100px";const k=box/w.getBoundingClientRect().width;w.style.fontSize=Math.min(560,100*k*.9)+"px"}
+function layout(){if(view!=="ausgabe")return;fitWord();const dist=Math.max(0,track.scrollWidth-innerWidth);strecke.style.height=(innerHeight+dist)+"px";strecke.dataset.dist=dist;stLine.style.width=(track.scrollWidth-32)+"px"}
+let ticking=false;
+function requestTick(){if(!ticking){ticking=true;requestAnimationFrame(frame)}}
+function frame(){
+  ticking=false;const y=scrollY,vh=innerHeight;
+  $("#topbar").classList.toggle("on",view!=="ausgabe"||y>vh*.75);
+  if(view!=="ausgabe")return;
+  if(!RM&&y<vh*1.3){
+    sun.style.setProperty("--set",(y*.95)+"px");glow.style.setProperty("--glow",clamp(1-y/(vh*.6)));
+    $$("#wordIn .ch").forEach((c,i)=>c.style.setProperty("--sink",(y*(.08+i*.07))+"px"));   // Buchstaben sinken nacheinander mit der Sonne
+  }
+  $$("#feats [data-scrub]").forEach(el=>{const r=el.getBoundingClientRect();if(r.top>vh*1.1||r.bottom<-vh*.2)return;el.style.setProperty("--p",(RM?1:ease(clamp((vh-r.top)/(vh*.85)))).toFixed(3))});
+  const sr=strecke.getBoundingClientRect(),dist=+strecke.dataset.dist||0,sp=clamp(-sr.top/Math.max(1,strecke.offsetHeight-vh));
+  track.style.transform=`translate3d(${-sp*dist}px,0,0)`;stLine.style.setProperty("--p",sp.toFixed(3));
+  if(!RM&&sr.top<vh&&sr.bottom>0){const mid=innerWidth/2;$$("#track .stop").forEach(s=>{const r=s.getBoundingClientRect(),d=clamp(Math.abs(r.left+r.width/2-mid)/innerWidth,0,1);
+    s.style.transform=`scale(${1-d*.14}) translateY(${d*24}px)`;s.style.opacity=1-d*.55})}
+}
+addEventListener("scroll",requestTick,{passive:true});
+addEventListener("resize",()=>{layout();sunS.set(centers()[TABS.indexOf(view)]);requestTick()});
+document.fonts?.ready.then(()=>{layout();sunS.set(centers()[TABS.indexOf(view)]);requestTick()});
+
+/* Start */
+persist(false);renderAusgabe();go("ausgabe");sunS.set(centers()[0]);reveal();
+DB.open().then(()=>DB.all()).then(all=>{if(Object.keys(all).length){Object.assign(IMG,all);renderAusgabe();requestTick()}});
+</script>
+</body>
+</html>
