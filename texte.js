@@ -790,3 +790,9 @@ window.TEXTE={
   "kueche": "The Restaurant mit Blick auf die False Bay."
  }
 };
+/* Freie Fotos aus Wikimedia Commons (direkt von dort geladen, Urheber und Lizenz auf der jeweiligen Dateiseite) */
+window.WEBBILDER={
+"delaire":[{f:"Delaire Graff Estate, Stellenbosch, Western Cape, South Africa (20514267611).jpg"}],
+"vergelegen-wine-estate":[{f:"Vergelegen (rear).JPG"},{f:"Camphor trees at Vergelegen.JPG"},{f:"Vergelegen oak trees 2.JPG"},{f:"Vergelegen Wine Estate - panoramio (1).jpg"}],
+"babylonstoren":[{f:"Aloe broomii - Babylonstoren - Copy.jpg"},{f:"Glottiphyllum neilii - Babylonstoren 1.jpg"}]
+};
