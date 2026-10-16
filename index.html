@@ -232,6 +232,13 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .sect{margin-top:var(--s6)}
 .sect h3{font-size:13px;color:var(--grey);font-weight:600;margin-bottom:var(--s1)}
 .sect p{font-size:18px;line-height:1.4}
+.kick{color:var(--duene);font-weight:650;margin-left:12px}
+.beitrag .sect p{font-size:18px;line-height:1.5;max-width:34em}
+.beitrag .sect+.sect{margin-top:var(--s4)}
+.steck,.quellen{margin-top:var(--s8)}
+.steck h3,.quellen h3{font-size:20px;font-weight:750;margin-bottom:var(--s2)}
+.quellen ul{list-style:none;padding:0;display:grid;gap:8px;font-size:15px}
+.quellen a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .note{font-size:17px;margin-bottom:var(--s4);max-width:28em}
 .bild{margin-top:var(--s8);background:var(--soft);padding:var(--s3) var(--s2)}
 .bild h3{font-size:20px;font-weight:750}
@@ -538,7 +545,7 @@ function addEstate(name,web,reg){
   const d=DET[k];const e=d?Object.assign({},d):{id:slugify(name),name:name.trim(),adresse:"",zeiten:"",reservierung:"",kinder:""};
   if(!d&&ESTATES.some(x=>x.id===e.id))e.id+="-"+ESTATES.length;
   e.gebiet=reg||e.gebiet||"stellenbosch";e.web=web||e.web||"";e.ort=e.ort||GEBIETE[e.gebiet].name;e.approx=!d;
-  const tx=!d&&(window.TEXTE||{})[k];if(tx){Object.assign(e,tx);e.quelle="web"}
+  const tx=(window.TEXTE||{})[k];if(tx&&(!d||tx.stufe==="beitrag")){Object.assign(e,tx);e.quelle=tx.stufe==="beitrag"?"beitrag":"web"}
   ESTATES.push(e);seen[k]=e;return e}
 BASE.forEach(([n,w,g])=>addEstate(n,w,g));
 DETAIL.forEach(d=>{if(!seen[norm(d.name)])addEstate(d.name,"",d.gebiet in GEBIETE?d.gebiet:"stellenbosch")});
@@ -1028,14 +1035,17 @@ function buildSheet(id){
   sinner.innerHTML=`<div class="sbar"><span class="grab"></span><button data-close>Schließen</button><button data-save aria-pressed="${on}"><span class="dotm"></span><span>${on?"Gemerkt":"Merken"}</span></button></div>
   <div class="smedia" id="smedia">${media(e)}</div>
   <div class="wrap sbody">
-    <div class="loc"><span class="grey">${pad(e.nr)}</span><span>${esc(GEBIETE[e.gebiet].name)}</span></div>
+    <div class="loc"><span class="grey">${pad(e.nr)}</span><span>${esc(GEBIETE[e.gebiet].name)}${e.stufe==="beitrag"?`<b class="kick">Beitrag</b>`:""}</span></div>
     <h2 class="cond rv" style="--n:${Math.max(...e.name.split(/\s+/).map(w=>w.length))}">${esc(e.name)}</h2>
     ${e.test?`<p class="note">Zu diesem Gut gibt es noch keinen Text. Die Lage auf der Karte ist anhand der Gegend geschätzt.</p>`:`<p class="lead">${esc(e.lead)}</p>`}
     ${e.quelle==="web"?`<p class="small grey" style="margin:-12px 0 var(--s3)">Kurz zusammengefasst nach der Website des Guts, noch nicht geprüft.</p>`:""}
     ${mine(e)}
     <dl class="tbl">${[["Gegend",GEBIETE[e.gebiet].name],["Adresse",e.adresse],["Öffnungszeiten",e.zeiten],["Reservierung",e.reservierung],["Mit Kindern",e.kinder]].filter(([,v])=>v&&v!==TBD).map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}${e.web?`<div><dt>Website</dt><dd><a href="${esc(e.web)}" target="_blank" rel="noopener">${esc(e.web.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))}</a></dd></div>`:""}</dl>
     <div class="planbtn"><button class="btn accent" id="addDay">${planLabel(id)}</button><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.name+", "+GEBIETE[e.gebiet].name+", South Africa")}" target="_blank" rel="noopener">In Karten öffnen</a></div>
-    ${e.ressorts.map(k=>`<div class="sect"><h3>${RESSORTS[k]}</h3><p>${esc(e[k])}</p></div>`).join("")}
+    ${e.abschnitte?`<article class="beitrag">${e.abschnitte.map(a=>`<section class="sect"><h3>${esc(a.t)}</h3><p>${esc(a.p)}</p></section>`).join("")}</article>
+    ${e.steckbrief?`<div class="steck"><h3>Steckbrief</h3><dl class="tbl">${e.steckbrief.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>`:""}
+    ${e.quellen?`<div class="quellen"><h3>Quellen</h3><ul>${e.quellen.map(q=>`<li><a href="${esc(q.u)}" target="_blank" rel="noopener">${esc(q.t)}</a></li>`).join("")}</ul></div>`:""}`
+    :e.ressorts.map(k=>`<div class="sect"><h3>${RESSORTS[k]}</h3><p>${esc(e[k])}</p></div>`).join("")}
     <div class="bild">
       <h3>Bildwandler</h3>
       <p>Wähle ein Foto aus deiner Mediathek oder mach eins. Die App wandelt es auf dem Gerät in eine Grafik im Stil von werf um.</p>
