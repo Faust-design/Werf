@@ -77,6 +77,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 /* ---------- Bilder und Tafeln ---------- */
 .ph{position:relative;overflow:hidden;background:var(--soft)}
 .ph img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(1.03)}
+.ph.graf img{filter:none}
 .plate{position:relative;overflow:hidden;background:var(--ink);color:var(--paper)}
 .plate svg{position:absolute;inset:0;width:100%;height:100%}
 .plate span{position:absolute;left:12px;bottom:-.12em;font-variation-settings:"wdth" 62;font-weight:900;font-size:clamp(150px,56vw,500px);line-height:.8;letter-spacing:-.06em}
@@ -224,7 +225,17 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:100px}
 .urlrow{display:flex;gap:var(--s1);margin-top:var(--s2)}
 .urlrow input{flex:1;min-width:0;height:48px;font-size:16px;padding:0 12px;background:#fff;outline:none;-webkit-appearance:none;appearance:none}
-.status{font-size:14px;margin-top:10px;min-height:1.4em}
+.status{font-size:14px;margin-top:var(--s2);min-height:1.4em}
+.wd{margin-top:var(--s3)}
+.wd[hidden]{display:none}
+.wd canvas{display:block;width:100%;height:auto;aspect-ratio:4/5;background:#000}
+.wd .seg{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:var(--s2)}
+.wd .seg button{min-height:44px;font-size:13px;font-weight:650;background:#fff;transition:background .2s,color .2s}
+.wd .seg button[aria-pressed="true"]{background:#000;color:#fff}
+.wd label.rng{display:flex;align-items:center;gap:var(--s2);margin-top:var(--s2);font-size:14px;font-weight:600}
+.wd input[type=range]{flex:1;accent-color:var(--duene);height:44px}
+.wd .acts{margin-top:var(--s2)}
+.wd .busy{opacity:.55;transition:opacity .2s}
 .pager{display:grid;grid-template-columns:1fr 1fr;gap:var(--g);margin-top:var(--s8)}
 .pager button{text-align:left;padding:10px 0;font-size:17px;font-weight:700}
 .pager button:last-child{text-align:right}
@@ -493,9 +504,10 @@ function plateSvg(e){
 
 /* ---------- Bilder ---------- */
 const IMG={};
-const src=e=>IMG[e.id]||e.bild||"";
+const src=e=>IMG[e.id]?.src||e.bild||"";
+const isGraf=e=>!!IMG[e.id]?.graf;
 const plate=e=>`<div class="plate" data-plate="${e.id}">${plateSvg(e)}<span>${esc(e.name[0])}</span><i></i></div>`;
-const media=e=>src(e)?`<div class="ph" data-id="${e.id}"><img src="${esc(src(e))}" alt="${esc(e.name)}" referrerpolicy="no-referrer" decoding="async"></div>`:plate(e);
+const media=e=>src(e)?`<div class="ph${isGraf(e)?" graf":""}" data-id="${e.id}"><img src="${esc(src(e))}" alt="${esc(e.name)}" referrerpolicy="no-referrer" decoding="async"></div>`:plate(e);
 document.addEventListener("error",ev=>{const im=ev.target;if(im.tagName==="IMG"&&im.parentNode?.classList.contains("ph")){im.parentNode.outerHTML=plate(byId[im.parentNode.dataset.id])}},true);
 
 /* ---------- Speicher ---------- */
@@ -702,6 +714,7 @@ const dragY=new Spring(0,{onUpdate:y=>{const vh=innerHeight,k=clamp(y/vh);sheet.
 const pageX=new Spring(0,{onUpdate:x=>{sinner.style.transform=`translateX(${x}px)`;sinner.style.opacity=1-Math.min(.6,Math.abs(x)/innerWidth*.8)}});
 
 function buildSheet(id){
+  WZ.base=null;
   const e=byId[id];
   const seq=(view==="register"&&visibleIds.includes(id))?visibleIds:ESTATES.map(x=>x.id);
   const i=seq.indexOf(id),prev=byId[seq[(i-1+seq.length)%seq.length]],next=byId[seq[(i+1)%seq.length]];
@@ -716,13 +729,19 @@ function buildSheet(id){
     <a class="btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.name+" Stellenbosch")}" target="_blank" rel="noopener">In Karten öffnen</a>
     ${e.ressorts.map(k=>`<div class="sect"><h3>${RESSORTS[k]}</h3><p>${esc(e[k])}</p></div>`).join("")}
     <div class="bild">
-      <h3>Bild</h3>
-      <p>Wähle ein Foto vom Gerät oder füge einen Bildlink ein. Die App zeigt jedes Bild in derselben Schwarzweiß-Behandlung.</p>
+      <h3>Bildwandler</h3>
+      <p>Wähle ein Foto aus deiner Mediathek oder mach eins. Die App wandelt es auf dem Gerät in eine Grafik im Stil von werf um.</p>
       <div class="acts">
         <label class="btn filebtn">Foto wählen<input type="file" accept="image/*" id="bFile"></label>
         ${IMG[id]?`<button class="btn line" id="bRemove">Eigenes Bild entfernen</button>`:""}
       </div>
-      <div class="urlrow"><input type="url" id="bUrl" placeholder="https://… Bildlink" aria-label="Bildlink"><button class="btn line" id="bUrlOk">Übernehmen</button></div>
+      <div class="wd" id="wd" hidden>
+        <canvas id="wCanvas" width="800" height="1000" aria-label="Vorschau der Grafik"></canvas>
+        <div class="seg" role="group" aria-label="Stil">${[["linien","Linien"],["raster","Raster"],["flaeche","Fläche"],["foto","Foto"]].map(([k,v],j)=>`<button data-wstyle="${k}" aria-pressed="${j===0}">${v}</button>`).join("")}</div>
+        <label class="rng">Detail<input type="range" id="wDetail" min="0" max="100" value="50"></label>
+        <div class="acts"><button class="btn" id="wSave">Übernehmen</button><button class="btn line" id="wCancel">Verwerfen</button></div>
+      </div>
+      <div class="urlrow"><input type="url" id="bUrl" placeholder="Oder Bildlink einfügen: https://…" aria-label="Bildlink"><button class="btn line" id="bUrlOk">Übernehmen</button></div>
       <p class="status" id="bStatus" aria-live="polite"></p>
     </div>
     <div class="pager"><button data-page="-1" data-id="${prev.id}"><small>Vorheriges</small>${esc(prev.name)}</button><button data-page="1" data-id="${next.id}"><small>Nächstes</small>${esc(next.name)}</button></div>
@@ -791,16 +810,75 @@ function flyToNav(fromEl){
 
 /* Fotos */
 const say=t=>{const s=$("#bStatus");if(s)s.textContent=t};
-function readPhoto(file){return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=()=>rej("lesen");
-  fr.onload=()=>{const im=new Image();im.onload=()=>{const M=1400,s=Math.min(1,M/Math.max(im.naturalWidth,im.naturalHeight));const c=document.createElement("canvas");c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);try{res(c.toDataURL("image/jpeg",.82))}catch(_){res(fr.result)}};im.onerror=()=>rej("format");im.src=fr.result};
-  fr.readAsDataURL(file)})}
+/* Foto laden: auf 4:5 zuschneiden, auf 800x1000 verkleinern (sicher für Safari-Speichergrenzen) */
+const WW=800,WH=1000;
+async function loadPhoto(file){
+  let src;
+  try{if(window.createImageBitmap)src=await createImageBitmap(file,{imageOrientation:"from-image"})}catch(_){src=null}
+  if(!src){src=await new Promise((res,rej)=>{const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{res(im);setTimeout(()=>URL.revokeObjectURL(u),1000)};im.onerror=()=>{URL.revokeObjectURL(u);rej("format")};im.src=u})}
+  const w=src.width||src.naturalWidth,h=src.height||src.naturalHeight;if(!w||!h)throw "format";
+  const k=Math.max(WW/w,WH/h),dw=w*k,dh=h*k;
+  const c=document.createElement("canvas");c.width=WW;c.height=WH;const x=c.getContext("2d");
+  x.drawImage(src,(WW-dw)/2,(WH-dh)/2,dw,dh);src.close?.();
+  return c;
+}
+/* Helligkeit in reduzierter Auflösung */
+function lumGrid(base,gw,gh){
+  const c=document.createElement("canvas");c.width=gw;c.height=gh;const x=c.getContext("2d");x.drawImage(base,0,0,gw,gh);
+  const d=x.getImageData(0,0,gw,gh).data,L=new Float32Array(gw*gh);
+  for(let i=0;i<gw*gh;i++)L[i]=(.2126*d[i*4]+.7152*d[i*4+1]+.0722*d[i*4+2])/255;
+  /* Kontrast strecken (2 % bis 98 %) */
+  const srt=Float32Array.from(L).sort(),lo=srt[Math.floor(L.length*.02)],hi=srt[Math.floor(L.length*.98)];
+  for(let i=0;i<L.length;i++)L[i]=clamp((L[i]-lo)/Math.max(.01,hi-lo));
+  return L;
+}
+function boxBlur(L,w,h,r){if(r<1)return L;const T=new Float32Array(L.length),O=new Float32Array(L.length),n=2*r+1;
+  for(let y=0;y<h;y++){let s=0;for(let x=-r;x<=r;x++)s+=L[y*w+clamp(x,0,w-1)];for(let x=0;x<w;x++){T[y*w+x]=s/n;s+=L[y*w+Math.min(w-1,x+r+1)]-L[y*w+Math.max(0,x-r)]}}
+  for(let x=0;x<w;x++){let s=0;for(let y=-r;y<=r;y++)s+=T[clamp(y,0,h-1)*w+x];for(let y=0;y<h;y++){O[y*w+x]=s/n;s+=T[Math.min(h-1,y+r+1)*w+x]-T[Math.max(0,y-r)*w+x]}}
+  return O}
+const SUN="#E4561B";
+function render(base,style,detail,out){
+  const x=out.getContext("2d"),W=out.width,H=out.height;
+  if(style==="foto"){x.drawImage(base,0,0,W,H);const im=x.getImageData(0,0,W,H),d=im.data;for(let i=0;i<d.length;i+=4){let v=.2126*d[i]+.7152*d[i+1]+.0722*d[i+2];v=clamp((v-128)*1.15+131,0,255);d[i]=d[i+1]=d[i+2]=v}x.putImageData(im,0,0);return}
+  if(style==="linien"){
+    const gw=160,gh=200,L=boxBlur(lumGrid(base,gw,gh),gw,gh,Math.round(3-detail*2)),levels=Math.round(8+detail*18);
+    x.fillStyle="#000";x.fillRect(0,0,W,H);x.lineJoin="round";x.lineCap="round";
+    const sx=W/(gw-1),sy=H/(gh-1);
+    for(let l=1;l<=levels;l++){const T=l/(levels+1);x.beginPath();
+      for(let j=0;j<gh-1;j++)for(let i=0;i<gw-1;i++){
+        const a=L[j*gw+i],b=L[j*gw+i+1],c=L[(j+1)*gw+i+1],e=L[(j+1)*gw+i];
+        const k=(a>T?8:0)|(b>T?4:0)|(c>T?2:0)|(e>T?1:0);if(!k||k===15)continue;
+        const P=[[i+(T-a)/(b-a),j],[i+1,j+(T-b)/(c-b)],[i+(T-e)/(c-e),j+1],[i,j+(T-a)/(e-a)]];
+        for(const [p,q] of CASES[k]){x.moveTo(P[p][0]*sx,P[p][1]*sy);x.lineTo(P[q][0]*sx,P[q][1]*sy)}}
+      const idx=l%4===0;x.strokeStyle=idx?"rgba(255,255,255,.95)":"rgba(255,255,255,.6)";x.lineWidth=idx?2.4:1.2;x.stroke()}
+    return}
+  if(style==="raster"){
+    const cell=Math.round(26-detail*16),gw=Math.ceil(W/cell),gh=Math.ceil(H/cell),L=lumGrid(base,gw,gh);
+    x.fillStyle="#fff";x.fillRect(0,0,W,H);x.fillStyle="#000";
+    for(let j=0;j<gh;j++)for(let i=0;i<gw;i++){const r=cell*.56*Math.sqrt(1-L[j*gw+i]);if(r>.5){x.beginPath();x.arc(i*cell+cell/2,j*cell+cell/2,r,0,Math.PI*2);x.fill()}}
+    return}
+  /* Fläche: Schwarz, Weiß, und die hellsten Stellen in Wüstenorange */
+  const gw=Math.round(120+detail*280),gh=Math.round(gw*1.25),L=boxBlur(lumGrid(base,gw,gh),gw,gh,1);
+  const id=x.createImageData(gw,gh),d=id.data,o=[228,86,27];
+  for(let i=0;i<L.length;i++){const v=L[i],c=v>.86?o:v>.42?[255,255,255]:[0,0,0];d[i*4]=c[0];d[i*4+1]=c[1];d[i*4+2]=c[2];d[i*4+3]=255}
+  const t=document.createElement("canvas");t.width=gw;t.height=gh;t.getContext("2d").putImageData(id,0,0);
+  x.imageSmoothingEnabled=false;x.drawImage(t,0,0,W,H);x.imageSmoothingEnabled=true;
+}
+const WZ={base:null,style:"linien"};
+let wTimer=0;
+function redraw(){if(!WZ.base)return;const cv=$("#wCanvas");if(!cv)return;cv.classList.add("busy");clearTimeout(wTimer);
+  wTimer=setTimeout(()=>{try{render(WZ.base,WZ.style,+$("#wDetail").value/100,cv)}catch(err){say("Die Umwandlung ist fehlgeschlagen. Versuche ein anderes Foto.")}cv.classList.remove("busy")},30)}
 async function setImage(id,value,ok){IMG[id]=value;const stored=await DB.put(id,value);$("#smedia").innerHTML=media(byId[id]);
   if(!RM)$("#smedia").firstElementChild.animate([{clipPath:"inset(0 0 100% 0)"},{clipPath:"inset(0 0 0 0)"}],{duration:900,easing:"cubic-bezier(.2,.9,.1,1)"});
   say(stored?ok:"Bild übernommen. Speichern ist in dieser Ansicht nicht möglich, nach dem Neuladen fehlt es wieder. Öffne die Datei in Safari.");
   if(FEATURED.includes(id)||ROUTE.some(r=>r.id===id))renderAusgabe()}
-sheet.addEventListener("change",async ev=>{if(ev.target.id!=="bFile"||!ev.target.files?.[0]||!current)return;say("Foto wird verarbeitet …");
-  try{await setImage(current,await readPhoto(ev.target.files[0]),"Foto übernommen und auf diesem Gerät gespeichert.")}
-  catch(err){say(err==="format"?"Dieses Format kann der Browser nicht öffnen. Wähle ein JPG oder PNG.":"Das Foto ließ sich nicht lesen. Versuche es erneut.")}});
+sheet.addEventListener("change",async ev=>{if(ev.target.id!=="bFile"||!ev.target.files?.[0]||!current)return;say("Foto wird geladen …");
+  const file=ev.target.files[0];ev.target.value="";
+  try{WZ.base=await loadPhoto(file);$("#wd").hidden=false;redraw();say("Wähle einen Stil und übernimm die Grafik.");
+    $("#wd").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"});
+    if(!RM)$("#wCanvas").animate([{clipPath:"inset(0 0 100% 0)"},{clipPath:"inset(0 0 0 0)"}],{duration:800,easing:"cubic-bezier(.2,.9,.1,1)"})}
+  catch(err){say("Dieses Foto kann der Browser nicht öffnen. Wähle ein anderes Foto oder exportiere es vorher als JPG.")}});
+sheet.addEventListener("input",ev=>{if(ev.target.id==="wDetail")redraw()});
 
 /* =========================================================
    KLICKS
@@ -817,7 +895,12 @@ document.addEventListener("click",async ev=>{
   if(sv&&current){const was=saved.includes(current);saved=was?saved.filter(x=>x!==current):[...saved,current];const on=!was;
     sv.setAttribute("aria-pressed",on);sv.lastElementChild.textContent=on?"Gemerkt":"Merken";
     if(on)flyToNav(sv);else persist(false);if(view==="merkliste")renderSaved();return}
-  if(t.id==="bUrlOk"&&current){const u=$("#bUrl").value.trim();if(!/^https?:\/\//i.test(u)){say("Füge einen vollständigen Bildlink ein, der mit https:// beginnt.");return}await setImage(current,u,"Bildlink übernommen. Lädt das Bild nicht, erscheint wieder die Tafel.");return}
+  const ws=t.closest("[data-wstyle]");if(ws){WZ.style=ws.dataset.wstyle;$$("[data-wstyle]").forEach(b=>b.setAttribute("aria-pressed",b===ws));$("#wDetail").closest("label").hidden=WZ.style==="foto";redraw();return}
+  if(t.id==="wCancel"){WZ.base=null;$("#wd").hidden=true;say("");return}
+  if(t.id==="wSave"&&current&&WZ.base){const cv=$("#wCanvas");render(WZ.base,WZ.style,+$("#wDetail").value/100,cv);
+    const data=cv.toDataURL("image/jpeg",.86);WZ.base=null;$("#wd").hidden=true;sheet.scrollTo({top:0,behavior:RM?"auto":"smooth"});
+    await setImage(current,{src:data,graf:true},"Grafik übernommen und auf diesem Gerät gespeichert.");return}
+  if(t.id==="bUrlOk"&&current){const u=$("#bUrl").value.trim();if(!/^https?:\/\//i.test(u)){say("Füge einen vollständigen Bildlink ein, der mit https:// beginnt.");return}await setImage(current,{src:u},"Bildlink übernommen. Lädt das Bild nicht, erscheint wieder die Tafel.");return}
   if(t.id==="bRemove"&&current){delete IMG[current];await DB.del(current);$("#smedia").innerHTML=media(byId[current]);t.remove();say("Eigenes Bild entfernt.");return}
 });
 document.addEventListener("keydown",ev=>{
@@ -854,7 +937,7 @@ document.fonts?.ready.then(()=>{layout();sunS.set(centers()[TABS.indexOf(view)])
 
 /* Start */
 persist(false);renderAusgabe();go("ausgabe");sunS.set(centers()[0]);reveal();
-DB.open().then(()=>DB.all()).then(all=>{if(Object.keys(all).length){Object.assign(IMG,all);renderAusgabe();requestTick()}});
+DB.open().then(()=>DB.all()).then(all=>{if(Object.keys(all).length){for(const [k,v] of Object.entries(all))IMG[k]=typeof v==="string"?{src:v}:v;renderAusgabe();requestTick()}});
 </script>
 </body>
 </html>
