@@ -108,7 +108,13 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .strecke{position:relative;background:var(--ink);color:var(--paper);margin-top:var(--s12)}
 .st-sticky{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:var(--s4);padding:calc(64px + env(safe-area-inset-top)) 0 var(--navh)}
 .st-head{padding:0 var(--g)}
-.st-head h2{font-size:min(16vw,8.5svh,160px)}
+.st-head h2{font-size:min(11vw,6svh,120px)}
+.st-head p{font-size:14px!important;margin-top:var(--s1)!important}
+.strecke .st-sticky{justify-content:flex-start;padding-top:calc(76px + env(safe-area-inset-top));gap:var(--s3)}
+.rtabs{display:flex;gap:6px;margin-bottom:var(--s2);flex-wrap:wrap}
+.rtabs button{font-size:13px;font-weight:650;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;transition:background .25s,box-shadow .25s}
+.rtabs button[aria-pressed="true"]{background:var(--duene);box-shadow:0 0 14px rgba(228,86,27,.7)}
+.stop .warn{color:var(--duene);font-weight:700}
 .st-head p{margin-top:var(--s2);color:#9a9a9a;max-width:28em;font-size:15px}
 .track{display:flex;padding:0 var(--g);will-change:transform;position:relative}
 .stop{flex:0 0 min(72vw,330px);margin-right:var(--s3);transform-origin:50% 40%;will-change:transform,opacity}
@@ -160,13 +166,65 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .empty{padding:var(--s3) 0;font-size:18px;font-weight:500;max-width:22em}
 .empty .btn{margin-top:var(--s2)}
 
+.rchips{margin-top:0}
+.rchips button{font-weight:500}
+.rhead{display:flex;justify-content:space-between;align-items:flex-end;margin-top:var(--s8);padding-bottom:var(--s1)}
+.rhead h2{font-size:clamp(40px,12vw,96px)}
+.rhead span{font-size:13px;color:var(--grey);font-variant-numeric:tabular-nums;padding-bottom:6px}
+.rhead+section .ghead{margin-top:var(--s2)}
+.row{grid-template-columns:48px 1fr auto}
+.row .tg{gap:10px;align-items:center;min-width:16px}
+.mins{font-variation-settings:"wdth" 68;font-weight:800;font-size:22px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mins small{font-size:11px;font-weight:600;margin-left:2px;letter-spacing:0;font-variation-settings:"wdth" 100}
+.mins.est{color:var(--grey)}
+.rnote{margin:var(--s3) 0 0;padding:var(--s2);background:#FBE3D6;font-size:15px;line-height:1.35}
+.near{margin-top:var(--s4)}
+.near h3{font-size:13px;color:var(--grey);font-weight:600;margin-bottom:var(--s1)}
+/* Umkreis */
+.um{margin-top:var(--s3)}
+.umopen{display:flex;align-items:center;gap:10px;min-height:48px;font-size:16px;font-weight:700}
+.umopen i{width:22px;height:22px;border-radius:50%;border:2px solid var(--duene);position:relative}
+.umopen i::after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--duene);box-shadow:0 0 10px rgba(228,86,27,.8)}
+.umbar{display:flex;align-items:stretch;gap:2px}
+.umsum{flex:1;display:flex;align-items:center;gap:var(--s2);text-align:left;background:#000;color:#fff;padding:10px var(--s2)}
+.umsum b{font-variation-settings:"wdth" 62;font-weight:900;font-size:44px;line-height:.85;letter-spacing:-.04em;color:var(--duene);font-variant-numeric:tabular-nums}
+.umsum b small{font-size:13px;letter-spacing:0;color:#fff;margin-left:3px;font-variation-settings:"wdth" 100;font-weight:600}
+.umsum span{font-size:15px;font-weight:650;line-height:1.25}
+.umsum em{display:block;font-style:normal;font-size:12px;font-weight:500;color:#9a9a9a}
+.umx{width:56px;background:#000;color:#fff;font-size:26px;font-weight:300}
+.umpanel{background:var(--soft);padding:var(--s2);margin-top:2px}
+.umlbl{font-size:13px;color:var(--grey);margin:var(--s1) 0}
+.umlbl b{color:#000;font-size:15px}
+.umstart{display:flex;flex-wrap:wrap;gap:var(--s1)}
+.umstart .btn{min-height:44px}
+.umsel{flex:1 1 140px;display:flex;flex-direction:column;background:#fff;padding:4px 10px}
+.umsel span{font-size:11px;color:var(--grey)}
+.umsel select{font:inherit;font-size:15px;font-weight:600;border:0;background:none;padding:2px 0 4px;-webkit-appearance:none;appearance:none;width:100%}
+.umpanel input[type=range]{width:100%;accent-color:var(--duene);height:32px}
+.umnote{font-size:13px;color:var(--grey);min-height:1em}
 /* ---------- Karte mit Höhenlinien ---------- */
 .mapbox{position:relative;overflow:hidden;height:min(62svh,600px);margin:var(--s3) calc(var(--g) * -1) 0;background:#fff;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
 .mapbox:active{cursor:grabbing}
 .mapbox svg{position:absolute;left:0;top:0;will-change:transform;transform-origin:0 0;--iz:1}
-.mapbox svg.far .area.sm,.mapbox svg.far .town.sm{display:none}
+.mapbox svg.mid .area.sm{font-size:11px}
 .mapbox svg.far .c{stroke-opacity:.35}
-.mapbox .reg{fill:rgba(228,86,27,.09);stroke:var(--duene);stroke-width:calc(1.6px * var(--iz));stroke-linejoin:round}
+.mapbox .clu{fill:rgba(228,86,27,.07);stroke:var(--duene);stroke-width:calc(2.2px * var(--iz));stroke-linejoin:round;transform-box:fill-box;transform-origin:center;transition:fill .3s}
+.mapbox svg.far .clu{fill:rgba(228,86,27,.16);cursor:pointer}
+.mapbox .reg{fill:none;stroke:var(--duene);stroke-width:calc(.9px * var(--iz));stroke-dasharray:calc(4px * var(--iz)) calc(3px * var(--iz));stroke-linejoin:round;opacity:.8}
+.mapbox svg.far .reg{opacity:0}
+.mapbox .clab{display:none;cursor:pointer}
+.mapbox svg.far .clab{display:block}
+.mapbox .clab text{paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+.mapbox .clab .cn{font-size:15px;font-weight:800;fill:#000;font-variation-settings:"wdth" 80}
+.mapbox .clab .cc{font-size:12px;font-weight:650;fill:var(--duene)}
+.mapbox svg.far .area,.mapbox svg.far .town{display:none}
+.mapbox svg.far .dot circle.v{r:3}
+.mapbox .dot.est circle.v{fill:#fff;stroke:#000;stroke-width:1.2;stroke-dasharray:2 1.5}
+.mapbox .dot.det.est circle.v{stroke-dasharray:none}
+.mapbox .dot.off{opacity:.14}
+.mapbox .umr{fill:rgba(228,86,27,.08);stroke:var(--duene);stroke-width:calc(1.6px * var(--iz));stroke-dasharray:calc(6px * var(--iz)) calc(4px * var(--iz))}
+.mapbox .ums{fill:var(--duene);stroke:#fff;stroke-width:3;filter:drop-shadow(0 0 6px rgba(228,86,27,.9))}
+.mapbox .uml{font-size:12px;font-weight:800;fill:var(--duene);paint-order:stroke;stroke:#fff;stroke-width:4px}
 .mapbox .inv,.mapbox .inv2{transform-box:fill-box;transform-origin:center;transform:scale(var(--iz))}
 .mapbox .town rect{fill:#000}
 .zoom{position:absolute;right:var(--g);top:var(--s2);display:grid;gap:2px;z-index:2}
@@ -181,11 +239,13 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .mapbox .dot.sel circle.v{fill:var(--duene);stroke:#fff;stroke-width:2}
 .mapbox .dot g{transform-box:fill-box;transform-origin:center}
 .mapbox .ring{fill:none;stroke:var(--duene);stroke-width:calc(2px * var(--iz))}
-.maphint{position:absolute;left:var(--g);bottom:var(--s2);font-size:12px;font-weight:650;background:#000;color:#fff;padding:6px 10px;pointer-events:none;transition:opacity .5s}
+.maphint{position:absolute;left:var(--g);top:var(--s2);max-width:calc(100% - 92px);font-size:12px;font-weight:650;background:#000;color:#fff;padding:6px 10px;pointer-events:none;transition:opacity .5s}
 .legend{list-style:none;max-width:720px;margin-top:var(--s3)}
 .legend button{width:100%;min-height:44px;display:flex;justify-content:space-between;align-items:center;padding:0;font-size:17px;font-weight:650;text-align:left;transition:transform .12s}
 .legend button:active{transform:translateX(6px)}
 .legend span{color:var(--grey);font-weight:500;font-variant-numeric:tabular-nums}
+.legend li{padding:var(--s1) 0}
+.legend li small{display:block;font-size:13px;color:var(--grey);margin-top:-6px}
 .mapcard{position:fixed;z-index:35;left:var(--g);right:var(--g);bottom:calc(var(--navh) + var(--s1));max-width:420px;margin:0 auto;background:#fff;border-radius:22px;padding:14px 14px 14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 18px 50px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.08);transform:translateY(var(--y,160px));opacity:var(--o,0);pointer-events:none}
 .mapcard.on{pointer-events:auto}
 .mapcard b{display:block;font-variation-settings:"wdth" 80;font-weight:800;font-size:22px;line-height:1}
@@ -404,7 +464,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 
   <section class="strecke" id="strecke">
     <div class="st-sticky">
-      <div class="st-head"><h2 class="cond rv">Skulpturen an einem Tag</h2><p>Vier Güter, eine Route. Von den Gärten am Morgen bis zur Galerie am späten Nachmittag.</p><button class="btn" id="takeRoute">Als meinen Tag übernehmen</button></div>
+      <div class="st-head"><div class="rtabs" id="rtabs" role="group" aria-label="Route wählen"></div><h2 class="cond" id="rTitle"></h2><p id="rText"></p><button class="btn" id="takeRoute">Als meinen Tag übernehmen</button></div>
       <div class="track" id="track"><div class="st-line" id="stLine"><i></i></div></div>
     </div>
   </section>
@@ -423,7 +483,9 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
     <div class="search">
       <input id="q" type="search" placeholder="Weingut oder Gebiet suchen" autocomplete="off" aria-label="Weingut oder Gebiet suchen">
       <div class="chips" id="chips" role="group" aria-label="Nach Schwerpunkt filtern"></div>
+      <div class="chips rchips" id="rchips" role="group" aria-label="Nach Region filtern"></div>
     </div>
+    <div class="um" data-um></div>
     <p class="count" id="count" aria-live="polite"></p>
     <div class="imp" id="imp"></div>
     <div id="groups"></div>
@@ -434,7 +496,8 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 <div class="view" id="v-karte">
   <section class="wrap page">
     <h1 class="cond rv">Karte</h1>
-    <p class="small grey" style="margin-top:var(--s1);max-width:30em">Schematisch und offline. Orange Flächen zeigen die Gegenden aus der Tabelle, die Lage einzelner Güter darin ist geschätzt. Weiße Punkte haben einen ausführlichen Eintrag.</p>
+    <p class="small grey" style="margin-top:var(--s1);max-width:30em">Orange Flächen sind die sechs Regionen, tippe eine an. Weiße Punkte haben einen ausführlichen Eintrag, hohle Punkte sind in der Lage geschätzt. Die Höhenlinien sind schematisch. Lage der Güter und Fahrzeiten: © OpenStreetMap-Mitwirkende, OSRM.</p>
+    <div class="um" data-um></div>
     <div class="mapbox" id="mapbox"><svg id="map" aria-label="Höhenlinienkarte aller Weingüter" role="img"></svg><div class="zoom"><button data-z="in" aria-label="Hineinzoomen">+</button><button data-z="out" aria-label="Herauszoomen">−</button></div><div class="maphint" id="maphint">Mit einem Finger verschieben, mit zwei zoomen</div></div>
     <ul class="legend" id="legend"></ul>
   </section>
@@ -465,10 +528,20 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Eintrag"><div class="sinner" id="sinner"></div></div>
 
 <script src="texte.js"></script>
+<script src="geo.js"></script>
 <script>
 /* =========================================================
    DATEN – später aus der Excel (eine Zeile = ein Gut)
    ========================================================= */
+/* Land, Region, Ort: weitere Länder bekommen eine eigene Ausgabe mit gleicher Struktur */
+const LAND={key:"za",name:"Südafrika",ausgabe:"Kap"};
+const REGIONEN=[
+ {k:"stellenbosch-helderberg",name:"Stellenbosch & Helderberg",orte:["stellenbosch","somerset-west","koelenhof","sir-lowry-s-pass"]},
+ {k:"paarl-franschhoek",name:"Paarl & Franschhoek",orte:["paarl","franschhoek","klapmuts","wellington"]},
+ {k:"walker-bay",name:"Walker Bay & Overberg",orte:["hermanus","botrivier","elgin","grabouw","stanford"]},
+ {k:"breede",name:"Breede-Tal",orte:["robertson","worcester","brede-river"]},
+ {k:"kapstadt",name:"Kapstadt",orte:["cape-town","constantia","durbanville"]},
+ {k:"swartland",name:"Swartland",orte:["malmesbury","darling"]}];
 const RESSORTS={architektur:"Architektur",kunst:"Kunst",garten:"Garten",kueche:"Küche"};
 const TBD="Folgt aus der Tabelle";
 /* Gegenden aus der Tabelle, mit ungefährem Mittelpunkt (Ort oder Weintal) */
@@ -548,13 +621,15 @@ const DETAIL=[
 ];
 /* Öffentliche Angaben aus der Tabelle: Name, Website, Gegend */
 const BASE=[["Adama","https://www.adamawines.co.za","paarl"],["Akkerdal","https://akkerdal.co.za","franschhoek"],["Alheit Vineyards","http://www.alheitvineyards.co.za/","hermanus"],["Allee Bleue","http://www.alleebleue.co.za/","franschhoek"],["Alluvia Boutique","https://www.alluvia.co.za/","stellenbosch"],["Almenkerk","http://www.almenkerk.co.za/","grabouw"],["Ambeloui (Method Classique)","http://www.ambeloui.co.za/","cape-town"],["Andreas Wines","http://www.andreas.co.za/","paarl"],["Anthonij Rupert","http://www.rupertwines.com/","franschhoek"],["Anura","http://www.anura.co.za/","klapmuts"],["Anwilka","http://www.anwilka.com/","stellenbosch"],["Arabella Wines","http://www.arabellawines.com/","robertson"],["Arendsig Hand Crafted Wines","http://www.arendsig.co.za/","robertson"],["Arra Vineyards","http://arravineyards.com/","klapmuts"],["Asara","http://www.asara.co.za/","stellenbosch"],["Ashton Winery","http://www.ashtonwinery.com/","robertson"],["Aslina","https://www.aslinawines.com/","stellenbosch"],["Ataraxia Wines","https://www.ataraxiawines.co.za/","hermanus"],["Atlas Swift","http://www.atlasswift.co.za/","franschhoek"],["Avondale","http://www.avondalewine.co.za/","paarl"],["Avontur","https://www.avontuurestate.co.za/wine","stellenbosch"],["Ayama","http://www.ayama.info/","paarl"],["Babylon's Peak","https://babylonspeak.co.za/","malmesbury"],["Babylonstoren","http://www.babylonstoren.com/","klapmuts"],["Bacco Estate","http://www.baccoestate.co.za/","klapmuts"],["Backsberg Family Wines","https://backsberg.co.za/","franschhoek"],["Bartho Eksteen Wine Estate","https://barthoeksteen.co.za/","hermanus"],["Bartinney","http://www.bartinney.co.za/","stellenbosch"],["Beau Constantia","https://www.beauconstantia.com/","constantia"],["Beaumont","http://www.beaumont.co.za/","botrivier"],["Bein Private Cellar","http://www.beinwine.com/","stellenbosch"],["Bellevue","http://www.bellevue.co.za/","stellenbosch"],["Benguela Cove","https://www.benguelacove.co.za/","botrivier"],["Bergsig Wine Estate","http://www.bergsig.co.za/","brede-river"],["Beyerskloof","https://beyerskloof.co.za/","stellenbosch"],["Blaauwklippen","https://www.blaauwklippen.com","stellenbosch"],["Black Elephant Vintners","https://bevintners.co.za/","franschhoek"],["Black Pearl","http://www.blackpearlwines.com/","paarl"],["Blankbottle","https://blankbottle.co.za/","somerset-west"],["Boekenhoutskloof","http://www.boekenhoutskloof.co.za/","franschhoek"],["Boland Cellar","https://bolandcellar.co.za/","paarl"],["Bonnievale Wines","https://bonnievalewines.co.za/","robertson"],["Boschendal","http://www.boschendal.com/","franschhoek"],["Boschkloof","http://www.boschkloofwines.com/","stellenbosch"],["Bosman Family Vineyards","http://www.bosmanwines.com/","paarl"],["Brampton","http://www.brampton.co.za/","stellenbosch"],["Brandvlei Cellar","http://www.bcwines.co.za/","worcester"],["Brookdale","https://brookdale-estate.com/","paarl"],["Buitenverwachting","http://www.buitenverwachting.com/","constantia"],["Calais Wine Estate","","paarl"],["Camberley","http://www.camberley.co.za/","stellenbosch"],["Cape Point Vineyards","https://cpv.co.za","cape-town"],["Cavalli","https://cavalliestate.com/","stellenbosch"],["Chamonix","http://www.chamonix.co.za/","franschhoek"],["Charles Fox Cap Classique Wine Estate","http://www.charlesfox.co.za/","elgin"],["Colmant Cap Classique","https://www.colmant.co.za/","franschhoek"],["Constantia Glen","http://www.constantiaglen.com/","cape-town"],["Creation Wines","https://www.creationwines.com/","hermanus"],["Cronier","https://www.cronierwines.com/","paarl"],["D'Aria","http://www.dariawinery.co.za/","cape-town"],["Darling Cellars","http://www.darlingcellars.co.za/","darling"],["David Finlayson","http://www.edgebaston.co.za/","stellenbosch"],["De Grendel","https://www.degrendel.co.za/","cape-town"],["De Meye","http://www.demeye.co.za/","klapmuts"],["De Toren","https://www.de-toren.com/","stellenbosch"],["De Waal","https://www.dewaal.co.za/","stellenbosch"],["De Wetshof","http://www.dewetshof.com/","robertson"],["Deetlefs","https://deetlefs.com/","worcester"],["Dekkersvlei","http://www.dekkersvlei.com/","paarl"],["Delaire Graff","http://www.delaire.co.za/","stellenbosch"],["Delheim","http://www.delheim.com/","stellenbosch"],["DeMorgenzon","http://www.demorgenzon.com/","stellenbosch"],["Denneboom Wines","http://www.denneboomvineyardsandwildlife.co.za/","paarl"],["Deux Freres","https://dfwines.co.za","stellenbosch"],["Diemersdal","http://www.diemersdal.co.za/","durbanville"],["Dieu Donné Vineyards","http://www.dieudonnevineyards.com/","franschhoek"],["Doran Vineyards","http://www.doranvineyards.co.za/","paarl"],["Dornier","http://www.dornier.co.za/","stellenbosch"],["Dorrance","http://dorrancewines.com/","cape-town"],["Druk My Niet Estate","https://www.dmnwines.co.za/","paarl"],["Du Toitskloof","http://www.dutoitskloof.co.za/","paarl"],["Durbanville Hills","http://www.durbanvillehills.co.za/","cape-town"],["Eagle's Cliff Wines","https://www.eaglescliff.co.za/","worcester"],["Eenzaamheid","http://www.eenzaamheidwines.co.za","klapmuts"],["Eikehof","http://www.eikehof.com/f","franschhoek"],["Eikendal","http://www.eikendal.com/","somerset-west"],["Ernie Els","http://www.ernieelswines.com/","stellenbosch"],["Ernst Gouws & Co","http://www.ernstgouws.co.za/","klapmuts"],["Escape Wines","http://escwines.com/","hermanus"],["Esona Boutique Wine Estate","https://esona.co.za/","robertson"],["Fairview","https://www.fairview.co.za/","paarl"],["Flagstone Wines","http://www.flagstonewines.com/","somerset-west"],["Fijnbosch Vineyards Capensis","http://www.capensiswines.com/","stellenbosch"],["Frater Family Wines","http://www.fraterfamilywines.co.za/","paarl"],["Gabrielskloof Wine Estate","http://www.gabrielskloof.co.za/","botrivier"],["Glen Carlou","https://glencarlou.com/","klapmuts"],["Glenelly","http://glenellyestate.com/","stellenbosch"],["Glenwood","http://www.glenwoodvineyards.co.za/","franschhoek"],["Good Hope","http://www.thewineryofgoodhope.com/","somerset-west"],["Graham Beck Estate","http://www.grahambeck.com/","robertson"],["Grande Provence","http://www.grandeprovence.co.za/","franschhoek"],["Groenland Wyne","http://www.groenland.co.za/","stellenbosch"],["Groot Constantia","https://www.grootconstantia.co.za/","cape-town"],["Groot Parys","http://www.grootparys.co.za/","paarl"],["Groot Phesantekraal","http://www.grootphesantekraal.co.za/","durbanville"],["Guardian Peak","http://www.guardianpeak.com/","stellenbosch"],["Hamilton Russell","http://www.hamiltonrussellvineyards.com/","hermanus"],["Hartenberg","https://hartenbergestate.com/","stellenbosch"],["Haut Bay Vineyards","https://houtbayvineyards.co.za/","cape-town"],["Haute Cabriere","https://www.cabriere.co.za/","franschhoek"],["Hazendal","http://www.hazendal.co.za/","stellenbosch"],["Heavens's View Vineyards","","stellenbosch"],["Hermanus River Wines","https://eaglescliff.co.za/","botrivier"],["Hidden Valley","http://www.hiddenvalleywines.co.za/","stellenbosch"],["High Constantia","http://www.highconstantia.co.za/","cape-town"],["Highlands Road Estate","http://www.highlandsroadestate.co.za/","elgin"],["Hout Bay Vineyards","https://houtbayvineyards.co.za/","cape-town"],["Idiom","http://www.idiom.co.za/","somerset-west"],["Imbuko Wines","http://www.imbuko.co.za/","paarl"],["Iona Wines","https://www.iona.co.za/","botrivier"],["J.C Le Roux","http://www.jcleroux.co.za/","stellenbosch"],["Jacaranda Wines","http://www.jacarandawines.co.za/","paarl"],["Jason's Hill","http://www.jasonshill.co.za/","worcester"],["Joostenberg","http://joostenberg.co.za/the-kraal-restaurant/","klapmuts"],["Jordan","http://www.jordanwines.com/","stellenbosch"],["Joubert Family Wines","https://joubertfamilywines.com/","stellenbosch"],["Journey's End","http://www.journeysend.co.za/","sir-lowry-s-pass"],["Kaapzicht","http://www.kaapzicht.co.za/","stellenbosch"],["Kanonkop","http://www.kanonkop.co.za/","stellenbosch"],["Kanu Wines","http://www.kanu.co.za/","stellenbosch"],["Karibib","https://karibib.co.za/","stellenbosch"],["Keermont","http://www.keermont.co.za/","stellenbosch"],["Ken Forester","https://kenforresterwines.com/","stellenbosch"],["Khulu","https://khululuxury.com/","klapmuts"],["Kirabo Private Cellar","http://kiraboprivatecellar.com/","worcester"],["Klein Alto","http://www.alto.co.za/","stellenbosch"],["Klein Goederust","https://kleingoederust.co.za/","franschhoek"],["Klein Graniet","https://kleingraniet.co.za","stellenbosch"],["Klein Parys","https://kleinparysvineyards.co.za/","paarl"],["Klein Roosboom","http://www.kleinroosboom.co.za/","durbanville"],["Klein Welmoed","http://www.kleinwelmoed.co.za/","stellenbosch"],["Kleine Zalze","http://www.kleinezalze.co.za/","stellenbosch"],["Kleinhoekkloof Wines","http://www.kleinhoekkloof.co.za/","robertson"],["Kleinood","http://www.kleinood.com/","stellenbosch"],["Kloovenburg Wine & Olive Estate","http://www.kloovenburg.com/","malmesbury"],["Knorhoek","https://www.knorhoek.co.za/","stellenbosch"],["Koelenhof","https://www.koelenhof.co.za/","klapmuts"],["Koopmanskloof","http://www.koopmanskloof.co.za/","stellenbosch"],["Kranskop Wines","http://www.kranskopwines.co.za/","robertson"],["Kunjani","https://kunjani-villas.co.za/","stellenbosch"],["La Boucher","https://laboucherwines.co.za/","koelenhof"],["La Bri","http://www.labri.co.za/","franschhoek"],["La Cave","https://lacave.co.za","wellington"],["La Luandiere","","paarl"],["La Motte","https://www.la-motte.com/","franschhoek"],["La Provence","http://laprovencevineyards.com/","franschhoek"],["La Roche","http://www.larocheestate.com/","franschhoek"],["La Vierge Wines","http://lavierge.co.za/","hermanus"],["Laborie Wine Estate","","paarl"],["Ladybird","http://www.ladybirdvineyards.co.za/","stellenbosch"],["Lammershoek","http://www.lammershoek.co.za/","malmesbury"],["Landskein Wines","http://www.landskeinwines.co.za/","stanford"],["Landskroon Wines","http://www.landskroonwines.com/","paarl"],["Lanzerac","http://www.lanzerac.co.za/","stellenbosch"],["L'Avenir","http://www.lavenirestate.co.za/","stellenbosch"],["Le Riche","http://www.leriche.co.za/","stellenbosch"],["Leeu Passant","https://mlfwines.com/discover-leeu-passant/","franschhoek"],["Leeuwenkuil Family Vineyards","http://www.leeuwenkuilfv.co.za/","paarl"],["Leopard Leap","https://leopardsleap.co.za/","franschhoek"],["LePommier","http://www.lepommier.co.za/","stellenbosch"],["Lievland","https://lievland.co.za/","stellenbosch"],["L'Ormarins","https://www.rupertwines.com/farms.php?farms_id=1","franschhoek"],["Louisvale","http://www.louisvale.com/","stellenbosch"],["Lourens Family Wines","http://lourensfamilywines.co.za/","paarl"],["Lourensford","http://www.lourensford.co.za/","somerset-west"],["Lynx Wine Estate","http://www.lynx-collection.com/","franschhoek"],["Maison","http://maisonestate.com/","cape-town"],["MAN Family Wines","https://manwines.com/","stellenbosch"],["Marklew Family Wines","http://www.marklew.co.za/","stellenbosch"],["Marras Wines","https://www.marraswines.co.za/","malmesbury"],["McFarlane","https://mcfarlanewines.com/","klapmuts"],["Meerendal","https://meerendal.co.za/","durbanville"],["Meinert Wines","http://www.meinertwines.com/","stellenbosch"],["Merwida Wine Cellar","https://www.merwida.com/","worcester"],["M'hudi Wines Stellenbosch","https://mhudi.com/","stellenbosch"],["Middelvlei","http://www.middelvlei.co.za/","stellenbosch"],["Minimalist Wines","https://minimalistwines.com/","cape-town"],["Mitre's Edge","http://www.mitres-edge.co.za/","klapmuts"],["Mont Destin","http://www.montdestin.co.za/","stellenbosch"],["Mont du Toit","http://www.montdutoitwines.co.za/","paarl"],["Mont Marie","http://www.montmarie.co.za/","stellenbosch"],["Mont Rous","https://www.montrous.com/","stellenbosch"],["Mooi Bly","http://www.mooibly.com/","paarl"],["Mooiplaas","http://www.mooiplaas.co.za/","stellenbosch"],["Morgenhof","http://www.morgenhof.com/","stellenbosch"],["Morgenster","https://morgensterestate.co.za/","somerset-west"],["Mt Vernon","http://www.shop.mountvernon.co.za/","klapmuts"],["Mulderbosch","http://www.mulderbosch.co.za/","stellenbosch"],["Mullineux Winery","http://www.mlfwines.com/","malmesbury"],["Muratie","http://www.muratie.co.za/","stellenbosch"],["Napier Vineyards","http://www.napier-vineyards.co.za/","paarl"],["Nederburg","http://www.nederburg.com/","paarl"],["Neethlingshof","http://www.neethlingshof.co.za/","stellenbosch"],["Nelson Wine Estate","http://www.nelsonscreek.co.za/","paarl"],["Newton Johnson","http://www.newtonjohnson.com/","hermanus"],["Nico van der Merwe","https://www.nvdmwines.com/","stellenbosch"],["Niel Joubert","http://www.nieljoubert.co.za/","klapmuts"],["Noble Hill","https://www.noblehill.com/","klapmuts"],["Nuy Winery","http://www.nuywinery.co.za/","worcester"],["Oldenburg","https://oldenburgvineyards.com/","stellenbosch"],["Olsen Private Vineyards","http://olsenprivatevineyards.co.za/","paarl"],["Oneiric Wines","http://www.oneiric.co.za/","elgin"],["Overgaauw","https://www.overgaauw.co.za/","stellenbosch"],["Paserene","https://paserene.com/","franschhoek"],["Paul Clüver","http://www.cluver.com/","grabouw"],["Perdeberg","http://www.perdeberg.co.za/","paarl"],["Peter Falke","http://www.peterfalkewines.com/","stellenbosch"],["Pigcasso","http://www.pigcasso.org/","franschhoek"],["Pink Valley","http://www.pinkvalleywines.com/","stellenbosch"],["Plaisir","http://www.plaisir.co.za/","klapmuts"],["Post House","http://www.posthousewines.co.za/","somerset-west"],["Pulpitrock","http://www.pulpitrock.co.za/","malmesbury"],["Quoin Rock","http://www.quoinrock.co.za/","stellenbosch"],["Raats Family Wines","http://raats.co.za/","stellenbosch"],["Rainbow's End","http://www.rainbowsend.co.za/","stellenbosch"],["Remhoogte","https://remhoogte.co.za/","stellenbosch"],["Reyneke","https://www.reynekewines.co.za/","stellenbosch"],["Rhebokskloof Estate","http://www.rhebokskloof.co.za/","paarl"],["Rickety Bridge","https://www.ricketybridge.com/","franschhoek"],["Riebeek Valley Wine","https://riebeekvalleywineco.com/","malmesbury"],["Rietvallei","https://rietvallei.co.za/","robertson"],["Rivendell","https://eaglescliff.co.za/","botrivier"],["Ruitersvlei","","paarl"],["Rupert & Rothschild","http://www.rupert-rothschildvignerons.com/","klapmuts"],["Rust en Vrede","http://rustenvrede.com/","stellenbosch"],["Rustenberg","http://www.rustenberg.co.za/","stellenbosch"],["Savage Wines","https://www.savagewines.com/","cape-town"],["Saxenburg","http://www.saxenburg.co.za/","stellenbosch"],["Scali Wines","http://scaliwines.wordpress.com/","paarl"],["Seven Oaks","http://www.sevenoaks.co.za/","brede-river"],["Seven Sisters","http://www.sevensisters.co.za/","stellenbosch"],["Seven Springs Vineyard","http://7springs.co.za/","hermanus"],["Silvermist Organic Wine Estate","https://silvermistestate.co.za/","constantia"],["Silverthorn Wines","https://silverthornwines.co.za","robertson"],["Simonsig","http://www.simonsig.co.za/","stellenbosch"],["Simonsvlei","http://www.simonsvlei.com/","klapmuts"],["Skilpadvlei Wine Farm","https://www.skilpadvlei.co.za/","stellenbosch"],["Slaley","http://www.slaley.co.za/","stellenbosch"],["Slanghoek Cellar","http://www.slanghoek.co.za/","worcester"],["Solms Delta","https://solmsdelta.co","franschhoek"],["Sommerbosch","http://www.somerbosch.co.za/","stellenbosch"],["South Hill Vineyards","https://southhill.co.za/","elgin"],["Spier","http://www.spier.co.za/","stellenbosch"],["Spioenkop Wines","http://www.spioenkopwines.co.za/","grabouw"],["Spookfontein Wines","https://www.spookfontein.co.za/","hermanus"],["Spotswood Wines","https://spotswoodwines.co.za/","stellenbosch"],["Springfield Estate","http://www.springfieldestate.com/","robertson"],["Springfontein Wines","http://www.springfontein.co.za/","stanford"],["Stark-Conde","http://www.stark-conde.co.za/","stellenbosch"],["Steenberg","https://steenbergfarm.com","cape-town"],["Stellenbosch 1679","https://www.stellenbosch1679.co.za/","klapmuts"],["Stellenbosch Vineyards Wine Farm","http://www.stellenboschvineyards.co.za/","stellenbosch"],["Stellenrust","http://www.stellenrust.co.za/","stellenbosch"],["Stellenzicht","http://stellenzicht.com/","stellenbosch"],["Stettyn Family Vineyards","https://www.stettyncellar.com/","worcester"],["Stony Brook","http://www.stonybrook.co.za/","franschhoek"],["Summerhill Wines","","stellenbosch"],["Survivor Wines","https://survivorwines.com/","paarl"],["Swartland Winery","https://www.swartlandwinery.co.za/","malmesbury"],["Taaibosch","https://www.taaiboschwines.com/","stellenbosch"],["Tempel Wines","http://www.tempelwines.co.za/","paarl"],["Thamnus Wines","https://www.thamnuswines.co.za/","hermanus"],["The Ahrens","https://theahrensfamily.co.za/","paarl"],["The Hills","http://www.thehillswine.com/","stellenbosch"],["The Sadie Family Wines","http://www.thesadiefamily.com/","malmesbury"],["Thelema","https://www.thelema.co.za/","stellenbosch"],["Tokara","http://www.tokara.com/","stellenbosch"],["Uitkyk","https://www.uitkyk.co.za/","stellenbosch"],["Uitsig","http://uitsig.co.za/contact/","constantia"],["Under Oaks Estate","http://www.underoaks.co.za/","paarl"],["uniWines Vineyards","http://www.uniwines.co.za/","worcester"],["Upland Organic Estate","http://www.organicwine.co.za/","paarl"],["Uva Mira","http://www.uvamira.com/","stellenbosch"],["Van Loveren Family Vineyards","http://www.vanloveren.co.za/","robertson"],["Vendom","https://www.vendome.co.za/","paarl"],["Vergelegen Wine Estate","http://www.vergelegen.co.za/","somerset-west"],["Vergenoegd Löw","https://vergenoegd.co.za/","stellenbosch"],["Viento","","paarl"],["Vilafonte","http://www.vilafonte.com/","stellenbosch"],["Villiera","http://www.villiera.com/","klapmuts"],["Vondeling Wines","https://vondelingwines.co.za/","paarl"],["Vrede Wines","https://www.vdcinternational.co.za/","stellenbosch"],["Vrede en Lust","http://www.vnl.co.za/","klapmuts"],["Vredenheim Wine Farm","http://vredenheim.co.za/","stellenbosch"],["Walker Bay Estate","https://www.walkerbayestate.com/","stanford"],["Warwick","https://www.warwickwine.com/","stellenbosch"],["Waterford","http://www.waterfordestate.co.za/","stellenbosch"],["Waterkloof","http://www.waterkloofwines.co.za/","somerset-west"],["Webersburg","https://webersburg.co.za","stellenbosch"],["Wellington Wines","http://www.wellingtonwines.com/","paarl"],["Weltevrede Wine Estate","http://weltevrede.com/","robertson"],["Whalehaven Winery","http://www.whalehaven.co.za/","hermanus"],["Wildeberg Wines","https://www.wildeberg.co.za/","somerset-west"],["Windmeul Kelder","http://www.windmeul.com/","paarl"],["Winshaw Vineyards","http://winshaw.co.za/","stellenbosch"],["Yonder Hill","http://www.yonderhill.co.za/","stellenbosch"],["Zandvliet Wine Estate","https://zandvliet.co.za/","robertson"],["Zevenwacht","http://zevenwacht.co.za/","stellenbosch"],["Zorgvliet","http://www.zorgvlietwines.com/","stellenbosch"]];
-const FEATURED=["delaire","tokara","lanzerac"];
-const ROUTE=[
- {id:"delaire",zeit:"09:30",text:"Gärten und Skulpturen im Morgenlicht, bevor es voll wird."},
- {id:"tokara",zeit:"11:30",text:"Zwei Minuten weiter: Skulpturengarten, danach Mittag mit Galerie."},
- {id:"spier",zeit:"14:30",text:"Die Sammlung über das ganze Gelände verteilt, gut zu Fuß."},
- {id:"cavalli",zeit:"16:30",text:"Zum Schluss die Galerie, wenn das Licht flacher wird."},
-];
+/* Themenrouten: Reihenfolge nach Lage und Öffnungszeiten, Uhrzeiten werden aus den Fahrzeiten berechnet */
+const ROUTEN=[
+ {k:"kunst",titel:"Kunst um Stellenbosch",text:"Vier Güter am Rand der Stadt, kaum eine Viertelstunde auseinander. Glas am Vormittag, Skulpturen über Mittag, Bronze zum Schluss.",start:"10:00",
+  stops:[["glenelly",75,"Das Glasmuseum unter dem Gut, am Vormittag fast für dich allein."],["delaire",120,"Skulpturen im Garten, Mittag auf der Terrasse über dem Tal."],["tokara",60,"Gegenüber am Pass: Skulpturen zwischen Reben und Olivenbäumen."],["quoin-rock",75,"Glas, Stahl und die Bronzerebe in der Halle. Offen bis 18 Uhr."]]},
+ {k:"franschhoek",titel:"Gärten und Galerien im Franschhoek-Tal",text:"Ein Nutzgarten am Morgen, Skulpturen im Fynbos am Mittag, Pierneef am Nachmittag.",start:"09:45",
+  stops:[["babylonstoren",150,"Um 10 Uhr startet die Gartenführung. Danach Mittag im Greenhouse."],["leeu-passant",90,"Skulpturen im Fynbos und die Everard Read Gallery."],["la-motte",90,"Pierneef im Museum, der Probierraum ist bis 17 Uhr offen."]]},
+ {k:"helderberg",titel:"Helderberg und False Bay",text:"Zwei Güter, zehn Minuten auseinander: ein Gouverneurshof von 1700 und ein Glaskörper über der Bucht.",start:"09:00",
+  stops:[["vergelegen-wine-estate",150,"Kampferbäume, der achteckige Garten, Kaffee im Stables."],["waterkloof",120,"Mittag im Glaskörper über der Bucht, danach Pferde zwischen den Reben."]]}];
+let RI=0,ROUTE=[];
 
 /* ---------- Hilfen ---------- */
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -579,6 +654,8 @@ function addEstate(name,web,reg){
   const d=DET[k];const e=d?Object.assign({},d):{id:slugify(name),name:name.trim(),adresse:"",zeiten:"",reservierung:"",kinder:""};
   if(!d&&ESTATES.some(x=>x.id===e.id))e.id+="-"+ESTATES.length;
   e.gebiet=reg||e.gebiet||"stellenbosch";e.web=web||e.web||"";e.ort=e.ort||GEBIETE[e.gebiet].name;e.approx=!d;
+  const gp=(window.GEO||{})[name.trim()];
+  if(gp&&gp[0]<-33.25&&gp[0]>-34.6&&gp[1]>18.2&&gp[1]<20.3){e.lat=gp[0];e.lng=gp[1];e.approx=false;e.genau=true}
   const tx=(window.TEXTE||{})[k];if(tx&&(!d||tx.stufe==="beitrag")){Object.assign(e,tx);e.quelle=tx.stufe==="beitrag"?"beitrag":"web"}
   ESTATES.push(e);seen[k]=e;return e}
 BASE.forEach(([n,w,g])=>addEstate(n,w,g));
@@ -588,11 +665,32 @@ if(IMPORT?.rows)IMPORT.rows.forEach(x=>{const e=addEstate(x.n,x.w,x.g?slugify(x.
 ESTATES.sort((a,b)=>a.name.localeCompare(b.name,"de"));
 ESTATES.forEach((e,i)=>{e.nr=i+1;e.ressorts=Object.keys(RESSORTS).filter(k=>e[k]);e.test=!e.lead;e.key=norm(e.name+" "+GEBIETE[e.gebiet].name+" "+(e.notiz||""))});
 const byId=Object.fromEntries(ESTATES.map(e=>[e.id,e]));
+ROUTEN.forEach(r=>r.stops=r.stops.filter(([id])=>byId[id]));
+const toMin0=t=>{const [h,m]=t.split(":").map(Number);return h*60+m};
+const hhmm0=m=>`${String(Math.floor(m/60)%24).padStart(2,"0")}:${String(Math.round(m%60)).padStart(2,"0")}`;
+function legMin(a,b){const R=6371,r=Math.PI/180,dLa=(b.lat-a.lat)*r,dLo=(b.lng-a.lng)*r,x=Math.sin(dLa/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLo/2)**2;return Math.max(5,Math.round(2*R*Math.asin(Math.sqrt(x))*1.35/45*60+4))}
+function buildRoute(i){const r=ROUTEN[i];let t=toMin0(r.start);
+  ROUTE=r.stops.map(([id,dur,text],k)=>{const e=byId[id];if(k>0)t+=legMin(byId[r.stops[k-1][0]],e);const o={id,dur,text,zeit:hhmm0(t),warn:""};
+    const oe=e.oeffnung;if(oe){if(t<toMin0(oe.t[0]))o.warn=`öffnet ${oe.t[0]}`;else if(t+dur>toMin0(oe.t[1]))o.warn=`schließt ${oe.t[1]}`}
+    t+=dur;return o});
+  const zu=r.stops.map(([id])=>byId[id]).filter(e=>e.oeffnung?.zu?.length).map(e=>`${e.name}: ${e.oeffnung.zuText}`);
+  r.hinweis=zu.length?`Geschlossen: ${zu.join("; ")}.`:"";}
+/* Beiträge auf der Startseite: drei pro Woche, im Wechsel */
+const BEITRAEGE=ESTATES.filter(e=>e.stufe==="beitrag").map(e=>e.id);
+const FEATURED=(()=>{const n=BEITRAEGE.length;if(n<=3)return BEITRAEGE;const w=Math.floor(Date.now()/6048e5);return [0,1,2].map(k=>BEITRAEGE[(w*3+k)%n])})();
+/* Echte Lage weit weg vom Ort aus der Tabelle: dem nächsten Ort zuordnen */
+{const R=6371,r=Math.PI/180,km=(a,b)=>{const x=Math.sin((b.lat-a.lat)*r/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin((b.lng-a.lng)*r/2)**2;return 2*R*Math.asin(Math.sqrt(x))};
+  ESTATES.forEach(e=>{if(!e.genau||km(e,GEBIETE[e.gebiet])<25)return;let best=e.gebiet,bd=1e9;for(const [k,G] of Object.entries(GEBIETE)){if(G.unbekannt)continue;const d=km(e,G);if(d<bd){bd=d;best=k}}
+    if(best!==e.gebiet){e.ortTabelle=GEBIETE[e.gebiet].name;e.gebiet=best;e.ort=GEBIETE[best].name}})}
 /* Gegenden nach Größe sortieren, Anzahl merken */
 Object.keys(GEBIETE).forEach(k=>GEBIETE[k].count=ESTATES.filter(e=>e.gebiet===k).length);
 for(const k of Object.keys(GEBIETE))if(!GEBIETE[k].count)delete GEBIETE[k];
 {const sorted=Object.entries(GEBIETE).sort((a,b)=>b[1].count-a[1].count||a[1].name.localeCompare(b[1].name));for(const k of Object.keys(GEBIETE))delete GEBIETE[k];sorted.forEach(([k,v])=>GEBIETE[k]=v)}
 
+for(const [k,G] of Object.entries(GEBIETE)){let r=REGIONEN.find(x=>x.orte.includes(k));
+  if(!r){let best=1e9;REGIONEN.forEach(x=>x.orte.forEach(o=>{const g=GEBIETE[o];if(!g||o===k)return;const d=(g.lat-G.lat)**2+(g.lng-G.lng)**2;if(d<best){best=d;r=x}}));r=r||REGIONEN[0];r.orte.push(k)}G.region=r.k}
+const REG=Object.fromEntries(REGIONEN.map(r=>[r.k,r]));
+const regionOf=e=>REG[GEBIETE[e.gebiet]?.region]||REGIONEN[0];
 /* Lage: Gegenden als Flächen (Kreis, an den Nachbarn beschnitten), Güter darin verteilt.
    Gerechnet in Kilometern, damit Fahrzeiten stimmen. */
 const KM={w:18.28,n:-33.30,kx:92.4,ky:111.2};
@@ -610,6 +708,19 @@ REGIONS.forEach(rg=>{const list=ESTATES.filter(e=>e.gebiet===rg.k&&e.approx);if(
   list.forEach(e=>{while(j<M*4){const r=rg.R*.92*Math.sqrt((j+.5)/M),t=j*2.39996+rot;j++;const p=[rg.c[0]+Math.cos(t)*r,rg.c[1]+Math.sin(t)*r];
     if(inPoly(p,rg.poly)){Object.assign(e,fromKm(p[0],p[1]));return}}Object.assign(e,fromKm(rg.c[0],rg.c[1]))})});
 ESTATES.forEach(e=>{if(e.lat==null)Object.assign(e,{lat:GEBIETE[e.gebiet].lat,lng:GEBIETE[e.gebiet].lng})});
+REGIONEN.forEach(r=>{r.count=ESTATES.filter(e=>regionOf(e)===r).length});
+/* Umrisse aus den echten Lagen: konvexe Hülle mit Abstand, geglättet */
+function hull(pts){pts=pts.slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]);if(pts.length<3)return pts;const cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]);
+  const lo=[],up=[];for(const p of pts){while(lo.length>=2&&cr(lo[lo.length-2],lo[lo.length-1],p)<=0)lo.pop();lo.push(p)}
+  for(const p of pts.slice().reverse()){while(up.length>=2&&cr(up[up.length-2],up[up.length-1],p)<=0)up.pop();up.push(p)}return lo.slice(0,-1).concat(up.slice(0,-1))}
+function blob(pts,pad){const ring=[];pts.forEach(p=>{for(let a=0;a<12;a++){const t=a/12*Math.PI*2;ring.push([p[0]+Math.cos(t)*pad,p[1]+Math.sin(t)*pad])}});
+  let P=hull(ring);for(let k=0;k<2;k++){const Q=[];P.forEach((a,i)=>{const b=P[(i+1)%P.length];Q.push([a[0]*.75+b[0]*.25,a[1]*.75+b[1]*.25],[a[0]*.25+b[0]*.75,a[1]*.25+b[1]*.75])});P=Q}return P}
+const CLUSTERS=REGIONEN.filter(r=>r.count).map(r=>{const pts=ESTATES.filter(e=>regionOf(e)===r).map(e=>toKm(e.lat,e.lng));
+  r.orte.forEach(o=>{const g=GEBIETE[o];if(g)pts.push(toKm(g.lat,g.lng))});
+  const poly=blob(pts,3.2),xs=poly.map(p=>p[0]),ys=poly.map(p=>p[1]);
+  const c=[pts.reduce((a,p)=>a+p[0],0)/pts.length,pts.reduce((a,p)=>a+p[1],0)/pts.length];
+  return Object.assign(r,{poly,box:[Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)],c})});
+buildRoute(0);
 
 /* =========================================================
    FEDERPHYSIK (Apple: Dämpfung + Antwortzeit statt Masse/Steifigkeit)
@@ -705,7 +816,7 @@ function reveal(root=document){root.querySelectorAll(".rv").forEach(el=>{split(e
    AUSGABE
    ========================================================= */
 $("#wordIn").innerHTML=[..."werf"].map((c,i)=>`<span class="ch" style="--i:${i}">${c}</span>`).join("");
-$("#facts4").innerHTML=[[1,"Ausgabe"],[FEATURED.length,"Beiträge"],[ESTATES.length,"Güter"],[Object.keys(GEBIETE).length,"Gegenden"]]
+$("#facts4").innerHTML=[[1,"Ausgabe"],[BEITRAEGE.length,"Beiträge"],[ESTATES.length,"Güter"],[REGIONEN.filter(r=>r.count).length,"Regionen"]]
   .map(([n,l])=>`<div><b data-count="${n}">00</b><span>${l}</span></div>`).join("");
 /* Zahlen zählen hoch, sobald sie sichtbar werden */
 const ioCount=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;ioCount.unobserve(en.target);const el=en.target,n=+el.dataset.count;
@@ -713,6 +824,15 @@ const ioCount=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting
 $$("[data-count]").forEach(el=>ioCount.observe(el));
 $("#regTeaser").textContent=`Alle ${ESTATES.length} Weingüter, durchsuchbar und nach Gegend geordnet.`;
 
+function renderRoute(anim){const r=ROUTEN[RI];
+  $("#rtabs").innerHTML=ROUTEN.map((x,i)=>`<button data-ri="${i}" aria-pressed="${i===RI}">${esc(x.titel.split(" ")[0]==="Kunst"?"Kunst":x.k==="franschhoek"?"Franschhoek":"Helderberg")}</button>`).join("");
+  $("#rTitle").textContent=r.titel;$("#rText").textContent=r.text+(r.hinweis?" "+r.hinweis:"");
+  $$("#track .stop").forEach(n=>n.remove());
+  $("#track").insertAdjacentHTML("beforeend",ROUTE.map(s=>{const e=byId[s.id];const [h,m]=s.zeit.split(":");return `<div class="stop"><button data-open="${e.id}" data-from=".media">
+    <div class="media">${media(e)}</div><div class="t">${h}<em>:</em>${m}</div><h4>${esc(e.name)}</h4><p>${esc(s.text)}${s.warn?` <b class="warn">${esc(s.warn)}</b>`:""}</p></button></div>`}).join(""));
+  if(anim&&!RM)$$("#track .stop").forEach((n,i)=>n.firstElementChild.animate([{opacity:0,transform:"translateX(60px)"},{opacity:1,transform:"none"}],{duration:620,delay:i*70,easing:"cubic-bezier(.2,.9,.2,1)",fill:"backwards"}));
+  if(anim&&!RM)$("#rTitle").animate([{opacity:0,transform:"translateY(20px)"},{opacity:1,transform:"none"}],{duration:520,easing:"cubic-bezier(.2,.9,.2,1)"})}
+document.addEventListener("click",ev=>{const b=ev.target.closest("[data-ri]");if(!b)return;RI=+b.dataset.ri;buildRoute(RI);renderRoute(true);layout();requestTick()});
 function renderAusgabe(){
   $("#feats").innerHTML=FEATURED.map((id,i)=>{const e=byId[id];return `<article class="feat wrap grid" data-scrub>
     <div class="num"><b>${pad(i+1,2)}</b><span class="small">${esc(GEBIETE[e.gebiet].name)}</span></div>
@@ -723,37 +843,110 @@ function renderAusgabe(){
       <p class="lead">${esc(e.lead)}</p>
       <button class="btn" data-open="${e.id}" data-from=".media">Eintrag öffnen</button>
     </div></article>`}).join("");
-  $$("#track .stop").forEach(n=>n.remove());
-  $("#track").insertAdjacentHTML("beforeend",ROUTE.map(s=>{const e=byId[s.id];const [h,m]=s.zeit.split(":");return `<div class="stop"><button data-open="${e.id}" data-from=".media">
-    <div class="media">${media(e)}</div><div class="t">${h}<em>:</em>${m}</div><h4>${esc(e.name)}</h4><p>${esc(s.text)}</p></button></div>`}).join(""));
+  renderRoute();
   reveal($("#v-ausgabe"));layout();
 }
 
 /* =========================================================
+   UMKREIS: von einem Startpunkt aus, mit höchstens X Minuten Fahrt
+   Ohne Netz geschätzt (Luftlinie x 1,35, 45 km/h, plus 4 Min.),
+   mit Netz über Straßen berechnet (OSRM, OpenStreetMap).
+   ========================================================= */
+const UM={on:false,max:30,label:"",lat:null,lng:null,kind:"",ref:"",routed:false,busy:false};
+try{Object.assign(UM,JSON.parse(localStorage.getItem("werf-umkreis")||"{}"))}catch(_){}
+const TT=new Map();
+function saveUm(){try{localStorage.setItem("werf-umkreis",JSON.stringify({on:UM.on,max:UM.max,label:UM.label,lat:UM.lat,lng:UM.lng,kind:UM.kind,ref:UM.ref}))}catch(_){}}
+const estMin=km=>Math.max(3,Math.round(km*1.35/45*60+4));
+function estimateAll(){TT.clear();if(UM.lat==null)return;const o={lat:UM.lat,lng:UM.lng};
+  ESTATES.forEach(e=>{if(UM.kind==="gut"&&e.id===UM.ref){TT.set(e.id,{min:0,est:false});return}TT.set(e.id,{min:estMin(hav(o,e)),est:true})})}
+const ROUTE_CACHE={};
+async function routeAll(){if(UM.lat==null||!navigator.onLine)return;const key=UM.lat.toFixed(3)+","+UM.lng.toFixed(3);
+  if(ROUTE_CACHE[key]){applyRoutes(ROUTE_CACHE[key]);return}
+  const list=ESTATES.filter(e=>e.genau),res={};UM.busy=true;renderUm(true);
+  try{for(let i=0;i<list.length;i+=90){const part=list.slice(i,i+90);
+      const url=`https://router.project-osrm.org/table/v1/driving/${UM.lng.toFixed(5)},${UM.lat.toFixed(5)};${part.map(e=>e.lng.toFixed(5)+","+e.lat.toFixed(5)).join(";")}?sources=0&annotations=duration`;
+      const r=await fetch(url);if(!r.ok)throw r.status;const j=await r.json();if(j.code!=="Ok")throw j.code;
+      j.durations[0].slice(1).forEach((sec,k)=>{if(sec!=null)res[part[k].id]=Math.max(1,Math.round(sec/60)+2)})}
+    ROUTE_CACHE[key]=res;applyRoutes(res)}
+  catch(_){UM.routed=false}
+  UM.busy=false;renderUm(true);if(view==="register")renderRegister();if(view==="karte")drawUm()}
+function applyRoutes(res){for(const [id,min] of Object.entries(res))TT.set(id,{min,est:false});UM.routed=Object.keys(res).length>0}
+function setStart(o){Object.assign(UM,o,{on:true,routed:false});saveUm();estimateAll();renderUm();refreshUm();routeAll()}
+function refreshUm(){if(view==="register")renderRegister();if(view==="karte")drawUm(true)}
+const reachKm=m=>Math.max(0,(m-4)*45/60/1.35);
+function drawUm(fit){const g=$("#umk");if(!g)return;
+  $$("#map .dot").forEach(d=>{const t=TT.get(d.dataset.pick);d.classList.toggle("off",UM.on&&!!t&&t.min>UM.max)});
+  if(!UM.on||UM.lat==null){g.innerHTML="";return}
+  const cx=f(X(UM.lng)),cy=f(Y(UM.lat)),r=f(reachKm(UM.max)*PXKM);
+  g.innerHTML=`<circle class="umr" cx="${cx}" cy="${cy}" r="${r}"/><g class="inv"><circle class="ums" cx="${cx}" cy="${cy}" r="9"/></g><text class="uml inv2" x="${cx}" y="${f(Y(UM.lat)-reachKm(UM.max)*PXKM-8)}" text-anchor="middle">ca. ${UM.max} Min</text>`;
+  if(fit){const k=reachKm(UM.max)+2,[x,y]=toKm(UM.lat,UM.lng);fitBox(x-k,y-k,x+k,y+k)}}
+const TOWNS_SORTED=()=>Object.entries(GEBIETE).sort((a,b)=>a[1].name.localeCompare(b[1].name,"de"));
+function umHTML(){const est=!UM.routed;
+  const head=UM.on?`<div class="umbar"><button class="umsum" data-umtoggle><b>${UM.max}<small>Min</small></b><span>von ${esc(UM.label)}<em>${UM.busy?"Fahrzeiten werden berechnet …":est?"Fahrzeiten geschätzt":"Fahrzeiten über Straßen berechnet"}</em></span></button><button class="umx" data-umoff aria-label="Umkreis aufheben">×</button></div>`
+    :`<button class="umopen" data-umtoggle><i></i>Von hier aus erreichbar</button>`;
+  return head+`<div class="umpanel" hidden>
+    <p class="umlbl">Startpunkt</p>
+    <div class="umstart"><button class="btn line" data-umgps>Mein Standort</button>
+      <label class="umsel"><span>Ort</span><select data-umort><option value="">wählen</option>${TOWNS_SORTED().map(([k,G])=>`<option value="${k}"${UM.kind==="ort"&&UM.ref===k?" selected":""}>${esc(G.name)}</option>`).join("")}</select></label>
+      <label class="umsel"><span>Gut</span><select data-umgut><option value="">wählen</option>${ESTATES.map(e=>`<option value="${e.id}"${UM.kind==="gut"&&UM.ref===e.id?" selected":""}>${esc(e.name)}</option>`).join("")}</select></label></div>
+    <p class="umlbl">Höchstens <b data-ummax>${UM.max}</b> Minuten Fahrt</p>
+    <input type="range" min="10" max="120" step="5" value="${UM.max}" data-umrange aria-label="Höchste Fahrzeit in Minuten">
+    <p class="umnote" data-umnote></p></div>`}
+function renderUm(keepOpen){$$("[data-um]").forEach(el=>{const open=keepOpen&&!el.querySelector(".umpanel")?.hidden;el.innerHTML=umHTML();if(open)el.querySelector(".umpanel").hidden=false})}
+document.addEventListener("click",ev=>{const t=ev.target,box=t.closest("[data-um]");if(!box)return;
+  if(t.closest("[data-umtoggle]")){const p=box.querySelector(".umpanel");p.hidden=!p.hidden;
+    if(!p.hidden&&!RM)p.animate([{opacity:0,transform:"translateY(-8px)"},{opacity:1,transform:"none"}],{duration:320,easing:"cubic-bezier(.2,.9,.2,1)"});return}
+  if(t.closest("[data-umoff]")){UM.on=false;saveUm();renderUm();refreshUm();if(view==="karte")fitAll();return}
+  if(t.closest("[data-umgps]")){const note=box.querySelector("[data-umnote]");
+    if(!navigator.geolocation){note.textContent="Dieses Gerät gibt keinen Standort heraus. Wähle einen Ort oder ein Gut.";return}
+    note.textContent="Standort wird bestimmt …";
+    navigator.geolocation.getCurrentPosition(p=>{const la=p.coords.latitude,lo=p.coords.longitude;
+      if(la>-33.1||la<-34.7||lo<18.1||lo>20.6){note.textContent="Du bist gerade nicht in den Winelands. Wähle einen Ort oder ein Gut als Startpunkt.";return}
+      setStart({lat:la,lng:lo,label:"deinem Standort",kind:"gps",ref:""})},
+      err=>{note.textContent=err.code===1?"Der Standort ist für diese Seite nicht freigegeben. Erlaube ihn in den Safari-Einstellungen oder wähle einen Ort.":"Der Standort ließ sich nicht bestimmen. Wähle einen Ort oder ein Gut."},{enableHighAccuracy:false,timeout:12000,maximumAge:300000});return}});
+document.addEventListener("change",ev=>{const t=ev.target;
+  if(t.matches("[data-umort]")&&t.value){const G=GEBIETE[t.value];setStart({lat:G.lat,lng:G.lng,label:G.name,kind:"ort",ref:t.value})}
+  if(t.matches("[data-umgut]")&&t.value){const e=byId[t.value];setStart({lat:e.lat,lng:e.lng,label:e.name,kind:"gut",ref:e.id})}
+  if(t.matches("[data-umrange]")){UM.max=+t.value;saveUm();refreshUm();renderUm(true)}});
+document.addEventListener("input",ev=>{const t=ev.target;if(!t.matches("[data-umrange]"))return;UM.max=+t.value;
+  $$("[data-ummax]").forEach(b=>b.textContent=UM.max);$$(".umsum b").forEach(b=>b.firstChild.textContent=UM.max);
+  if(view==="karte")drawUm();clearTimeout(document.umT);document.umT=setTimeout(()=>{saveUm();if(view==="register")renderRegister()},120)});
+if(UM.on&&UM.lat!=null){estimateAll();setTimeout(routeAll,400)}else UM.on=false;
+renderUm();
+
+/* =========================================================
    REGISTER
    ========================================================= */
-let filter="alle",query="",visibleIds=ESTATES.map(e=>e.id);
+let filter="alle",query="",region="alle",visibleIds=ESTATES.map(e=>e.id);
 $("#chips").innerHTML=[["alle","Alle"],...(IMPORT?[["will","Will ich hin"],["dort","Schon dort"]]:[]),...Object.entries(RESSORTS)].map(([k,v])=>`<button data-f="${k}" aria-pressed="${k==="alle"}">${v}</button>`).join("");
-const row=e=>`<li><button class="row" data-open="${e.id}"><span class="n">${pad(e.nr)}</span><span class="nm">${esc(e.name)}${e.bekannt?`<small>Schon dort${e.datum?", "+esc(fmtDate(e.datum)):""}</small>`:e.notiz?`<small>${esc(e.notiz)}</small>`:""}</span><span class="tg">${e.test?"":"<i title='Ausführlicher Eintrag'></i>"}</span></button></li>`;
+const row=e=>{const t=UM.on?TT.get(e.id):null;const sub=e.bekannt?`Schon dort${e.datum?", "+esc(fmtDate(e.datum)):""}`:e.notiz?esc(e.notiz):UM.on?esc(GEBIETE[e.gebiet].name):"";
+  return `<li><button class="row" data-open="${e.id}"><span class="n">${pad(e.nr)}</span><span class="nm">${esc(e.name)}${sub?`<small>${sub}</small>`:""}</span><span class="tg">${t?`<span class="mins${t.est?" est":""}">${t.est?"≈":""}${t.min}<small>Min</small></span>`:""}${e.test?"":"<i title='Ausführlicher Eintrag'></i>"}</span></button></li>`};
 const fmtDate=s=>{const d=new Date(s);return isNaN(d)?s:d.toLocaleDateString("de-DE",{day:"numeric",month:"short",year:"numeric"})};
 function mine(e){if(!IMPORT)return "";const parts=[];
   if(e.bekannt)parts.push(`<b>Schon dort${e.datum?" am "+esc(fmtDate(e.datum)):""}</b>`);else if(e.besuchen)parts.push(`<b>Will ich hin</b>`);
   if(e.notiz)parts.push(`<p>${esc(e.notiz)}</p>`);if(/prüf/i.test(e.status))parts.push(`<small>In der Tabelle als „Überprüfen“ markiert</small>`);
   return parts.length?`<div class="mine"><h3>Aus deiner Tabelle</h3>${parts.join("")}</div>`:""}
 function stagger(nodes,max=18){if(RM)return;nodes.slice(0,max).forEach((n,i)=>n.animate([{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],{duration:560,delay:i*26,easing:"cubic-bezier(.2,.9,.2,1)",fill:"backwards"}))}
+$("#rchips").innerHTML=[["alle","Alle Regionen"],...REGIONEN.filter(r=>r.count).map(r=>[r.k,r.name])].map(([k,v])=>`<button data-r="${k}" aria-pressed="${k==="alle"}">${esc(v)}</button>`).join("");
+const BANDS=[15,30,45,60,90,120,180];
 function renderRegister(){
   const q=norm(query.trim());
-  const list=ESTATES.filter(e=>(filter==="alle"||(filter==="will"?e.besuchen&&!e.bekannt:filter==="dort"?e.bekannt:e.ressorts.includes(filter)))&&(!q||e.key.includes(q)));
+  let list=ESTATES.filter(e=>(filter==="alle"||(filter==="will"?e.besuchen&&!e.bekannt:filter==="dort"?e.bekannt:e.ressorts.includes(filter)))&&(!q||e.key.includes(q))&&(region==="alle"||regionOf(e).k===region));
+  if(UM.on)list=list.filter(e=>TT.has(e.id)&&TT.get(e.id).min<=UM.max).sort((a,b)=>TT.get(a.id).min-TT.get(b.id).min);
   visibleIds=list.map(e=>e.id);
-  $("#count").textContent=(q||filter!=="alle")?`${list.length} von ${ESTATES.length} Weingütern`:`${ESTATES.length} Weingüter in ${Object.keys(GEBIETE).length} Gegenden. Orange markiert: ausführlicher Eintrag.`;
-  if(!list.length){$("#groups").innerHTML=`<div class="empty">Kein Weingut gefunden. Prüfe die Schreibweise oder setze den Filter zurück.<br><button class="btn line" id="reset">Filter zurücksetzen</button></div>`;return}
-  $("#groups").innerHTML=Object.entries(GEBIETE).map(([g,G])=>{const items=list.filter(e=>e.gebiet===g);if(!items.length)return "";
-    return `<section id="grp-${g}"><div class="ghead">${esc(G.name)}<span>${items.length}</span></div><ul class="rows">${items.map(row).join("")}</ul></section>`}).join("");
-  stagger($$("#groups .ghead, #groups .row"));
+  $("#count").textContent=UM.on?`${list.length} ${list.length===1?"Gut":"Güter"} in höchstens ${UM.max} Minuten von ${UM.label}`:(q||filter!=="alle"||region!=="alle")?`${list.length} von ${ESTATES.length} Weingütern`:`${ESTATES.length} Weingüter in ${REGIONEN.filter(r=>r.count).length} Regionen. Orange markiert: ausführlicher Eintrag.`;
+  if(!list.length){$("#groups").innerHTML=`<div class="empty">${UM.on?`In ${UM.max} Minuten ist von hier kein passendes Gut erreichbar. Erhöhe die Fahrzeit oder setze die Filter zurück.`:"Kein Weingut gefunden. Prüfe die Schreibweise oder setze den Filter zurück."}<br><button class="btn line" id="reset">Filter zurücksetzen</button></div>`;return}
+  if(UM.on){let lo=0;$("#groups").innerHTML=BANDS.map(b=>{const items=list.filter(e=>{const m=TT.get(e.id).min;return m>lo&&m<=b||(lo===0&&m<=b)});const from=lo;lo=b;if(!items.length)return "";
+      return `<section><div class="ghead">${from?`${from} bis ${b} Minuten`:`Bis ${b} Minuten`}<span>${items.length}</span></div><ul class="rows">${items.map(row).join("")}</ul></section>`}).join("")}
+  else $("#groups").innerHTML=REGIONEN.map(r=>{const secs=r.orte.filter(g=>GEBIETE[g]).map(g=>{const items=list.filter(e=>e.gebiet===g);if(!items.length)return "";
+      return `<section id="grp-${g}"><div class="ghead">${esc(GEBIETE[g].name)}<span>${items.length}</span></div><ul class="rows">${items.map(row).join("")}</ul></section>`}).join("");
+    return secs?`<div class="rhead" id="reg-${r.k}"><h2 class="cond">${esc(r.name)}</h2><span>${list.filter(e=>regionOf(e)===r).length}</span></div>${secs}`:""}).join("");
+  stagger($$("#groups .rhead, #groups .ghead, #groups .row"));
 }
 $("#q").addEventListener("input",ev=>{query=ev.target.value;renderRegister()});
+$("#rchips").addEventListener("click",ev=>{const b=ev.target.closest("[data-r]");if(!b)return;region=b.dataset.r;$$("#rchips [data-r]").forEach(c=>c.setAttribute("aria-pressed",c===b));renderRegister()});
 $("#chips").addEventListener("click",ev=>{const b=ev.target.closest("[data-f]");if(!b)return;filter=b.dataset.f;$$("#chips [data-f]").forEach(c=>c.setAttribute("aria-pressed",c===b));renderRegister()});
-$("#groups").addEventListener("click",ev=>{if(ev.target.id==="reset"){filter="alle";query="";$("#q").value="";$$("#chips [data-f]").forEach(c=>c.setAttribute("aria-pressed",c.dataset.f==="alle"));renderRegister()}});
+$("#groups").addEventListener("click",ev=>{if(ev.target.id==="reset"){filter="alle";query="";region="alle";$("#q").value="";$$("#chips [data-f]").forEach(c=>c.setAttribute("aria-pressed",c.dataset.f==="alle"));$$("#rchips [data-r]").forEach(c=>c.setAttribute("aria-pressed",c.dataset.r==="alle"));if(UM.on){UM.on=false;saveUm();renderUm()}renderRegister()}});
 
 
 /* =========================================================
@@ -798,20 +991,29 @@ function buildMap(){
   const cs=contours((u,v)=>terrain(lerp(B.n,B.s,v),lerp(B.w,B.e,u)),150,112,15,i=>i/149*MW,j=>j/111*MH);
   let s=`<rect width="${MW}" height="${MH}" fill="#fff"/>`;
   s+=cs.map((c,i)=>`<path class="c${c.idx?" idx":""}" pathLength="1" d="${c.d}"/>`).join("");
-  s+=REGIONS.map(rg=>`<path class="reg" d="M${rg.poly.map(p=>f(p[0]*PXKM)+" "+f(p[1]*PXKM)).join("L")}Z"/>`).join("");
-  s+=`<path class="route" pathLength="1" d="M${ROUTE.map(st=>{const e=byId[st.id];return f(X(e.lng))+" "+f(Y(e.lat))}).join(" L")}"/>`;
+  s+=CLUSTERS.map(r=>`<path class="clu" data-clu="${r.k}" d="M${r.poly.map(p=>f(p[0]*PXKM)+" "+f(p[1]*PXKM)).join("L")}Z"/>`).join("");
+  s+=REGIONS.map(rg=>{const pts=ESTATES.filter(e=>e.gebiet===rg.k).map(e=>toKm(e.lat,e.lng));pts.push(rg.c);const P=blob(pts,1.1);
+    return `<path class="reg" d="M${P.map(p=>f(p[0]*PXKM)+" "+f(p[1]*PXKM)).join("L")}Z"/>`}).join("");
+  s+=`<g id="umk"></g>`;
   s+=`<g id="rings"></g>`;
   ESTATES.slice().sort((a,b)=>!a.test-!b.test).forEach(e=>{const x=f(X(e.lng)),y=f(Y(e.lat)),det=!e.test;
-    s+=`<g class="dot${det?" det":""}" data-pick="${e.id}" role="button" tabindex="0" aria-label="${esc(e.name)}"><g><g class="inv"><circle class="hit" cx="${x}" cy="${y}" r="15" fill="transparent"/><circle class="v" cx="${x}" cy="${y}" r="${det?6.5:4.5}"/></g></g></g>`});
+    s+=`<g class="dot${det?" det":""}${e.genau?"":" est"}" data-pick="${e.id}" role="button" tabindex="0" aria-label="${esc(e.name)}"><g><g class="inv"><circle class="hit" cx="${x}" cy="${y}" r="15" fill="transparent"/><circle class="v" cx="${x}" cy="${y}" r="${det?6.5:4.5}"/></g></g></g>`});
   REGIONS.forEach(rg=>{const x=f(rg.c[0]*PXKM),y=f((rg.c[1]-rg.R*.55)*PXKM);
-    const sm=GEBIETE[rg.k].count<6?" sm":"";s+=`<g class="town inv2${sm}"><rect x="${f(rg.c[0]*PXKM-3)}" y="${f(rg.c[1]*PXKM-3)}" width="6" height="6"/></g><text class="area inv2${sm}" x="${x}" y="${y}" text-anchor="middle">${esc(GEBIETE[rg.k].name)}</text>`});
+    const sm=" sm";s+=`<g class="town inv2${sm}"><rect x="${f(rg.c[0]*PXKM-3)}" y="${f(rg.c[1]*PXKM-3)}" width="6" height="6"/></g><text class="area inv2${sm}" x="${x}" y="${y}" text-anchor="middle">${esc(GEBIETE[rg.k].name)}</text>`});
+  /* Beschriftungen der Regionen auseinanderschieben, damit sie sich in der Übersicht nicht überdecken */
+  const L=CLUSTERS.map(r=>({r,x:r.c[0],y:r.c[1],w:Math.max(r.name.length,8)*3.9,h:16}));
+  for(let it=0;it<60;it++)for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const a=L[i],b=L[j],ox=(a.w+b.w)/2-Math.abs(a.x-b.x),oy=(a.h+b.h)/2-Math.abs(a.y-b.y);
+    if(ox>0&&oy>0){if(oy<ox){const d=(oy/2+.2)*(a.y<=b.y?-1:1);a.y+=d;b.y-=d}else{const d=(ox/2+.2)*(a.x<=b.x?-1:1);a.x+=d;b.x-=d}}}
+  L.forEach(l=>l.r.lab=[l.x,l.y]);
+  CLUSTERS.forEach(r=>{const x=f(r.lab[0]*PXKM),y=f(r.lab[1]*PXKM);
+    s+=`<g class="clab inv2" data-clu="${r.k}" role="button" tabindex="0" aria-label="${esc(r.name)} zeigen"><text x="${x}" y="${y}" text-anchor="middle"><tspan class="cn" x="${x}" dy="-.2em">${esc(r.name)}</tspan><tspan class="cc" x="${x}" dy="1.25em">${r.count} Güter</tspan></text></g>`});
   const svg=$("#map");svg.setAttribute("viewBox",`0 0 ${MW} ${MH}`);svg.setAttribute("width",MW);svg.setAttribute("height",MH);svg.innerHTML=s;
-  $("#legend").innerHTML=Object.entries(GEBIETE).map(([g,G])=>`<li><button data-area="${g}">${esc(G.name)}<span>${pad(G.count,2)}</span></button></li>`).join("");
+  $("#legend").innerHTML=CLUSTERS.map(r=>`<li><button data-clu="${r.k}">${esc(r.name)}<span>${pad(r.count,2)}</span></button><small>${r.orte.filter(o=>GEBIETE[o]).map(o=>esc(GEBIETE[o].name)).join(", ")}</small></li>`).join("");
   mapBuilt=true;
 }
 /* Position und Zoom als drei Federn; Punkte und Schrift behalten ihre Größe */
 const MZ={x:0,y:0,s:1};
-let mapRaf=0;function applyMap(){if(mapRaf)return;mapRaf=requestAnimationFrame(()=>{mapRaf=0;const m=$("#map");m.style.transform=`translate3d(${MZ.x}px,${MZ.y}px,0) scale(${MZ.s})`;m.style.setProperty("--iz",(1/MZ.s).toFixed(4));m.classList.toggle("far",MZ.s<.6)})}
+let mapRaf=0;function applyMap(){if(mapRaf)return;mapRaf=requestAnimationFrame(()=>{mapRaf=0;const m=$("#map");m.style.transform=`translate3d(${MZ.x}px,${MZ.y}px,0) scale(${MZ.s})`;m.style.setProperty("--iz",(1/MZ.s).toFixed(4));m.classList.toggle("far",MZ.s<.62);m.classList.toggle("mid",MZ.s>=.62&&MZ.s<1.1)})}
 const panX=new Spring(0,{onUpdate:v=>{MZ.x=v;applyMap()}}),panY=new Spring(0,{onUpdate:v=>{MZ.y=v;applyMap()}}),zoomS=new Spring(1,{eps:.0005,onUpdate:v=>{MZ.s=v;applyMap()}});
 const box=()=>$("#mapbox");
 const SMIN=()=>Math.max(.22,box().clientWidth/MW),SMAX=3.5;
@@ -824,13 +1026,18 @@ function zoomTo(ts,ax,ay){ts=clamp(ts,SMIN(),SMAX);const k=ts/MZ.s;const tx=ax-(
 function centerOn(lat,lng,anim=true,sc=MZ.s){const W=box().clientWidth,H=box().clientHeight,L=limits(sc);
   const tx=clamp(W/2-X(lng)*sc,L.minX,L.maxX),ty=clamp(H/2-Y(lat)*sc,L.minY,L.maxY);
   if(anim){panX.to(tx,{response:.55});panY.to(ty,{response:.55});if(sc!==MZ.s)zoomS.to(sc,{response:.55})}else{zoomS.set(sc);panX.set(tx);panY.set(ty)}}
+function fitBox(x0,y0,x1,y1,anim=true){const W=box().clientWidth,H=box().clientHeight;const sc=clamp(Math.min(W/((x1-x0)*PXKM),H/((y1-y0)*PXKM))*.9,SMIN(),SMAX);
+  const c=fromKm((x0+x1)/2,(y0+y1)/2);centerOn(c.lat,c.lng,anim,sc)}
+function fitAll(anim=true){const xs=CLUSTERS.flatMap(r=>[r.box[0],r.box[2]]),ys=CLUSTERS.flatMap(r=>[r.box[1],r.box[3]]);fitBox(Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys),anim)}
+function fitCluster(k){const r=REG[k];if(!r)return;fitBox(...r.box);
+  if(!RM){const el=$(`#map .clu[data-clu="${k}"]`);el?.animate([{fill:"rgba(228,86,27,.28)"},{fill:"rgba(228,86,27,.06)"}],{duration:1100,easing:"ease-out"})}}
 function enterMap(){
   const first=!mapBuilt;if(first)buildMap();
-  centerOn(-33.90,18.92,false,first?.9:MZ.s);$("#maphint").style.opacity=1;clearTimeout(enterMap.t);enterMap.t=setTimeout(()=>$("#maphint").style.opacity=0,3500);
+  if(first)fitAll(false);if(UM.on)drawUm(true);$("#maphint").style.opacity=1;clearTimeout(enterMap.t);enterMap.t=setTimeout(()=>$("#maphint").style.opacity=0,3500);
   if(RM){$$("#map .c,#map .route").forEach(p=>p.style.strokeDashoffset=0);return}
   const cs=$$("#map .c");cs.forEach((p,i)=>p.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:1400,delay:(i%40)*30,easing:"cubic-bezier(.5,0,.2,1)",fill:"forwards"}));
   $$("#map .reg").forEach((p,i)=>p.animate([{opacity:0},{opacity:1}],{duration:700,delay:500+i*40,easing:"ease-out",fill:"backwards"}));
-  $("#map .route").animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:1200,delay:1000,easing:"cubic-bezier(.6,0,.2,1)",fill:"forwards"});
+  $$("#map .clu").forEach((p,i)=>p.animate([{opacity:0,transform:"scale(.96)"},{opacity:1,transform:"none"}],{duration:900,delay:300+i*90,easing:"cubic-bezier(.2,.9,.2,1)",fill:"backwards"}));
   const W=box().clientWidth,H=box().clientHeight;
   $$("#map .dot>g").forEach(g=>{const c=g.querySelector(".v"),sx=c.cx.baseVal.value*MZ.s+MZ.x,sy=c.cy.baseVal.value*MZ.s+MZ.y;
     if(sx<-40||sy<-40||sx>W+40||sy>H+40)return;const d=Math.hypot(sx-W/2,sy-H/2);
@@ -843,7 +1050,7 @@ function enterMap(){
   el.addEventListener("pointerdown",e=>{if(e.target.closest(".zoom"))return;el.setPointerCapture(e.pointerId);const p=rel(e);P.set(e.pointerId,p);
     [panX,panY,zoomS].forEach(s=>running.delete(s));
     if(P.size===2){const [a,b]=[...P.values()];pinch={d0:Math.hypot(a.x-b.x,a.y-b.y),m0:{x:(a.x+b.x)/2,y:(a.y+b.y)/2},s0:MZ.s,x0:MZ.x,y0:MZ.y};st=null;$("#maphint").style.opacity=0;return}
-    startPan(p);st.dot=e.target.closest("[data-pick]");
+    startPan(p);st.dot=e.target.closest("[data-pick]");st.clu=e.target.closest(".clab,.far .clu")?.dataset.clu;
     if(st.dot)st.dot.firstElementChild.animate([{transform:"scale(1)"},{transform:"scale(1.4)"}],{duration:140,fill:"forwards",easing:"ease-out"})});
   el.addEventListener("pointermove",e=>{if(!P.has(e.pointerId))return;const p=rel(e);P.set(e.pointerId,p);
     if(pinch&&P.size>=2){const [a,b]=[...P.values()],d=Math.hypot(a.x-b.x,a.y-b.y),m={x:(a.x+b.x)/2,y:(a.y+b.y)/2};
@@ -864,7 +1071,7 @@ function enterMap(){
     if(s.dot)s.dot.firstElementChild.animate([{transform:"scale(1.4)"},{transform:"scale(1)"}],{duration:380,fill:"forwards",easing:"cubic-bezier(.3,1.6,.5,1)"});
     if(!s.moved){const now=performance.now(),p=rel(e);
       if(!s.dot&&lastTap&&now-lastTap.t<320&&Math.hypot(p.x-lastTap.x,p.y-lastTap.y)<30){zoomTo(MZ.s*2,p.x,p.y);lastTap=null;return}
-      lastTap={t:now,x:p.x,y:p.y};if(s.dot)pick(s.dot.dataset.pick);else unpick();return}
+      lastTap={t:now,x:p.x,y:p.y};if(s.dot)pick(s.dot.dataset.pick);else if(s.clu){unpick();fitCluster(s.clu)}else unpick();return}
     const v=tr.vel();settle(v.x,v.y)};
   el.addEventListener("pointerup",end);el.addEventListener("pointercancel",end);
   el.addEventListener("wheel",e=>{e.preventDefault();const p=rel(e);zoomTo(MZ.s*Math.exp(-e.deltaY*.0025),p.x,p.y)},{passive:false});
@@ -922,7 +1129,8 @@ function optimize(d){const st=d.stops;if(st.length<3)return;
   if(n<=8){const rest=[...Array(n).keys()].slice(1);const perm=(a,k)=>{if(k===a.length){const o=[0,...a],c=cost(o);if(c<bc){bc=c;best=o}return}for(let i=k;i<a.length;i++){[a[k],a[i]]=[a[i],a[k]];perm(a,k+1);[a[k],a[i]]=[a[i],a[k]]}};perm(rest,0)}
   else{best=[0];const left=new Set([...Array(n).keys()].slice(1));while(left.size){const l=best[best.length-1];let m=null,md=Infinity;left.forEach(j=>{const dd=hav(pts[l],pts[j]);if(dd<md){md=dd;m=j}});best.push(m);left.delete(m)}}
   d.stops=best.map(i=>st[i]);savePlan()}
-function mapsUrl(d){const q=d.stops.map(s=>encodeURIComponent(byId[s.id].name+", Stellenbosch, South Africa"));if(!q.length)return "#";
+const mapsQ=e=>encodeURIComponent(e.genau?`${e.lat},${e.lng}`:`${e.name}, ${GEBIETE[e.gebiet].name}, South Africa`);
+function mapsUrl(d){const q=d.stops.map(s=>mapsQ(byId[s.id]));if(!q.length)return "#";
   return `https://www.google.com/maps/dir/?api=1&travelmode=driving&origin=${q[0]}&destination=${q[q.length-1]}${q.length>2?"&waypoints="+q.slice(1,-1).join("%7C"):""}`}
 /* Kleine Höhenlinienkarte des Tages */
 let miniCache=null;
@@ -937,6 +1145,16 @@ function miniMap(d){
   if(pts.length>1)svg+=`<path class="rt" pathLength="1" d="M${pts.map(p=>f(X(p.lng))+" "+f(Y(p.lat))).join(" L")}"/>`;
   pts.forEach((p,i)=>{svg+=`<g class="pin"><circle cx="${f(X(p.lng))}" cy="${f(Y(p.lat))}" r="10"/><text x="${f(X(p.lng))}" y="${f(Y(p.lat))}">${i+1}</text></g>`});
   return svg+"</svg>"}
+/* Regionen an einem Tag: Hinweis, wenn der Tag zwei Regionen verbindet */
+function regionNote(d){const rs=[...new Set(d.stops.map(s=>regionOf(byId[s.id])))];if(rs.length<2)return "";
+  let worst=null;for(let i=1;i<d.stops.length;i++){const a=byId[d.stops[i-1].id],b=byId[d.stops[i].id];if(regionOf(a)!==regionOf(b)){const l=legOf(a,b);if(!worst||l.min>worst.min)worst=l}}
+  return `<p class="rnote"><b>Dieser Tag führt durch ${rs.length} Regionen:</b> ${rs.map(r=>esc(r.name)).join(", ")}.${worst?` Die längste Fahrt dazwischen dauert etwa ${worst.min} Minuten.`:""}</p>`}
+/* Vorschläge für den nächsten Stopp: nah am letzten Gut, ausführliche Einträge und Gemerktes zuerst */
+function nearby(d){const last=byId[d.stops[d.stops.length-1]?.id];if(!last)return "";const inDay=new Set(d.stops.map(s=>s.id));
+  const c=ESTATES.filter(e=>!inDay.has(e.id)&&e.genau).map(e=>({e,m:legOf(last,e).min})).filter(x=>x.m<=20)
+    .sort((a,b)=>((!b.e.test)-(!a.e.test))*30+(saved.includes(b.e.id)-saved.includes(a.e.id))*20+(a.m-b.m)).slice(0,4);
+  if(!c.length)return "";
+  return `<div class="near"><h3>Nah an ${esc(last.name)}</h3>${c.map(({e,m})=>`<div class="prow"><button class="nm" data-open="${e.id}">${esc(e.name)}<small>ca. ${m} Min.${e.test?"":", ausführlicher Eintrag"}</small></button><button class="plus" data-plus="${e.id}" aria-label="${esc(e.name)} zum Tag hinzufügen">+</button></div>`).join("")}</div>`}
 function renderPlan(opts={}){
   const box=$("#plan");const d=activeDay();
   const dayBtns=PLAN.days.map(x=>`<button class="day" data-day="${x.id}" aria-pressed="${d&&x.id===d.id}"><b>${esc(DE_DAY.format(parseISO(x.date)))}</b><small>${x.stops.length} ${x.stops.length===1?"Gut":"Güter"}</small></button>`).join("");
@@ -954,6 +1172,7 @@ function renderPlan(opts={}){
         <div><button class="nm" data-open="${r.e.id}">${esc(r.e.name)}</button><div class="sub"><button class="dur" data-dur="${i}" aria-label="Aufenthalt ändern">${r.s.dur} Min.</button><button class="rm" data-rm="${i}">Entfernen</button></div></div>
         <div class="grip" data-grip="${i}" role="button" aria-label="Ziehen zum Verschieben"><i></i></div></li>`).join("")+`</ol>
       <div class="endrow"><b>${hhmm(sc.end)}</b><span>Ende des Tages</span></div>
+      ${regionNote(d)}${nearby(d)}
       <div class="planacts">${d.stops.length>2?`<button class="btn line" id="pOpt">Reihenfolge optimieren</button>`:""}<a class="btn" href="${mapsUrl(d)}" target="_blank" rel="noopener">Route in Karten öffnen</a></div>`}
     h+=`<button class="daydel" id="dayDel">Diesen Tag löschen</button>`;
   }
@@ -1046,6 +1265,7 @@ function go(v,opts={}){
   reveal($("#v-"+v));
   if(v==="karte"&&prev!=="karte")requestAnimationFrame(enterMap);
   if(prev!==v&&!RM)$("#v-"+v).animate([{opacity:0,transform:"scale(.985)",filter:"blur(8px)"},{opacity:1,transform:"none",filter:"blur(0)"}],{duration:480,easing:"cubic-bezier(.2,.8,.2,1)"});
+  if(opts.area&&v==="register"&&region!=="alle"&&GEBIETE[opts.area]?.region!==region){region="alle";$$("#rchips [data-r]").forEach(c=>c.setAttribute("aria-pressed",c.dataset.r==="alle"));renderRegister()}
   if(opts.area)requestAnimationFrame(()=>{const el=document.getElementById("grp-"+opts.area);if(el)scrollTo({top:el.getBoundingClientRect().top+scrollY-140,behavior:RM?"auto":"smooth"})});
   requestTick();
 }
@@ -1076,6 +1296,7 @@ function buildSheet(id){
     <div class="loc"><span class="grey">${pad(e.nr)}</span><span>${esc(GEBIETE[e.gebiet].name)}${e.stufe==="beitrag"?`<b class="kick">Beitrag</b>`:""}</span></div>
     <h2 class="cond rv" style="--n:${Math.max(...e.name.split(/\s+/).map(w=>w.length))}">${esc(e.name)}</h2>
     ${e.test?`<p class="note">Zu diesem Gut gibt es noch keinen Text. Die Lage auf der Karte ist anhand der Gegend geschätzt.</p>`:`<p class="lead">${esc(e.lead)}</p>`}
+    ${!e.genau?`<p class="small grey" style="margin:-12px 0 var(--s2)">Lage auf der Karte geschätzt, die genaue Adresse fehlt noch.</p>`:""}
     ${e.quelle==="web"?`<p class="small grey" style="margin:-12px 0 var(--s3)">Kurz zusammengefasst nach der Website des Guts, noch nicht geprüft.</p>`:""}
     ${mine(e)}
     <dl class="tbl">${[["Gegend",GEBIETE[e.gebiet].name],["Adresse",e.adresse],["Öffnungszeiten",e.zeiten],["Reservierung",e.reservierung],["Mit Kindern",e.kinder]].filter(([,v])=>v&&v!==TBD).map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}${e.web?`<div><dt>Website</dt><dd><a href="${esc(e.web)}" target="_blank" rel="noopener">${esc(e.web.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))}</a></dd></div>`:""}</dl>
@@ -1361,6 +1582,7 @@ document.addEventListener("click",async ev=>{
   const o=t.closest("[data-open]");if(o){const from=o.dataset.from?o.closest(".feat,.stop")?.querySelector(o.dataset.from):o;openEstate(o.dataset.open,{from});return}
   const v=t.closest("[data-view]");if(v){go(v.dataset.view);return}
   const a=t.closest("[data-area]");if(a){go("register",{area:a.dataset.area});return}
+  const cl=t.closest("#legend [data-clu]");if(cl){$("#mapbox").scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});fitCluster(cl.dataset.clu);return}
   if(t.closest("[data-close]")){closeSheet();return}
   const sv=t.closest("[data-save]");
   if(sv&&current){const was=saved.includes(current);saved=was?saved.filter(x=>x!==current):[...saved,current];const on=!was;
@@ -1369,7 +1591,7 @@ document.addEventListener("click",async ev=>{
   if(t.id==="addDay"&&current){const pd=dayOf(current);if(pd){PLAN.active=pd.id;savePlan();go("merkliste");return}
     const d=addToDay(current);t.textContent=planLabel(current);const sb=$("[data-save]");if(sb){sb.setAttribute("aria-pressed","true");sb.lastElementChild.textContent="Gemerkt"}
     flyToNav(t);toast(`Am ${DE_DAY.format(parseISO(d.date))} eingeplant`);if(view==="merkliste")renderPlan();return}
-  if(t.id==="takeRoute"){const d=newDay();d.stops=ROUTE.map(r=>({id:r.id,dur:90}));ROUTE.forEach(r=>{PLAN.days.forEach(x=>{if(x!==d)x.stops=x.stops.filter(s=>s.id!==r.id)});if(!saved.includes(r.id))saved.push(r.id)});savePlan();persist(true);
+  if(t.id==="takeRoute"){const d=newDay();d.start=ROUTEN[RI].start;d.stops=ROUTE.map(r=>({id:r.id,dur:r.dur}));ROUTE.forEach(r=>{PLAN.days.forEach(x=>{if(x!==d)x.stops=x.stops.filter(s=>s.id!==r.id)});if(!saved.includes(r.id))saved.push(r.id)});savePlan();persist(true);
     toast("Route als neuer Tag angelegt");go("merkliste");return}
   const ws=t.closest("[data-wstyle]");if(ws){WZ.style=ws.dataset.wstyle;$$("[data-wstyle]").forEach(b=>b.setAttribute("aria-pressed",b===ws));$("#wDetail").closest("label").hidden=WZ.style==="foto";redraw();return}
   if(t.id==="wCancel"){WZ.base=null;$("#wd").hidden=true;say("");return}

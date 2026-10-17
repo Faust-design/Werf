@@ -134,11 +134,22 @@ window.TEXTE={
    {
     "t": "Great Wine Capitals",
     "u": "https://www.greatwinecapitals.com/wine-stories/architectural-splendor-in-the-cape-winelands-south-africa/"
+   },
+   {
+    "t": "Öffnungszeiten: Babylonstoren, Besucherinfo",
+    "u": "https://babylonstoren.com/visitor-information"
    }
   ],
   "architektur": "Einer der am besten erhaltenen kapholländischen Werfs.",
   "garten": "Nutzgarten von Patrice Taravella mit 15 Bereichen.",
-  "kueche": "Farm-to-Fork im Babel und im Greenhouse."
+  "kueche": "Farm-to-Fork im Babel und im Greenhouse.",
+  "zeiten": "Täglich geöffnet, außer am 25. Dezember. Gartenführung täglich um 10 Uhr. Eintritt in den Garten R190, unter 18 frei. (Stand Okt. 2026)",
+  "oeffnung": {
+   "t": [
+    "09:00",
+    "17:00"
+   ]
+  }
  },
  "bacco estate": {
   "lead": "Weingut mit Super-Tuscan-Rebsorten, eigenem Keller und italienisch geprägtem Restaurant, täglich 11 bis 16:30 Uhr.",
@@ -368,12 +379,23 @@ window.TEXTE={
    {
     "t": "David Collins Studio",
     "u": "https://www.davidcollins.studio/project/delaire-graff-estate"
+   },
+   {
+    "t": "Öffnungszeiten: Delaire Graff, Wine Lounge",
+    "u": "https://www.delaire.co.za/wine/wine-lounge/"
    }
   ],
   "architektur": "Kapholländisch zitiert, modern umgesetzt: Reet, Stein, Eiche, viel Glas.",
   "kunst": "Eine der größten privaten Kunstsammlungen des Landes, innen wie außen.",
   "garten": "Gärten von Keith Kirsten, Skulpturen, Blick ins Tal.",
-  "kueche": "Delaire Graff Restaurant und Indochine."
+  "kueche": "Delaire Graff Restaurant und Indochine.",
+  "zeiten": "Wine Lounge Mo bis Sa 10 bis 17:30 Uhr, So 10 bis 17 Uhr. Keine Reservierung für die Verkostung. (Stand Okt. 2026)",
+  "oeffnung": {
+   "t": [
+    "10:00",
+    "17:30"
+   ]
+  }
  },
  "delheim": {
   "lead": "Gut an den Hängen des Simonsbergs mit Gartenrestaurant, Probierstube und Wanderwegen.",
@@ -455,11 +477,26 @@ window.TEXTE={
    {
     "t": "Cape Town Magazine",
     "u": "https://www.capetownmagazine.com/glass-museum"
+   },
+   {
+    "t": "Öffnungszeiten: wine.co.za, Glenelly Glass Museum",
+    "u": "https://tour.wine.co.za/do/do.aspx?DOID=1036"
    }
   ],
   "architektur": "Klarer Baukörper am Hang, Granittheke aus dem eigenen Boden.",
   "kunst": "Glasmuseum mit über 600 Stücken.",
-  "kueche": "The Vine Bistro."
+  "kueche": "The Vine Bistro.",
+  "zeiten": "Glasmuseum Di bis Sa 10 bis 17 Uhr, So 10 bis 15 Uhr, montags geschlossen. Eintritt frei. (Stand Okt. 2026)",
+  "oeffnung": {
+   "t": [
+    "10:00",
+    "17:00"
+   ],
+   "zu": [
+    1
+   ],
+   "zuText": "montags"
+  }
  },
  "la motte": {
   "stufe": "beitrag",
@@ -520,12 +557,27 @@ window.TEXTE={
    {
     "t": "Cape Town Magazine",
     "u": "https://www.capetownmagazine.com/la-motte-winery"
+   },
+   {
+    "t": "Öffnungszeiten: Cape Town Magazine",
+    "u": "https://www.capetownmagazine.com/la-motte-museum-exhibition"
    }
   ],
   "architektur": "Hof mit denkmalgeschützter Wassermühle.",
   "kunst": "Museum mit der Pierneef-Sammlung und wechselnden Ausstellungen.",
   "garten": "Rosen, Eichen, Proteengarten, Wanderweg.",
-  "kueche": "Südafrikanische Küche und Hofladen."
+  "kueche": "Südafrikanische Küche und Hofladen.",
+  "zeiten": "Probierraum und Museum Mo bis Sa 9 bis 17 Uhr. Restaurant Mi bis So 11 bis 15:30 Uhr. (Stand Okt. 2026)",
+  "oeffnung": {
+   "t": [
+    "09:00",
+    "17:00"
+   ],
+   "zu": [
+    0
+   ],
+   "zuText": "sonntags (Museum)"
+  }
  },
  "leeu passant": {
   "stufe": "beitrag",
@@ -590,12 +642,27 @@ window.TEXTE={
    {
     "t": "Leeu Collection",
     "u": "https://leeucollection.com/SA/blog/5-things-to-do-at-leeu-estates-in-franschhoek"
+   },
+   {
+    "t": "Öffnungszeiten: Leeu Collection, Everard Read",
+    "u": "https://leeucollection.com/SA/everard-read"
    }
   ],
   "architektur": "Wine Studio von Tomeu Esteva, Neubauten von DHK.",
   "kunst": "Everard Read Gallery, Skulpturen im Fynbos.",
   "garten": "Gärten von Francesca Watson.",
-  "kueche": "La Petite Colombe."
+  "kueche": "La Petite Colombe.",
+  "zeiten": "Everard Read Gallery Di bis So 10 bis 17 Uhr oder nach Vereinbarung. (Stand Okt. 2026)",
+  "oeffnung": {
+   "t": [
+    "10:00",
+    "17:00"
+   ],
+   "zu": [
+    1
+   ],
+   "zuText": "montags (Galerie)"
+  }
  },
  "quoin rock": {
   "stufe": "beitrag",
@@ -660,12 +727,23 @@ window.TEXTE={
    {
     "t": "House & Garden SA",
     "u": "https://www.houseandgarden.co.za/design/design-led-wine-estates-blend-art-architecture-and-story-b5c20e24-f3a2-4667-a66f-ce6d7c899891"
+   },
+   {
+    "t": "Öffnungszeiten: Dineplan",
+    "u": "https://www.dineplan.com/restaurants/quoin-rock-wine-lounge"
    }
   ],
   "architektur": "Glas, Stahl und Holz, Pergola mit Weinblatt-Schatten.",
   "kunst": "Bronzerebe von Charles Haupt, wechselnde Ausstellungen.",
   "garten": "Gärten und Fynbos-Korridore.",
-  "kueche": "Restaurant Quartz."
+  "kueche": "Restaurant Quartz.",
+  "zeiten": "Wine Lounge täglich 11 bis 18 Uhr. (Stand Okt. 2026)",
+  "oeffnung": {
+   "t": [
+    "11:00",
+    "18:00"
+   ]
+  }
  },
  "vergelegen wine estate": {
   "stufe": "beitrag",
@@ -722,11 +800,22 @@ window.TEXTE={
    {
     "t": "The Paintbox Garden",
     "u": "https://www.thepaintboxgarden.com/touring-historic-vergelegen/"
+   },
+   {
+    "t": "Öffnungszeiten: Bolander Lifestyle, August 2026",
+    "u": "https://bolanderlifestyle.co.za/news/2026-08-25-vergelegen-in-somerset-west-named-best-wine-farm-experience-for-the-second-year-running/"
    }
   ],
   "architektur": "Haupthaus von 1700, achteckige Kellerei im Hügel.",
   "garten": "Achteckiger Garten, Kampferbäume, Arboretum.",
-  "kueche": "Stables Restaurant."
+  "kueche": "Stables Restaurant.",
+  "zeiten": "Täglich 8:30 bis 17 Uhr, letzter Einlass 16 Uhr. Eintritt R30, Senioren und Schüler R10. (Stand Okt. 2026)",
+  "oeffnung": {
+   "t": [
+    "08:30",
+    "17:00"
+   ]
+  }
  },
  "waterkloof": {
   "stufe": "beitrag",
@@ -783,11 +872,22 @@ window.TEXTE={
    {
     "t": "House & Garden SA",
     "u": "https://houseandgarden.co.za/travel-leisure/restaurants-with-amazing-architectural-designs-17427693"
+   },
+   {
+    "t": "Öffnungszeiten: Cape Town Magazine",
+    "u": "https://www.capetownmagazine.com/things-to-do-cape-town/World-Class-Views-at-Waterkloof-Wine-Farm/15_52_52153"
    }
   ],
   "architektur": "Glas und Beton am Hang, Kellerei mit Schwerkraft.",
   "garten": "Biodynamischer Weinbau, Fynbos, Pferde.",
-  "kueche": "The Restaurant mit Blick auf die False Bay."
+  "kueche": "The Restaurant mit Blick auf die False Bay.",
+  "zeiten": "Probierraum täglich 10 bis 17 Uhr. (Stand Okt. 2026)",
+  "oeffnung": {
+   "t": [
+    "10:00",
+    "17:00"
+   ]
+  }
  }
 };
 /* Freie Fotos aus Wikimedia Commons (direkt von dort geladen, Urheber und Lizenz auf der jeweiligen Dateiseite) */
