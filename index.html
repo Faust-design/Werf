@@ -256,6 +256,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .wtxt{position:relative;max-width:22ch}
 .wtxt p{font-variation-settings:"wdth" 68;font-weight:800;font-size:clamp(30px,9vw,64px);line-height:1.02;letter-spacing:-.025em;margin-bottom:.35em}
 .wtxt .w>span{transition-duration:1.3s}
+.wtxt.solo p{font-size:clamp(46px,15vw,120px);line-height:.95}
 .wtxt small{display:block;font-size:15px;font-weight:600;color:#bdbdbd;margin-top:var(--s3);opacity:0;transition:opacity 1.2s}
 .wtxt.done small{opacity:1}
 .wgo{position:relative;align-self:flex-start;margin-top:var(--s6);background:var(--duene);color:#fff;font-weight:750;font-size:16px;padding:14px 26px;border-radius:999px;box-shadow:0 0 30px rgba(228,86,27,.7);opacity:0;transform:translateY(16px);transition:opacity .8s,transform .8s cubic-bezier(.2,.9,.2,1)}
@@ -1846,9 +1847,9 @@ document.addEventListener("change",async ev=>{if(ev.target.id!=="edImport"||!ev.
    WIDMUNG: einmal beim ersten Öffnen, danach über „Widmung“ unten
    Text hier austauschen. Zeilen erscheinen nacheinander.
    ========================================================= */
-const WIDMUNG={zeilen:["Für dich.","Du hast die Liste geschrieben.","Ich habe ihr ein Zuhause gebaut.","Jetzt fehlt nur noch die Reise."],von:"Julian"};
+const WIDMUNG={zeilen:["Auf das, was noch kommt."],von:"Julian"};
 function showWidmung(){const w=$("#widmung"),tx=$("#wtxt");
-  tx.innerHTML=WIDMUNG.zeilen.map(z=>`<p class="rv">${esc(z)}</p>`).join("")+`<small>${esc(WIDMUNG.von)}</small>`;tx.classList.remove("done");
+  tx.classList.toggle("solo",WIDMUNG.zeilen.length===1);tx.innerHTML=WIDMUNG.zeilen.map(z=>`<p class="rv">${esc(z)}</p>`).join("")+`<small>${esc(WIDMUNG.von)}</small>`;tx.classList.remove("done");
   w.hidden=false;document.body.style.overflow="hidden";const sun=w.querySelector(".wsun");
   if(RM){tx.querySelectorAll(".rv").forEach(el=>{split(el);el.classList.add("in")});tx.classList.add("done");return}
   sun.animate([{transform:"translate(-50%,100%)"},{transform:"translate(-50%,62%)"}],{duration:3200,easing:"cubic-bezier(.25,0,.1,1)",fill:"both"});
