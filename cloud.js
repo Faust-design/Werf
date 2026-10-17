@@ -103,23 +103,24 @@ window.cloudSuggestPhoto=async(estate,rec)=>{if(!user||!rec?.blob)return false;
   const up=await sb.storage.from("fotos").upload(path,rec.blob,{contentType:"image/jpeg",upsert:true});if(up.error)return false;
   const {error}=await sb.from("photos").insert({estate_id:estate,path,taken_at:rec.date?new Date(rec.date).toISOString():null});return !error};
 
-/* ---------- Oberfläche im Register ---------- */
+/* ---------- Oberfläche unter „Konto“ ---------- */
 function render(state){if(!box)return;
   if(state==="offline"){box.innerHTML=`<h3><i></i>${tt("Mitmachen")}</h3><p>${tt("Für Konto und Community braucht die App einmal Internet.")}</p>`;return}
-  if(!user){box.innerHTML=`<h3><i></i>${tt("Mitmachen")}</h3>
+  if(!user){const kb=document.getElementById("kbadge");if(kb)kb.textContent="";box.innerHTML=`<h3><i></i>${tt("Anmelden und mitmachen")}</h3>
     <p>${tt("Mit einem Konto ergänzt du leere Güter für alle und hast Merkliste, Planung, Notizen und Fotos auf jedem Gerät. Anmeldung ohne Passwort, mit einem Code per E-Mail.")}</p>
     <div class="row2"><input type="email" id="cEmail" placeholder="${tt("E-Mail-Adresse")}" autocomplete="email" inputmode="email"><button class="btn accent" id="cSend">${tt("Code senden")}</button></div>
     <div class="row2" id="cCodeRow" hidden style="margin-top:8px"><input type="text" id="cCode" placeholder="${tt("6-stelliger Code")}" inputmode="numeric" autocomplete="one-time-code" maxlength="8"><button class="btn" id="cVerify">${tt("Anmelden")}</button></div>
     <p class="msg" id="cMsg" aria-live="polite"></p>
     <p style="margin:0">${tt("Mit der Anmeldung stimmst du den {a} zu.",{a:`<a href="rechtliches.html#nutzung" style="color:#fff">${tt("Nutzungsbedingungen")}</a>`})} <a href="rechtliches.html#datenschutz" style="color:#fff">${tt("Datenschutz")}</a></p>`;return}
-  const st=stats||{pending:0,approved:0};
-  box.innerHTML=`<h3><i></i>${tt("Angemeldet")}</h3>
-    <div class="stat"><span>${esc(user.email)}</span><span>${tt("Synchronisiert {d}",{d:syncedAt()?new Date(syncedAt()).toLocaleTimeString(LOC,{hour:"2-digit",minute:"2-digit"}):"–"})}</span></div>
-    <div class="stat"><span>${tt("Deine Vorschläge:")} <b>${st.pending||0}</b> ${tt("offen")}, <b>${st.approved||0}</b> ${tt("freigegeben")}</span></div>
-    <div class="row2"><input type="text" id="cName" value="${esc(profile?.name||"")}" placeholder="${tt("Dein Name für Bildnachweise")}" maxlength="40"><button class="btn ghost" id="cNameOk">${tt("Speichern")}</button></div>
-    <div class="row2" style="margin-top:8px">${window.CLOUD.editor?`<button class="btn accent" id="cMod">${tt("Freigaben")}${pendingCount?` (${pendingCount})`:""}</button>`:""}<button class="btn ghost" id="cNew">${tt("Gut vorschlagen")}</button><button class="btn ghost" id="cOut">${tt("Abmelden")}</button></div>
+  const st=stats||{pending:0,approved:0},nm=(profile?.name||"").trim(),ini=(nm||user.email||"?").trim().charAt(0).toUpperCase();
+  const kb=document.getElementById("kbadge");if(kb)kb.textContent=window.CLOUD.editor&&pendingCount?String(pendingCount):"";
+  box.innerHTML=`<div class="who"><span class="ava" aria-hidden="true">${esc(ini)}</span><div><b>${esc(nm||tt("Mein Konto"))}</b><span>${esc(user.email)}</span></div></div>
+    <div class="stat"><span>${tt("Deine Vorschläge:")} <b>${st.pending||0}</b> ${tt("offen")}, <b>${st.approved||0}</b> ${tt("freigegeben")}</span><span>${tt("Synchronisiert {d}",{d:syncedAt()?new Date(syncedAt()).toLocaleTimeString(LOC,{hour:"2-digit",minute:"2-digit"}):"–"})}</span></div>
+    <div class="klist">${window.CLOUD.editor?`<button id="cMod">${tt("Freigaben")}${pendingCount?`<em>${pendingCount}</em>`:""}</button>`:""}<button id="cNew">${tt("Gut vorschlagen")}</button></div>
+    <label class="fl" for="cName" style="display:block;font-size:13px;color:#9a9a9a;margin-bottom:6px">${tt("Dein Name für Bildnachweise")}</label>
+    <div class="row2"><input type="text" id="cName" value="${esc(profile?.name||"")}" placeholder="${tt("Name")}" maxlength="40"><button class="btn ghost" id="cNameOk">${tt("Speichern")}</button></div>
     <p class="msg" id="cMsg" aria-live="polite"></p>
-    <p style="margin:var(--s2) 0 0"><button class="wlink" id="cDel" style="color:#9a9a9a">${tt("Konto löschen")}</button></p>`}
+    <div class="kfoot"><button class="wlink" id="cOut" style="color:#fff">${tt("Abmelden")}</button><button class="wlink" id="cDel" style="color:#9a9a9a">${tt("Konto löschen")}</button></div>`}
 box?.addEventListener("click",async ev=>{const id=ev.target.id,msg=()=>box.querySelector("#cMsg");
   if(id==="cSend"){const email=box.querySelector("#cEmail").value.trim();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg().textContent=tt("Bitte eine gültige E-Mail-Adresse eingeben.");return}
     ev.target.disabled=true;const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});ev.target.disabled=false;
@@ -129,7 +130,7 @@ box?.addEventListener("click",async ev=>{const id=ev.target.id,msg=()=>box.query
     const {error}=await sb.auth.verifyOtp({email,token,type:"email"});if(error){msg().textContent=tt("Der Code stimmt nicht oder ist abgelaufen.")+(error.message?` (${error.message})`:"");return}return}
   if(id==="cOut"){if(!confirm(tt("Abmelden? Deine Daten bleiben auf diesem Gerät und in deinem Konto.")))return;await sb.auth.signOut();try{localStorage.removeItem("werf-sync-at")}catch(_){}setUser(null);return}
   if(id==="cNameOk"){const name=box.querySelector("#cName").value.trim().slice(0,40);const {error}=await sb.from("profiles").update({name}).eq("id",user.id);
-    msg().textContent=error?tt("Speichern hat nicht geklappt."):tt("Gespeichert.");if(!error)profile.name=name;return}
+    msg().textContent=error?tt("Speichern hat nicht geklappt."):tt("Gespeichert.");if(!error){profile.name=name;render();box.querySelector("#cMsg").textContent=tt("Gespeichert.")}return}
   if(id==="cDel"){if(!confirm(tt("Konto endgültig löschen? Deine privaten Daten in der Cloud und deine offenen Vorschläge werden gelöscht. Freigegebene Beiträge bleiben ohne deinen Namen erhalten. Auf diesem Gerät bleibt alles gespeichert.")))return;
     try{for(const b of ["privat","fotos"]){const {data}=await sb.storage.from(b).list(user.id,{limit:1000});const own=(data||[]).map(f=>`${user.id}/${f.name}`);
         if(b==="fotos"){const keep=new Set((COMM.p||[]).map(x=>x.path));const del=own.filter(x=>!keep.has(x));if(del.length)await sb.storage.from(b).remove(del)}else if(own.length)await sb.storage.from(b).remove(own)}

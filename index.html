@@ -264,7 +264,21 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .legal{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s3);margin-top:var(--s6)}
 .wlink{font-size:14px;color:var(--grey);text-decoration:underline;text-underline-offset:3px}
 /* Community */
-.cloud{margin-top:var(--s1);padding:var(--s2);background:#000;color:#fff}
+.cloud{margin-top:var(--s3);padding:var(--s2);background:#000;color:#fff}
+.ksec{font-size:13px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin:var(--s6) 0 var(--s1);padding-bottom:8px;border-bottom:1px solid #000}
+.krow{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);padding:14px 0;border-bottom:1px solid #e2e2dd}
+.krow b{display:block;font-weight:700}.krow small{display:block;font-size:13px;color:var(--grey)}
+.konto .imp{margin-top:var(--s1)}
+.klinks a{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #e2e2dd;text-decoration:none;font-weight:600}
+.klinks a::after{content:"→";color:var(--grey)}
+.cloud .who{display:flex;align-items:center;gap:14px;margin-bottom:var(--s2)}
+.cloud .ava{flex:0 0 52px;height:52px;border-radius:50%;background:var(--duene);display:grid;place-items:center;font-size:22px;font-weight:800;color:#fff}
+.cloud .who b{display:block;font-size:20px;font-weight:750;line-height:1.15}.cloud .who div span{display:block;font-size:13px;color:#9a9a9a;word-break:break-all}
+.cloud .klist{margin:var(--s2) 0;border-top:1px solid #2a2a2a}
+.cloud .klist button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:var(--s1);padding:15px 0;border-bottom:1px solid #2a2a2a;color:#fff;font-size:17px;font-weight:600;text-align:left}
+.cloud .klist button::after{content:"→";color:#9a9a9a}
+.cloud .klist em{font-style:normal;font-size:12px;font-weight:800;background:var(--duene);border-radius:10px;padding:2px 8px;margin-left:8px}
+.cloud .kfoot{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s3);margin-top:var(--s2)}
 .cloud h3{font-size:18px;font-weight:750;display:flex;align-items:center;gap:10px}
 .cloud h3 i{width:10px;height:10px;border-radius:50%;background:var(--duene);box-shadow:0 0 10px rgba(228,86,27,.8)}
 .cloud p{font-size:14px;color:#cfcfcf;margin:6px 0 var(--s2);max-width:32em}
@@ -615,8 +629,6 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
     <div class="chips rchips" id="rchips" role="group" aria-label="Nach Region filtern"></div>
     <div class="um" data-um></div>
     <p class="count" id="count" aria-live="polite"></p>
-    <div class="cloud" id="cloudbox" hidden></div>
-    <div class="imp" id="imp"></div>
     <div id="groups"></div>
   </section>
 </div>
@@ -629,6 +641,20 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
     <div class="um" data-um></div>
     <div class="mapbox" id="mapbox"><svg id="map" aria-label="Höhenlinienkarte aller Weingüter" role="img"></svg><div class="zoom"><button data-z="in" aria-label="Hineinzoomen">+</button><button data-z="out" aria-label="Herauszoomen">−</button></div><div class="maphint" id="maphint">Mit einem Finger verschieben, mit zwei zoomen</div></div>
     <ul class="legend" id="legend"></ul>
+  </section>
+</div>
+
+<!-- ================= KONTO ================= -->
+<div class="view" id="v-konto">
+  <section class="wrap page konto">
+    <h1 class="cond rv">Konto</h1>
+    <div class="cloud" id="cloudbox" hidden></div>
+    <h2 class="ksec">Einstellungen</h2>
+    <div class="krow"><span><b>Sprache</b><small>Deutsch, English, Afrikaans</small></span><span class="lang" data-langsw></span></div>
+    <h2 class="ksec">Auf diesem Gerät</h2>
+    <div class="imp" id="imp"></div>
+    <h2 class="ksec">Rechtliches</h2>
+    <div class="klinks"><a href="rechtliches.html#impressum">Impressum</a><a href="rechtliches.html#datenschutz">Datenschutz</a><a href="rechtliches.html#nutzung">Nutzungsbedingungen</a><a href="rechtliches.html#lizenzen">Lizenzen</a></div>
   </section>
 </div>
 
@@ -650,6 +676,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
   <button data-tab="register" aria-label="Register"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.6" cy="6" r=".9" fill="#fff"/><circle cx="4.6" cy="12" r=".9" fill="#fff"/><circle cx="4.6" cy="18" r=".9" fill="#fff"/></svg></button>
   <button data-tab="karte" aria-label="Karte"><svg viewBox="0 0 24 24"><path d="M12 3c5.2 0 9 3.6 9 8.6S16.6 21 12 21 3 16.4 3 11.3 6.8 3 12 3z"/><path d="M12.2 7.6c2.7 0 4.6 1.9 4.6 4.2s-2 4.6-4.6 4.6-4.8-2.2-4.8-4.5 2.1-4.3 4.8-4.3z"/><circle cx="12" cy="12" r="1" fill="#fff"/></svg></button>
   <button data-tab="merkliste" aria-label="Planung"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.6" fill="#fff"/></svg><span class="badge" id="badge"></span></button>
+  <button data-tab="konto" aria-label="Konto"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.2" r="3.9"/><path d="M4.5 20.5c.9-4 3.9-6.3 7.5-6.3s6.6 2.3 7.5 6.3"/></svg><span class="badge" id="kbadge"></span></button>
 </nav>
 
 <div class="widmung" id="widmung" hidden role="dialog" aria-modal="true" aria-label="Widmung"><div class="wsun"></div><div class="wtxt" id="wtxt"></div><button class="wgo" id="wgo">Öffnen</button></div>
@@ -1427,7 +1454,7 @@ function persist(bump){try{localStorage.setItem("werf-merkliste",JSON.stringify(
 /* =========================================================
    GLAS-NAVIGATION: Sonne folgt Tipp und Finger, mit Schwung
    ========================================================= */
-const TABS=["ausgabe","register","karte","merkliste"],nav=$("#nav"),navSun=$("#navSun");
+const TABS=["ausgabe","register","karte","merkliste","konto"],nav=$("#nav"),navSun=$("#navSun");
 const centers=()=>$$("#nav [data-tab]").map(b=>b.offsetLeft+b.offsetWidth/2);
 const sunS=new Spring(0,{response:.42,onUpdate:(x,v)=>{const st=1+Math.min(.45,Math.abs(v)/2200);navSun.style.transform=`translateX(${x-23}px) scale(${st},${1/Math.sqrt(st)})`}});
 (()=>{const tr=new Tracker();let st=null;
@@ -1449,7 +1476,7 @@ const sunS=new Spring(0,{response:.42,onUpdate:(x,v)=>{const st=1+Math.min(.45,M
    ANSICHTEN
    ========================================================= */
 let view="ausgabe";
-const TITLES={ausgabe:tt("Ausgabe 01"),register:tt("Register"),karte:tt("Karte"),merkliste:tt("Planung")};
+const TITLES={ausgabe:tt("Ausgabe 01"),register:tt("Register"),karte:tt("Karte"),merkliste:tt("Planung"),konto:tt("Konto")};
 function go(v,opts={}){
   const prev=view;view=v;if(sheet.classList.contains("open"))closeSheet(true);
   $$(".view").forEach(n=>n.classList.toggle("on",n.id==="v-"+v));
@@ -1790,7 +1817,7 @@ function buildEditor(id){const e=byId[id];
   <div class="wrap sbody ed">
     <h2 class="cond" style="--n:${Math.max(...e.name.split(/\s+/).map(w=>w.length))}">${esc(e.name)}</h2>
     <p class="small grey ednote">${window.CLOUD?.user?tt("Deine Änderungen gelten sofort für dich. Mit dem Schalter schlägst du Texte und Angaben auch für alle vor."):tt("Deine Änderungen bleiben auf diesem Gerät. Im Register kannst du sie als Datei sichern und weitergeben.")}</p>
-    ${window.CLOUD?.user?`<label class="fld chk sugg"><input type="checkbox" id="edSuggest" checked><i></i><span class="fl">${tt("Für alle vorschlagen ({l})",{l:LANG.toUpperCase()})}</span></label>`:window.CLOUD?.ready?`<p class="small grey ednote">${tt("Melde dich im Register an, um deine Texte für alle vorzuschlagen.")}</p>`:""}
+    ${window.CLOUD?.user?`<label class="fld chk sugg"><input type="checkbox" id="edSuggest" checked><i></i><span class="fl">${tt("Für alle vorschlagen ({l})",{l:LANG.toUpperCase()})}</span></label>`:window.CLOUD?.ready?`<p class="small grey ednote">${tt("Melde dich unter „Konto“ an, um deine Texte für alle vorzuschlagen.")}</p>`:""}
     <fieldset><legend>${tt("Text")}</legend>${fld(e,"lead",tt("Einleitung"))}${sec}</fieldset>
     <fieldset><legend>${tt("Praktisches")}</legend>${fld(e,"adresse",tt("Adresse"),"text")}${fld(e,"zeiten",tt("Öffnungszeiten"))}${fld(e,"reservierung",tt("Reservierung"),"text")}${fld(e,"kinder",tt("Mit Kindern"),"text")}${fld(e,"web",tt("Website"),"url")}</fieldset>
     <fieldset><legend>${tt("Persönlich")}</legend>${fld(e,"besuchen",tt("Will ich hin"),"check")}${fld(e,"bekannt",tt("Schon dort"),"check")}${fld(e,"datum",tt("Besucht am"),"date")}${fld(e,"notiz",tt("Notiz"))}</fieldset>

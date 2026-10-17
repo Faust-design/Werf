@@ -1,6 +1,14 @@
 /* Oberfläche auf Englisch und Afrikaans. Schlüssel ist der deutsche Text. */
 window.I18N={
 en:{
+"Konto":"Account",
+"Einstellungen":"Settings",
+"Sprache":"Language",
+"Auf diesem Gerät":"On this device",
+"Rechtliches":"Legal",
+"Mein Konto":"My account",
+"Anmelden und mitmachen":"Sign in and contribute",
+"Melde dich unter „Konto“ an, um deine Texte für alle vorzuschlagen.":"Sign in under “Account” to suggest your texts for everyone.",
 "Foto: {x}":"Photo: {x}",
 "Community":"Community",
 "Für alle vorschlagen":"Suggest for everyone",
@@ -178,6 +186,14 @@ en:{
 "montags":"Mondays","sonntags (Museum)":"Sundays (museum)","montags (Galerie)":"Mondays (gallery)"
 },
 af:{
+"Konto":"Rekening",
+"Einstellungen":"Instellings",
+"Sprache":"Taal",
+"Auf diesem Gerät":"Op hierdie toestel",
+"Rechtliches":"Regsinligting",
+"Mein Konto":"My rekening",
+"Anmelden und mitmachen":"Meld aan en doen mee",
+"Melde dich unter „Konto“ an, um deine Texte für alle vorzuschlagen.":"Meld aan onder “Rekening” om jou tekste vir almal voor te stel.",
 "Foto: {x}":"Foto: {x}",
 "Community":"Gemeenskap",
 "Für alle vorschlagen":"Stel vir almal voor",

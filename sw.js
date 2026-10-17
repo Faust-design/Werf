@@ -1,5 +1,5 @@
 /* werf: Offline-Start. App-Dateien aus dem Speicher, im Hintergrund aktualisiert. */
-const V="werf-v2";
+const V="werf-v3";
 const SHELL=["./","index.html","config.js","cloud.js","i18n.js","texte.js","texte-i18n.js","geo.js","manifest.webmanifest","icons/icon-192.png","icons/apple-touch-icon.png","fonts/archivo-latin-wdth-normal.woff2","fonts/archivo-latin-ext-wdth-normal.woff2","rechtliches.html","lib/supabase-2.45.4.js"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V&&k!=="werf-ext").map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
