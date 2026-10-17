@@ -1,0 +1,92 @@
+{
+ "diag": {
+  "elements": 12904,
+  "ep": "https://overpass-api.de/api/interpreter"
+ },
+ "found": {
+  "De Toren": {
+   "km": 11.0,
+   "lat": -33.95969,
+   "lng": 18.75149,
+   "osm": "De Toren",
+   "score": 14,
+   "src": "osm-suche",
+   "tags": {
+    "website": "https://www.de-toren.com/"
+   }
+  },
+  "Hazendal": {
+   "km": 14.9,
+   "lat": -33.90102,
+   "lng": 18.71969,
+   "osm": "The Hazendal",
+   "score": 5,
+   "src": "osm-suche",
+   "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+   }
+  },
+  "Joubert Family Wines": {
+   "km": 13.4,
+   "lat": -33.8317,
+   "lng": 18.90024,
+   "osm": "Neil Joubert Wines",
+   "score": 7,
+   "src": "osm-suche",
+   "tags": {
+    "craft": "winery",
+    "shop": "wine"
+   }
+  },
+  "Mt Vernon": {
+   "km": 7.2,
+   "lat": -33.83787,
+   "lng": 18.94753,
+   "osm": "Rupert & Rothchild Tasting Centre",
+   "score": 11,
+   "src": "osm-suche",
+   "tags": {
+    "tourism": "attraction",
+    "website": "https://shop.rupert-rothschildvignerons.com/visit-us-tasting-page"
+   }
+  },
+  "Steenberg": {
+   "km": 13.9,
+   "lat": -34.0714,
+   "lng": 18.42557,
+   "osm": "Steenberg Hotel",
+   "score": 13,
+   "src": "osm-suche",
+   "tags": {
+    "tourism": "hotel",
+    "website": "https://www.steenbergfarm.com/"
+   }
+  },
+  "The Hills": {
+   "km": 6.5,
+   "lat": -33.9602,
+   "lng": 18.80085,
+   "osm": "Stellenbosch Hills Winery",
+   "score": 6,
+   "src": "osm-suche",
+   "tags": {
+    "craft": "winery",
+    "website": "https://stellenbosch-hills.co.za/"
+   }
+  },
+  "Vrede Wines": {
+   "km": 5.6,
+   "lat": -33.99873,
+   "lng": 18.85619,
+   "osm": "Rust en Vrede",
+   "score": 6,
+   "src": "osm-suche",
+   "tags": {
+    "craft": "winery",
+    "tourism": "wine_cellar",
+    "website": "https://rustenvrede.com/"
+   }
+  }
+ }
+}
