@@ -1,8 +1,6 @@
 name: Koordinaten
 on:
   workflow_dispatch:
-  push:
-    paths: ["tools/geo3.py", ".github/workflows/geo.yml"]
 permissions:
   contents: write
 jobs:
