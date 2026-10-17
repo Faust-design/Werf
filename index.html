@@ -1790,7 +1790,7 @@ function buildEditor(id){const e=byId[id];
   <div class="wrap sbody ed">
     <h2 class="cond" style="--n:${Math.max(...e.name.split(/\s+/).map(w=>w.length))}">${esc(e.name)}</h2>
     <p class="small grey ednote">${window.CLOUD?.user?tt("Deine Änderungen gelten sofort für dich. Mit dem Schalter schlägst du Texte und Angaben auch für alle vor."):tt("Deine Änderungen bleiben auf diesem Gerät. Im Register kannst du sie als Datei sichern und weitergeben.")}</p>
-    ${window.CLOUD?.user?`<label class="fld chk sugg"><input type="checkbox" id="edSuggest" checked><i></i><span class="fl">${tt("Für alle vorschlagen ({l})",{l:LANG.toUpperCase()})}</span></label>`:CLOUD_ON?`<p class="small grey ednote">${tt("Melde dich im Register an, um deine Texte für alle vorzuschlagen.")}</p>`:""}
+    ${window.CLOUD?.user?`<label class="fld chk sugg"><input type="checkbox" id="edSuggest" checked><i></i><span class="fl">${tt("Für alle vorschlagen ({l})",{l:LANG.toUpperCase()})}</span></label>`:window.CLOUD?.ready?`<p class="small grey ednote">${tt("Melde dich im Register an, um deine Texte für alle vorzuschlagen.")}</p>`:""}
     <fieldset><legend>${tt("Text")}</legend>${fld(e,"lead",tt("Einleitung"))}${sec}</fieldset>
     <fieldset><legend>${tt("Praktisches")}</legend>${fld(e,"adresse",tt("Adresse"),"text")}${fld(e,"zeiten",tt("Öffnungszeiten"))}${fld(e,"reservierung",tt("Reservierung"),"text")}${fld(e,"kinder",tt("Mit Kindern"),"text")}${fld(e,"web",tt("Website"),"url")}</fieldset>
     <fieldset><legend>${tt("Persönlich")}</legend>${fld(e,"besuchen",tt("Will ich hin"),"check")}${fld(e,"bekannt",tt("Schon dort"),"check")}${fld(e,"datum",tt("Besucht am"),"date")}${fld(e,"notiz",tt("Notiz"))}</fieldset>

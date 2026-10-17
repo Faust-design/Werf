@@ -12,9 +12,14 @@ const S=k=>{try{return localStorage.getItem(k)}catch(_){return null}},W=(k,v)=>{
 function loadLib(){return window.supabase?.createClient?Promise.resolve():new Promise((res,rej)=>{const s=document.createElement("script");s.src=LIB;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
 
 /* ---------- Start ---------- */
-async function init(){box.hidden=false;render();
-  try{await loadLib()}catch(_){render("offline");return}
+async function init(){
+  try{await loadLib()}catch(_){return}
   sb=window.supabase.createClient(CFG.url,CFG.anon,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+  /* Erst zeigen, wenn die Datenbank eingerichtet ist (Tabellen vorhanden). Ohne Netz: zuletzt bekannten Zustand nutzen. */
+  let ready=S("werf-cloud-ready")==="1";
+  if(navigator.onLine){try{const h=await sb.from("profiles").select("id",{count:"exact",head:true});ready=!h.error;W("werf-cloud-ready",ready?"1":"0")}catch(_){}}
+  if(!ready)return;
+  window.CLOUD.ready=true;box.hidden=false;render();
   const {data}=await sb.auth.getSession();await setUser(data?.session?.user||null);
   sb.auth.onAuthStateChange((ev,s)=>{if(ev==="SIGNED_IN"||ev==="SIGNED_OUT")setUser(s?.user||null)});
   refreshCommunity()}
