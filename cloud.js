@@ -123,10 +123,10 @@ function render(state){if(!box)return;
 box?.addEventListener("click",async ev=>{const id=ev.target.id,msg=()=>box.querySelector("#cMsg");
   if(id==="cSend"){const email=box.querySelector("#cEmail").value.trim();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg().textContent=tt("Bitte eine gültige E-Mail-Adresse eingeben.");return}
     ev.target.disabled=true;const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});ev.target.disabled=false;
-    if(error){msg().textContent=tt("Das hat nicht geklappt. Versuche es in ein paar Minuten noch einmal.");return}
+    if(error){msg().textContent=tt("Das hat nicht geklappt. Versuche es in ein paar Minuten noch einmal.")+(error.message?` (${error.message})`:"");return}
     box.querySelector("#cCodeRow").hidden=false;box.querySelector("#cCode").focus();msg().textContent=tt("Wir haben dir einen Code geschickt. Gib ihn hier ein oder tippe auf den Link in der E-Mail.");return}
   if(id==="cVerify"){const email=box.querySelector("#cEmail").value.trim(),token=box.querySelector("#cCode").value.replace(/\D/g,"");
-    const {error}=await sb.auth.verifyOtp({email,token,type:"email"});if(error){msg().textContent=tt("Der Code stimmt nicht oder ist abgelaufen.");return}return}
+    const {error}=await sb.auth.verifyOtp({email,token,type:"email"});if(error){msg().textContent=tt("Der Code stimmt nicht oder ist abgelaufen.")+(error.message?` (${error.message})`:"");return}return}
   if(id==="cOut"){if(!confirm(tt("Abmelden? Deine Daten bleiben auf diesem Gerät und in deinem Konto.")))return;await sb.auth.signOut();try{localStorage.removeItem("werf-sync-at")}catch(_){}setUser(null);return}
   if(id==="cNameOk"){const name=box.querySelector("#cName").value.trim().slice(0,40);const {error}=await sb.from("profiles").update({name}).eq("id",user.id);
     msg().textContent=error?tt("Speichern hat nicht geklappt."):tt("Gespeichert.");if(!error)profile.name=name;return}
