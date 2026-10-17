@@ -1,0 +1,22 @@
+name: Koordinaten
+on:
+  workflow_dispatch:
+  push:
+    paths: ["tools/geo.py", ".github/workflows/geo.yml"]
+permissions:
+  contents: write
+jobs:
+  geo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python tools/geo.py
+      - run: |
+          git config user.name "werf-bot"
+          git config user.email "werf-bot@users.noreply.github.com"
+          git add tools/geo.json tools/geo-report.md tools/osm-candidates.json
+          git commit -m "Koordinaten aus OpenStreetMap" || echo "nichts neu"
+          git pull --rebase && git push
