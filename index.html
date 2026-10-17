@@ -80,24 +80,16 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .about-txt{margin-top:var(--s4);max-width:34em}
 .about-txt p{font-size:18px;line-height:1.45}
 .about-txt p+p{margin-top:var(--s2);color:var(--grey);font-size:16px}
-.ressorts{list-style:none;margin-top:var(--s6)}
-.ressorts li{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .9s cubic-bezier(.2,.9,.1,1);transition-delay:calc(var(--i) * 90ms)}
-.ressorts.in li,.steps.in li{opacity:1;transform:none}
-.ressorts button{width:100%;display:grid;grid-template-columns:1fr;gap:6px;text-align:left;padding:var(--s2) 0;transition:transform .12s}
-.ressorts button:active{transform:translateX(6px)}
-.ressorts h3{font-variation-settings:"wdth" 68;font-weight:800;font-size:clamp(44px,14vw,120px);line-height:.86;letter-spacing:-.035em;display:flex;align-items:center;gap:var(--s2)}
-.ressorts h3 i{flex:0 0 auto;width:.22em;height:.22em;border-radius:50%;background:var(--duene);box-shadow:0 0 14px rgba(228,86,27,.7)}
-.ressorts .n{order:3;font-size:13px;font-weight:650;color:var(--duene);font-variant-numeric:tabular-nums}
-.ressorts p{order:2;font-size:16px;line-height:1.4;max-width:30em;color:#333}
 .about-h{font-size:20px;font-weight:750;margin:var(--s8) 0 var(--s2)}
 .steps{list-style:none;display:grid;gap:2px}
+.steps.in li{opacity:1;transform:none}
 .steps li{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .9s cubic-bezier(.2,.9,.1,1);transition-delay:calc(var(--i) * 90ms)}
 .steps button{width:100%;display:grid;grid-template-columns:56px 1fr;gap:var(--s2);text-align:left;background:var(--soft);padding:var(--s2);transition:transform .12s,background .2s}
 .steps button:active{transform:scale(.98);background:#e8e8e4}
 .steps b{font-variation-settings:"wdth" 62;font-weight:900;font-size:40px;line-height:.85;color:var(--duene);letter-spacing:-.04em}
 .steps span{font-size:15px;line-height:1.35}
 .steps em{display:block;font-style:normal;font-weight:750;font-size:19px;margin-bottom:2px}
-@media(min-width:900px){.steps{grid-template-columns:repeat(4,1fr)}.ressorts{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--g)}}
+@media(min-width:900px){.steps{grid-template-columns:repeat(4,1fr)}}
 .shead h2{font-size:clamp(56px,18vw,180px)}
 
 /* ---------- Bilder und Tafeln ---------- */
@@ -153,7 +145,9 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .stop>button{display:block;width:100%;text-align:left}
 .st-line{position:absolute;left:var(--g);top:calc(var(--s2) * -1);height:3px;background:rgba(255,255,255,.14)}
 .st-line i{display:block;height:100%;background:var(--duene);transform-origin:left;transform:scaleX(var(--p,0));box-shadow:0 0 12px rgba(228,86,27,.8)}
-.to-reg{padding-top:var(--s12);padding-bottom:calc(var(--navh) + var(--s8))}
+.to-reg{padding-top:var(--s12);padding-bottom:0}
+.howto{padding-top:var(--s12);padding-bottom:calc(var(--navh) + var(--s8))}
+.howto h2{font-size:clamp(48px,15vw,150px);margin-bottom:var(--s4)}
 .to-reg h2{font-size:clamp(56px,18vw,180px)}
 .to-reg p{font-size:20px;font-weight:500;margin:var(--s2) 0 var(--s3);max-width:22em}
 
@@ -164,9 +158,14 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .search input{width:100%;height:48px;font-size:18px;font-weight:550;padding:0 var(--s2);background:var(--soft);outline:none;transition:box-shadow .2s;-webkit-appearance:none;appearance:none}
 .search input:focus{box-shadow:0 0 0 2px var(--duene)}
 .search input::placeholder{color:#9d9d9d}
-.chips{display:flex;overflow-x:auto;scrollbar-width:none;margin:var(--s1) calc(var(--g) * -1) 0;padding:0 var(--g)}
+#chips{display:flex;flex-wrap:wrap;justify-content:space-between;column-gap:8px;margin-top:var(--s1)}
+#chips button{font-size:clamp(12.5px,3.55vw,15px);gap:6px}
+#chips button::before{width:9px;height:9px}
+.rchips{display:flex;flex-wrap:wrap;column-gap:14px}
+.rchips button{min-height:36px!important;gap:6px!important}
+@media(min-width:600px){#chips{justify-content:flex-start;column-gap:var(--s3)}}
 .chips::-webkit-scrollbar{display:none}
-.chips button{flex:0 0 auto;min-height:44px;font-size:14px;font-weight:600;padding:0 var(--s2) 0 0;display:flex;align-items:center;gap:var(--s1)}
+.chips button{flex:0 0 auto;min-height:40px;font-size:14px;font-weight:600;padding:0;display:flex;align-items:center;gap:var(--s1)}
 .chips button::before{content:"";width:10px;height:10px;border-radius:50%;background:transparent;box-shadow:inset 0 0 0 1.5px #000;transition:background .25s,box-shadow .25s,transform .35s cubic-bezier(.34,1.6,.5,1)}
 .chips button[aria-pressed="true"]::before{background:var(--duene);box-shadow:0 0 10px rgba(228,86,27,.7);transform:scale(1.25)}
 .count{font-size:13px;color:var(--grey);padding:var(--s1) 0 0}
@@ -192,7 +191,8 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .empty{padding:var(--s3) 0;font-size:18px;font-weight:500;max-width:22em}
 .empty .btn{margin-top:var(--s2)}
 
-.rchips{margin-top:0}
+.rchips{margin-top:var(--s1);padding-top:var(--s1)}
+.rchips::before{content:"Region";width:100%;font-size:12px;color:var(--grey)}
 .rchips button{font-weight:500}
 .rhead{display:flex;justify-content:space-between;align-items:flex-end;margin-top:var(--s8);padding-bottom:var(--s1)}
 .rhead h2{font-size:clamp(40px,12vw,96px)}
@@ -492,14 +492,6 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
       <p>Wer auf ein Gut am Kap fährt, kommt durch eine Allee, über einen Hof, an einem Haus vorbei, das jemand gebaut hat, und in Räume, in denen Bilder hängen. Davon erzählt werf: wer das Gebäude entworfen hat, wessen Skulpturen im Garten stehen, wer die Beete angelegt hat und was auf den Teller kommt.</p>
       <p>Grundlage ist eine Liste mit über 300 Gütern zwischen Kapstadt, Stellenbosch, Franschhoek und der Walker Bay. Einige sind ausführlich recherchiert, mit Quellen. Die anderen werden nach und nach ergänzt.</p>
     </div>
-    <ol class="ressorts" id="ressorts"></ol>
-    <h3 class="about-h">So nutzt du werf</h3>
-    <ol class="steps">
-      <li><button data-view="register"><b>01</b><span><em>Lesen</em>Beiträge auf dieser Seite, alle Güter im Register, nach Region und Ort geordnet.</span></button></li>
-      <li><button data-view="karte"><b>02</b><span><em>Finden</em>Auf der Karte oder mit „Von hier aus erreichbar“: alles, was in einer halben Stunde zu schaffen ist.</span></button></li>
-      <li><button data-view="merkliste"><b>03</b><span><em>Planen</em>Güter merken, auf Tage verteilen, Reihenfolge und Fahrzeiten rechnet die App.</span></button></li>
-      <li><button data-view="register"><b>04</b><span><em>Erinnern</em>Eigene Fotos zu jedem Gut ablegen. Notizen und Bilder bleiben auf deinem Gerät.</span></button></li>
-    </ol>
   </section>
 
   <div class="wrap shead"><h2 class="cond rv">In dieser Ausgabe</h2></div>
@@ -517,6 +509,16 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
     <p id="regTeaser"></p>
     <button class="btn" data-view="register">Register öffnen</button>
   </section>
+
+  <section class="wrap howto">
+    <h2 class="cond rv">So nutzt du werf</h2>
+    <ol class="steps">
+      <li><button data-view="register"><b>01</b><span><em>Lesen</em>Beiträge auf dieser Seite, alle Güter im Register, nach Region und Ort geordnet.</span></button></li>
+      <li><button data-view="karte"><b>02</b><span><em>Finden</em>Auf der Karte oder mit „Von hier aus erreichbar“: alles, was in einer halben Stunde zu schaffen ist.</span></button></li>
+      <li><button data-view="merkliste"><b>03</b><span><em>Planen</em>Güter merken, auf Tage verteilen, Reihenfolge und Fahrzeiten rechnet die App.</span></button></li>
+      <li><button data-view="register"><b>04</b><span><em>Erinnern</em>Eigene Fotos zu jedem Gut ablegen. Notizen und Bilder bleiben auf deinem Gerät.</span></button></li>
+    </ol>
+  </section>
 </div>
 
 <!-- ================= REGISTER ================= -->
@@ -526,8 +528,8 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
     <div class="search">
       <input id="q" type="search" placeholder="Weingut oder Gebiet suchen" autocomplete="off" aria-label="Weingut oder Gebiet suchen">
       <div class="chips" id="chips" role="group" aria-label="Nach Schwerpunkt filtern"></div>
-      <div class="chips rchips" id="rchips" role="group" aria-label="Nach Region filtern"></div>
     </div>
+    <div class="chips rchips" id="rchips" role="group" aria-label="Nach Region filtern"></div>
     <div class="um" data-um></div>
     <p class="count" id="count" aria-live="polite"></p>
     <div class="imp" id="imp"></div>
@@ -579,12 +581,12 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 /* Land, Region, Ort: weitere Länder bekommen eine eigene Ausgabe mit gleicher Struktur */
 const LAND={key:"za",name:"Südafrika",ausgabe:"Kap"};
 const REGIONEN=[
- {k:"stellenbosch-helderberg",name:"Stellenbosch & Helderberg",orte:["stellenbosch","somerset-west","koelenhof","sir-lowry-s-pass"]},
- {k:"paarl-franschhoek",name:"Paarl & Franschhoek",orte:["paarl","franschhoek","klapmuts","wellington"]},
- {k:"walker-bay",name:"Walker Bay & Overberg",orte:["hermanus","botrivier","elgin","grabouw","stanford"]},
- {k:"breede",name:"Breede-Tal",orte:["robertson","worcester","brede-river"]},
- {k:"kapstadt",name:"Kapstadt",orte:["cape-town","constantia","durbanville"]},
- {k:"swartland",name:"Swartland",orte:["malmesbury","darling"]}];
+ {k:"stellenbosch-helderberg",kurz:"Stellenbosch",name:"Stellenbosch & Helderberg",orte:["stellenbosch","somerset-west","koelenhof","sir-lowry-s-pass"]},
+ {k:"paarl-franschhoek",kurz:"Paarl & Franschhoek",name:"Paarl & Franschhoek",orte:["paarl","franschhoek","klapmuts","wellington"]},
+ {k:"walker-bay",kurz:"Walker Bay",name:"Walker Bay & Overberg",orte:["hermanus","botrivier","elgin","grabouw","stanford"]},
+ {k:"breede",kurz:"Breede",name:"Breede-Tal",orte:["robertson","worcester","brede-river"]},
+ {k:"kapstadt",kurz:"Kapstadt",name:"Kapstadt",orte:["cape-town","constantia","durbanville"]},
+ {k:"swartland",kurz:"Swartland",name:"Swartland",orte:["malmesbury","darling"]}];
 const RESSORTS={architektur:"Architektur",kunst:"Kunst",garten:"Garten",kueche:"Küche"};
 const TBD="Folgt aus der Tabelle";
 /* Gegenden aus der Tabelle, mit ungefährem Mittelpunkt (Ort oder Weintal) */
@@ -876,17 +878,9 @@ function renderRoute(anim){const r=ROUTEN[RI];
   if(anim&&!RM)$$("#track .stop").forEach((n,i)=>n.firstElementChild.animate([{opacity:0,transform:"translateX(60px)"},{opacity:1,transform:"none"}],{duration:620,delay:i*70,easing:"cubic-bezier(.2,.9,.2,1)",fill:"backwards"}));
   if(anim&&!RM)$("#rTitle").animate([{opacity:0,transform:"translateY(20px)"},{opacity:1,transform:"none"}],{duration:520,easing:"cubic-bezier(.2,.9,.2,1)"})}
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-ri]");if(!b)return;RI=+b.dataset.ri;buildRoute(RI);renderRoute(true);layout();requestTick()});
-const RES_TXT={architektur:"Wer hat gebaut, wer umgebaut? Kapholländische Höfe, Glas und Beton am Hang, Innenräume, Materialien.",
-  kunst:"Private Sammlungen, Skulpturen im Fynbos, Galerien und Museen auf dem Gut.",
-  garten:"Nutzgärten, Parks, alte Bäume, Fynbos und die Wege durch die Weinberge.",
-  kueche:"Restaurants, Hofläden, Bäckereien. Wer kocht, und was kommt vom eigenen Land."};
-$("#ressorts").innerHTML=Object.entries(RESSORTS).map(([k,v],i)=>{const n=ESTATES.filter(e=>e.ressorts.includes(k)).length;
-  return `<li style="--i:${i}"><button data-goressort="${k}"><h3><i></i>${v}</h3><span class="n">${n} Güter im Register →</span><p>${RES_TXT[k]}</p></button></li>`}).join("");
 $$(".steps li").forEach((li,i)=>li.style.setProperty("--i",i));
 {const io2=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in");io2.unobserve(en.target)}}),{threshold:.15});
-  [$("#ressorts"),$(".steps")].forEach(el=>RM?el.classList.add("in"):io2.observe(el))}
-document.addEventListener("click",ev=>{const b=ev.target.closest("[data-goressort]");if(!b)return;filter=b.dataset.goressort;
-  $$("#chips [data-f]").forEach(c=>c.setAttribute("aria-pressed",c.dataset.f===filter));go("register")});
+  [$(".steps")].forEach(el=>RM?el.classList.add("in"):io2.observe(el))}
 function renderAusgabe(){
   $("#feats").innerHTML=FEATURED.map((id,i)=>{const e=byId[id];return `<article class="feat wrap grid" data-scrub>
     <div class="num"><b>${pad(i+1,2)}</b><span class="small">${esc(GEBIETE[e.gebiet].name)}</span></div>
@@ -981,7 +975,7 @@ function mine(e){if(!IMPORT)return "";const parts=[];
   if(e.notiz)parts.push(`<p>${esc(e.notiz)}</p>`);if(/prüf/i.test(e.status))parts.push(`<small>In der Tabelle als „Überprüfen“ markiert</small>`);
   return parts.length?`<div class="mine"><h3>Aus deiner Tabelle</h3>${parts.join("")}</div>`:""}
 function stagger(nodes,max=18){if(RM)return;nodes.slice(0,max).forEach((n,i)=>n.animate([{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],{duration:560,delay:i*26,easing:"cubic-bezier(.2,.9,.2,1)",fill:"backwards"}))}
-$("#rchips").innerHTML=[["alle","Alle Regionen"],...REGIONEN.filter(r=>r.count).map(r=>[r.k,r.name])].map(([k,v])=>`<button data-r="${k}" aria-pressed="${k==="alle"}">${esc(v)}</button>`).join("");
+$("#rchips").innerHTML=[["alle","Alle"],...REGIONEN.filter(r=>r.count).map(r=>[r.k,r.kurz])].map(([k,v])=>`<button data-r="${k}" aria-pressed="${k==="alle"}">${esc(v)}</button>`).join("");
 const BANDS=[15,30,45,60,90,120,180];
 function renderRegister(){
   const q=norm(query.trim());
