@@ -1,0 +1,1855 @@
+{
+ "Akkerdal": {
+  "km": 37.6,
+  "lat": -33.82385,
+  "lng": 18.72003,
+  "osm": "Akkerdal Close (highway/residential)",
+  "src": "nominatim"
+ },
+ "Alheit Vineyards": {
+  "km": 23.1,
+  "lat": -34.33897,
+  "lng": 19.00588,
+  "osm": "Alheit Street (highway/residential)",
+  "src": "nominatim"
+ },
+ "Allee Bleue": {
+  "id": "node/6562432574",
+  "km": 13.0,
+  "lat": -33.85876,
+  "lng": 18.98595,
+  "osm": "Allee Bleue Estate",
+  "src": "osm-name"
+ },
+ "Alluvia Boutique": {
+  "id": "node/12598690907",
+  "km": 6.4,
+  "lat": -33.91753,
+  "lng": 18.92668,
+  "osm": "Alluvia",
+  "src": "osm-website"
+ },
+ "Almenkerk": {
+  "id": "node/4796944221",
+  "km": 8.7,
+  "lat": -34.2123,
+  "lng": 19.03133,
+  "osm": "Almenkerk Wine Estate",
+  "src": "osm-name"
+ },
+ "Anthonij Rupert": {
+  "id": "node/8809683219",
+  "km": 8.8,
+  "lat": -33.88187,
+  "lng": 19.02424,
+  "osm": "Anthonij Rupert Winery",
+  "src": "osm-name"
+ },
+ "Anura": {
+  "id": "node/3185466125",
+  "km": 1.1,
+  "lat": -33.81199,
+  "lng": 18.88895,
+  "osm": "Anura",
+  "src": "osm-website"
+ },
+ "Arabella Wines": {
+  "id": "node/5488238100",
+  "km": 12.3,
+  "lat": -33.84091,
+  "lng": 20.01048,
+  "osm": "Arabella",
+  "src": "osm-name"
+ },
+ "Arra Vineyards": {
+  "id": "node/12655684989",
+  "km": 2.6,
+  "lat": -33.82376,
+  "lng": 18.86246,
+  "osm": "Arra",
+  "src": "osm-website"
+ },
+ "Asara": {
+  "id": "node/12537874209",
+  "km": 5.7,
+  "lat": -33.94247,
+  "lng": 18.80889,
+  "osm": "Asara",
+  "src": "osm-website"
+ },
+ "Ashton Winery": {
+  "id": "node/4382961798",
+  "km": 13.9,
+  "lat": -33.83672,
+  "lng": 20.0304,
+  "osm": "Ashton",
+  "src": "osm-website"
+ },
+ "Avondale": {
+  "id": "node/13726848950",
+  "km": 4.7,
+  "lat": -33.76474,
+  "lng": 19.0009,
+  "osm": "Avondale Wine",
+  "src": "osm-website"
+ },
+ "Avontur": {
+  "id": "way/1305401269",
+  "km": 9.4,
+  "lat": -34.02553,
+  "lng": 18.82367,
+  "osm": "Avontuur Estate",
+  "src": "osm-fuzzy"
+ },
+ "Babylonstoren": {
+  "id": "node/12649412353",
+  "km": 4.6,
+  "lat": -33.82356,
+  "lng": 18.92487,
+  "osm": "Babylonstoren",
+  "src": "osm-website"
+ },
+ "Bacco Estate": {
+  "id": "node/12642994937",
+  "km": 4.3,
+  "lat": -33.80324,
+  "lng": 18.927,
+  "osm": "Bacco",
+  "src": "osm-website"
+ },
+ "Backsberg Family Wines": {
+  "id": "node/12430675627",
+  "km": 20.3,
+  "lat": -33.82878,
+  "lng": 18.91489,
+  "osm": "Backsberg",
+  "src": "osm-name"
+ },
+ "Bartho Eksteen Wine Estate": {
+  "id": "node/9074159477",
+  "km": 4.7,
+  "lat": -34.39925,
+  "lng": 19.21737,
+  "osm": "Bartho Eksteen",
+  "src": "osm-website"
+ },
+ "Bartinney": {
+  "id": "node/3361042710",
+  "km": 6.6,
+  "lat": -33.91835,
+  "lng": 18.93065,
+  "osm": "Bartinney Private Cellar",
+  "src": "osm-name"
+ },
+ "Beau Constantia": {
+  "km": 2.8,
+  "lat": -34.01368,
+  "lng": 18.40644,
+  "osm": "Beau Constantia (amenity/restaurant)",
+  "src": "nominatim"
+ },
+ "Beaumont": {
+  "km": 63.2,
+  "lat": -33.86805,
+  "lng": 18.67606,
+  "osm": "Beaumont Avenue (highway/residential)",
+  "src": "nominatim"
+ },
+ "Bein Private Cellar": {
+  "km": 12.5,
+  "lat": -33.96188,
+  "lng": 18.73563,
+  "osm": "Bein Wine (shop/alcohol)",
+  "src": "nominatim"
+ },
+ "Bellevue": {
+  "id": "node/12365572462",
+  "km": 12.8,
+  "lat": -33.87777,
+  "lng": 18.76185,
+  "osm": "Bellevue",
+  "src": "osm-name"
+ },
+ "Benguela Cove": {
+  "id": "node/14243811901",
+  "km": 14.4,
+  "lat": -34.34599,
+  "lng": 19.13465,
+  "osm": "Benguela Cove Lagoon Wine Estate",
+  "src": "osm-fuzzy"
+ },
+ "Bergsig Wine Estate": {
+  "id": "node/4227032753",
+  "km": 95.9,
+  "lat": -33.51916,
+  "lng": 19.19508,
+  "osm": "Bergsig",
+  "src": "osm-website"
+ },
+ "Beyerskloof": {
+  "id": "node/12565470802",
+  "km": 7.9,
+  "lat": -33.89112,
+  "lng": 18.823,
+  "osm": "Beyerskloof",
+  "src": "osm-website"
+ },
+ "Blaauwklippen": {
+  "id": "node/12373400863",
+  "km": 3.2,
+  "lat": -33.97267,
+  "lng": 18.84779,
+  "osm": "Blaauwklippen",
+  "src": "osm-name"
+ },
+ "Black Elephant Vintners": {
+  "id": "node/6122012685",
+  "km": 0.7,
+  "lat": -33.90195,
+  "lng": 19.12152,
+  "osm": "Black Elephant Vintners",
+  "src": "osm-name"
+ },
+ "Black Pearl": {
+  "id": "node/4142785801",
+  "km": 6.8,
+  "lat": -33.73946,
+  "lng": 18.89173,
+  "osm": "Black Pearl",
+  "src": "osm-name"
+ },
+ "Boekenhoutskloof": {
+  "id": "node/12626432263",
+  "km": 4.2,
+  "lat": -33.94266,
+  "lng": 19.10734,
+  "osm": "Boekenhoutskloof",
+  "src": "osm-website"
+ },
+ "Boland Cellar": {
+  "id": "node/4142785802",
+  "km": 5.2,
+  "lat": -33.68873,
+  "lng": 18.95523,
+  "osm": "Boland Kelder",
+  "src": "osm-name"
+ },
+ "Bonnievale Wines": {
+  "id": "node/4087697627",
+  "km": 26.3,
+  "lat": -33.9578,
+  "lng": 20.10194,
+  "osm": "Bonnievale",
+  "src": "osm-name"
+ },
+ "Boschendal": {
+  "id": "node/12368549122",
+  "km": 13.3,
+  "lat": -33.8746,
+  "lng": 18.97569,
+  "osm": "Boschendal",
+  "src": "osm-website"
+ },
+ "Bosman Family Vineyards": {
+  "km": 1.7,
+  "lat": -33.74988,
+  "lng": 18.95895,
+  "osm": "Bosman (highway/residential)",
+  "src": "nominatim"
+ },
+ "Brampton": {
+  "km": 1.6,
+  "lat": -33.93818,
+  "lng": 18.86057,
+  "osm": "Brampton (amenity/bar)",
+  "src": "nominatim"
+ },
+ "Brandvlei Cellar": {
+  "id": "node/12604155025",
+  "km": 17.9,
+  "lat": -33.80487,
+  "lng": 19.46952,
+  "osm": "BC Wines",
+  "src": "osm-website"
+ },
+ "Brookdale": {
+  "km": 45.5,
+  "lat": -33.79121,
+  "lng": 18.47789,
+  "osm": "Brookdale Street (highway/residential)",
+  "src": "nominatim"
+ },
+ "Buitenverwachting": {
+  "id": "node/583974868",
+  "km": 1.9,
+  "lat": -34.04231,
+  "lng": 18.41633,
+  "osm": "Buitenverwachting",
+  "src": "osm-website"
+ },
+ "Calais Wine Estate": {
+  "km": 27.9,
+  "lat": -33.82907,
+  "lng": 18.68527,
+  "osm": "Calais Road (highway/residential)",
+  "src": "nominatim"
+ },
+ "Camberley": {
+  "id": "node/3361042711",
+  "km": 6.7,
+  "lat": -33.91896,
+  "lng": 18.93226,
+  "osm": "Camberley Wines",
+  "src": "osm-name"
+ },
+ "Cape Point Vineyards": {
+  "id": "node/13477804522",
+  "km": 17.6,
+  "lat": -34.09378,
+  "lng": 18.38742,
+  "osm": "Cape Point Vineyards",
+  "src": "osm-website"
+ },
+ "Cavalli": {
+  "id": "node/3246101228",
+  "km": 8.5,
+  "lat": -34.00997,
+  "lng": 18.81292,
+  "osm": "Equus Restaurant @ Cavalli Estate",
+  "src": "osm-fuzzy"
+ },
+ "Chamonix": {
+  "id": "node/12625203948",
+  "km": 1.2,
+  "lat": -33.89967,
+  "lng": 19.12667,
+  "osm": "Chamonix",
+  "src": "osm-name"
+ },
+ "Charles Fox Cap Classique Wine Estate": {
+  "id": "node/6113994087",
+  "km": 8.1,
+  "lat": -34.23733,
+  "lng": 19.07844,
+  "osm": "Charles Fox Cap Classique",
+  "src": "osm-name"
+ },
+ "Colmant Cap Classique": {
+  "id": "node/12629162238",
+  "km": 2.3,
+  "lat": -33.92338,
+  "lng": 19.1275,
+  "osm": "Colmant",
+  "src": "osm-website"
+ },
+ "Constantia Glen": {
+  "id": "node/12535106895",
+  "km": 9.4,
+  "lat": -34.01555,
+  "lng": 18.40896,
+  "osm": "Constantia Glen",
+  "src": "osm-website"
+ },
+ "Creation Wines": {
+  "id": "way/779458036",
+  "km": 7.9,
+  "lat": -34.33127,
+  "lng": 19.32657,
+  "osm": "Creation Wines",
+  "src": "osm-website"
+ },
+ "Cronier": {
+  "km": 10.1,
+  "lat": -33.64915,
+  "lng": 19.00092,
+  "osm": "Estienne Cronier Close (highway/residential)",
+  "src": "nominatim"
+ },
+ "D'Aria": {
+  "id": "node/725593563",
+  "km": 17.2,
+  "lat": -33.84306,
+  "lng": 18.6094,
+  "osm": "D'Aria",
+  "src": "osm-website"
+ },
+ "Darling Cellars": {
+  "km": 0.4,
+  "lat": -33.37643,
+  "lng": 18.37919,
+  "osm": "Darling (place/town)",
+  "src": "nominatim"
+ },
+ "De Grendel": {
+  "id": "way/182723091",
+  "km": 14.6,
+  "lat": -33.84926,
+  "lng": 18.57288,
+  "osm": "De Grendel",
+  "src": "osm-name"
+ },
+ "De Toren": {
+  "id": "node/12649412353",
+  "km": 14.9,
+  "lat": -33.82356,
+  "lng": 18.92487,
+  "osm": "Babylonstoren",
+  "src": "osm-fuzzy"
+ },
+ "De Waal": {
+  "id": "node/12538680178",
+  "km": 9.6,
+  "lat": -33.94157,
+  "lng": 18.76614,
+  "osm": "De Waal",
+  "src": "osm-website"
+ },
+ "De Wetshof": {
+  "id": "node/4087697607",
+  "km": 14.1,
+  "lat": -33.87755,
+  "lng": 20.00968,
+  "osm": "De Wetshof",
+  "src": "osm-name"
+ },
+ "DeMorgenzon": {
+  "id": "node/12538712358",
+  "km": 11.1,
+  "lat": -33.93927,
+  "lng": 18.75009,
+  "osm": "DeMorgenzon",
+  "src": "osm-website"
+ },
+ "Deetlefs": {
+  "id": "node/12595378561",
+  "km": 14.0,
+  "lat": -33.69158,
+  "lng": 19.30471,
+  "osm": "Deetlefs",
+  "src": "osm-website"
+ },
+ "Dekkersvlei": {
+  "id": "node/14230486001",
+  "km": 7.1,
+  "lat": -33.74143,
+  "lng": 19.04163,
+  "osm": "Dekkersvlei Vineyards",
+  "src": "osm-website"
+ },
+ "Delaire Graff": {
+  "id": "node/1027802215",
+  "km": 5.8,
+  "lat": -33.9218,
+  "lng": 18.92271,
+  "osm": "Delaire Graff Estate",
+  "src": "osm-name"
+ },
+ "Delheim": {
+  "id": "node/12722407913",
+  "km": 9.1,
+  "lat": -33.86891,
+  "lng": 18.88603,
+  "osm": "Delheim",
+  "src": "osm-website"
+ },
+ "Denneboom Wines": {
+  "km": 4.3,
+  "lat": -33.7484,
+  "lng": 19.0086,
+  "osm": "Denneboom Road (highway/secondary)",
+  "src": "nominatim"
+ },
+ "Deux Freres": {
+  "id": "node/12728669985",
+  "km": 8.0,
+  "lat": -33.88082,
+  "lng": 18.84563,
+  "osm": "Deux Frères",
+  "src": "osm-website"
+ },
+ "Diemersdal": {
+  "id": "node/12534721622",
+  "km": 3.1,
+  "lat": -33.80189,
+  "lng": 18.63992,
+  "osm": "Diemersdal",
+  "src": "osm-website"
+ },
+ "Dieu Donné Vineyards": {
+  "id": "node/12625276401",
+  "km": 1.7,
+  "lat": -33.89549,
+  "lng": 19.12931,
+  "osm": "Dieu Donné",
+  "src": "osm-website"
+ },
+ "Doran Vineyards": {
+  "id": "way/42125322",
+  "km": 55.7,
+  "lat": -33.94391,
+  "lng": 18.41631,
+  "osm": "Clos d'Oranje",
+  "src": "osm-fuzzy"
+ },
+ "Dornier": {
+  "id": "way/384846130",
+  "km": 4.7,
+  "lat": -33.99213,
+  "lng": 18.87207,
+  "osm": "Dornier Wine Estate",
+  "src": "osm-website"
+ },
+ "Druk My Niet Estate": {
+  "km": 22.9,
+  "lat": -33.92838,
+  "lng": 18.88064,
+  "osm": "Druk My Niet Road (highway/residential)",
+  "src": "nominatim"
+ },
+ "Du Toitskloof": {
+  "id": "node/12595378512",
+  "km": 28.3,
+  "lat": -33.70269,
+  "lng": 19.26897,
+  "osm": "Du Toitskloof",
+  "src": "osm-name"
+ },
+ "Durbanville Hills": {
+  "id": "way/730005777",
+  "km": 16.5,
+  "lat": -33.82497,
+  "lng": 18.56585,
+  "osm": "Durbanville Hills",
+  "src": "osm-name"
+ },
+ "Eagle's Cliff Wines": {
+  "id": "node/12604134087",
+  "km": 21.9,
+  "lat": -33.84045,
+  "lng": 19.41897,
+  "osm": "Eagle’s Cliff",
+  "src": "osm-website"
+ },
+ "Eikehof": {
+  "id": "node/4230413893",
+  "km": 5.4,
+  "lat": -33.88142,
+  "lng": 19.06376,
+  "osm": "Eikehof",
+  "src": "osm-website"
+ },
+ "Eikendal": {
+  "id": "node/5585143038",
+  "km": 6.3,
+  "lat": -34.01283,
+  "lng": 18.82347,
+  "osm": "Eikendal Winery",
+  "src": "osm-name"
+ },
+ "Ernie Els": {
+  "id": "way/1279423451",
+  "km": 7.5,
+  "lat": -34.01471,
+  "lng": 18.84816,
+  "osm": "Ernie Els Wines",
+  "src": "osm-name"
+ },
+ "Escape Wines": {
+  "km": 29.3,
+  "lat": -34.14816,
+  "lng": 19.0822,
+  "osm": "Escape Trail (highway/path)",
+  "src": "nominatim"
+ },
+ "Fairview": {
+  "id": "node/12587657706",
+  "km": 5.6,
+  "lat": -33.77176,
+  "lng": 18.92423,
+  "osm": "Fairview",
+  "src": "osm-website"
+ },
+ "Flagstone Wines": {
+  "id": "relation/16105264",
+  "km": 4.8,
+  "lat": -34.09058,
+  "lng": 18.80832,
+  "osm": "Flagstone Winery",
+  "src": "osm-name"
+ },
+ "Frater Family Wines": {
+  "km": 4.1,
+  "lat": -33.77226,
+  "lng": 18.96606,
+  "osm": "Frater Street (highway/residential)",
+  "src": "nominatim"
+ },
+ "Gabrielskloof Wine Estate": {
+  "km": 4.2,
+  "lat": -34.23893,
+  "lng": 19.2496,
+  "osm": "Gabrielskloof (amenity/restaurant)",
+  "src": "nominatim"
+ },
+ "Glen Carlou": {
+  "id": "node/12649433336",
+  "km": 2.4,
+  "lat": -33.81234,
+  "lng": 18.90444,
+  "osm": "Glen Carlou",
+  "src": "osm-website"
+ },
+ "Glenelly": {
+  "id": "node/12105816984",
+  "km": 3.7,
+  "lat": -33.91792,
+  "lng": 18.879,
+  "osm": "Glenelly Estate",
+  "src": "osm-website"
+ },
+ "Glenwood": {
+  "id": "node/7016692386",
+  "km": 3.3,
+  "lat": -33.91609,
+  "lng": 19.08151,
+  "osm": "Glenwood",
+  "src": "osm-website"
+ },
+ "Good Hope": {
+  "km": 18.1,
+  "lat": -34.05198,
+  "lng": 18.65423,
+  "osm": "Good Hope (place/suburb)",
+  "src": "nominatim"
+ },
+ "Graham Beck Estate": {
+  "id": "node/13072209901",
+  "km": 7.9,
+  "lat": -33.80165,
+  "lng": 19.79956,
+  "osm": "Graham Beck Estate",
+  "src": "osm-name"
+ },
+ "Grande Provence": {
+  "id": "node/12621437688",
+  "km": 1.2,
+  "lat": -33.90461,
+  "lng": 19.10221,
+  "osm": "Grande Provence",
+  "src": "osm-website"
+ },
+ "Groenland Wyne": {
+  "id": "node/13204475927",
+  "km": 14.3,
+  "lat": -33.89556,
+  "lng": 18.72975,
+  "osm": "Groenland",
+  "src": "osm-fuzzy"
+ },
+ "Groot Constantia": {
+  "id": "node/12537802201",
+  "km": 10.2,
+  "lat": -34.03038,
+  "lng": 18.41765,
+  "osm": "Groot Constantia",
+  "src": "osm-website"
+ },
+ "Groot Phesantekraal": {
+  "km": 5.5,
+  "lat": -33.79981,
+  "lng": 18.68778,
+  "osm": "Planet Fitness Groot Phesantekraal (leisure/fitness_centre)",
+  "src": "nominatim"
+ },
+ "Guardian Peak": {
+  "km": 7.3,
+  "lat": -34.01119,
+  "lng": 18.84217,
+  "osm": "Guardian Peak (amenity/restaurant)",
+  "src": "nominatim"
+ },
+ "Hamilton Russell": {
+  "id": "node/5116500825",
+  "km": 2.5,
+  "lat": -34.3906,
+  "lng": 19.24318,
+  "osm": "Hamilton Russel",
+  "src": "osm-website"
+ },
+ "Hartenberg": {
+  "id": "node/12535191961",
+  "km": 9.2,
+  "lat": -33.8982,
+  "lng": 18.79207,
+  "osm": "Hartenberg",
+  "src": "osm-website"
+ },
+ "Haute Cabriere": {
+  "id": "node/6071265285",
+  "km": 2.2,
+  "lat": -33.91453,
+  "lng": 19.13634,
+  "osm": "Haute Cabrière",
+  "src": "osm-website"
+ },
+ "Hazendal": {
+  "km": 33.7,
+  "lat": -33.95278,
+  "lng": 18.50444,
+  "osm": "Hazendal (place/suburb)",
+  "src": "nominatim"
+ },
+ "Hermanus River Wines": {
+  "id": "node/12604134087",
+  "km": 47.6,
+  "lat": -33.84045,
+  "lng": 19.41897,
+  "osm": "Eagle’s Cliff",
+  "src": "osm-website"
+ },
+ "Hidden Valley": {
+  "km": 8.0,
+  "lat": -34.02092,
+  "lng": 18.85277,
+  "osm": "Hidden Valley Wine Estate (shop/alcohol)",
+  "src": "nominatim"
+ },
+ "High Constantia": {
+  "km": 9.0,
+  "lat": -34.02388,
+  "lng": 18.42887,
+  "osm": "High Constantia (highway/residential)",
+  "src": "nominatim"
+ },
+ "Highlands Road Estate": {
+  "km": 7.4,
+  "lat": -34.23101,
+  "lng": 19.0653,
+  "osm": "Highlands Road (highway/tertiary)",
+  "src": "nominatim"
+ },
+ "Hout Bay Vineyards": {
+  "km": 15.1,
+  "lat": -34.04309,
+  "lng": 18.35564,
+  "osm": "Hout Bay (place/town)",
+  "src": "nominatim"
+ },
+ "Idiom": {
+  "id": "way/1290847136",
+  "km": 9.4,
+  "lat": -34.10476,
+  "lng": 18.94054,
+  "osm": "Idiom Restaurant and Wine Tasting Centre",
+  "src": "osm-website"
+ },
+ "Iona Wines": {
+  "km": 12.2,
+  "lat": -34.27786,
+  "lng": 19.08501,
+  "osm": "Iona Wines (shop/alcohol)",
+  "src": "nominatim"
+ },
+ "J.C Le Roux": {
+  "id": "node/12365178316",
+  "km": 7.5,
+  "lat": -33.90466,
+  "lng": 18.81016,
+  "osm": "J.C. Le Roux",
+  "src": "osm-name"
+ },
+ "Jacaranda Wines": {
+  "id": "node/5422735251",
+  "km": 14.0,
+  "lat": -33.61352,
+  "lng": 19.00438,
+  "osm": "Jacaranda Wine and Guestfarm",
+  "src": "osm-fuzzy"
+ },
+ "Jason's Hill": {
+  "id": "node/4608590893",
+  "km": 20.2,
+  "lat": -33.66488,
+  "lng": 19.22844,
+  "osm": "Jason's Hill",
+  "src": "osm-website"
+ },
+ "Joostenberg": {
+  "id": "way/1141328525",
+  "km": 6.6,
+  "lat": -33.81311,
+  "lng": 18.80901,
+  "osm": "Joostenberg wines",
+  "src": "osm-name"
+ },
+ "Jordan": {
+  "id": "node/3128013369",
+  "km": 11.6,
+  "lat": -33.943,
+  "lng": 18.745,
+  "osm": "Jordan",
+  "src": "osm-website"
+ },
+ "Joubert Family Wines": {
+  "id": "way/1246260139",
+  "km": 11.9,
+  "lat": -33.95332,
+  "lng": 18.7406,
+  "osm": "Beau Joubert",
+  "src": "osm-fuzzy"
+ },
+ "Journey's End": {
+  "km": 7.3,
+  "lat": -34.1445,
+  "lng": 18.85813,
+  "osm": "Journey's End (landuse/residential)",
+  "src": "nominatim"
+ },
+ "Kaapzicht": {
+  "id": "node/11581460152",
+  "km": 13.1,
+  "lat": -33.91295,
+  "lng": 18.73542,
+  "osm": "Kaapzicht",
+  "src": "osm-website"
+ },
+ "Kanonkop": {
+  "id": "node/1168893522",
+  "km": 10.6,
+  "lat": -33.85533,
+  "lng": 18.85983,
+  "osm": "Kanonkop",
+  "src": "osm-website"
+ },
+ "Kanu Wines": {
+  "id": "node/12565470672",
+  "km": 8.2,
+  "lat": -33.88956,
+  "lng": 18.81854,
+  "osm": "Kanu",
+  "src": "osm-website"
+ },
+ "Klein Alto": {
+  "id": "node/808701500",
+  "km": 6.2,
+  "lat": -34.00253,
+  "lng": 18.84729,
+  "osm": "Alto",
+  "src": "osm-website"
+ },
+ "Klein Goederust": {
+  "id": "node/13418590412",
+  "km": 2.9,
+  "lat": -33.88963,
+  "lng": 19.08988,
+  "osm": "Klein Goederust",
+  "src": "osm-website"
+ },
+ "Klein Parys": {
+  "km": 2.8,
+  "lat": -33.74166,
+  "lng": 18.99471,
+  "osm": "Klein Parys (place/suburb)",
+  "src": "nominatim"
+ },
+ "Klein Roosboom": {
+  "id": "node/12139776195",
+  "km": 6.2,
+  "lat": -33.81852,
+  "lng": 18.5744,
+  "osm": "Klein Roosboom",
+  "src": "osm-website"
+ },
+ "Kleine Zalze": {
+  "id": "node/3195675708",
+  "km": 3.9,
+  "lat": -33.97077,
+  "lng": 18.83526,
+  "osm": "Kleine Zalze",
+  "src": "osm-website"
+ },
+ "Kleinhoekkloof Wines": {
+  "id": "way/919250478",
+  "km": 15.9,
+  "lat": -33.78116,
+  "lng": 20.05454,
+  "osm": "Klein Hoek Kloof",
+  "src": "osm-fuzzy"
+ },
+ "Kleinood": {
+  "id": "node/1168848267",
+  "km": 5.0,
+  "lat": -33.99498,
+  "lng": 18.8733,
+  "osm": "Kleinood",
+  "src": "osm-name"
+ },
+ "Kloovenburg Wine & Olive Estate": {
+  "id": "node/6116701685",
+  "km": 17.4,
+  "lat": -33.39423,
+  "lng": 18.89028,
+  "osm": "Kloovenburg Wine & Olive Estate",
+  "src": "osm-website"
+ },
+ "Knorhoek": {
+  "id": "node/8058363607",
+  "km": 7.9,
+  "lat": -33.87911,
+  "lng": 18.87179,
+  "osm": "Knorhoek",
+  "src": "osm-website"
+ },
+ "Koelenhof": {
+  "id": "node/12177957901",
+  "km": 8.3,
+  "lat": -33.83493,
+  "lng": 18.79771,
+  "osm": "Koelenhof Winery",
+  "src": "osm-name"
+ },
+ "Koopmanskloof": {
+  "id": "node/12365572461",
+  "km": 11.5,
+  "lat": -33.89892,
+  "lng": 18.76112,
+  "osm": "Koopmanskloof",
+  "src": "osm-name"
+ },
+ "Kranskop Wines": {
+  "id": "node/4381866912",
+  "km": 10.5,
+  "lat": -33.79841,
+  "lng": 19.99885,
+  "osm": "Kranskop",
+  "src": "osm-name"
+ },
+ "Kunjani": {
+  "id": "node/7314725884",
+  "km": 8.6,
+  "lat": -33.89452,
+  "lng": 18.8058,
+  "osm": "Kunjani Wines",
+  "src": "osm-name"
+ },
+ "L'Avenir": {
+  "id": "way/1240903855",
+  "km": 7.6,
+  "lat": -33.88567,
+  "lng": 18.84357,
+  "osm": "L’Avenir Cellardoor",
+  "src": "osm-website"
+ },
+ "L'Ormarins": {
+  "id": "node/12431767599",
+  "km": 10.3,
+  "lat": -33.88833,
+  "lng": 19.00533,
+  "osm": "L'Ormarins",
+  "src": "osm-name"
+ },
+ "La Boucher": {
+  "id": "node/12701796901",
+  "km": 5.7,
+  "lat": -33.86508,
+  "lng": 18.84732,
+  "osm": "La Boucher",
+  "src": "osm-website"
+ },
+ "La Bri": {
+  "id": "node/7016692385",
+  "km": 1.9,
+  "lat": -33.92211,
+  "lng": 19.1178,
+  "osm": "La Bri",
+  "src": "osm-website"
+ },
+ "La Motte": {
+  "id": "node/12615389153",
+  "km": 4.7,
+  "lat": -33.88037,
+  "lng": 19.07406,
+  "osm": "La Motte",
+  "src": "osm-website"
+ },
+ "La Provence": {
+  "id": "node/12612599553",
+  "km": 2.5,
+  "lat": -33.89383,
+  "lng": 19.09182,
+  "osm": "La Provence",
+  "src": "osm-website"
+ },
+ "La Roche": {
+  "id": "node/12640374204",
+  "km": 4.3,
+  "lat": -33.93116,
+  "lng": 19.08014,
+  "osm": "La Roche",
+  "src": "osm-website"
+ },
+ "Laborie Wine Estate": {
+  "km": 3.5,
+  "lat": -33.76568,
+  "lng": 18.957,
+  "osm": "Laborie (building/residential)",
+  "src": "nominatim"
+ },
+ "Ladybird": {
+  "id": "node/12686564124",
+  "km": 11.7,
+  "lat": -33.84542,
+  "lng": 18.86212,
+  "osm": "Ladybird",
+  "src": "osm-website"
+ },
+ "Lammershoek": {
+  "id": "node/8658930400",
+  "km": 10.7,
+  "lat": -33.52512,
+  "lng": 18.8055,
+  "osm": "Lammershoek Winery",
+  "src": "osm-website"
+ },
+ "Landskroon Wines": {
+  "id": "node/12587631517",
+  "km": 5.3,
+  "lat": -33.76036,
+  "lng": 18.91618,
+  "osm": "Landskroon",
+  "src": "osm-website"
+ },
+ "Lanzerac": {
+  "id": "node/12535061492",
+  "km": 2.6,
+  "lat": -33.93718,
+  "lng": 18.89348,
+  "osm": "Lanzerac",
+  "src": "osm-website"
+ },
+ "Le Riche": {
+  "km": 32.2,
+  "lat": -33.87401,
+  "lng": 18.53308,
+  "osm": "Le Riche Close (highway/residential)",
+  "src": "nominatim"
+ },
+ "LePommier": {
+  "id": "node/3361042707",
+  "km": 6.4,
+  "lat": -33.9187,
+  "lng": 18.92853,
+  "osm": "Le Pommier",
+  "src": "osm-website"
+ },
+ "Leeu Passant": {
+  "id": "node/12629951337",
+  "km": 1.1,
+  "lat": -33.90973,
+  "lng": 19.10486,
+  "osm": "Leeu Passant",
+  "src": "osm-website"
+ },
+ "Leopard Leap": {
+  "id": "way/968777920",
+  "km": 3.8,
+  "lat": -33.88576,
+  "lng": 19.08037,
+  "osm": "Leopard's Leap",
+  "src": "osm-website"
+ },
+ "Lievland": {
+  "id": "node/12676687700",
+  "km": 12.1,
+  "lat": -33.84139,
+  "lng": 18.87639,
+  "osm": "Lievland",
+  "src": "osm-website"
+ },
+ "Louisvale": {
+  "id": "node/12559300697",
+  "km": 7.4,
+  "lat": -33.9089,
+  "lng": 18.80663,
+  "osm": "Louisvale",
+  "src": "osm-website"
+ },
+ "Lourens Family Wines": {
+  "id": "node/11765598454",
+  "km": 38.1,
+  "lat": -34.07176,
+  "lng": 18.88866,
+  "osm": "Lourensford Wine Estate",
+  "src": "osm-fuzzy"
+ },
+ "Lourensford": {
+  "id": "node/11765598454",
+  "km": 3.6,
+  "lat": -34.07176,
+  "lng": 18.88866,
+  "osm": "Lourensford Wine Estate",
+  "src": "osm-website"
+ },
+ "Lynx Wine Estate": {
+  "id": "node/12640343473",
+  "km": 8.6,
+  "lat": -33.86278,
+  "lng": 19.03736,
+  "osm": "Lynx",
+  "src": "osm-website"
+ },
+ "MAN Family Wines": {
+  "id": "node/12676704031",
+  "km": 12.3,
+  "lat": -33.83979,
+  "lng": 18.87867,
+  "osm": "MAN Family Wines",
+  "src": "osm-website"
+ },
+ "Maison": {
+  "id": "node/12638337528",
+  "km": 55.6,
+  "lat": -33.88588,
+  "lng": 19.07642,
+  "osm": "Maison",
+  "src": "osm-website"
+ },
+ "Marklew Family Wines": {
+  "id": "node/12686564084",
+  "km": 11.9,
+  "lat": -33.84321,
+  "lng": 18.86377,
+  "osm": "Marklew",
+  "src": "osm-website"
+ },
+ "McFarlane": {
+  "km": 59.0,
+  "lat": -34.19881,
+  "lng": 18.45105,
+  "osm": "McFarlane Road (highway/secondary)",
+  "src": "nominatim"
+ },
+ "Meerendal": {
+  "id": "node/725623452",
+  "km": 3.7,
+  "lat": -33.79945,
+  "lng": 18.62362,
+  "osm": "Bossa Winelands",
+  "src": "osm-website"
+ },
+ "Middelvlei": {
+  "id": "node/12538729683",
+  "km": 4.3,
+  "lat": -33.92764,
+  "lng": 18.83225,
+  "osm": "Middelvlei",
+  "src": "osm-website"
+ },
+ "Mont Destin": {
+  "id": "node/12683929856",
+  "km": 13.2,
+  "lat": -33.83289,
+  "lng": 18.89106,
+  "osm": "Mont Destin",
+  "src": "osm-name"
+ },
+ "Mont Marie": {
+  "km": 3.6,
+  "lat": -33.9822,
+  "lng": 18.87216,
+  "osm": "Mont Marie (amenity/restaurant)",
+  "src": "nominatim"
+ },
+ "Mooiplaas": {
+  "id": "node/11581374317",
+  "km": 12.4,
+  "lat": -33.92154,
+  "lng": 18.73949,
+  "osm": "Mooiplaas",
+  "src": "osm-website"
+ },
+ "Morgenhof": {
+  "id": "node/12816498565",
+  "km": 6.3,
+  "lat": -33.89347,
+  "lng": 18.8614,
+  "osm": "Morgenhof",
+  "src": "osm-website"
+ },
+ "Morgenster": {
+  "id": "way/319933390",
+  "km": 3.9,
+  "lat": -34.08401,
+  "lng": 18.88546,
+  "osm": "Morgenster Estate",
+  "src": "osm-website"
+ },
+ "Mullineux Winery": {
+  "id": "node/12629951337",
+  "km": 61.4,
+  "lat": -33.90973,
+  "lng": 19.10486,
+  "osm": "Leeu Passant",
+  "src": "osm-website"
+ },
+ "Muratie": {
+  "id": "node/12252832401",
+  "km": 8.9,
+  "lat": -33.87007,
+  "lng": 18.87746,
+  "osm": "Muratie",
+  "src": "osm-website"
+ },
+ "Napier Vineyards": {
+  "km": 1.2,
+  "lat": -33.72518,
+  "lng": 18.95845,
+  "osm": "Napier (highway/residential)",
+  "src": "nominatim"
+ },
+ "Nederburg": {
+  "id": "node/12563434533",
+  "km": 3.7,
+  "lat": -33.72199,
+  "lng": 19.0022,
+  "osm": "Nederburg",
+  "src": "osm-website"
+ },
+ "Neethlingshof": {
+  "id": "node/5672169621",
+  "km": 6.3,
+  "lat": -33.94085,
+  "lng": 18.80222,
+  "osm": "Neethlingshof",
+  "src": "osm-website"
+ },
+ "Nelson Wine Estate": {
+  "km": 53.3,
+  "lat": -33.93068,
+  "lng": 18.43777,
+  "osm": "Nelson Street Park (leisure/park)",
+  "src": "nominatim"
+ },
+ "Newton Johnson": {
+  "km": 0.4,
+  "lat": -34.36922,
+  "lng": 19.25942,
+  "osm": "The Restaurant at Newton Johnson (amenity/restaurant)",
+  "src": "nominatim"
+ },
+ "Nico van der Merwe": {
+  "id": "node/14061213913",
+  "km": 12.9,
+  "lat": -33.96336,
+  "lng": 18.73145,
+  "osm": "Nico van der Merwe Wines",
+  "src": "osm-name"
+ },
+ "Niel Joubert": {
+  "id": "node/12430661117",
+  "km": 3.5,
+  "lat": -33.8317,
+  "lng": 18.90024,
+  "osm": "Neil Joubert Wines",
+  "src": "osm-fuzzy"
+ },
+ "Noble Hill": {
+  "id": "node/12649452288",
+  "km": 5.8,
+  "lat": -33.82723,
+  "lng": 18.93639,
+  "osm": "Noble Hill",
+  "src": "osm-website"
+ },
+ "Nuy Winery": {
+  "id": "node/7058665478",
+  "km": 14.1,
+  "lat": -33.68547,
+  "lng": 19.58888,
+  "osm": "Nuy Winery",
+  "src": "osm-name"
+ },
+ "Oldenburg": {
+  "id": "way/1339375673",
+  "km": 7.4,
+  "lat": -33.92952,
+  "lng": 18.94617,
+  "osm": "Oldenburg Vineyards",
+  "src": "osm-website"
+ },
+ "Overgaauw": {
+  "id": "node/12538680180",
+  "km": 7.1,
+  "lat": -33.94778,
+  "lng": 18.79313,
+  "osm": "Overgaauw",
+  "src": "osm-website"
+ },
+ "Paserene": {
+  "id": "node/6113994085",
+  "km": 5.9,
+  "lat": -33.87878,
+  "lng": 19.05906,
+  "osm": "Paserene",
+  "src": "osm-website"
+ },
+ "Paul Clüver": {
+  "km": 8.8,
+  "lat": -34.14562,
+  "lng": 19.09086,
+  "osm": "Paul Cluver MTB (highway/track)",
+  "src": "nominatim"
+ },
+ "Peter Falke": {
+  "id": "node/6049446285",
+  "km": 6.3,
+  "lat": -34.00032,
+  "lng": 18.83913,
+  "osm": "Peter Falke wine tastery",
+  "src": "osm-fuzzy"
+ },
+ "Plaisir": {
+  "id": "node/12587470775",
+  "km": 7.6,
+  "lat": -33.84686,
+  "lng": 18.94461,
+  "osm": "Plaisir",
+  "src": "osm-website"
+ },
+ "Post House": {
+  "km": 69.7,
+  "lat": -34.05118,
+  "lng": 19.60657,
+  "osm": "The Post House (tourism/hotel)",
+  "src": "nominatim"
+ },
+ "Quoin Rock": {
+  "id": "node/8058363605",
+  "km": 8.0,
+  "lat": -33.87818,
+  "lng": 18.86684,
+  "osm": "Quoin Rock",
+  "src": "osm-website"
+ },
+ "Raats Family Wines": {
+  "km": 35.6,
+  "lat": -33.81762,
+  "lng": 18.51916,
+  "osm": "Raats Drive (highway/tertiary)",
+  "src": "nominatim"
+ },
+ "Rainbow's End": {
+  "km": 30.3,
+  "lat": -33.70133,
+  "lng": 19.00505,
+  "osm": "Rainbows End Street (highway/residential)",
+  "src": "nominatim"
+ },
+ "Remhoogte": {
+  "id": "node/12816486141",
+  "km": 7.5,
+  "lat": -33.88447,
+  "lng": 18.85089,
+  "osm": "Remhoogte",
+  "src": "osm-website"
+ },
+ "Reyneke": {
+  "km": 26.2,
+  "lat": -33.72721,
+  "lng": 18.96225,
+  "osm": "Reyneke Street (highway/residential)",
+  "src": "nominatim"
+ },
+ "Rhebokskloof Estate": {
+  "km": 6.3,
+  "lat": -33.68502,
+  "lng": 18.93192,
+  "osm": "Rhebokskloof (amenity/restaurant)",
+  "src": "nominatim"
+ },
+ "Rickety Bridge": {
+  "id": "node/12646531037",
+  "km": 2.3,
+  "lat": -33.89851,
+  "lng": 19.09084,
+  "osm": "Rickety Bridge",
+  "src": "osm-website"
+ },
+ "Riebeek Valley Wine": {
+  "km": 18.4,
+  "lat": -33.35411,
+  "lng": 18.87245,
+  "osm": "Riebeek Valley Garden Centre (amenity/childcare)",
+  "src": "nominatim"
+ },
+ "Rietvallei": {
+  "id": "node/4087697603",
+  "km": 8.4,
+  "lat": -33.83829,
+  "lng": 19.96717,
+  "osm": "Rietvallei",
+  "src": "osm-name"
+ },
+ "Rivendell": {
+  "id": "node/12604134087",
+  "km": 47.6,
+  "lat": -33.84045,
+  "lng": 19.41897,
+  "osm": "Eagle’s Cliff",
+  "src": "osm-website"
+ },
+ "Ruitersvlei": {
+  "km": 6.4,
+  "lat": -33.74412,
+  "lng": 18.89706,
+  "osm": "Ruitersvlei (amenity/restaurant)",
+  "src": "nominatim"
+ },
+ "Rupert & Rothschild": {
+  "id": "node/12537903482",
+  "km": 7.2,
+  "lat": -33.83741,
+  "lng": 18.94735,
+  "osm": "Rupert & Rothchild Vignerons",
+  "src": "osm-website"
+ },
+ "Rust en Vrede": {
+  "id": "node/2687528374",
+  "km": 5.6,
+  "lat": -33.99873,
+  "lng": 18.85619,
+  "osm": "Rust en Vrede",
+  "src": "osm-website"
+ },
+ "Rustenberg": {
+  "id": "node/1168893806",
+  "km": 6.4,
+  "lat": -33.89571,
+  "lng": 18.89252,
+  "osm": "Rustenberg Wines",
+  "src": "osm-name"
+ },
+ "Saxenburg": {
+  "id": "node/11578541201",
+  "km": 13.9,
+  "lat": -33.94645,
+  "lng": 18.71922,
+  "osm": "Saxenburg Wine Estate",
+  "src": "osm-website"
+ },
+ "Seven Oaks": {
+  "id": "node/8685624660",
+  "km": 92.5,
+  "lat": -33.52844,
+  "lng": 19.23009,
+  "osm": "Seven Oaks",
+  "src": "osm-website"
+ },
+ "Silvermist Organic Wine Estate": {
+  "km": 3.2,
+  "lat": -34.01309,
+  "lng": 18.40203,
+  "osm": "Silvermist Estate (place/hamlet)",
+  "src": "nominatim"
+ },
+ "Simonsig": {
+  "id": "node/3185474559",
+  "km": 9.8,
+  "lat": -33.87003,
+  "lng": 18.82547,
+  "osm": "Simonsig Estate",
+  "src": "osm-name"
+ },
+ "Simonsvlei": {
+  "id": "node/12430675637",
+  "km": 3.4,
+  "lat": -33.81258,
+  "lng": 18.91584,
+  "osm": "Simonsvlei",
+  "src": "osm-name"
+ },
+ "Skilpadvlei Wine Farm": {
+  "id": "node/12365165882",
+  "km": 9.5,
+  "lat": -33.95952,
+  "lng": 18.76788,
+  "osm": "Skilpadvlei",
+  "src": "osm-name"
+ },
+ "Slaley": {
+  "id": "node/12430642315",
+  "km": 9.7,
+  "lat": -33.86486,
+  "lng": 18.8475,
+  "osm": "Slaley",
+  "src": "osm-website"
+ },
+ "Slanghoek Cellar": {
+  "id": "node/12597971777",
+  "km": 19.9,
+  "lat": -33.6504,
+  "lng": 19.23046,
+  "osm": "Slanghoek",
+  "src": "osm-website"
+ },
+ "Solms Delta": {
+  "id": "node/12587336711",
+  "km": 12.3,
+  "lat": -33.86094,
+  "lng": 18.99222,
+  "osm": "Solms Delta",
+  "src": "osm-website"
+ },
+ "Spier": {
+  "id": "node/251859733",
+  "km": 8.5,
+  "lat": -33.9745,
+  "lng": 18.78277,
+  "osm": "Spier",
+  "src": "osm-website"
+ },
+ "Spioenkop Wines": {
+  "id": "node/6113994086",
+  "km": 12.3,
+  "lat": -34.23829,
+  "lng": 19.05611,
+  "osm": "Spioenkop Winery",
+  "src": "osm-name"
+ },
+ "Spookfontein Wines": {
+  "id": "node/4626735739",
+  "km": 3.5,
+  "lat": -34.35526,
+  "lng": 19.28896,
+  "osm": "Spookfontein Wines & Restaurant",
+  "src": "osm-fuzzy"
+ },
+ "Springfield Estate": {
+  "id": "node/4087697601",
+  "km": 4.5,
+  "lat": -33.83695,
+  "lng": 19.91571,
+  "osm": "Springfield",
+  "src": "osm-website"
+ },
+ "Springfontein Wines": {
+  "km": 5.0,
+  "lat": -34.42697,
+  "lng": 19.40803,
+  "osm": "Springfontein Eats (amenity/restaurant)",
+  "src": "nominatim"
+ },
+ "Stark-Conde": {
+  "id": "way/750377352",
+  "km": 3.8,
+  "lat": -33.9535,
+  "lng": 18.91056,
+  "osm": "Stark Conde",
+  "src": "osm-name"
+ },
+ "Steenberg": {
+  "km": 13.3,
+  "lat": -34.07472,
+  "lng": 18.47083,
+  "osm": "Steenberg (place/suburb)",
+  "src": "nominatim"
+ },
+ "Stellenbosch 1679": {
+  "km": 14.4,
+  "lat": -33.93444,
+  "lng": 18.86917,
+  "osm": "Stellenbosch (place/town)",
+  "src": "nominatim"
+ },
+ "Stellenbosch Vineyards Wine Farm": {
+  "id": "node/5110672222",
+  "km": 10.4,
+  "lat": -33.99166,
+  "lng": 18.76857,
+  "osm": "Stellenbosch Vinyards",
+  "src": "osm-website"
+ },
+ "Stellenrust": {
+  "id": "node/1168848532",
+  "km": 5.1,
+  "lat": -33.99127,
+  "lng": 18.84707,
+  "osm": "Stellenrust",
+  "src": "osm-name"
+ },
+ "Stellenzicht": {
+  "id": "node/1168847484",
+  "km": 4.9,
+  "lat": -33.9935,
+  "lng": 18.86544,
+  "osm": "Stellenzicht",
+  "src": "osm-name"
+ },
+ "Stettyn Family Vineyards": {
+  "id": "node/12604135936",
+  "km": 26.1,
+  "lat": -33.87073,
+  "lng": 19.36721,
+  "osm": "Stettyn",
+  "src": "osm-website"
+ },
+ "Stony Brook": {
+  "id": "node/12629032140",
+  "km": 4.0,
+  "lat": -33.94015,
+  "lng": 19.12279,
+  "osm": "Stony Brook",
+  "src": "osm-website"
+ },
+ "Summerhill Wines": {
+  "km": 16.7,
+  "lat": -34.10052,
+  "lng": 18.87282,
+  "osm": "Summerhill Surgical Centre (amenity/hospital)",
+  "src": "nominatim"
+ },
+ "Swartland Winery": {
+  "id": "way/831267106",
+  "km": 3.1,
+  "lat": -33.45358,
+  "lng": 18.7529,
+  "osm": "Swartland Winery",
+  "src": "osm-name"
+ },
+ "Tempel Wines": {
+  "id": "node/6557054904",
+  "km": 6.6,
+  "lat": -33.67627,
+  "lng": 18.97512,
+  "osm": "Tempel Wines",
+  "src": "osm-name"
+ },
+ "The Hills": {
+  "id": "node/5103544422",
+  "km": 6.5,
+  "lat": -33.9602,
+  "lng": 18.80085,
+  "osm": "Stellenbosch Hills Winery",
+  "src": "osm-fuzzy"
+ },
+ "The Sadie Family Wines": {
+  "km": 47.3,
+  "lat": -33.88499,
+  "lng": 18.71014,
+  "osm": "Sadie Close (highway/residential)",
+  "src": "nominatim"
+ },
+ "Thelema": {
+  "id": "node/1168893748",
+  "km": 6.7,
+  "lat": -33.90848,
+  "lng": 18.92289,
+  "osm": "Thelema",
+  "src": "osm-website"
+ },
+ "Tokara": {
+  "id": "node/12598677826",
+  "km": 5.8,
+  "lat": -33.9178,
+  "lng": 18.92013,
+  "osm": "Tokara",
+  "src": "osm-website"
+ },
+ "Uitkyk": {
+  "id": "node/1168893579",
+  "km": 10.3,
+  "lat": -33.85722,
+  "lng": 18.86386,
+  "osm": "Uitkyk",
+  "src": "osm-website"
+ },
+ "Uitsig": {
+  "id": "way/687432361",
+  "km": 2.0,
+  "lat": -34.04719,
+  "lng": 18.42379,
+  "osm": "Constantia Uitsig",
+  "src": "osm-fuzzy"
+ },
+ "Under Oaks Estate": {
+  "km": 7.0,
+  "lat": -33.67509,
+  "lng": 18.94221,
+  "osm": "Under Oaks (amenity/restaurant)",
+  "src": "nominatim"
+ },
+ "Upland Organic Estate": {
+  "id": "way/1117885633",
+  "km": 10.1,
+  "lat": -33.67219,
+  "lng": 19.04426,
+  "osm": "Upland Organic Estate",
+  "src": "osm-website"
+ },
+ "Uva Mira": {
+  "km": 8.5,
+  "lat": -34.02543,
+  "lng": 18.85696,
+  "osm": "Uva Mira (amenity/parking)",
+  "src": "nominatim"
+ },
+ "Van Loveren Family Vineyards": {
+  "id": "node/503850733",
+  "km": 13.4,
+  "lat": -33.87528,
+  "lng": 20.00262,
+  "osm": "Van Loveren",
+  "src": "osm-name"
+ },
+ "Vergelegen Wine Estate": {
+  "id": "node/12541253581",
+  "km": 6.1,
+  "lat": -34.08713,
+  "lng": 18.91066,
+  "osm": "Vergelegen",
+  "src": "osm-website"
+ },
+ "Vergenoegd Löw": {
+  "id": "node/12541177813",
+  "km": 15.3,
+  "lat": -34.03386,
+  "lng": 18.7387,
+  "osm": "Vergenoegd Löw",
+  "src": "osm-website"
+ },
+ "Vilafonte": {
+  "id": "node/12538780179",
+  "km": 2.4,
+  "lat": -33.94066,
+  "lng": 18.84696,
+  "osm": "Villafonté",
+  "src": "osm-website"
+ },
+ "Villiera": {
+  "id": "node/12177959901",
+  "km": 8.5,
+  "lat": -33.83423,
+  "lng": 18.79549,
+  "osm": "Villiera Wines",
+  "src": "osm-name"
+ },
+ "Vrede Wines": {
+  "id": "node/2687528374",
+  "km": 5.6,
+  "lat": -33.99873,
+  "lng": 18.85619,
+  "osm": "Rust en Vrede",
+  "src": "osm-fuzzy"
+ },
+ "Vrede en Lust": {
+  "id": "node/12533908667",
+  "km": 7.7,
+  "lat": -33.83768,
+  "lng": 18.95373,
+  "osm": "Vrede en Lust",
+  "src": "osm-website"
+ },
+ "Vredenheim Wine Farm": {
+  "id": "node/12537996504",
+  "km": 5.8,
+  "lat": -33.96079,
+  "lng": 18.80806,
+  "osm": "Vredenheim",
+  "src": "osm-website"
+ },
+ "Walker Bay Estate": {
+  "id": "node/6551100393",
+  "km": 0.5,
+  "lat": -34.43817,
+  "lng": 19.4653,
+  "osm": "Walker Bay",
+  "src": "osm-name"
+ },
+ "Warwick": {
+  "id": "node/4321272427",
+  "km": 12.2,
+  "lat": -33.84054,
+  "lng": 18.86421,
+  "osm": "Warwick",
+  "src": "osm-website"
+ },
+ "Waterford": {
+  "id": "relation/5725076",
+  "km": 5.4,
+  "lat": -33.99852,
+  "lng": 18.87012,
+  "osm": "Waterford Estate",
+  "src": "osm-name"
+ },
+ "Waterkloof": {
+  "id": "node/12031045871",
+  "km": 5.2,
+  "lat": -34.09893,
+  "lng": 18.88913,
+  "osm": "Waterkloof Wine Estate",
+  "src": "osm-website"
+ },
+ "Webersburg": {
+  "id": "way/1350689731",
+  "km": 6.9,
+  "lat": -34.00844,
+  "lng": 18.84395,
+  "osm": "Vineyard Cottages",
+  "src": "osm-website"
+ },
+ "Wellington Wines": {
+  "id": "node/2070086515",
+  "km": 12.1,
+  "lat": -33.64684,
+  "lng": 19.04198,
+  "osm": "Oude Wellington Estate",
+  "src": "osm-fuzzy"
+ },
+ "Weltevrede Wine Estate": {
+  "id": "node/4381896222",
+  "km": 21.7,
+  "lat": -33.94182,
+  "lng": 20.05196,
+  "osm": "Weltevrede",
+  "src": "osm-website"
+ },
+ "Whalehaven Winery": {
+  "id": "node/12538808651",
+  "km": 6.7,
+  "lat": -34.41026,
+  "lng": 19.20002,
+  "osm": "Whalehaven",
+  "src": "osm-website"
+ },
+ "Windmeul Kelder": {
+  "km": 8.4,
+  "lat": -33.67149,
+  "lng": 18.91511,
+  "osm": "Windmeul (place/hamlet)",
+  "src": "nominatim"
+ },
+ "Winshaw Vineyards": {
+  "id": "node/13399460347",
+  "km": 11.8,
+  "lat": -34.00394,
+  "lng": 18.7604,
+  "osm": "Winshaw Vineyards",
+  "src": "osm-name"
+ },
+ "Zevenwacht": {
+  "id": "node/12538785963",
+  "km": 13.5,
+  "lat": -33.93091,
+  "lng": 18.72505,
+  "osm": "Zevenwacht",
+  "src": "osm-website"
+ },
+ "Zorgvliet": {
+  "id": "node/3361042706",
+  "km": 7.3,
+  "lat": -33.91302,
+  "lng": 18.93552,
+  "osm": "Zorgvliet",
+  "src": "osm-name"
+ }
+}
