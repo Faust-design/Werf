@@ -153,12 +153,12 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 
 /* ---------- Register ---------- */
 .page{padding-top:calc(64px + env(safe-area-inset-top));padding-bottom:calc(var(--navh) + var(--s8))}
-.page h1{font-size:clamp(64px,22vw,220px);padding-bottom:var(--s1)}
+.page h1{font-size:clamp(48px,min(22vw,calc(94vw / (var(--n,8) * .56))),220px);padding-bottom:var(--s1)}
 .search{position:sticky;top:calc(48px + env(safe-area-inset-top));z-index:29;background:linear-gradient(#fff 85%,rgba(255,255,255,0));padding:var(--s2) 0 var(--s2);margin:0 calc(var(--g) * -1);padding-left:var(--g);padding-right:var(--g)}
 .search input{width:100%;height:48px;font-size:18px;font-weight:550;padding:0 var(--s2);background:var(--soft);outline:none;transition:box-shadow .2s;-webkit-appearance:none;appearance:none}
 .search input:focus{box-shadow:0 0 0 2px var(--duene)}
 .search input::placeholder{color:#9d9d9d}
-#chips{display:flex;flex-wrap:wrap;justify-content:space-between;column-gap:8px;margin-top:var(--s1)}
+#chips{display:flex;flex-wrap:wrap;column-gap:12px;margin-top:var(--s1)}
 #chips button{font-size:clamp(12.5px,3.55vw,15px);gap:6px}
 #chips button::before{width:9px;height:9px}
 .rchips{display:flex;flex-wrap:wrap;column-gap:14px}
@@ -206,6 +206,35 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .rnote{margin:var(--s3) 0 0;padding:var(--s2);background:#FBE3D6;font-size:15px;line-height:1.35}
 .near{margin-top:var(--s4)}
 .near h3{font-size:13px;color:var(--grey);font-weight:600;margin-bottom:var(--s1)}
+/* Sprachumschalter */
+.tright{display:flex;align-items:center;gap:10px}
+.lang{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--soft);pointer-events:auto;vertical-align:middle}
+.hero-meta .lang{display:flex;width:max-content;margin-top:var(--s1)}
+.lang button{min-width:32px;height:26px;padding:0 6px;border-radius:999px;font-size:11px;font-weight:750;letter-spacing:.04em;color:#000;transition:background .25s,color .25s,box-shadow .25s}
+.lang button[aria-pressed="true"]{background:#000;color:#fff;box-shadow:inset 0 -2px 0 var(--duene)}
+.topbar.dark .lang{background:rgba(255,255,255,.14)}.topbar.dark .lang button{color:#fff}.topbar.dark .lang button[aria-pressed="true"]{background:#fff;color:#000}
+/* Bearbeiten */
+.lnk{font:inherit;font-size:inherit;font-weight:650;color:var(--duene);text-decoration:underline;text-underline-offset:3px;padding:0}
+.planbtn{display:flex;flex-wrap:wrap;gap:0 var(--s1)}
+.edbar b{font-size:15px}
+.edbar .edsave{background:var(--duene);color:#fff;padding:8px 16px;border-radius:999px;font-weight:700;box-shadow:0 0 14px rgba(228,86,27,.55)}
+.ed h2{margin-bottom:var(--s1)!important}
+.ednote{margin-bottom:var(--s4)}
+.ed fieldset{border:0;margin:0 0 var(--s6);padding:0;display:grid;gap:var(--s2)}
+.ed legend{font-size:20px;font-weight:750;margin-bottom:var(--s2)}
+.fld{display:grid;gap:6px}
+.fl{font-size:13px;color:var(--grey);display:flex;justify-content:space-between;gap:var(--s2)}
+.fld textarea,.fld input[type=text],.fld input[type=url],.fld input[type=date]{width:100%;font:inherit;font-size:17px;line-height:1.45;padding:12px 14px;background:var(--soft);border:0;border-radius:0;outline:none;resize:none;-webkit-appearance:none;appearance:none;transition:box-shadow .2s;color:#000}
+.fld textarea:focus,.fld input:focus{box-shadow:0 0 0 2px var(--duene)}
+.fld.chk{grid-template-columns:auto 1fr;align-items:center;gap:12px;min-height:44px;cursor:pointer}
+.fld.chk input{position:absolute;opacity:0;pointer-events:none}
+.fld.chk i{width:46px;height:28px;border-radius:999px;background:#d9d9d4;position:relative;transition:background .25s}
+.fld.chk i::after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:transform .35s cubic-bezier(.34,1.5,.5,1)}
+.fld.chk input:checked+i{background:var(--duene);box-shadow:0 0 12px rgba(228,86,27,.5)}
+.fld.chk input:checked+i::after{transform:translateX(18px)}
+.fld.chk .fl{font-size:16px;color:#000;font-weight:600}
+.edbox{flex:1 1 100%;display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1) var(--s2);border-top:1px solid #e2e2dd;padding-top:var(--s2);margin-top:var(--s1)}
+.edbox p{flex:1 1 200px;font-size:13px;color:var(--grey)}
 /* Umkreis */
 .um{margin-top:var(--s3)}
 .umopen{display:flex;align-items:center;gap:10px;min-height:48px;font-size:16px;font-weight:700}
@@ -461,7 +490,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 </head>
 <body>
 
-<header class="topbar" id="topbar" aria-hidden="true"><b>werf</b><span id="topTitle">Ausgabe 01</span></header>
+<header class="topbar" id="topbar"><b>werf</b><span class="tright"><span id="topTitle">Ausgabe 01</span><span class="lang" data-langsw></span></span></header>
 
 <main>
 <!-- ================= AUSGABE ================= -->
@@ -469,7 +498,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
   <section class="hero">
     <div class="hero-meta wrap grid small">
       <div style="grid-column:1/3">Ausgabe 01<br>Oktober 2026</div>
-      <div style="grid-column:3/5">Stellenbosch und Kapweinland, Südafrika</div>
+      <div style="grid-column:3/5">Stellenbosch und Kapweinland, Südafrika<span class="lang" data-langsw></span></div>
     </div>
     <div class="sky" id="sky">
       <div class="glow" id="glow"></div>
@@ -572,9 +601,29 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Galerie"><div class="lbtrack" id="lbtrack"></div><div class="lbtop"><span id="lbcount"></span><button id="lbclose">Schließen</button></div><div class="lbbot"><div class="dots" id="lbdots"></div><p class="lbcap" id="lbcap"></p><div class="lbacts" id="lbacts"></div></div></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Eintrag"><div class="sinner" id="sinner"></div></div>
 
+<script src="i18n.js"></script>
 <script src="texte.js"></script>
+<script src="texte-i18n.js"></script>
 <script src="geo.js"></script>
 <script>
+/* =========================================================
+   SPRACHE: Deutsch ist die Quelle, Englisch und Afrikaans per Wörterbuch
+   ========================================================= */
+const LANGS=["de","en","af"];
+const LANG=(()=>{try{const l=localStorage.getItem("werf-lang");return LANGS.includes(l)?l:"de"}catch(_){return "de"}})();
+const LOC={de:"de-DE",en:"en-GB",af:"af-ZA"}[LANG];
+document.documentElement.lang=LANG;
+function tt(s,v){let r=LANG==="de"?s:((window.I18N||{})[LANG]||{})[s]??s;if(v)r=r.replace(/\{(\w+)\}/g,(_,k)=>v[k]??"");return r}
+/* Feste Texte im HTML: Textknoten und Attribute, die im Wörterbuch stehen */
+function translateStatic(root){if(LANG==="de")return;const D=(window.I18N||{})[LANG]||{};
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentNode.closest("script,style,svg")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  const nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+  nodes.forEach(n=>{const k=n.nodeValue.trim();if(k&&D[k]!=null)n.nodeValue=n.nodeValue.replace(k,D[k])});
+  root.querySelectorAll("[placeholder],[aria-label],[title]").forEach(el=>["placeholder","aria-label","title"].forEach(a=>{const v=el.getAttribute(a);if(v&&D[v]!=null)el.setAttribute(a,D[v])}))}
+translateStatic(document.body);
+document.querySelectorAll(".page h1").forEach(h=>h.style.setProperty("--n",h.textContent.trim().length));
+document.title=tt("werf – Stellenbosch");
+
 /* =========================================================
    DATEN – später aus der Excel (eine Zeile = ein Gut)
    ========================================================= */
@@ -584,10 +633,10 @@ const REGIONEN=[
  {k:"stellenbosch-helderberg",kurz:"Stellenbosch",name:"Stellenbosch & Helderberg",orte:["stellenbosch","somerset-west","koelenhof","sir-lowry-s-pass"]},
  {k:"paarl-franschhoek",kurz:"Paarl & Franschhoek",name:"Paarl & Franschhoek",orte:["paarl","franschhoek","klapmuts","wellington"]},
  {k:"walker-bay",kurz:"Walker Bay",name:"Walker Bay & Overberg",orte:["hermanus","botrivier","elgin","grabouw","stanford"]},
- {k:"breede",kurz:"Breede",name:"Breede-Tal",orte:["robertson","worcester","brede-river"]},
- {k:"kapstadt",kurz:"Kapstadt",name:"Kapstadt",orte:["cape-town","constantia","durbanville"]},
+ {k:"breede",kurz:"Breede",name:tt("Breede-Tal"),orte:["robertson","worcester","brede-river"]},
+ {k:"kapstadt",kurz:tt("Kapstadt"),name:tt("Kapstadt"),orte:["cape-town","constantia","durbanville"]},
  {k:"swartland",kurz:"Swartland",name:"Swartland",orte:["malmesbury","darling"]}];
-const RESSORTS={architektur:"Architektur",kunst:"Kunst",garten:"Garten",kueche:"Küche"};
+const RESSORTS={architektur:tt("Architektur"),kunst:tt("Kunst"),garten:tt("Garten"),kueche:tt("Küche")};
 const TBD="Folgt aus der Tabelle";
 /* Gegenden aus der Tabelle, mit ungefährem Mittelpunkt (Ort oder Weintal) */
 const GEBIETE={
@@ -668,12 +717,12 @@ const DETAIL=[
 const BASE=[["Adama","https://www.adamawines.co.za","paarl"],["Akkerdal","https://akkerdal.co.za","franschhoek"],["Alheit Vineyards","http://www.alheitvineyards.co.za/","hermanus"],["Allee Bleue","http://www.alleebleue.co.za/","franschhoek"],["Alluvia Boutique","https://www.alluvia.co.za/","stellenbosch"],["Almenkerk","http://www.almenkerk.co.za/","grabouw"],["Ambeloui (Method Classique)","http://www.ambeloui.co.za/","cape-town"],["Andreas Wines","http://www.andreas.co.za/","paarl"],["Anthonij Rupert","http://www.rupertwines.com/","franschhoek"],["Anura","http://www.anura.co.za/","klapmuts"],["Anwilka","http://www.anwilka.com/","stellenbosch"],["Arabella Wines","http://www.arabellawines.com/","robertson"],["Arendsig Hand Crafted Wines","http://www.arendsig.co.za/","robertson"],["Arra Vineyards","http://arravineyards.com/","klapmuts"],["Asara","http://www.asara.co.za/","stellenbosch"],["Ashton Winery","http://www.ashtonwinery.com/","robertson"],["Aslina","https://www.aslinawines.com/","stellenbosch"],["Ataraxia Wines","https://www.ataraxiawines.co.za/","hermanus"],["Atlas Swift","http://www.atlasswift.co.za/","franschhoek"],["Avondale","http://www.avondalewine.co.za/","paarl"],["Avontur","https://www.avontuurestate.co.za/wine","stellenbosch"],["Ayama","http://www.ayama.info/","paarl"],["Babylon's Peak","https://babylonspeak.co.za/","malmesbury"],["Babylonstoren","http://www.babylonstoren.com/","klapmuts"],["Bacco Estate","http://www.baccoestate.co.za/","klapmuts"],["Backsberg Family Wines","https://backsberg.co.za/","franschhoek"],["Bartho Eksteen Wine Estate","https://barthoeksteen.co.za/","hermanus"],["Bartinney","http://www.bartinney.co.za/","stellenbosch"],["Beau Constantia","https://www.beauconstantia.com/","constantia"],["Beaumont","http://www.beaumont.co.za/","botrivier"],["Bein Private Cellar","http://www.beinwine.com/","stellenbosch"],["Bellevue","http://www.bellevue.co.za/","stellenbosch"],["Benguela Cove","https://www.benguelacove.co.za/","botrivier"],["Bergsig Wine Estate","http://www.bergsig.co.za/","brede-river"],["Beyerskloof","https://beyerskloof.co.za/","stellenbosch"],["Blaauwklippen","https://www.blaauwklippen.com","stellenbosch"],["Black Elephant Vintners","https://bevintners.co.za/","franschhoek"],["Black Pearl","http://www.blackpearlwines.com/","paarl"],["Blankbottle","https://blankbottle.co.za/","somerset-west"],["Boekenhoutskloof","http://www.boekenhoutskloof.co.za/","franschhoek"],["Boland Cellar","https://bolandcellar.co.za/","paarl"],["Bonnievale Wines","https://bonnievalewines.co.za/","robertson"],["Boschendal","http://www.boschendal.com/","franschhoek"],["Boschkloof","http://www.boschkloofwines.com/","stellenbosch"],["Bosman Family Vineyards","http://www.bosmanwines.com/","paarl"],["Brampton","http://www.brampton.co.za/","stellenbosch"],["Brandvlei Cellar","http://www.bcwines.co.za/","worcester"],["Brookdale","https://brookdale-estate.com/","paarl"],["Buitenverwachting","http://www.buitenverwachting.com/","constantia"],["Calais Wine Estate","","paarl"],["Camberley","http://www.camberley.co.za/","stellenbosch"],["Cape Point Vineyards","https://cpv.co.za","cape-town"],["Cavalli","https://cavalliestate.com/","stellenbosch"],["Chamonix","http://www.chamonix.co.za/","franschhoek"],["Charles Fox Cap Classique Wine Estate","http://www.charlesfox.co.za/","elgin"],["Colmant Cap Classique","https://www.colmant.co.za/","franschhoek"],["Constantia Glen","http://www.constantiaglen.com/","cape-town"],["Creation Wines","https://www.creationwines.com/","hermanus"],["Cronier","https://www.cronierwines.com/","paarl"],["D'Aria","http://www.dariawinery.co.za/","cape-town"],["Darling Cellars","http://www.darlingcellars.co.za/","darling"],["David Finlayson","http://www.edgebaston.co.za/","stellenbosch"],["De Grendel","https://www.degrendel.co.za/","cape-town"],["De Meye","http://www.demeye.co.za/","klapmuts"],["De Toren","https://www.de-toren.com/","stellenbosch"],["De Waal","https://www.dewaal.co.za/","stellenbosch"],["De Wetshof","http://www.dewetshof.com/","robertson"],["Deetlefs","https://deetlefs.com/","worcester"],["Dekkersvlei","http://www.dekkersvlei.com/","paarl"],["Delaire Graff","http://www.delaire.co.za/","stellenbosch"],["Delheim","http://www.delheim.com/","stellenbosch"],["DeMorgenzon","http://www.demorgenzon.com/","stellenbosch"],["Denneboom Wines","http://www.denneboomvineyardsandwildlife.co.za/","paarl"],["Deux Freres","https://dfwines.co.za","stellenbosch"],["Diemersdal","http://www.diemersdal.co.za/","durbanville"],["Dieu Donné Vineyards","http://www.dieudonnevineyards.com/","franschhoek"],["Doran Vineyards","http://www.doranvineyards.co.za/","paarl"],["Dornier","http://www.dornier.co.za/","stellenbosch"],["Dorrance","http://dorrancewines.com/","cape-town"],["Druk My Niet Estate","https://www.dmnwines.co.za/","paarl"],["Du Toitskloof","http://www.dutoitskloof.co.za/","paarl"],["Durbanville Hills","http://www.durbanvillehills.co.za/","cape-town"],["Eagle's Cliff Wines","https://www.eaglescliff.co.za/","worcester"],["Eenzaamheid","http://www.eenzaamheidwines.co.za","klapmuts"],["Eikehof","http://www.eikehof.com/f","franschhoek"],["Eikendal","http://www.eikendal.com/","somerset-west"],["Ernie Els","http://www.ernieelswines.com/","stellenbosch"],["Ernst Gouws & Co","http://www.ernstgouws.co.za/","klapmuts"],["Escape Wines","http://escwines.com/","hermanus"],["Esona Boutique Wine Estate","https://esona.co.za/","robertson"],["Fairview","https://www.fairview.co.za/","paarl"],["Flagstone Wines","http://www.flagstonewines.com/","somerset-west"],["Fijnbosch Vineyards Capensis","http://www.capensiswines.com/","stellenbosch"],["Frater Family Wines","http://www.fraterfamilywines.co.za/","paarl"],["Gabrielskloof Wine Estate","http://www.gabrielskloof.co.za/","botrivier"],["Glen Carlou","https://glencarlou.com/","klapmuts"],["Glenelly","http://glenellyestate.com/","stellenbosch"],["Glenwood","http://www.glenwoodvineyards.co.za/","franschhoek"],["Good Hope","http://www.thewineryofgoodhope.com/","somerset-west"],["Graham Beck Estate","http://www.grahambeck.com/","robertson"],["Grande Provence","http://www.grandeprovence.co.za/","franschhoek"],["Groenland Wyne","http://www.groenland.co.za/","stellenbosch"],["Groot Constantia","https://www.grootconstantia.co.za/","cape-town"],["Groot Parys","http://www.grootparys.co.za/","paarl"],["Groot Phesantekraal","http://www.grootphesantekraal.co.za/","durbanville"],["Guardian Peak","http://www.guardianpeak.com/","stellenbosch"],["Hamilton Russell","http://www.hamiltonrussellvineyards.com/","hermanus"],["Hartenberg","https://hartenbergestate.com/","stellenbosch"],["Haut Bay Vineyards","https://houtbayvineyards.co.za/","cape-town"],["Haute Cabriere","https://www.cabriere.co.za/","franschhoek"],["Hazendal","http://www.hazendal.co.za/","stellenbosch"],["Heavens's View Vineyards","","stellenbosch"],["Hermanus River Wines","https://eaglescliff.co.za/","botrivier"],["Hidden Valley","http://www.hiddenvalleywines.co.za/","stellenbosch"],["High Constantia","http://www.highconstantia.co.za/","cape-town"],["Highlands Road Estate","http://www.highlandsroadestate.co.za/","elgin"],["Hout Bay Vineyards","https://houtbayvineyards.co.za/","cape-town"],["Idiom","http://www.idiom.co.za/","somerset-west"],["Imbuko Wines","http://www.imbuko.co.za/","paarl"],["Iona Wines","https://www.iona.co.za/","botrivier"],["J.C Le Roux","http://www.jcleroux.co.za/","stellenbosch"],["Jacaranda Wines","http://www.jacarandawines.co.za/","paarl"],["Jason's Hill","http://www.jasonshill.co.za/","worcester"],["Joostenberg","http://joostenberg.co.za/the-kraal-restaurant/","klapmuts"],["Jordan","http://www.jordanwines.com/","stellenbosch"],["Joubert Family Wines","https://joubertfamilywines.com/","stellenbosch"],["Journey's End","http://www.journeysend.co.za/","sir-lowry-s-pass"],["Kaapzicht","http://www.kaapzicht.co.za/","stellenbosch"],["Kanonkop","http://www.kanonkop.co.za/","stellenbosch"],["Kanu Wines","http://www.kanu.co.za/","stellenbosch"],["Karibib","https://karibib.co.za/","stellenbosch"],["Keermont","http://www.keermont.co.za/","stellenbosch"],["Ken Forester","https://kenforresterwines.com/","stellenbosch"],["Khulu","https://khululuxury.com/","klapmuts"],["Kirabo Private Cellar","http://kiraboprivatecellar.com/","worcester"],["Klein Alto","http://www.alto.co.za/","stellenbosch"],["Klein Goederust","https://kleingoederust.co.za/","franschhoek"],["Klein Graniet","https://kleingraniet.co.za","stellenbosch"],["Klein Parys","https://kleinparysvineyards.co.za/","paarl"],["Klein Roosboom","http://www.kleinroosboom.co.za/","durbanville"],["Klein Welmoed","http://www.kleinwelmoed.co.za/","stellenbosch"],["Kleine Zalze","http://www.kleinezalze.co.za/","stellenbosch"],["Kleinhoekkloof Wines","http://www.kleinhoekkloof.co.za/","robertson"],["Kleinood","http://www.kleinood.com/","stellenbosch"],["Kloovenburg Wine & Olive Estate","http://www.kloovenburg.com/","malmesbury"],["Knorhoek","https://www.knorhoek.co.za/","stellenbosch"],["Koelenhof","https://www.koelenhof.co.za/","klapmuts"],["Koopmanskloof","http://www.koopmanskloof.co.za/","stellenbosch"],["Kranskop Wines","http://www.kranskopwines.co.za/","robertson"],["Kunjani","https://kunjani-villas.co.za/","stellenbosch"],["La Boucher","https://laboucherwines.co.za/","koelenhof"],["La Bri","http://www.labri.co.za/","franschhoek"],["La Cave","https://lacave.co.za","wellington"],["La Luandiere","","paarl"],["La Motte","https://www.la-motte.com/","franschhoek"],["La Provence","http://laprovencevineyards.com/","franschhoek"],["La Roche","http://www.larocheestate.com/","franschhoek"],["La Vierge Wines","http://lavierge.co.za/","hermanus"],["Laborie Wine Estate","","paarl"],["Ladybird","http://www.ladybirdvineyards.co.za/","stellenbosch"],["Lammershoek","http://www.lammershoek.co.za/","malmesbury"],["Landskein Wines","http://www.landskeinwines.co.za/","stanford"],["Landskroon Wines","http://www.landskroonwines.com/","paarl"],["Lanzerac","http://www.lanzerac.co.za/","stellenbosch"],["L'Avenir","http://www.lavenirestate.co.za/","stellenbosch"],["Le Riche","http://www.leriche.co.za/","stellenbosch"],["Leeu Passant","https://mlfwines.com/discover-leeu-passant/","franschhoek"],["Leeuwenkuil Family Vineyards","http://www.leeuwenkuilfv.co.za/","paarl"],["Leopard Leap","https://leopardsleap.co.za/","franschhoek"],["LePommier","http://www.lepommier.co.za/","stellenbosch"],["Lievland","https://lievland.co.za/","stellenbosch"],["L'Ormarins","https://www.rupertwines.com/farms.php?farms_id=1","franschhoek"],["Louisvale","http://www.louisvale.com/","stellenbosch"],["Lourens Family Wines","http://lourensfamilywines.co.za/","paarl"],["Lourensford","http://www.lourensford.co.za/","somerset-west"],["Lynx Wine Estate","http://www.lynx-collection.com/","franschhoek"],["Maison","http://maisonestate.com/","cape-town"],["MAN Family Wines","https://manwines.com/","stellenbosch"],["Marklew Family Wines","http://www.marklew.co.za/","stellenbosch"],["Marras Wines","https://www.marraswines.co.za/","malmesbury"],["McFarlane","https://mcfarlanewines.com/","klapmuts"],["Meerendal","https://meerendal.co.za/","durbanville"],["Meinert Wines","http://www.meinertwines.com/","stellenbosch"],["Merwida Wine Cellar","https://www.merwida.com/","worcester"],["M'hudi Wines Stellenbosch","https://mhudi.com/","stellenbosch"],["Middelvlei","http://www.middelvlei.co.za/","stellenbosch"],["Minimalist Wines","https://minimalistwines.com/","cape-town"],["Mitre's Edge","http://www.mitres-edge.co.za/","klapmuts"],["Mont Destin","http://www.montdestin.co.za/","stellenbosch"],["Mont du Toit","http://www.montdutoitwines.co.za/","paarl"],["Mont Marie","http://www.montmarie.co.za/","stellenbosch"],["Mont Rous","https://www.montrous.com/","stellenbosch"],["Mooi Bly","http://www.mooibly.com/","paarl"],["Mooiplaas","http://www.mooiplaas.co.za/","stellenbosch"],["Morgenhof","http://www.morgenhof.com/","stellenbosch"],["Morgenster","https://morgensterestate.co.za/","somerset-west"],["Mt Vernon","http://www.shop.mountvernon.co.za/","klapmuts"],["Mulderbosch","http://www.mulderbosch.co.za/","stellenbosch"],["Mullineux Winery","http://www.mlfwines.com/","malmesbury"],["Muratie","http://www.muratie.co.za/","stellenbosch"],["Napier Vineyards","http://www.napier-vineyards.co.za/","paarl"],["Nederburg","http://www.nederburg.com/","paarl"],["Neethlingshof","http://www.neethlingshof.co.za/","stellenbosch"],["Nelson Wine Estate","http://www.nelsonscreek.co.za/","paarl"],["Newton Johnson","http://www.newtonjohnson.com/","hermanus"],["Nico van der Merwe","https://www.nvdmwines.com/","stellenbosch"],["Niel Joubert","http://www.nieljoubert.co.za/","klapmuts"],["Noble Hill","https://www.noblehill.com/","klapmuts"],["Nuy Winery","http://www.nuywinery.co.za/","worcester"],["Oldenburg","https://oldenburgvineyards.com/","stellenbosch"],["Olsen Private Vineyards","http://olsenprivatevineyards.co.za/","paarl"],["Oneiric Wines","http://www.oneiric.co.za/","elgin"],["Overgaauw","https://www.overgaauw.co.za/","stellenbosch"],["Paserene","https://paserene.com/","franschhoek"],["Paul Clüver","http://www.cluver.com/","grabouw"],["Perdeberg","http://www.perdeberg.co.za/","paarl"],["Peter Falke","http://www.peterfalkewines.com/","stellenbosch"],["Pigcasso","http://www.pigcasso.org/","franschhoek"],["Pink Valley","http://www.pinkvalleywines.com/","stellenbosch"],["Plaisir","http://www.plaisir.co.za/","klapmuts"],["Post House","http://www.posthousewines.co.za/","somerset-west"],["Pulpitrock","http://www.pulpitrock.co.za/","malmesbury"],["Quoin Rock","http://www.quoinrock.co.za/","stellenbosch"],["Raats Family Wines","http://raats.co.za/","stellenbosch"],["Rainbow's End","http://www.rainbowsend.co.za/","stellenbosch"],["Remhoogte","https://remhoogte.co.za/","stellenbosch"],["Reyneke","https://www.reynekewines.co.za/","stellenbosch"],["Rhebokskloof Estate","http://www.rhebokskloof.co.za/","paarl"],["Rickety Bridge","https://www.ricketybridge.com/","franschhoek"],["Riebeek Valley Wine","https://riebeekvalleywineco.com/","malmesbury"],["Rietvallei","https://rietvallei.co.za/","robertson"],["Rivendell","https://eaglescliff.co.za/","botrivier"],["Ruitersvlei","","paarl"],["Rupert & Rothschild","http://www.rupert-rothschildvignerons.com/","klapmuts"],["Rust en Vrede","http://rustenvrede.com/","stellenbosch"],["Rustenberg","http://www.rustenberg.co.za/","stellenbosch"],["Savage Wines","https://www.savagewines.com/","cape-town"],["Saxenburg","http://www.saxenburg.co.za/","stellenbosch"],["Scali Wines","http://scaliwines.wordpress.com/","paarl"],["Seven Oaks","http://www.sevenoaks.co.za/","brede-river"],["Seven Sisters","http://www.sevensisters.co.za/","stellenbosch"],["Seven Springs Vineyard","http://7springs.co.za/","hermanus"],["Silvermist Organic Wine Estate","https://silvermistestate.co.za/","constantia"],["Silverthorn Wines","https://silverthornwines.co.za","robertson"],["Simonsig","http://www.simonsig.co.za/","stellenbosch"],["Simonsvlei","http://www.simonsvlei.com/","klapmuts"],["Skilpadvlei Wine Farm","https://www.skilpadvlei.co.za/","stellenbosch"],["Slaley","http://www.slaley.co.za/","stellenbosch"],["Slanghoek Cellar","http://www.slanghoek.co.za/","worcester"],["Solms Delta","https://solmsdelta.co","franschhoek"],["Sommerbosch","http://www.somerbosch.co.za/","stellenbosch"],["South Hill Vineyards","https://southhill.co.za/","elgin"],["Spier","http://www.spier.co.za/","stellenbosch"],["Spioenkop Wines","http://www.spioenkopwines.co.za/","grabouw"],["Spookfontein Wines","https://www.spookfontein.co.za/","hermanus"],["Spotswood Wines","https://spotswoodwines.co.za/","stellenbosch"],["Springfield Estate","http://www.springfieldestate.com/","robertson"],["Springfontein Wines","http://www.springfontein.co.za/","stanford"],["Stark-Conde","http://www.stark-conde.co.za/","stellenbosch"],["Steenberg","https://steenbergfarm.com","cape-town"],["Stellenbosch 1679","https://www.stellenbosch1679.co.za/","klapmuts"],["Stellenbosch Vineyards Wine Farm","http://www.stellenboschvineyards.co.za/","stellenbosch"],["Stellenrust","http://www.stellenrust.co.za/","stellenbosch"],["Stellenzicht","http://stellenzicht.com/","stellenbosch"],["Stettyn Family Vineyards","https://www.stettyncellar.com/","worcester"],["Stony Brook","http://www.stonybrook.co.za/","franschhoek"],["Summerhill Wines","","stellenbosch"],["Survivor Wines","https://survivorwines.com/","paarl"],["Swartland Winery","https://www.swartlandwinery.co.za/","malmesbury"],["Taaibosch","https://www.taaiboschwines.com/","stellenbosch"],["Tempel Wines","http://www.tempelwines.co.za/","paarl"],["Thamnus Wines","https://www.thamnuswines.co.za/","hermanus"],["The Ahrens","https://theahrensfamily.co.za/","paarl"],["The Hills","http://www.thehillswine.com/","stellenbosch"],["The Sadie Family Wines","http://www.thesadiefamily.com/","malmesbury"],["Thelema","https://www.thelema.co.za/","stellenbosch"],["Tokara","http://www.tokara.com/","stellenbosch"],["Uitkyk","https://www.uitkyk.co.za/","stellenbosch"],["Uitsig","http://uitsig.co.za/contact/","constantia"],["Under Oaks Estate","http://www.underoaks.co.za/","paarl"],["uniWines Vineyards","http://www.uniwines.co.za/","worcester"],["Upland Organic Estate","http://www.organicwine.co.za/","paarl"],["Uva Mira","http://www.uvamira.com/","stellenbosch"],["Van Loveren Family Vineyards","http://www.vanloveren.co.za/","robertson"],["Vendom","https://www.vendome.co.za/","paarl"],["Vergelegen Wine Estate","http://www.vergelegen.co.za/","somerset-west"],["Vergenoegd Löw","https://vergenoegd.co.za/","stellenbosch"],["Viento","","paarl"],["Vilafonte","http://www.vilafonte.com/","stellenbosch"],["Villiera","http://www.villiera.com/","klapmuts"],["Vondeling Wines","https://vondelingwines.co.za/","paarl"],["Vrede Wines","https://www.vdcinternational.co.za/","stellenbosch"],["Vrede en Lust","http://www.vnl.co.za/","klapmuts"],["Vredenheim Wine Farm","http://vredenheim.co.za/","stellenbosch"],["Walker Bay Estate","https://www.walkerbayestate.com/","stanford"],["Warwick","https://www.warwickwine.com/","stellenbosch"],["Waterford","http://www.waterfordestate.co.za/","stellenbosch"],["Waterkloof","http://www.waterkloofwines.co.za/","somerset-west"],["Webersburg","https://webersburg.co.za","stellenbosch"],["Wellington Wines","http://www.wellingtonwines.com/","paarl"],["Weltevrede Wine Estate","http://weltevrede.com/","robertson"],["Whalehaven Winery","http://www.whalehaven.co.za/","hermanus"],["Wildeberg Wines","https://www.wildeberg.co.za/","somerset-west"],["Windmeul Kelder","http://www.windmeul.com/","paarl"],["Winshaw Vineyards","http://winshaw.co.za/","stellenbosch"],["Yonder Hill","http://www.yonderhill.co.za/","stellenbosch"],["Zandvliet Wine Estate","https://zandvliet.co.za/","robertson"],["Zevenwacht","http://zevenwacht.co.za/","stellenbosch"],["Zorgvliet","http://www.zorgvlietwines.com/","stellenbosch"]];
 /* Themenrouten: Reihenfolge nach Lage und Öffnungszeiten, Uhrzeiten werden aus den Fahrzeiten berechnet */
 const ROUTEN=[
- {k:"kunst",titel:"Kunst um Stellenbosch",text:"Vier Güter am Rand der Stadt, kaum eine Viertelstunde auseinander. Glas am Vormittag, Skulpturen über Mittag, Bronze zum Schluss.",start:"10:00",
-  stops:[["glenelly",75,"Das Glasmuseum unter dem Gut, am Vormittag fast für dich allein."],["delaire",120,"Skulpturen im Garten, Mittag auf der Terrasse über dem Tal."],["tokara",60,"Gegenüber am Pass: Skulpturen zwischen Reben und Olivenbäumen."],["quoin-rock",75,"Glas, Stahl und die Bronzerebe in der Halle. Offen bis 18 Uhr."]]},
- {k:"franschhoek",titel:"Gärten und Galerien im Franschhoek-Tal",text:"Ein Nutzgarten am Morgen, Skulpturen im Fynbos am Mittag, Pierneef am Nachmittag.",start:"09:45",
-  stops:[["babylonstoren",150,"Um 10 Uhr startet die Gartenführung. Danach Mittag im Greenhouse."],["leeu-passant",90,"Skulpturen im Fynbos und die Everard Read Gallery."],["la-motte",90,"Pierneef im Museum, der Probierraum ist bis 17 Uhr offen."]]},
- {k:"helderberg",titel:"Helderberg und False Bay",text:"Zwei Güter, zehn Minuten auseinander: ein Gouverneurshof von 1700 und ein Glaskörper über der Bucht.",start:"09:00",
-  stops:[["vergelegen-wine-estate",150,"Kampferbäume, der achteckige Garten, Kaffee im Stables."],["waterkloof",120,"Mittag im Glaskörper über der Bucht, danach Pferde zwischen den Reben."]]}];
+ {k:"kunst",titel:tt("Kunst um Stellenbosch"),text:tt("Vier Güter am Rand der Stadt, kaum eine Viertelstunde auseinander. Glas am Vormittag, Skulpturen über Mittag, Bronze zum Schluss."),start:"10:00",
+  stops:[["glenelly",75,tt("Das Glasmuseum unter dem Gut, am Vormittag fast für dich allein.")],["delaire",120,tt("Skulpturen im Garten, Mittag auf der Terrasse über dem Tal.")],["tokara",60,tt("Gegenüber am Pass: Skulpturen zwischen Reben und Olivenbäumen.")],["quoin-rock",75,tt("Glas, Stahl und die Bronzerebe in der Halle. Offen bis 18 Uhr.")]]},
+ {k:"franschhoek",titel:tt("Gärten und Galerien im Franschhoek-Tal"),text:tt("Ein Nutzgarten am Morgen, Skulpturen im Fynbos am Mittag, Pierneef am Nachmittag."),start:"09:45",
+  stops:[["babylonstoren",150,tt("Um 10 Uhr startet die Gartenführung. Danach Mittag im Greenhouse.")],["leeu-passant",90,tt("Skulpturen im Fynbos und die Everard Read Gallery.")],["la-motte",90,tt("Pierneef im Museum, der Probierraum ist bis 17 Uhr offen.")]]},
+ {k:"helderberg",titel:tt("Helderberg und False Bay"),text:tt("Zwei Güter, zehn Minuten auseinander: ein Gouverneurshof von 1700 und ein Glaskörper über der Bucht."),start:"09:00",
+  stops:[["vergelegen-wine-estate",150,tt("Kampferbäume, der achteckige Garten, Kaffee im Stables.")],["waterkloof",120,tt("Mittag im Glaskörper über der Bucht, danach Pferde zwischen den Reben.")]]}];
 let RI=0,ROUTE=[];
 
 /* ---------- Hilfen ---------- */
@@ -701,25 +750,36 @@ function addEstate(name,web,reg){
   e.gebiet=reg||e.gebiet||"stellenbosch";e.web=web||e.web||"";e.ort=e.ort||GEBIETE[e.gebiet].name;e.approx=!d;
   const gp=(window.GEO||{})[name.trim()];
   if(gp&&gp[0]<-33.25&&gp[0]>-34.6&&gp[1]>18.2&&gp[1]<20.3){e.lat=gp[0];e.lng=gp[1];e.approx=false;e.genau=true}
-  const tx=(window.TEXTE||{})[k];if(tx&&(!d||tx.stufe==="beitrag")){Object.assign(e,tx);e.quelle=tx.stufe==="beitrag"?"beitrag":"web"}
+  const tx=(window.TEXTE||{})[k];if(tx&&(!d||tx.stufe==="beitrag")){Object.assign(e,JSON.parse(JSON.stringify(tx)));e.quelle=tx.stufe==="beitrag"?"beitrag":"web"}
+  if(LANG!=="de"){const tr=((window.TEXTE_I18N||{})[LANG]||{})[k];if(tr)Object.assign(e,JSON.parse(JSON.stringify(tr)));else if(e.lead)e.nurDE=true}
   ESTATES.push(e);seen[k]=e;return e}
 BASE.forEach(([n,w,g])=>addEstate(n,w,g));
 DETAIL.forEach(d=>{if(!seen[norm(d.name)])addEstate(d.name,"",d.gebiet in GEBIETE?d.gebiet:"stellenbosch")});
 if(IMPORT?.rows)IMPORT.rows.forEach(x=>{const e=addEstate(x.n,x.w,x.g?slugify(x.g):"");if(!e)return;
   if(x.w)e.web=x.w;e.besuchen=!!x.b;e.bekannt=!!x.k;e.notiz=x.no||"";e.datum=x.d||"";e.status=x.s||""});
+/* Eigene Texte und Angaben, direkt im Eintrag geschrieben (nur auf diesem Gerät) */
+let EDITS={};try{EDITS=JSON.parse(localStorage.getItem("werf-edits")||"{}")||{}}catch(_){EDITS={}}
+function applyEdits(e){const ed=EDITS[e.id];if(!ed)return;e._orig=e._orig||{};
+  for(const [k,v] of Object.entries(ed)){if(k==="_at")continue;
+    if(k==="abschnitte"){if(e.abschnitte){if(!e._orig.abschnitte)e._orig.abschnitte=e.abschnitte.map(a=>a.p);e.abschnitte=e.abschnitte.map((a,i)=>({t:a.t,p:v[i]??a.p}))}continue}
+    if(!(k in e._orig))e._orig[k]=e[k]??"";e[k]=v}
+  e.edAt=ed._at;e.nurDE=false}
+ESTATES.forEach(applyEdits);
 ESTATES.sort((a,b)=>a.name.localeCompare(b.name,"de"));
-ESTATES.forEach((e,i)=>{e.nr=i+1;e.ressorts=Object.keys(RESSORTS).filter(k=>e[k]);e.test=!e.lead;e.key=norm(e.name+" "+GEBIETE[e.gebiet].name+" "+(e.notiz||""))});
+function refreshDerived(e){e.ressorts=Object.keys(RESSORTS).filter(k=>e[k]);e.test=!e.lead;e.key=norm(e.name+" "+GEBIETE[e.gebiet].name+" "+(e.notiz||""))}
+ESTATES.forEach((e,i)=>{e.nr=i+1;refreshDerived(e)});
+const HASPERS=ESTATES.some(e=>e.besuchen||e.bekannt);
 const byId=Object.fromEntries(ESTATES.map(e=>[e.id,e]));
 ROUTEN.forEach(r=>r.stops=r.stops.filter(([id])=>byId[id]));
 const toMin0=t=>{const [h,m]=t.split(":").map(Number);return h*60+m};
 const hhmm0=m=>`${String(Math.floor(m/60)%24).padStart(2,"0")}:${String(Math.round(m%60)).padStart(2,"0")}`;
 function legMin(a,b){const R=6371,r=Math.PI/180,dLa=(b.lat-a.lat)*r,dLo=(b.lng-a.lng)*r,x=Math.sin(dLa/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLo/2)**2;return Math.max(5,Math.round(2*R*Math.asin(Math.sqrt(x))*1.35/45*60+4))}
-function buildRoute(i){const r=ROUTEN[i];let t=toMin0(r.start);
-  ROUTE=r.stops.map(([id,dur,text],k)=>{const e=byId[id];if(k>0)t+=legMin(byId[r.stops[k-1][0]],e);const o={id,dur,text,zeit:hhmm0(t),warn:""};
-    const oe=e.oeffnung;if(oe){if(t<toMin0(oe.t[0]))o.warn=`öffnet ${oe.t[0]}`;else if(t+dur>toMin0(oe.t[1]))o.warn=`schließt ${oe.t[1]}`}
-    t+=dur;return o});
-  const zu=r.stops.map(([id])=>byId[id]).filter(e=>e.oeffnung?.zu?.length).map(e=>`${e.name}: ${e.oeffnung.zuText}`);
-  r.hinweis=zu.length?`Geschlossen: ${zu.join("; ")}.`:"";}
+function buildRoute(i){const r=ROUTEN[i];let tm=toMin0(r.start);
+  ROUTE=r.stops.map(([id,dur,text],k)=>{const e=byId[id];if(k>0)tm+=legMin(byId[r.stops[k-1][0]],e);const o={id,dur,text,zeit:hhmm0(tm),warn:""};
+    const oe=e.oeffnung;if(oe){if(tm<toMin0(oe.t[0]))o.warn=tt("öffnet {z}",{z:oe.t[0]});else if(tm+dur>toMin0(oe.t[1]))o.warn=tt("schließt {z}",{z:oe.t[1]})}
+    tm+=dur;return o});
+  const zu=r.stops.map(([id])=>byId[id]).filter(e=>e.oeffnung?.zu?.length).map(e=>`${e.name}: ${tt(e.oeffnung.zuText)}`);
+  r.hinweis=zu.length?tt("Geschlossen: {x}.",{x:zu.join("; ")}):"";}
 /* Beiträge auf der Startseite: drei pro Woche, im Wechsel */
 const BEITRAEGE=ESTATES.filter(e=>e.stufe==="beitrag").map(e=>e.id);
 const FEATURED=(()=>{const n=BEITRAEGE.length;if(n<=3)return BEITRAEGE;const w=Math.floor(Date.now()/6048e5);return [0,1,2].map(k=>BEITRAEGE[(w*3+k)%n])})();
@@ -861,16 +921,16 @@ function reveal(root=document){root.querySelectorAll(".rv").forEach(el=>{split(e
    AUSGABE
    ========================================================= */
 $("#wordIn").innerHTML=[..."werf"].map((c,i)=>`<span class="ch" style="--i:${i}">${c}</span>`).join("");
-$("#facts4").innerHTML=[[1,"Ausgabe"],[BEITRAEGE.length,"Beiträge"],[ESTATES.length,"Güter"],[REGIONEN.filter(r=>r.count).length,"Regionen"]]
+$("#facts4").innerHTML=[[1,tt("Ausgabe")],[BEITRAEGE.length,tt("Beiträge")],[ESTATES.length,tt("Güter")],[REGIONEN.filter(r=>r.count).length,tt("Regionen")]]
   .map(([n,l])=>`<div><b data-count="${n}">00</b><span>${l}</span></div>`).join("");
 /* Zahlen zählen hoch, sobald sie sichtbar werden */
 const ioCount=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;ioCount.unobserve(en.target);const el=en.target,n=+el.dataset.count;
   if(RM){el.textContent=pad(n,2);return}new Spring(0,{response:.9,damping:1,eps:.05,onUpdate:x=>el.textContent=pad(Math.round(x),2)}).to(n)}),{threshold:.6});
 $$("[data-count]").forEach(el=>ioCount.observe(el));
-$("#regTeaser").textContent=`Alle ${ESTATES.length} Weingüter, durchsuchbar und nach Gegend geordnet.`;
+$("#regTeaser").textContent=tt("Alle {n} Weingüter, durchsuchbar und nach Gegend geordnet.",{n:ESTATES.length});
 
 function renderRoute(anim){const r=ROUTEN[RI];
-  $("#rtabs").innerHTML=ROUTEN.map((x,i)=>`<button data-ri="${i}" aria-pressed="${i===RI}">${esc(x.titel.split(" ")[0]==="Kunst"?"Kunst":x.k==="franschhoek"?"Franschhoek":"Helderberg")}</button>`).join("");
+  $("#rtabs").innerHTML=ROUTEN.map((x,i)=>`<button data-ri="${i}" aria-pressed="${i===RI}">${esc(x.k==="kunst"?tt("Kunst"):x.k==="franschhoek"?"Franschhoek":"Helderberg")}</button>`).join("");
   $("#rTitle").textContent=r.titel;$("#rText").textContent=r.text+(r.hinweis?" "+r.hinweis:"");
   $$("#track .stop").forEach(n=>n.remove());
   $("#track").insertAdjacentHTML("beforeend",ROUTE.map(s=>{const e=byId[s.id];const [h,m]=s.zeit.split(":");return `<div class="stop"><button data-open="${e.id}" data-from=".media">
@@ -887,9 +947,9 @@ function renderAusgabe(){
     <div class="media" data-open="${e.id}">${media(e)}</div>
     <div class="txt">
       <h3 class="cond rv">${esc(e.name)}</h3>
-      <dl><div><dt>Lage</dt><dd>${esc(e.ort)}</dd></div><div><dt>Schwerpunkte</dt><dd>${e.ressorts.map(k=>RESSORTS[k]).join(", ")}</dd></div></dl>
+      <dl><div><dt>${tt("Lage")}</dt><dd>${esc(e.ort)}</dd></div><div><dt>${tt("Schwerpunkte")}</dt><dd>${e.ressorts.map(k=>RESSORTS[k]).join(", ")}</dd></div></dl>
       <p class="lead">${esc(e.lead)}</p>
-      <button class="btn" data-open="${e.id}" data-from=".media">Eintrag öffnen</button>
+      <button class="btn" data-open="${e.id}" data-from=".media">${tt("Eintrag öffnen")}</button>
     </div></article>`}).join("");
   renderRoute();
   reveal($("#v-ausgabe"));layout();
@@ -926,19 +986,19 @@ function drawUm(fit){const g=$("#umk");if(!g)return;
   $$("#map .dot").forEach(d=>{const t=TT.get(d.dataset.pick);d.classList.toggle("off",UM.on&&!!t&&t.min>UM.max)});
   if(!UM.on||UM.lat==null){g.innerHTML="";return}
   const cx=f(X(UM.lng)),cy=f(Y(UM.lat)),r=f(reachKm(UM.max)*PXKM);
-  g.innerHTML=`<circle class="umr" cx="${cx}" cy="${cy}" r="${r}"/><g class="inv"><circle class="ums" cx="${cx}" cy="${cy}" r="9"/></g><text class="uml inv2" x="${cx}" y="${f(Y(UM.lat)-reachKm(UM.max)*PXKM-8)}" text-anchor="middle">ca. ${UM.max} Min</text>`;
+  g.innerHTML=`<circle class="umr" cx="${cx}" cy="${cy}" r="${r}"/><g class="inv"><circle class="ums" cx="${cx}" cy="${cy}" r="9"/></g><text class="uml inv2" x="${cx}" y="${f(Y(UM.lat)-reachKm(UM.max)*PXKM-8)}" text-anchor="middle">${tt("ca. {n} Min",{n:UM.max})}</text>`;
   if(fit){const k=reachKm(UM.max)+2,[x,y]=toKm(UM.lat,UM.lng);fitBox(x-k,y-k,x+k,y+k)}}
-const TOWNS_SORTED=()=>Object.entries(GEBIETE).sort((a,b)=>a[1].name.localeCompare(b[1].name,"de"));
+const TOWNS_SORTED=()=>Object.entries(GEBIETE).sort((a,b)=>a[1].name.localeCompare(b[1].name,LOC));
 function umHTML(){const est=!UM.routed;
-  const head=UM.on?`<div class="umbar"><button class="umsum" data-umtoggle><b>${UM.max}<small>Min</small></b><span>von ${esc(UM.label)}<em>${UM.busy?"Fahrzeiten werden berechnet …":est?"Fahrzeiten geschätzt":"Fahrzeiten über Straßen berechnet"}</em></span></button><button class="umx" data-umoff aria-label="Umkreis aufheben">×</button></div>`
-    :`<button class="umopen" data-umtoggle><i></i>Von hier aus erreichbar</button>`;
+  const head=UM.on?`<div class="umbar"><button class="umsum" data-umtoggle><b>${UM.max}<small>Min</small></b><span>${tt("von {x}",{x:esc(UM.kind==="gps"?tt("deinem Standort"):UM.label)})}<em>${UM.busy?tt("Fahrzeiten werden berechnet …"):est?tt("Fahrzeiten geschätzt"):tt("Fahrzeiten über Straßen berechnet")}</em></span></button><button class="umx" data-umoff aria-label="${tt("Umkreis aufheben")}">×</button></div>`
+    :`<button class="umopen" data-umtoggle><i></i>${tt("Von hier aus erreichbar")}</button>`;
   return head+`<div class="umpanel" hidden>
-    <p class="umlbl">Startpunkt</p>
-    <div class="umstart"><button class="btn line" data-umgps>Mein Standort</button>
-      <label class="umsel"><span>Ort</span><select data-umort><option value="">wählen</option>${TOWNS_SORTED().map(([k,G])=>`<option value="${k}"${UM.kind==="ort"&&UM.ref===k?" selected":""}>${esc(G.name)}</option>`).join("")}</select></label>
-      <label class="umsel"><span>Gut</span><select data-umgut><option value="">wählen</option>${ESTATES.map(e=>`<option value="${e.id}"${UM.kind==="gut"&&UM.ref===e.id?" selected":""}>${esc(e.name)}</option>`).join("")}</select></label></div>
-    <p class="umlbl">Höchstens <b data-ummax>${UM.max}</b> Minuten Fahrt</p>
-    <input type="range" min="10" max="120" step="5" value="${UM.max}" data-umrange aria-label="Höchste Fahrzeit in Minuten">
+    <p class="umlbl">${tt("Startpunkt")}</p>
+    <div class="umstart"><button class="btn line" data-umgps>${tt("Mein Standort")}</button>
+      <label class="umsel"><span>${tt("Ort")}</span><select data-umort><option value="">${tt("wählen")}</option>${TOWNS_SORTED().map(([k,G])=>`<option value="${k}"${UM.kind==="ort"&&UM.ref===k?" selected":""}>${esc(G.name)}</option>`).join("")}</select></label>
+      <label class="umsel"><span>${tt("Gut")}</span><select data-umgut><option value="">${tt("wählen")}</option>${ESTATES.map(e=>`<option value="${e.id}"${UM.kind==="gut"&&UM.ref===e.id?" selected":""}>${esc(e.name)}</option>`).join("")}</select></label></div>
+    <p class="umlbl">${tt("Höchstens {b} Minuten Fahrt",{b:`<b data-ummax>${UM.max}</b>`})}</p>
+    <input type="range" min="10" max="120" step="5" value="${UM.max}" data-umrange aria-label="${tt("Höchste Fahrzeit in Minuten")}">
     <p class="umnote" data-umnote></p></div>`}
 function renderUm(keepOpen){$$("[data-um]").forEach(el=>{const open=keepOpen&&!el.querySelector(".umpanel")?.hidden;el.innerHTML=umHTML();if(open)el.querySelector(".umpanel").hidden=false})}
 document.addEventListener("click",ev=>{const t=ev.target,box=t.closest("[data-um]");if(!box)return;
@@ -946,12 +1006,12 @@ document.addEventListener("click",ev=>{const t=ev.target,box=t.closest("[data-um
     if(!p.hidden&&!RM)p.animate([{opacity:0,transform:"translateY(-8px)"},{opacity:1,transform:"none"}],{duration:320,easing:"cubic-bezier(.2,.9,.2,1)"});return}
   if(t.closest("[data-umoff]")){UM.on=false;saveUm();renderUm();refreshUm();if(view==="karte")fitAll();return}
   if(t.closest("[data-umgps]")){const note=box.querySelector("[data-umnote]");
-    if(!navigator.geolocation){note.textContent="Dieses Gerät gibt keinen Standort heraus. Wähle einen Ort oder ein Gut.";return}
-    note.textContent="Standort wird bestimmt …";
+    if(!navigator.geolocation){note.textContent=tt("Dieses Gerät gibt keinen Standort heraus. Wähle einen Ort oder ein Gut.");return}
+    note.textContent=tt("Standort wird bestimmt …");
     navigator.geolocation.getCurrentPosition(p=>{const la=p.coords.latitude,lo=p.coords.longitude;
-      if(la>-33.1||la<-34.7||lo<18.1||lo>20.6){note.textContent="Du bist gerade nicht in den Winelands. Wähle einen Ort oder ein Gut als Startpunkt.";return}
-      setStart({lat:la,lng:lo,label:"deinem Standort",kind:"gps",ref:""})},
-      err=>{note.textContent=err.code===1?"Der Standort ist für diese Seite nicht freigegeben. Erlaube ihn in den Safari-Einstellungen oder wähle einen Ort.":"Der Standort ließ sich nicht bestimmen. Wähle einen Ort oder ein Gut."},{enableHighAccuracy:false,timeout:12000,maximumAge:300000});return}});
+      if(la>-33.1||la<-34.7||lo<18.1||lo>20.6){note.textContent=tt("Du bist gerade nicht in den Winelands. Wähle einen Ort oder ein Gut als Startpunkt.");return}
+      setStart({lat:la,lng:lo,label:tt("deinem Standort"),kind:"gps",ref:""})},
+      err=>{note.textContent=err.code===1?tt("Der Standort ist für diese Seite nicht freigegeben. Erlaube ihn in den Safari-Einstellungen oder wähle einen Ort."):tt("Der Standort ließ sich nicht bestimmen. Wähle einen Ort oder ein Gut.")},{enableHighAccuracy:false,timeout:12000,maximumAge:300000});return}});
 document.addEventListener("change",ev=>{const t=ev.target;
   if(t.matches("[data-umort]")&&t.value){const G=GEBIETE[t.value];setStart({lat:G.lat,lng:G.lng,label:G.name,kind:"ort",ref:t.value})}
   if(t.matches("[data-umgut]")&&t.value){const e=byId[t.value];setStart({lat:e.lat,lng:e.lng,label:e.name,kind:"gut",ref:e.id})}
@@ -966,26 +1026,26 @@ renderUm();
    REGISTER
    ========================================================= */
 let filter="alle",query="",region="alle",visibleIds=ESTATES.map(e=>e.id);
-$("#chips").innerHTML=[["alle","Alle"],...(IMPORT?[["will","Will ich hin"],["dort","Schon dort"]]:[]),...Object.entries(RESSORTS)].map(([k,v])=>`<button data-f="${k}" aria-pressed="${k==="alle"}">${v}</button>`).join("");
-const row=e=>{const t=UM.on?TT.get(e.id):null;const sub=e.bekannt?`Schon dort${e.datum?", "+esc(fmtDate(e.datum)):""}`:e.notiz?esc(e.notiz):UM.on?esc(GEBIETE[e.gebiet].name):"";
-  return `<li><button class="row" data-open="${e.id}"><span class="n">${pad(e.nr)}</span><span class="nm">${esc(e.name)}${sub?`<small>${sub}</small>`:""}</span><span class="tg">${t?`<span class="mins${t.est?" est":""}">${t.est?"≈":""}${t.min}<small>Min</small></span>`:""}${e.test?"":"<i title='Ausführlicher Eintrag'></i>"}</span></button></li>`};
-const fmtDate=s=>{const d=new Date(s);return isNaN(d)?s:d.toLocaleDateString("de-DE",{day:"numeric",month:"short",year:"numeric"})};
-function mine(e){if(!IMPORT)return "";const parts=[];
-  if(e.bekannt)parts.push(`<b>Schon dort${e.datum?" am "+esc(fmtDate(e.datum)):""}</b>`);else if(e.besuchen)parts.push(`<b>Will ich hin</b>`);
-  if(e.notiz)parts.push(`<p>${esc(e.notiz)}</p>`);if(/prüf/i.test(e.status))parts.push(`<small>In der Tabelle als „Überprüfen“ markiert</small>`);
-  return parts.length?`<div class="mine"><h3>Aus deiner Tabelle</h3>${parts.join("")}</div>`:""}
+$("#chips").innerHTML=[["alle",tt("Alle")],...(IMPORT||HASPERS?[["will",tt("Will ich hin")],["dort",tt("Schon dort")]]:[]),...Object.entries(RESSORTS)].map(([k,v])=>`<button data-f="${k}" aria-pressed="${k==="alle"}">${v}</button>`).join("");
+const row=e=>{const t=UM.on?TT.get(e.id):null;const sub=e.bekannt?`${tt("Schon dort")}${e.datum?", "+esc(fmtDate(e.datum)):""}`:e.notiz?esc(e.notiz):UM.on?esc(GEBIETE[e.gebiet].name):"";
+  return `<li><button class="row" data-open="${e.id}"><span class="n">${pad(e.nr)}</span><span class="nm">${esc(e.name)}${sub?`<small>${sub}</small>`:""}</span><span class="tg">${t?`<span class="mins${t.est?" est":""}">${t.est?"≈":""}${t.min}<small>Min</small></span>`:""}${e.test?"":`<i title="${tt("Ausführlicher Eintrag")}"></i>`}</span></button></li>`};
+const fmtDate=s=>{const d=new Date(s);return isNaN(d)?s:d.toLocaleDateString(LOC,{day:"numeric",month:"short",year:"numeric"})};
+function mine(e){const parts=[];
+  if(e.bekannt)parts.push(`<b>${e.datum?tt("Schon dort am {d}",{d:esc(fmtDate(e.datum))}):tt("Schon dort")}</b>`);else if(e.besuchen)parts.push(`<b>${tt("Will ich hin")}</b>`);
+  if(e.notiz)parts.push(`<p>${esc(e.notiz)}</p>`);if(/prüf/i.test(e.status||""))parts.push(`<small>${tt("In der Tabelle als „Überprüfen“ markiert")}</small>`);
+  return parts.length?`<div class="mine"><h3>${tt("Persönlich")}</h3>${parts.join("")}</div>`:""}
 function stagger(nodes,max=18){if(RM)return;nodes.slice(0,max).forEach((n,i)=>n.animate([{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],{duration:560,delay:i*26,easing:"cubic-bezier(.2,.9,.2,1)",fill:"backwards"}))}
-$("#rchips").innerHTML=[["alle","Alle"],...REGIONEN.filter(r=>r.count).map(r=>[r.k,r.kurz])].map(([k,v])=>`<button data-r="${k}" aria-pressed="${k==="alle"}">${esc(v)}</button>`).join("");
+$("#rchips").innerHTML=[["alle",tt("Alle")],...REGIONEN.filter(r=>r.count).map(r=>[r.k,r.kurz])].map(([k,v])=>`<button data-r="${k}" aria-pressed="${k==="alle"}">${esc(v)}</button>`).join("");
 const BANDS=[15,30,45,60,90,120,180];
 function renderRegister(){
   const q=norm(query.trim());
   let list=ESTATES.filter(e=>(filter==="alle"||(filter==="will"?e.besuchen&&!e.bekannt:filter==="dort"?e.bekannt:e.ressorts.includes(filter)))&&(!q||e.key.includes(q))&&(region==="alle"||regionOf(e).k===region));
   if(UM.on)list=list.filter(e=>TT.has(e.id)&&TT.get(e.id).min<=UM.max).sort((a,b)=>TT.get(a.id).min-TT.get(b.id).min);
   visibleIds=list.map(e=>e.id);
-  $("#count").textContent=UM.on?`${list.length} ${list.length===1?"Gut":"Güter"} in höchstens ${UM.max} Minuten von ${UM.label}`:(q||filter!=="alle"||region!=="alle")?`${list.length} von ${ESTATES.length} Weingütern`:`${ESTATES.length} Weingüter in ${REGIONEN.filter(r=>r.count).length} Regionen. Orange markiert: ausführlicher Eintrag.`;
-  if(!list.length){$("#groups").innerHTML=`<div class="empty">${UM.on?`In ${UM.max} Minuten ist von hier kein passendes Gut erreichbar. Erhöhe die Fahrzeit oder setze die Filter zurück.`:"Kein Weingut gefunden. Prüfe die Schreibweise oder setze den Filter zurück."}<br><button class="btn line" id="reset">Filter zurücksetzen</button></div>`;return}
+  $("#count").textContent=UM.on?tt(list.length===1?"{n} Gut in höchstens {m} Minuten von {x}":"{n} Güter in höchstens {m} Minuten von {x}",{n:list.length,m:UM.max,x:UM.kind==="gps"?tt("deinem Standort"):UM.label}):(q||filter!=="alle"||region!=="alle")?tt("{n} von {total} Weingütern",{n:list.length,total:ESTATES.length}):tt("{n} Weingüter in {r} Regionen. Orange markiert: ausführlicher Eintrag.",{n:ESTATES.length,r:REGIONEN.filter(r=>r.count).length});
+  if(!list.length){$("#groups").innerHTML=`<div class="empty">${UM.on?tt("In {m} Minuten ist von hier kein passendes Gut erreichbar. Erhöhe die Fahrzeit oder setze die Filter zurück.",{m:UM.max}):tt("Kein Weingut gefunden. Prüfe die Schreibweise oder setze den Filter zurück.")}<br><button class="btn line" id="reset">${tt("Filter zurücksetzen")}</button></div>`;return}
   if(UM.on){let lo=0;$("#groups").innerHTML=BANDS.map(b=>{const items=list.filter(e=>{const m=TT.get(e.id).min;return m>lo&&m<=b||(lo===0&&m<=b)});const from=lo;lo=b;if(!items.length)return "";
-      return `<section><div class="ghead">${from?`${from} bis ${b} Minuten`:`Bis ${b} Minuten`}<span>${items.length}</span></div><ul class="rows">${items.map(row).join("")}</ul></section>`}).join("")}
+      return `<section><div class="ghead">${from?tt("{a} bis {b} Minuten",{a:from,b}):tt("Bis {b} Minuten",{b})}<span>${items.length}</span></div><ul class="rows">${items.map(row).join("")}</ul></section>`}).join("")}
   else $("#groups").innerHTML=REGIONEN.map(r=>{const secs=r.orte.filter(g=>GEBIETE[g]).map(g=>{const items=list.filter(e=>e.gebiet===g);if(!items.length)return "";
       return `<section id="grp-${g}"><div class="ghead">${esc(GEBIETE[g].name)}<span>${items.length}</span></div><ul class="rows">${items.map(row).join("")}</ul></section>`}).join("");
     return secs?`<div class="rhead" id="reg-${r.k}"><h2 class="cond">${esc(r.name)}</h2><span>${list.filter(e=>regionOf(e)===r).length}</span></div>${secs}`:""}).join("");
@@ -1001,8 +1061,8 @@ $("#groups").addEventListener("click",ev=>{if(ev.target.id==="reset"){filter="al
    EIGENE TABELLE: wird nur auf diesem Gerät gelesen und gespeichert
    ========================================================= */
 function renderImp(){const n=IMPORT?.rows?.length;
-  $("#imp").innerHTML=IMPORT?`<p><b>Deine Tabelle ist geladen</b> (${n} Zeilen, ${esc(new Date(IMPORT.at).toLocaleDateString("de-DE"))}). Notizen und Besuche bleiben auf diesem Gerät.</p><label class="btn line filebtn">Neu laden<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label><button class="btn line" id="impDel">Entfernen</button>`
-  :`<p>Lade die Excel-Tabelle, um Notizen, Besuche und „Will ich hin“ zu sehen. Sie wird nur auf diesem Gerät gespeichert.</p><label class="btn filebtn">Tabelle laden<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label>`}
+  $("#imp").innerHTML=(IMPORT?`<p>${tt("<b>Deine Tabelle ist geladen</b> ({n} Zeilen, {d}). Notizen und Besuche bleiben auf diesem Gerät.",{n,d:esc(new Date(IMPORT.at).toLocaleDateString(LOC))})}</p><label class="btn line filebtn">${tt("Neu laden")}<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label><button class="btn line" id="impDel">${tt("Entfernen")}</button>`
+  :`<p>${tt("Lade die Excel-Tabelle, um Notizen, Besuche und „Will ich hin“ zu sehen. Sie wird nur auf diesem Gerät gespeichert.")}</p><label class="btn filebtn">${tt("Tabelle laden")}<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label>`)+edBox()}
 function loadSheetJS(){return window.XLSX?Promise.resolve():new Promise((res,rej)=>{const sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";sc.onload=res;sc.onerror=()=>rej("netz");document.head.appendChild(sc)})}
 function parseRows(rows){
   const hi=rows.findIndex(r=>r.some(c=>norm(String(c??"")).trim()==="weingut"));if(hi<0)throw "kopf";
@@ -1017,14 +1077,14 @@ function parseRows(rows){
     out.push({n,w:/^https?:/i.test(w)?w:"",g:c.g>=0?String(r[c.g]??"").trim():"",b:c.b>=0&&yes(r[c.b]),k:(c.k>=0&&yes(r[c.k]))||/^bekannt$/i.test(st),no:c.no>=0?String(r[c.no]??"").trim():"",d,s:st})});
   return out}
 document.addEventListener("change",async ev=>{if(ev.target.id!=="impFile"||!ev.target.files?.[0])return;const file=ev.target.files[0];ev.target.value="";
-  const p=$("#imp p");p.textContent="Tabelle wird gelesen …";
+  const p=$("#imp p");p.textContent=tt("Tabelle wird gelesen …");
   try{await loadSheetJS();const wb=XLSX.read(await file.arrayBuffer(),{type:"array",cellDates:true});
     const ws=wb.Sheets[wb.SheetNames[0]],rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:null});
     const data=parseRows(rows);if(!data.length)throw "leer";
     localStorage.setItem("werf-import",JSON.stringify({at:Date.now(),rows:data}));
-    p.textContent=`${data.length} Zeilen gelesen. Die App lädt neu …`;setTimeout(()=>location.reload(),700)}
-  catch(err){p.textContent=err==="netz"?"Zum ersten Laden braucht die App einmal Internet. Versuche es mit Netz erneut.":err==="kopf"?"In der Tabelle fehlt die Spalte „Weingut“. Prüfe die Kopfzeile.":"Die Tabelle ließ sich nicht lesen. Speichere sie als .xlsx und versuche es erneut."}});
-document.addEventListener("click",ev=>{if(ev.target.id!=="impDel")return;if(!confirm("Deine Tabelle von diesem Gerät entfernen? Notizen und Besuche verschwinden aus der App, die Tabelle selbst bleibt unberührt."))return;
+    p.textContent=tt("{n} Zeilen gelesen. Die App lädt neu …",{n:data.length});setTimeout(()=>location.reload(),700)}
+  catch(err){p.textContent=err==="netz"?tt("Zum ersten Laden braucht die App einmal Internet. Versuche es mit Netz erneut."):err==="kopf"?tt("In der Tabelle fehlt die Spalte „Weingut“. Prüfe die Kopfzeile."):tt("Die Tabelle ließ sich nicht lesen. Speichere sie als .xlsx und versuche es erneut.")}});
+document.addEventListener("click",ev=>{if(ev.target.id!=="impDel")return;if(!confirm(tt("Deine Tabelle von diesem Gerät entfernen? Notizen und Besuche verschwinden aus der App, die Tabelle selbst bleibt unberührt.")))return;
   localStorage.removeItem("werf-import");location.reload()});
 renderImp();
 
@@ -1054,7 +1114,7 @@ function buildMap(){
     if(ox>0&&oy>0){if(oy<ox){const d=(oy/2+.2)*(a.y<=b.y?-1:1);a.y+=d;b.y-=d}else{const d=(ox/2+.2)*(a.x<=b.x?-1:1);a.x+=d;b.x-=d}}}
   L.forEach(l=>l.r.lab=[l.x,l.y]);
   CLUSTERS.forEach(r=>{const x=f(r.lab[0]*PXKM),y=f(r.lab[1]*PXKM);
-    s+=`<g class="clab inv2" data-clu="${r.k}" role="button" tabindex="0" aria-label="${esc(r.name)} zeigen"><text x="${x}" y="${y}" text-anchor="middle"><tspan class="cn" x="${x}" dy="-.2em">${esc(r.name)}</tspan><tspan class="cc" x="${x}" dy="1.25em">${r.count} Güter</tspan></text></g>`});
+    s+=`<g class="clab inv2" data-clu="${r.k}" role="button" tabindex="0" aria-label="${tt("{x} zeigen",{x:esc(r.name)})}"><text x="${x}" y="${y}" text-anchor="middle"><tspan class="cn" x="${x}" dy="-.2em">${esc(r.name)}</tspan><tspan class="cc" x="${x}" dy="1.25em">${tt("{n} Güter",{n:r.count})}</tspan></text></g>`});
   const svg=$("#map");svg.setAttribute("viewBox",`0 0 ${MW} ${MH}`);svg.setAttribute("width",MW);svg.setAttribute("height",MH);svg.innerHTML=s;
   $("#legend").innerHTML=CLUSTERS.map(r=>`<li><button data-clu="${r.k}">${esc(r.name)}<span>${pad(r.count,2)}</span></button><small>${r.orte.filter(o=>GEBIETE[o]).map(o=>esc(GEBIETE[o].name)).join(", ")}</small></li>`).join("");
   mapBuilt=true;
@@ -1146,8 +1206,8 @@ $("#mcAdd").addEventListener("click",ev=>{if(!picked)return;const d=addToDay(pic
 /* =========================================================
    PLANUNG: mehrere Tage mit Datum, Reihenfolge per Ziehen
    ========================================================= */
-const DE_DAY=new Intl.DateTimeFormat("de-DE",{weekday:"short",day:"numeric",month:"short"});
-const DE_LONG=new Intl.DateTimeFormat("de-DE",{weekday:"long",day:"numeric",month:"long"});
+const DE_DAY=new Intl.DateTimeFormat(LOC,{weekday:"short",day:"numeric",month:"short"});
+const DE_LONG=new Intl.DateTimeFormat(LOC,{weekday:"long",day:"numeric",month:"long"});
 const isoToday=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
 const parseISO=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
 const addDaysISO=(s,n)=>{const d=parseISO(s);d.setDate(d.getDate()+n);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
@@ -1162,7 +1222,7 @@ function newDay(date){const last=PLAN.days[PLAN.days.length-1];
   const d={id:"d"+Date.now().toString(36)+Math.floor(Math.random()*99),date:date||(last?addDaysISO(last.date,1):isoToday()),start:"09:30",stops:[]};
   PLAN.days.push(d);PLAN.days.sort((a,b)=>a.date.localeCompare(b.date));PLAN.active=d.id;savePlan();return d}
 const dayOf=id=>PLAN.days.find(d=>d.stops.some(s=>s.id===id));
-function planLabel(id){const d=dayOf(id);return d?`Eingeplant: ${DE_DAY.format(parseISO(d.date))}`:`Zum Tag hinzufügen`}
+function planLabel(id){const d=dayOf(id);return d?tt("Eingeplant: {d}",{d:DE_DAY.format(parseISO(d.date))}):tt("Zum Tag hinzufügen")}
 /* Fahrzeit grob aus Luftlinie: Umwegfaktor 1,35, Landstraße ~45 km/h, plus 4 Min. Parken */
 function hav(a,b){const R=6371,r=Math.PI/180,dLa=(b.lat-a.lat)*r,dLo=(b.lng-a.lng)*r,x=Math.sin(dLa/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(x))}
 const legOf=(a,b)=>{const km=hav(a,b)*1.35;return{km,min:Math.max(5,Math.round(km/45*60+4))}};
@@ -1189,44 +1249,44 @@ function miniMap(d){
     const cy=(n+so)/2,cx=(w+e)/2,sh=Math.max(n-so,(e-w)*H/W*1.2),sw=sh*W/H/1.2;n=cy+sh/2;so=cy-sh/2;w=cx-sw/2;e=cx+sw/2}
   const X=l=>(l-w)/(e-w)*W,Y=l=>(n-l)/(n-so)*H;
   const cs=contours((u,v)=>terrain(lerp(n,so,v),lerp(w,e,u)),46,26,10,i=>i/45*W,j=>j/25*H);
-  let svg=`<svg class="minimap" viewBox="0 0 ${W} ${H}" aria-label="Route des Tages" role="img">${cs.map(c=>`<path class="c" d="${c.d}"/>`).join("")}`;
+  let svg=`<svg class="minimap" viewBox="0 0 ${W} ${H}" aria-label="${tt("Route des Tages")}" role="img">${cs.map(c=>`<path class="c" d="${c.d}"/>`).join("")}`;
   if(pts.length>1)svg+=`<path class="rt" pathLength="1" d="M${pts.map(p=>f(X(p.lng))+" "+f(Y(p.lat))).join(" L")}"/>`;
   pts.forEach((p,i)=>{svg+=`<g class="pin"><circle cx="${f(X(p.lng))}" cy="${f(Y(p.lat))}" r="10"/><text x="${f(X(p.lng))}" y="${f(Y(p.lat))}">${i+1}</text></g>`});
   return svg+"</svg>"}
 /* Regionen an einem Tag: Hinweis, wenn der Tag zwei Regionen verbindet */
 function regionNote(d){const rs=[...new Set(d.stops.map(s=>regionOf(byId[s.id])))];if(rs.length<2)return "";
   let worst=null;for(let i=1;i<d.stops.length;i++){const a=byId[d.stops[i-1].id],b=byId[d.stops[i].id];if(regionOf(a)!==regionOf(b)){const l=legOf(a,b);if(!worst||l.min>worst.min)worst=l}}
-  return `<p class="rnote"><b>Dieser Tag führt durch ${rs.length} Regionen:</b> ${rs.map(r=>esc(r.name)).join(", ")}.${worst?` Die längste Fahrt dazwischen dauert etwa ${worst.min} Minuten.`:""}</p>`}
+  return `<p class="rnote"><b>${tt("Dieser Tag führt durch {n} Regionen:",{n:rs.length})}</b> ${rs.map(r=>esc(r.name)).join(", ")}.${worst?" "+tt("Die längste Fahrt dazwischen dauert etwa {m} Minuten.",{m:worst.min}):""}</p>`}
 /* Vorschläge für den nächsten Stopp: nah am letzten Gut, ausführliche Einträge und Gemerktes zuerst */
 function nearby(d){const last=byId[d.stops[d.stops.length-1]?.id];if(!last)return "";const inDay=new Set(d.stops.map(s=>s.id));
   const c=ESTATES.filter(e=>!inDay.has(e.id)&&e.genau).map(e=>({e,m:legOf(last,e).min})).filter(x=>x.m<=20)
     .sort((a,b)=>((!b.e.test)-(!a.e.test))*30+(saved.includes(b.e.id)-saved.includes(a.e.id))*20+(a.m-b.m)).slice(0,4);
   if(!c.length)return "";
-  return `<div class="near"><h3>Nah an ${esc(last.name)}</h3>${c.map(({e,m})=>`<div class="prow"><button class="nm" data-open="${e.id}">${esc(e.name)}<small>ca. ${m} Min.${e.test?"":", ausführlicher Eintrag"}</small></button><button class="plus" data-plus="${e.id}" aria-label="${esc(e.name)} zum Tag hinzufügen">+</button></div>`).join("")}</div>`}
+  return `<div class="near"><h3>${tt("Nah an {x}",{x:esc(last.name)})}</h3>${c.map(({e,m})=>`<div class="prow"><button class="nm" data-open="${e.id}">${esc(e.name)}<small>${tt("ca. {n} Min.",{n:m})}${e.test?"":", "+tt("ausführlicher Eintrag")}</small></button><button class="plus" data-plus="${e.id}" aria-label="${tt("{x} zum Tag hinzufügen",{x:esc(e.name)})}">+</button></div>`).join("")}</div>`}
 function renderPlan(opts={}){
   const box=$("#plan");const d=activeDay();
-  const dayBtns=PLAN.days.map(x=>`<button class="day" data-day="${x.id}" aria-pressed="${d&&x.id===d.id}"><b>${esc(DE_DAY.format(parseISO(x.date)))}</b><small>${x.stops.length} ${x.stops.length===1?"Gut":"Güter"}</small></button>`).join("");
-  let h=`<div class="days" role="group" aria-label="Tage">${dayBtns}<button class="day add" id="dayAdd">+ Tag</button></div>`;
-  if(!d){h+=`<p class="empty">Plane deine Reise Tag für Tag. Lege einen Tag an und füge gemerkte Güter hinzu.<br><button class="btn" id="dayAdd2">Ersten Tag anlegen</button></p>`}
+  const dayBtns=PLAN.days.map(x=>`<button class="day" data-day="${x.id}" aria-pressed="${d&&x.id===d.id}"><b>${esc(DE_DAY.format(parseISO(x.date)))}</b><small>${tt(x.stops.length===1?"{n} Gut":"{n} Güter",{n:x.stops.length})}</small></button>`).join("");
+  let h=`<div class="days" role="group" aria-label="${tt("Tage")}">${dayBtns}<button class="day add" id="dayAdd">${tt("+ Tag")}</button></div>`;
+  if(!d){h+=`<p class="empty">${tt("Plane deine Reise Tag für Tag. Lege einen Tag an und füge gemerkte Güter hinzu.")}<br><button class="btn" id="dayAdd2">${tt("Ersten Tag anlegen")}</button></p>`}
   else{
     const sc=schedule(d);
-    h+=`<div class="dayhead"><label class="when"><b>${esc(DE_LONG.format(parseISO(d.date)))}</b><span>Datum ändern</span><input type="date" id="dDate" value="${d.date}" aria-label="Datum"></label></div>
-    <div class="dayctl"><label><small>Start</small><b>${d.start}</b><input type="time" id="dStart" value="${d.start}" step="900" aria-label="Startzeit"></label>
-      <div class="sum"><small>Ende ca.</small><b>${d.stops.length?hhmm(sc.end):"–"}</b></div></div>`;
+    h+=`<div class="dayhead"><label class="when"><b>${esc(DE_LONG.format(parseISO(d.date)))}</b><span>${tt("Datum ändern")}</span><input type="date" id="dDate" value="${d.date}" aria-label="${tt("Datum")}"></label></div>
+    <div class="dayctl"><label><small>${tt("Start")}</small><b>${d.start}</b><input type="time" id="dStart" value="${d.start}" step="900" aria-label="${tt("Startzeit")}"></label>
+      <div class="sum"><small>${tt("Ende ca.")}</small><b>${d.stops.length?hhmm(sc.end):"–"}</b></div></div>`;
     h+=miniMap(d);
-    if(!d.stops.length)h+=`<p class="empty">Noch keine Stationen an diesem Tag. Tippe unten bei einem gemerkten Gut auf „+“ oder in einem Eintrag auf „Zum Tag hinzufügen“.</p>`;
-    else{h+=`<ol class="tl" id="tl">`+sc.rows.map((r,i)=>`${r.leg?`<li class="leg" aria-hidden="true">${r.leg.min} Min. Fahrt, ${r.leg.km.toFixed(0)} km</li>`:""}<li class="st" data-i="${i}" data-id="${r.e.id}">
-        <div class="tm">${hhmm(r.arr)}<small>bis ${hhmm(r.arr+r.s.dur)}</small></div>
-        <div><button class="nm" data-open="${r.e.id}">${esc(r.e.name)}</button><div class="sub"><button class="dur" data-dur="${i}" aria-label="Aufenthalt ändern">${r.s.dur} Min.</button><button class="rm" data-rm="${i}">Entfernen</button></div></div>
-        <div class="grip" data-grip="${i}" role="button" aria-label="Ziehen zum Verschieben"><i></i></div></li>`).join("")+`</ol>
-      <div class="endrow"><b>${hhmm(sc.end)}</b><span>Ende des Tages</span></div>
+    if(!d.stops.length)h+=`<p class="empty">${tt("Noch keine Stationen an diesem Tag. Tippe unten bei einem gemerkten Gut auf „+“ oder in einem Eintrag auf „Zum Tag hinzufügen“.")}</p>`;
+    else{h+=`<ol class="tl" id="tl">`+sc.rows.map((r,i)=>`${r.leg?`<li class="leg" aria-hidden="true">${tt("{m} Min. Fahrt, {k} km",{m:r.leg.min,k:r.leg.km.toFixed(0)})}</li>`:""}<li class="st" data-i="${i}" data-id="${r.e.id}">
+        <div class="tm">${hhmm(r.arr)}<small>${tt("bis {z}",{z:hhmm(r.arr+r.s.dur)})}</small></div>
+        <div><button class="nm" data-open="${r.e.id}">${esc(r.e.name)}</button><div class="sub"><button class="dur" data-dur="${i}" aria-label="${tt("Aufenthalt ändern")}">${r.s.dur} Min.</button><button class="rm" data-rm="${i}">${tt("Entfernen")}</button></div></div>
+        <div class="grip" data-grip="${i}" role="button" aria-label="${tt("Ziehen zum Verschieben")}"><i></i></div></li>`).join("")+`</ol>
+      <div class="endrow"><b>${hhmm(sc.end)}</b><span>${tt("Ende des Tages")}</span></div>
       ${regionNote(d)}${nearby(d)}
-      <div class="planacts">${d.stops.length>2?`<button class="btn line" id="pOpt">Reihenfolge optimieren</button>`:""}<a class="btn" href="${mapsUrl(d)}" target="_blank" rel="noopener">Route in Karten öffnen</a></div>`}
-    h+=`<button class="daydel" id="dayDel">Diesen Tag löschen</button>`;
+      <div class="planacts">${d.stops.length>2?`<button class="btn line" id="pOpt">${tt("Reihenfolge optimieren")}</button>`:""}<a class="btn" href="${mapsUrl(d)}" target="_blank" rel="noopener">${tt("Route in Karten öffnen")}</a></div>`}
+    h+=`<button class="daydel" id="dayDel">${tt("Diesen Tag löschen")}</button>`;
   }
   const planned=new Set(PLAN.days.flatMap(x=>x.stops.map(s=>s.id)));
   const pool=saved.filter(id=>byId[id]&&!planned.has(id));
-  h+=`<div class="pool"><h2>Gemerkt, noch nicht eingeplant</h2>${pool.length?pool.map(id=>{const e=byId[id];return `<div class="prow"><button class="nm" data-open="${id}">${esc(e.name)}<small>${esc(GEBIETE[e.gebiet].name)}</small></button><button class="plus" data-plus="${id}" aria-label="${esc(e.name)} zum Tag hinzufügen">+</button></div>`}).join(""):`<p class="small grey">Hier landen Güter, die du in einem Eintrag mit „Merken“ markierst.</p>`}</div>`;
+  h+=`<div class="pool"><h2>${tt("Gemerkt, noch nicht eingeplant")}</h2>${pool.length?pool.map(id=>{const e=byId[id];return `<div class="prow"><button class="nm" data-open="${id}">${esc(e.name)}<small>${esc(GEBIETE[e.gebiet].name)}</small></button><button class="plus" data-plus="${id}" aria-label="${tt("{x} zum Tag hinzufügen",{x:esc(e.name)})}">+</button></div>`}).join(""):`<p class="small grey">${tt("Hier landen Güter, die du in einem Eintrag mit „Merken“ markierst.")}</p>`}</div>`;
   box.innerHTML=h;
   if(!RM){const rt=box.querySelector(".rt");if(rt&&opts.draw!==false)rt.animate([{strokeDasharray:"1",strokeDashoffset:1},{strokeDasharray:"1",strokeDashoffset:0}],{duration:900,easing:"cubic-bezier(.5,0,.2,1)"});
     if(opts.stagger)stagger($$("#plan .st,#plan .prow"))}
@@ -1261,16 +1321,16 @@ $("#plan").addEventListener("click",e=>{const t=e.target;const d=activeDay();
     if(!RM)$("#plan .dayhead").animate([{opacity:0,transform:"translateX(24px)"},{opacity:1,transform:"none"}],{duration:420,easing:"cubic-bezier(.2,.8,.2,1)"});return}
   if(t.id==="dayAdd"||t.id==="dayAdd2"){newDay();renderPlan();const b=$$("#plan .day:not(.add)").find(x=>x.getAttribute("aria-pressed")==="true");
     b?.scrollIntoView({inline:"center",behavior:RM?"auto":"smooth",block:"nearest"});if(b&&!RM)b.animate([{transform:"scale(.6)",opacity:0},{transform:"scale(1.06)",offset:.7},{transform:"none",opacity:1}],{duration:480,easing:"ease-out"});return}
-  if(t.id==="dayDel"&&d){if(d.stops.length&&!confirm(`${DE_LONG.format(parseISO(d.date))} mit ${d.stops.length} Stationen löschen?`))return;
-    PLAN.days=PLAN.days.filter(x=>x!==d);PLAN.active=PLAN.days[0]?.id||null;savePlan();renderPlan();toast("Tag gelöscht");return}
+  if(t.id==="dayDel"&&d){if(d.stops.length&&!confirm(tt("{d} mit {n} Stationen löschen?",{d:DE_LONG.format(parseISO(d.date)),n:d.stops.length})))return;
+    PLAN.days=PLAN.days.filter(x=>x!==d);PLAN.active=PLAN.days[0]?.id||null;savePlan();renderPlan();toast(tt("Tag gelöscht"));return}
   const du=t.closest("[data-dur]");if(du&&d){const s=d.stops[+du.dataset.dur],o=[45,60,90,120,180];s.dur=o[(o.indexOf(s.dur)+1)%o.length];savePlan();renderPlan({draw:false});
     if(!RM)$$("#plan .tm").forEach(el=>el.animate([{opacity:.3},{opacity:1}],{duration:300}));return}
   const rm=t.closest("[data-rm]");if(rm&&d){const i=+rm.dataset.rm,row=$$("#tl .st")[i];
     const done=()=>{d.stops.splice(i,1);savePlan();renderPlan()};
     if(RM||!row)done();else row.animate([{opacity:1,transform:"none"},{opacity:0,transform:"translateX(-40px)"}],{duration:220,easing:"ease-in"}).onfinish=done;return}
-  const pl=t.closest("[data-plus]");if(pl){const id=pl.dataset.plus;const dd=addToDay(id);persist(false);renderPlan();toast(`${byId[id].name} am ${DE_DAY.format(parseISO(dd.date))} eingeplant`);
+  const pl=t.closest("[data-plus]");if(pl){const id=pl.dataset.plus;const dd=addToDay(id);persist(false);renderPlan();toast(tt("{x} am {d} eingeplant",{x:byId[id].name,d:DE_DAY.format(parseISO(dd.date))}));
     const row=$(`#tl .st[data-id="${id}"]`);if(row&&!RM){row.scrollIntoView({block:"center",behavior:"smooth"});row.animate([{background:"#FBE3D6"},{background:"#fff"}],{duration:1200,easing:"ease-out"})}return}
-  if(t.id==="pOpt"&&d){optimize(d);renderPlan({stagger:true});toast("Kürzeste Reihenfolge gesetzt");return}
+  if(t.id==="pOpt"&&d){optimize(d);renderPlan({stagger:true});toast(tt("Kürzeste Reihenfolge gesetzt"));return}
 });
 const badgeS=new Spring(1,{eps:.002,onUpdate:v=>$("#badge").style.setProperty("--b",v)});
 function persist(bump){try{localStorage.setItem("werf-merkliste",JSON.stringify(saved))}catch(_){}$("#badge").textContent=saved.length||"";
@@ -1301,7 +1361,7 @@ const sunS=new Spring(0,{response:.42,onUpdate:(x,v)=>{const st=1+Math.min(.45,M
    ANSICHTEN
    ========================================================= */
 let view="ausgabe";
-const TITLES={ausgabe:"Ausgabe 01",register:"Register",karte:"Karte",merkliste:"Planung"};
+const TITLES={ausgabe:tt("Ausgabe 01"),register:tt("Register"),karte:tt("Karte"),merkliste:tt("Planung")};
 function go(v,opts={}){
   const prev=view;view=v;if(sheet.classList.contains("open"))closeSheet(true);
   $$(".view").forEach(n=>n.classList.toggle("on",n.id==="v-"+v));
@@ -1338,40 +1398,41 @@ function buildSheet(id){
   const seq=(view==="register"&&visibleIds.includes(id))?visibleIds:ESTATES.map(x=>x.id);
   const i=seq.indexOf(id),prev=byId[seq[(i-1+seq.length)%seq.length]],next=byId[seq[(i+1)%seq.length]];
   const on=saved.includes(id);
-  sinner.innerHTML=`<div class="sbar"><span class="grab"></span><button data-close>Schließen</button><button data-save aria-pressed="${on}"><span class="dotm"></span><span>${on?"Gemerkt":"Merken"}</span></button></div>
+  sinner.innerHTML=`<div class="sbar"><span class="grab"></span><button data-close>${tt("Schließen")}</button><button data-save aria-pressed="${on}"><span class="dotm"></span><span>${on?tt("Gemerkt"):tt("Merken")}</span></button></div>
   <div class="smedia" id="smedia">${media(e)}</div>
   <div class="wrap sbody">
-    <div class="loc"><span class="grey">${pad(e.nr)}</span><span>${esc(GEBIETE[e.gebiet].name)}${e.stufe==="beitrag"?`<b class="kick">Beitrag</b>`:""}</span></div>
+    <div class="loc"><span class="grey">${pad(e.nr)}</span><span>${esc(GEBIETE[e.gebiet].name)}${e.stufe==="beitrag"?`<b class="kick">${tt("Beitrag")}</b>`:""}</span></div>
     <h2 class="cond rv" style="--n:${Math.max(...e.name.split(/\s+/).map(w=>w.length))}">${esc(e.name)}</h2>
-    ${e.test?`<p class="note">Zu diesem Gut gibt es noch keinen Text. Die Lage auf der Karte ist anhand der Gegend geschätzt.</p>`:`<p class="lead">${esc(e.lead)}</p>`}
-    ${!e.genau?`<p class="small grey" style="margin:-12px 0 var(--s2)">Lage auf der Karte geschätzt, die genaue Adresse fehlt noch.</p>`:""}
-    ${e.quelle==="web"?`<p class="small grey" style="margin:-12px 0 var(--s3)">Kurz zusammengefasst nach der Website des Guts, noch nicht geprüft.</p>`:""}
+    ${e.test?`<p class="note">${tt("Zu diesem Gut gibt es noch keinen Text.")} <button class="lnk" data-edit>${tt("Jetzt schreiben")}</button></p>`:`<p class="lead">${esc(e.lead)}</p>`}
+    ${!e.genau?`<p class="small grey" style="margin:-12px 0 var(--s2)">${tt("Lage auf der Karte geschätzt, die genaue Adresse fehlt noch.")}</p>`:""}
+    ${e.edAt?`<p class="small grey" style="margin:-12px 0 var(--s3)">${tt("Von dir bearbeitet am {d}.",{d:new Date(e.edAt).toLocaleDateString(LOC,{day:"numeric",month:"long",year:"numeric"})})}</p>`:e.quelle==="web"?`<p class="small grey" style="margin:-12px 0 var(--s3)">${tt("Kurz zusammengefasst nach der Website des Guts, noch nicht geprüft.")}</p>`:""}
+    ${e.nurDE?`<p class="small grey" style="margin:-12px 0 var(--s3)">${tt("Dieser Text liegt bisher nur auf Deutsch vor.")}</p>`:""}
     ${mine(e)}
-    <dl class="tbl">${[["Gegend",GEBIETE[e.gebiet].name],["Adresse",e.adresse],["Öffnungszeiten",e.zeiten],["Reservierung",e.reservierung],["Mit Kindern",e.kinder]].filter(([,v])=>v&&v!==TBD).map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}${e.web?`<div><dt>Website</dt><dd><a href="${esc(e.web)}" target="_blank" rel="noopener">${esc(e.web.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))}</a></dd></div>`:""}</dl>
-    <div class="planbtn"><button class="btn accent" id="addDay">${planLabel(id)}</button><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.name+", "+GEBIETE[e.gebiet].name+", South Africa")}" target="_blank" rel="noopener">In Karten öffnen</a></div>
+    <dl class="tbl">${[[tt("Gegend"),GEBIETE[e.gebiet].name],[tt("Adresse"),e.adresse],[tt("Öffnungszeiten"),e.zeiten],[tt("Reservierung"),e.reservierung],[tt("Mit Kindern"),e.kinder]].filter(([,v])=>v&&v!==TBD).map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}${e.web?`<div><dt>${tt("Website")}</dt><dd><a href="${esc(e.web)}" target="_blank" rel="noopener">${esc(e.web.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))}</a></dd></div>`:""}</dl>
+    <div class="planbtn"><button class="btn accent" id="addDay">${planLabel(id)}</button><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.name+", "+GEBIETE[e.gebiet].name+", South Africa")}" target="_blank" rel="noopener">${tt("In Karten öffnen")}</a><button class="btn line" data-edit>${tt("Bearbeiten")}</button></div>
     ${galHTML(e)}
     ${e.abschnitte?`<article class="beitrag">${e.abschnitte.map(a=>`<section class="sect"><h3>${esc(a.t)}</h3><p>${esc(a.p)}</p></section>`).join("")}</article>
-    ${e.steckbrief?`<div class="steck"><h3>Steckbrief</h3><dl class="tbl">${e.steckbrief.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>`:""}
-    ${e.quellen?`<div class="quellen"><h3>Quellen</h3><ul>${e.quellen.map(q=>`<li><a href="${esc(q.u)}" target="_blank" rel="noopener">${esc(q.t)}</a></li>`).join("")}</ul></div>`:""}`
+    ${e.steckbrief?`<div class="steck"><h3>${tt("Steckbrief")}</h3><dl class="tbl">${e.steckbrief.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>`:""}
+    ${e.quellen?`<div class="quellen"><h3>${tt("Quellen")}</h3><ul>${e.quellen.map(q=>`<li><a href="${esc(q.u)}" target="_blank" rel="noopener">${esc(q.t)}</a></li>`).join("")}</ul></div>`:""}`
     :e.ressorts.map(k=>`<div class="sect"><h3>${RESSORTS[k]}</h3><p>${esc(e[k])}</p></div>`).join("")}
     <div class="bild">
-      <h3>Bildwandler</h3>
-      <p>Wähle ein Foto aus deiner Mediathek oder mach eins. Die App wandelt es auf dem Gerät in eine Grafik im Stil von werf um.</p>
+      <h3>${tt("Bildwandler")}</h3>
+      <p>${tt("Wähle ein Foto aus deiner Mediathek oder mach eins. Die App wandelt es auf dem Gerät in eine Grafik im Stil von werf um.")}</p>
       <div class="acts">
-        <label class="btn filebtn">Foto wählen<input type="file" accept="image/*" id="bFile"></label>
-        ${IMG[id]?`<button class="btn line" id="bRemove">Eigenes Bild entfernen</button>`:""}
+        <label class="btn filebtn">${tt("Foto wählen")}<input type="file" accept="image/*" id="bFile"></label>
+        ${IMG[id]?`<button class="btn line" id="bRemove">${tt("Eigenes Bild entfernen")}</button>`:""}
       </div>
       <div class="wd" id="wd" hidden>
-        <canvas id="wCanvas" width="800" height="1000" aria-label="Vorschau der Grafik"></canvas>
-        <div class="seg" role="group" aria-label="Stil">${[["linien","Linien"],["raster","Raster"],["flaeche","Fläche"],["foto","Foto"]].map(([k,v],j)=>`<button data-wstyle="${k}" aria-pressed="${j===0}">${v}</button>`).join("")}</div>
-        <label class="rng">Detail<input type="range" id="wDetail" min="0" max="100" value="50"></label>
-        <div class="acts"><button class="btn" id="wSave">Übernehmen</button><button class="btn line" id="wCancel">Verwerfen</button></div>
+        <canvas id="wCanvas" width="800" height="1000" aria-label="${tt("Vorschau der Grafik")}"></canvas>
+        <div class="seg" role="group" aria-label="${tt("Stil")}">${[["linien",tt("Linien")],["raster",tt("Raster")],["flaeche",tt("Fläche")],["foto",tt("Foto")]].map(([k,v],j)=>`<button data-wstyle="${k}" aria-pressed="${j===0}">${v}</button>`).join("")}</div>
+        <label class="rng">${tt("Detail")}<input type="range" id="wDetail" min="0" max="100" value="50"></label>
+        <div class="acts"><button class="btn" id="wSave">${tt("Übernehmen")}</button><button class="btn line" id="wCancel">${tt("Verwerfen")}</button></div>
       </div>
-      <div class="urlrow"><input type="url" id="bUrl" placeholder="Oder Bildlink einfügen: https://…" aria-label="Bildlink"><button class="btn line" id="bUrlOk">Übernehmen</button></div>
+      <div class="urlrow"><input type="url" id="bUrl" placeholder="${tt("Oder Bildlink einfügen: https://…")}" aria-label="${tt("Bildlink")}"><button class="btn line" id="bUrlOk">${tt("Übernehmen")}</button></div>
       <p class="status" id="bStatus" aria-live="polite"></p>
     </div>
-    <div class="pager"><button data-page="-1" data-id="${prev.id}"><small>Vorheriges</small>${esc(prev.name)}</button><button data-page="1" data-id="${next.id}"><small>Nächstes</small>${esc(next.name)}</button></div>
-    <p class="swipehint">Seitlich wischen zum Blättern, nach unten ziehen zum Schließen</p>
+    <div class="pager"><button data-page="-1" data-id="${prev.id}"><small>${tt("Vorheriges")}</small>${esc(prev.name)}</button><button data-page="1" data-id="${next.id}"><small>${tt("Nächstes")}</small>${esc(next.name)}</button></div>
+    <p class="swipehint">${tt("Seitlich wischen zum Blättern, nach unten ziehen zum Schließen")}</p>
   </div>`;
   current=id;reveal(sinner);
 }
@@ -1403,7 +1464,7 @@ scrim.addEventListener("click",()=>closeSheet());
 
 /* Gesten im Eintrag */
 (()=>{const tr=new Tracker();let s=null;
-  sheet.addEventListener("touchstart",e=>{if(e.target.closest(".bild,.strip,input,a"))return s=null;const t=e.touches[0];s={x0:t.clientX,y0:t.clientY,top:sheet.scrollTop,axis:null};tr.reset();tr.add(t.clientX,t.clientY)},{passive:true});
+  sheet.addEventListener("touchstart",e=>{if(e.target.closest(".bild,.strip,input,a,textarea,select")||sinner.querySelector(".ed"))return s=null;const t=e.touches[0];s={x0:t.clientX,y0:t.clientY,top:sheet.scrollTop,axis:null};tr.reset();tr.add(t.clientX,t.clientY)},{passive:true});
   sheet.addEventListener("touchmove",e=>{if(!s)return;const t=e.touches[0],dx=t.clientX-s.x0,dy=t.clientY-s.y0;
     if(!s.axis&&Math.hypot(dx,dy)>10){
       if(Math.abs(dy)>Math.abs(dx)&&dy>0&&s.top<=0&&sheet.scrollTop<=0)s.axis="y";
@@ -1493,17 +1554,17 @@ function render(base,style,detail,out){
 const WZ={base:null,style:"linien"};
 let wTimer=0;
 function redraw(){if(!WZ.base)return;const cv=$("#wCanvas");if(!cv)return;cv.classList.add("busy");clearTimeout(wTimer);
-  wTimer=setTimeout(()=>{try{render(WZ.base,WZ.style,+$("#wDetail").value/100,cv)}catch(err){say("Die Umwandlung ist fehlgeschlagen. Versuche ein anderes Foto.")}cv.classList.remove("busy")},30)}
+  wTimer=setTimeout(()=>{try{render(WZ.base,WZ.style,+$("#wDetail").value/100,cv)}catch(err){say(tt("Die Umwandlung ist fehlgeschlagen. Versuche ein anderes Foto."))}cv.classList.remove("busy")},30)}
 async function setImage(id,value,ok){IMG[id]=value;const stored=await DB.put(id,value);$("#smedia").innerHTML=media(byId[id]);
   if(!RM)$("#smedia").firstElementChild.animate([{clipPath:"inset(0 0 100% 0)"},{clipPath:"inset(0 0 0 0)"}],{duration:900,easing:"cubic-bezier(.2,.9,.1,1)"});
-  say(stored?ok:"Bild übernommen. Speichern ist in dieser Ansicht nicht möglich, nach dem Neuladen fehlt es wieder. Öffne die Datei in Safari.");
+  say(stored?ok:tt("Bild übernommen. Speichern ist in dieser Ansicht nicht möglich, nach dem Neuladen fehlt es wieder. Öffne die Datei in Safari."));
   if(FEATURED.includes(id)||ROUTE.some(r=>r.id===id))renderAusgabe()}
-sheet.addEventListener("change",async ev=>{if(ev.target.id!=="bFile"||!ev.target.files?.[0]||!current)return;say("Foto wird geladen …");
+sheet.addEventListener("change",async ev=>{if(ev.target.id!=="bFile"||!ev.target.files?.[0]||!current)return;say(tt("Foto wird geladen …"));
   const file=ev.target.files[0];ev.target.value="";
-  try{WZ.base=await loadPhoto(file);$("#wd").hidden=false;redraw();say("Wähle einen Stil und übernimm die Grafik.");
+  try{WZ.base=await loadPhoto(file);$("#wd").hidden=false;redraw();say(tt("Wähle einen Stil und übernimm die Grafik."));
     $("#wd").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"});
     if(!RM)$("#wCanvas").animate([{clipPath:"inset(0 0 100% 0)"},{clipPath:"inset(0 0 0 0)"}],{duration:800,easing:"cubic-bezier(.2,.9,.1,1)"})}
-  catch(err){say("Dieses Foto kann der Browser nicht öffnen. Wähle ein anderes Foto oder exportiere es vorher als JPG.")}});
+  catch(err){say(tt("Dieses Foto kann der Browser nicht öffnen. Wähle ein anderes Foto oder exportiere es vorher als JPG."))}});
 sheet.addEventListener("input",ev=>{if(ev.target.id==="wDetail")redraw()});
 
 /* =========================================================
@@ -1512,18 +1573,18 @@ sheet.addEventListener("input",ev=>{if(ev.target.id==="wDetail")redraw()});
 const GAL={};                 // Gut-ID -> eigene Fotos [{gid,blob,date,url}]
 const COMMONS=f=>`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=1400`;
 const COMMONS_PAGE=f=>`https://commons.wikimedia.org/wiki/File:${encodeURIComponent(f.replace(/ /g,"_"))}`;
-const DE_DATE=new Intl.DateTimeFormat("de-DE",{day:"numeric",month:"long",year:"numeric"});
+const DE_DATE=new Intl.DateTimeFormat(LOC,{day:"numeric",month:"long",year:"numeric"});
 function webPics(e){return (window.WEBBILDER||{})[e.id]||[]}
 function galItems(e){
-  const own=(GAL[e.id]||[]).slice().sort((a,b)=>b.date-a.date).map(g=>({kind:"own",gid:g.gid,src:g.url||(g.url=URL.createObjectURL(g.blob)),cap:g.date?`Eigenes Foto, ${DE_DATE.format(new Date(g.date))}`:"Eigenes Foto"}));
-  const web=webPics(e).map(w=>({kind:"web",src:COMMONS(w.f),cap:w.t||"Wikimedia Commons",file:w.f}));
+  const own=(GAL[e.id]||[]).slice().sort((a,b)=>b.date-a.date).map(g=>({kind:"own",gid:g.gid,src:g.url||(g.url=URL.createObjectURL(g.blob)),cap:g.date?`${tt("Eigenes Foto")}, ${DE_DATE.format(new Date(g.date))}`:tt("Eigenes Foto")}));
+  const web=webPics(e).map(w=>({kind:"web",src:COMMONS(w.f),cap:w.t||tt("Wikimedia Commons"),file:w.f}));
   return own.concat(web)}
 function galLinks(e){const q=e.name+" "+(GEBIETE[e.gebiet]?.name||"");const tag=norm(e.name).replace(/\b(wine estate|estate|wines?|vineyards?|winery|family)\b/g,"").replace(/[^a-z0-9]/g,"");
-  return `<div class="gallinks"><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q+", South Africa")}" target="_blank" rel="noopener">Fotos in Google Maps</a><a href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(q+" wine estate")}" target="_blank" rel="noopener">Bildersuche</a>${tag?`<a href="https://www.instagram.com/explore/tags/${tag}/" target="_blank" rel="noopener">#${tag}</a>`:""}</div>`}
+  return `<div class="gallinks"><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q+", South Africa")}" target="_blank" rel="noopener">${tt("Fotos in Google Maps")}</a><a href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(q+" wine estate")}" target="_blank" rel="noopener">${tt("Bildersuche")}</a>${tag?`<a href="https://www.instagram.com/explore/tags/${tag}/" target="_blank" rel="noopener">#${tag}</a>`:""}</div>`}
 function galHTML(e){const it=galItems(e),own=(GAL[e.id]||[]).length;
-  return `<section class="gal" id="gal"><div class="galhead"><h3>Galerie</h3><span class="small grey">${it.length?`${it.length} ${it.length===1?"Foto":"Fotos"}`:""}</span></div>
-  <div class="strip" id="strip">${it.map((g,i)=>`<button class="tile" data-lb="${i}" aria-label="Foto ${i+1} öffnen"><img src="${esc(g.src)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="cap${g.kind==="web"?" web":""}">${g.kind==="web"?"Vorab":esc(g.cap.replace("Eigenes Foto, ",""))}</span></button>`).join("")}<label class="tile add"><span><b>+</b>${own?"Weitere Fotos":"Eigene Fotos"}</span><input type="file" accept="image/*" multiple id="gFile" aria-label="Eigene Fotos hinzufügen"></label></div>
-  ${it.length?"":`<p class="galnote">Noch keine Fotos. Schau vorab, wie es dort aussieht, und leg nach dem Besuch deine eigenen Bilder ab. Sie bleiben auf diesem Gerät.</p>`}
+  return `<section class="gal" id="gal"><div class="galhead"><h3>${tt("Galerie")}</h3><span class="small grey">${it.length?tt(it.length===1?"{n} Foto":"{n} Fotos",{n:it.length}):""}</span></div>
+  <div class="strip" id="strip">${it.map((g,i)=>`<button class="tile" data-lb="${i}" aria-label="${tt("Foto {n} öffnen",{n:i+1})}"><img src="${esc(g.src)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="cap${g.kind==="web"?" web":""}">${g.kind==="web"?tt("Vorab"):esc(g.cap.replace(tt("Eigenes Foto")+", ",""))}</span></button>`).join("")}<label class="tile add"><span><b>+</b>${own?tt("Weitere Fotos"):tt("Eigene Fotos")}</span><input type="file" accept="image/*" multiple id="gFile" aria-label="${tt("Eigene Fotos hinzufügen")}"></label></div>
+  ${it.length?"":`<p class="galnote">${tt("Noch keine Fotos. Schau vorab, wie es dort aussieht, und leg nach dem Besuch deine eigenen Bilder ab. Sie bleiben auf diesem Gerät.")}</p>`}
   ${galLinks(e)}</section>`}
 function refreshGal(){const g=$("#gal");if(!g||!current)return;const sx=$("#strip")?.scrollLeft||0;g.outerHTML=galHTML(byId[current]);const st=$("#strip");if(st)st.scrollLeft=sx}
 document.addEventListener("error",ev=>{const im=ev.target;if(im.tagName==="IMG"&&im.closest(".tile"))im.closest(".tile").remove()},true);
@@ -1549,12 +1610,12 @@ async function shrink(file,max=1800){
   const c=document.createElement("canvas");c.width=Math.round(w*k);c.height=Math.round(h*k);c.getContext("2d").drawImage(src,0,0,c.width,c.height);src.close?.();
   return await new Promise(r=>c.toBlob(r,"image/jpeg",.85))}
 async function addPhotos(id,files){
-  let n=0,fail=0;toast(files.length>1?`${files.length} Fotos werden abgelegt …`:"Foto wird abgelegt …");
+  let n=0,fail=0;toast(files.length>1?tt("{n} Fotos werden abgelegt …",{n:files.length}):tt("Foto wird abgelegt …"));
   for(const f of files){try{const date=await exifDate(f)||f.lastModified||Date.now();const blob=await shrink(f);if(!blob)throw 0;
     const gid=id+"-"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const ok=await DB.galPut(gid,{estate:id,blob,date});
     (GAL[id]=GAL[id]||[]).push({gid,blob,date,mem:!ok});n++}catch(_){fail++}}
   if(current===id){refreshGal();const st=$("#strip");if(st&&!RM){st.scrollTo({left:0,behavior:"smooth"});st.querySelectorAll(".tile").forEach((t,i)=>{if(i<n)t.animate([{transform:"translateY(40px) scale(.9)",opacity:0},{transform:"none",opacity:1}],{duration:700,delay:i*70,easing:"cubic-bezier(.2,.9,.1,1.15)",fill:"backwards"})})}}
-  toast(fail?`${n} abgelegt, ${fail} konnte der Browser nicht öffnen`:n===1?"Foto in der Galerie abgelegt":`${n} Fotos in der Galerie abgelegt`)}
+  toast(fail?tt("{n} abgelegt, {f} konnte der Browser nicht öffnen",{n,f:fail}):n===1?tt("Foto in der Galerie abgelegt"):tt("{n} Fotos in der Galerie abgelegt",{n}))}
 sheet.addEventListener("change",ev=>{if(ev.target.id!=="gFile"||!current)return;const files=[...ev.target.files];ev.target.value="";if(files.length)addPhotos(current,files)});
 
 /* Vollbild: wischen zum Blättern, nach unten ziehen zum Schließen */
@@ -1565,9 +1626,9 @@ const lbY=new Spring(0,{onUpdate:y=>{const k=clamp(Math.abs(y)/innerHeight);cons
 function lbInfo(){const g=LB.items[LB.i];if(!g)return;
   $("#lbcount").textContent=`${LB.i+1} / ${LB.items.length}`;
   $("#lbdots").innerHTML=LB.items.length>1&&LB.items.length<16?LB.items.map((_,j)=>`<i class="${j===LB.i?"on":""}"></i>`).join(""):"";
-  $("#lbcap").innerHTML=g.kind==="web"?`Freies Foto von <a href="${COMMONS_PAGE(g.file)}" target="_blank" rel="noopener">Wikimedia Commons</a>, Urheber und Lizenz dort`:esc(g.cap);
+  $("#lbcap").innerHTML=g.kind==="web"?tt("Freies Foto von {a}, Urheber und Lizenz dort",{a:`<a href="${COMMONS_PAGE(g.file)}" target="_blank" rel="noopener">Wikimedia Commons</a>`}):esc(g.cap);
   LB.arm=false;
-  $("#lbacts").innerHTML=g.kind==="own"?`<button data-lbact="titel">Als Titelbild</button><button data-lbact="del">Löschen</button>`:`<button data-lbact="titel">Als Titelbild</button>`}
+  $("#lbacts").innerHTML=g.kind==="own"?`<button data-lbact="titel">${tt("Als Titelbild")}</button><button data-lbact="del">${tt("Löschen")}</button>`:`<button data-lbact="titel">${tt("Als Titelbild")}</button>`}
 function lbGo(i,v=0){LB.i=clamp(i,0,LB.items.length-1);lbX.to(-LB.i*innerWidth,{velocity:v,response:.42,damping:.9});lbInfo()}
 function openLB(i,fromEl){
   const e=byId[current];LB.items=galItems(e);LB.id=current;LB.i=i;LB.from=fromEl;if(!LB.items.length)return;
@@ -1606,18 +1667,96 @@ function closeLB(v=0){
 lb.addEventListener("click",async ev=>{const t=ev.target;
   if(t.id==="lbclose"){closeLB();return}
   const act=t.closest("[data-lbact]")?.dataset.lbact,g=LB.items[LB.i];if(!act||!g)return;
-  if(act==="del"){if(!LB.arm){LB.arm=true;t.textContent="Wirklich löschen?";t.classList.add("warn");return}
+  if(act==="del"){if(!LB.arm){LB.arm=true;t.textContent=tt("Wirklich löschen?");t.classList.add("warn");return}
     await DB.galDel(g.gid);GAL[LB.id]=(GAL[LB.id]||[]).filter(x=>x.gid!==g.gid);refreshGal();
-    LB.items=galItems(byId[LB.id]);if(!LB.items.length){lb.classList.remove("open");lbtrack.innerHTML="";toast("Foto gelöscht");return}
-    const sl=lbtrack.children[LB.i];sl.animate([{opacity:1,transform:"scale(1)"},{opacity:0,transform:"scale(.85)"}],{duration:260,easing:"ease-in"}).onfinish=()=>{sl.remove();lbX.set(-Math.min(LB.i,LB.items.length-1)*innerWidth);lbGo(Math.min(LB.i,LB.items.length-1))};toast("Foto gelöscht");return}
+    LB.items=galItems(byId[LB.id]);if(!LB.items.length){lb.classList.remove("open");lbtrack.innerHTML="";toast(tt("Foto gelöscht"));return}
+    const sl=lbtrack.children[LB.i];sl.animate([{opacity:1,transform:"scale(1)"},{opacity:0,transform:"scale(.85)"}],{duration:260,easing:"ease-in"}).onfinish=()=>{sl.remove();lbX.set(-Math.min(LB.i,LB.items.length-1)*innerWidth);lbGo(Math.min(LB.i,LB.items.length-1))};toast(tt("Foto gelöscht"));return}
   if(act==="titel"){const id=LB.id;
-    if(g.kind==="web"){closeLB();await setImage(id,{src:g.src},"Titelbild übernommen.");toast("Als Titelbild übernommen");return}
+    if(g.kind==="web"){closeLB();await setImage(id,{src:g.src},tt("Titelbild übernommen."));toast(tt("Als Titelbild übernommen"));return}
     try{const blob=(GAL[id]||[]).find(x=>x.gid===g.gid)?.blob;WZ.base=await loadPhoto(blob);closeLB();
-      $("#wd").hidden=false;redraw();say("Wähle einen Stil für das Titelbild. Foto lässt es, wie es ist.");
-      setTimeout(()=>$("#wd").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"}),450)}catch(_){toast("Dieses Foto lässt sich nicht verwenden")}}});
+      $("#wd").hidden=false;redraw();say(tt("Wähle einen Stil für das Titelbild. Foto lässt es, wie es ist."));
+      setTimeout(()=>$("#wd").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"}),450)}catch(_){toast(tt("Dieses Foto lässt sich nicht verwenden"))}}});
 document.addEventListener("keydown",ev=>{if(!lb.classList.contains("open"))return;ev.stopImmediatePropagation();
   if(ev.key==="Escape")closeLB();if(ev.key==="ArrowRight")lbGo(LB.i+1);if(ev.key==="ArrowLeft")lbGo(LB.i-1)},true);
 addEventListener("resize",()=>{if(lb.classList.contains("open"))lbX.set(-LB.i*innerWidth)});
+
+/* =========================================================
+   BEARBEITEN: Texte, Praktisches und Persönliches direkt im Eintrag
+   ========================================================= */
+function persistEdits(){try{localStorage.setItem("werf-edits",JSON.stringify(EDITS));return true}catch(_){return false}}
+const origOf=(e,k)=>e._orig&&k in e._orig?e._orig[k]:(e[k]??"");
+function fld(e,k,label,type="area"){const v=e[k]??"",o=origOf(e,k),changed=e._orig&&k in e._orig&&String(o)!==String(v);
+  const head=`<span class="fl">${label}${changed&&o!==""?`<button class="lnk" data-edorig="${k}">${tt("Original")}</button>`:""}</span>`;
+  if(type==="area")return `<label class="fld">${head}<textarea data-ed="${k}" rows="2">${esc(v)}</textarea></label>`;
+  if(type==="check")return `<label class="fld chk"><input type="checkbox" data-ed="${k}"${v?" checked":""}><i></i><span class="fl">${label}</span></label>`;
+  return `<label class="fld">${head}<input type="${type}" data-ed="${k}" value="${esc(v)}"></label>`}
+function buildEditor(id){const e=byId[id];
+  const sec=e.abschnitte?e.abschnitte.map((a,i)=>{const o=e._orig?.abschnitte?.[i],ch=o!=null&&o!==a.p;
+      return `<label class="fld"><span class="fl">${esc(a.t)}${ch?`<button class="lnk" data-edorig="abschnitte:${i}">${tt("Original")}</button>`:""}</span><textarea data-ed="abschnitte:${i}" rows="4">${esc(a.p)}</textarea></label>`}).join("")
+    :Object.entries(RESSORTS).map(([k,v])=>fld(e,k,v)).join("");
+  sinner.innerHTML=`<div class="sbar edbar"><button data-edcancel>${tt("Abbrechen")}</button><b>${tt("Bearbeiten")}</b><button class="edsave" data-edsave>${tt("Sichern")}</button></div>
+  <div class="wrap sbody ed">
+    <h2 class="cond" style="--n:${Math.max(...e.name.split(/\s+/).map(w=>w.length))}">${esc(e.name)}</h2>
+    <p class="small grey ednote">${tt("Deine Änderungen bleiben auf diesem Gerät. Im Register kannst du sie als Datei sichern und weitergeben.")}</p>
+    <fieldset><legend>${tt("Text")}</legend>${fld(e,"lead",tt("Einleitung"))}${sec}</fieldset>
+    <fieldset><legend>${tt("Praktisches")}</legend>${fld(e,"adresse",tt("Adresse"),"text")}${fld(e,"zeiten",tt("Öffnungszeiten"))}${fld(e,"reservierung",tt("Reservierung"),"text")}${fld(e,"kinder",tt("Mit Kindern"),"text")}${fld(e,"web",tt("Website"),"url")}</fieldset>
+    <fieldset><legend>${tt("Persönlich")}</legend>${fld(e,"besuchen",tt("Will ich hin"),"check")}${fld(e,"bekannt",tt("Schon dort"),"check")}${fld(e,"datum",tt("Besucht am"),"date")}${fld(e,"notiz",tt("Notiz"))}</fieldset>
+    ${EDITS[id]?`<button class="daydel" data-edreset>${tt("Alle Änderungen an diesem Gut verwerfen")}</button>`:""}
+  </div>`;
+  sinner.querySelectorAll("textarea").forEach(grow);
+  if(!RM)sinner.querySelectorAll("fieldset").forEach((f,i)=>f.animate([{opacity:0,transform:"translateY(24px)"},{opacity:1,transform:"none"}],{duration:520,delay:80+i*70,easing:"cubic-bezier(.2,.9,.2,1)",fill:"backwards"}))}
+function grow(ta){ta.style.height="auto";ta.style.height=(ta.scrollHeight+2)+"px"}
+sheet.addEventListener("input",ev=>{if(ev.target.matches(".ed textarea"))grow(ev.target)});
+function openEditor(id){sheet.scrollTo({top:0,behavior:"auto"});
+  if(RM){buildEditor(id);return}
+  sinner.animate([{opacity:1,transform:"none"},{opacity:0,transform:"translateY(16px) scale(.985)"}],{duration:180,easing:"ease-in"}).onfinish=()=>{buildEditor(id);sinner.animate([{opacity:0,transform:"translateY(-10px)"},{opacity:1,transform:"none"}],{duration:420,easing:"cubic-bezier(.2,.9,.2,1)"})}}
+function saveEditor(id){const e=byId[id],ed={};
+  sinner.querySelectorAll("[data-ed]").forEach(el=>{const k=el.dataset.ed,v=el.type==="checkbox"?el.checked:el.value.trim();
+    if(k.startsWith("abschnitte:")){const i=+k.split(":")[1],o=e._orig?.abschnitte?.[i]??e.abschnitte[i].p;if(v!==o){ed.abschnitte=ed.abschnitte||[];ed.abschnitte[i]=v}return}
+    const o=origOf(e,k);if(el.type==="checkbox"?!!o!==v:String(o??"")!==v)ed[k]=v});
+  /* zurück zum Original, dann die neuen Änderungen anwenden */
+  if(e._orig){for(const [k,v] of Object.entries(e._orig)){if(k==="abschnitte")e.abschnitte=e.abschnitte.map((a,i)=>({t:a.t,p:v[i]}));else e[k]=v}}
+  delete e._orig;delete e.edAt;
+  if(Object.keys(ed).length){ed._at=Date.now();EDITS[id]=ed}else delete EDITS[id];
+  applyEdits(e);refreshDerived(e);const ok=persistEdits();
+  buildSheet(id);sheet.scrollTo({top:0});
+  if(!RM)sinner.animate([{opacity:0,transform:"translateY(10px)"},{opacity:1,transform:"none"}],{duration:420,easing:"cubic-bezier(.2,.9,.2,1)"});
+  toast(ok?(EDITS[id]?tt("Gesichert, auf diesem Gerät"):tt("Keine Änderungen")):tt("Speichern ist in dieser Ansicht nicht möglich"));
+  renderImp();if(view==="register")renderRegister();if(FEATURED.includes(id))renderAusgabe()}
+sheet.addEventListener("click",ev=>{const t=ev.target;if(!current)return;
+  if(t.closest("[data-edit]")){openEditor(current);return}
+  if(t.closest("[data-edcancel]")){buildSheet(current);sheet.scrollTo({top:0});return}
+  if(t.closest("[data-edsave]")){saveEditor(current);return}
+  const o=t.closest("[data-edorig]");if(o){ev.preventDefault();const k=o.dataset.edorig,e=byId[current],el=sinner.querySelector(`[data-ed="${k}"]`);
+    el.value=k.startsWith("abschnitte:")?e._orig.abschnitte[+k.split(":")[1]]:origOf(e,k);if(el.tagName==="TEXTAREA")grow(el);
+    if(!RM)el.animate([{background:"#FBE3D6"},{background:"#fff"}],{duration:900});o.remove();return}
+  if(t.closest("[data-edreset]")){if(!confirm(tt("Alle deine Änderungen an diesem Gut verwerfen?")))return;
+    sinner.querySelectorAll("[data-ed]").forEach(el=>{const k=el.dataset.ed,e=byId[current];if(k.startsWith("abschnitte:")){el.value=e._orig?.abschnitte?.[+k.split(":")[1]]??el.value}else{const o=origOf(e,k);if(el.type==="checkbox")el.checked=!!o;else el.value=o}});
+    saveEditor(current);return}});
+/* Sichern und Laden als Datei */
+function edBox(){const n=Object.keys(EDITS).length;
+  return `<div class="edbox"><p>${n?tt("<b>Eigene Texte:</b> {n} Güter bearbeitet.",{n}):tt("Eigene Texte schreibst du direkt im Eintrag über „Bearbeiten“.")}</p>${n?`<button class="btn line" id="edExport">${tt("Sichern")}</button>`:""}<label class="btn line filebtn">${tt("Laden")}<input type="file" id="edImport" accept=".json,application/json"></label></div>`}
+document.addEventListener("click",async ev=>{if(ev.target.id!=="edExport")return;
+  const name=`werf-texte-${new Date().toISOString().slice(0,10)}.json`,data=JSON.stringify({werf:"texte",version:1,at:Date.now(),edits:EDITS},null,1);
+  const file=new File([data],name,{type:"application/json"});
+  try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:"werf"});return}}catch(err){if(err?.name==="AbortError")return}
+  const a=document.createElement("a");a.href=URL.createObjectURL(file);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)});
+document.addEventListener("change",async ev=>{if(ev.target.id!=="edImport"||!ev.target.files?.[0])return;const file=ev.target.files[0];ev.target.value="";
+  try{const j=JSON.parse(await file.text());if(j?.werf!=="texte"||typeof j.edits!=="object")throw 0;let n=0;
+    for(const [id,ed] of Object.entries(j.edits)){if(!byId[id])continue;if(!EDITS[id]||(ed._at||0)>(EDITS[id]._at||0)){EDITS[id]=ed;n++}}
+    persistEdits();toast(tt("{n} Güter übernommen. Die App lädt neu …",{n}));setTimeout(()=>location.reload(),900)}
+  catch(_){toast(tt("Diese Datei enthält keine werf-Texte"))}});
+
+/* =========================================================
+   SPRACHUMSCHALTER
+   ========================================================= */
+function renderLang(){$$("[data-langsw]").forEach(el=>el.innerHTML=LANGS.map(l=>`<button data-lang="${l}" aria-pressed="${l===LANG}" aria-label="${{de:"Deutsch",en:"English",af:"Afrikaans"}[l]}">${l.toUpperCase()}</button>`).join(""))}
+renderLang();
+document.addEventListener("click",ev=>{const b=ev.target.closest("[data-lang]");if(!b)return;const l=b.dataset.lang;if(l===LANG)return;
+  try{localStorage.setItem("werf-lang",l);sessionStorage.setItem("werf-view",view)}catch(_){}
+  $$("[data-langsw]").forEach(el=>el.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b||x.dataset.lang===l)));
+  if(RM){location.reload();return}
+  document.body.animate([{opacity:1,filter:"blur(0)"},{opacity:0,filter:"blur(10px)"}],{duration:260,easing:"ease-in",fill:"forwards"}).onfinish=()=>location.reload()});
 
 /* =========================================================
    KLICKS
@@ -1634,20 +1773,20 @@ document.addEventListener("click",async ev=>{
   if(t.closest("[data-close]")){closeSheet();return}
   const sv=t.closest("[data-save]");
   if(sv&&current){const was=saved.includes(current);saved=was?saved.filter(x=>x!==current):[...saved,current];const on=!was;
-    sv.setAttribute("aria-pressed",on);sv.lastElementChild.textContent=on?"Gemerkt":"Merken";
+    sv.setAttribute("aria-pressed",on);sv.lastElementChild.textContent=on?tt("Gemerkt"):tt("Merken");
     if(on)flyToNav(sv);else{persist(false);PLAN.days.forEach(d=>d.stops=d.stops.filter(s=>s.id!==current));savePlan();const ad=$("#addDay");if(ad)ad.textContent=planLabel(current)}if(view==="merkliste")renderPlan({draw:false});return}
   if(t.id==="addDay"&&current){const pd=dayOf(current);if(pd){PLAN.active=pd.id;savePlan();go("merkliste");return}
-    const d=addToDay(current);t.textContent=planLabel(current);const sb=$("[data-save]");if(sb){sb.setAttribute("aria-pressed","true");sb.lastElementChild.textContent="Gemerkt"}
-    flyToNav(t);toast(`Am ${DE_DAY.format(parseISO(d.date))} eingeplant`);if(view==="merkliste")renderPlan();return}
+    const d=addToDay(current);t.textContent=planLabel(current);const sb=$("[data-save]");if(sb){sb.setAttribute("aria-pressed","true");sb.lastElementChild.textContent=tt("Gemerkt")}
+    flyToNav(t);toast(tt("Am {d} eingeplant",{d:DE_DAY.format(parseISO(d.date))}));if(view==="merkliste")renderPlan();return}
   if(t.id==="takeRoute"){const d=newDay();d.start=ROUTEN[RI].start;d.stops=ROUTE.map(r=>({id:r.id,dur:r.dur}));ROUTE.forEach(r=>{PLAN.days.forEach(x=>{if(x!==d)x.stops=x.stops.filter(s=>s.id!==r.id)});if(!saved.includes(r.id))saved.push(r.id)});savePlan();persist(true);
-    toast("Route als neuer Tag angelegt");go("merkliste");return}
+    toast(tt("Route als neuer Tag angelegt"));go("merkliste");return}
   const ws=t.closest("[data-wstyle]");if(ws){WZ.style=ws.dataset.wstyle;$$("[data-wstyle]").forEach(b=>b.setAttribute("aria-pressed",b===ws));$("#wDetail").closest("label").hidden=WZ.style==="foto";redraw();return}
   if(t.id==="wCancel"){WZ.base=null;$("#wd").hidden=true;say("");return}
   if(t.id==="wSave"&&current&&WZ.base){const cv=$("#wCanvas");render(WZ.base,WZ.style,+$("#wDetail").value/100,cv);
     const data=cv.toDataURL("image/jpeg",.86);WZ.base=null;$("#wd").hidden=true;sheet.scrollTo({top:0,behavior:RM?"auto":"smooth"});
-    await setImage(current,{src:data,graf:true},"Grafik übernommen und auf diesem Gerät gespeichert.");return}
-  if(t.id==="bUrlOk"&&current){const u=$("#bUrl").value.trim();if(!/^https?:\/\//i.test(u)){say("Füge einen vollständigen Bildlink ein, der mit https:// beginnt.");return}await setImage(current,{src:u},"Bildlink übernommen. Lädt das Bild nicht, erscheint wieder die Tafel.");return}
-  if(t.id==="bRemove"&&current){delete IMG[current];await DB.del(current);$("#smedia").innerHTML=media(byId[current]);t.remove();say("Eigenes Bild entfernt.");return}
+    await setImage(current,{src:data,graf:true},tt("Grafik übernommen und auf diesem Gerät gespeichert."));return}
+  if(t.id==="bUrlOk"&&current){const u=$("#bUrl").value.trim();if(!/^https?:\/\//i.test(u)){say(tt("Füge einen vollständigen Bildlink ein, der mit https:// beginnt."));return}await setImage(current,{src:u},tt("Bildlink übernommen. Lädt das Bild nicht, erscheint wieder die Tafel."));return}
+  if(t.id==="bRemove"&&current){delete IMG[current];await DB.del(current);$("#smedia").innerHTML=media(byId[current]);t.remove();say(tt("Eigenes Bild entfernt."));return}
 });
 document.addEventListener("keydown",ev=>{
   if(ev.key==="Escape"){if(sheet.classList.contains("open"))closeSheet();else unpick()}
@@ -1683,6 +1822,7 @@ document.fonts?.ready.then(()=>{layout();sunS.set(centers()[TABS.indexOf(view)])
 
 /* Start */
 persist(false);renderAusgabe();go("ausgabe");sunS.set(centers()[0]);reveal();
+{let v=null;try{v=sessionStorage.getItem("werf-view");sessionStorage.removeItem("werf-view")}catch(_){}if(v&&v!=="ausgabe"&&TABS.includes(v))go(v)}
 DB.open().then(()=>DB.galAll()).then(list=>{list.forEach(g=>(GAL[g.estate]=GAL[g.estate]||[]).push(g));if(current)refreshGal()}).then(()=>DB.all()).then(all=>{if(Object.keys(all).length){for(const [k,v] of Object.entries(all))IMG[k]=typeof v==="string"?{src:v}:v;renderAusgabe();requestTick()}});
 </script>
 </body>
