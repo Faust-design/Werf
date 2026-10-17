@@ -5,11 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="werf">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
 <title>werf – Stellenbosch</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self' https://router.project-osrm.org https://*.supabase.co wss://*.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <style>
+/* Archivo (SIL Open Font License), selbst gehostet: keine Verbindung zu Google */
+@font-face{font-family:"Archivo";font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(fonts/archivo-latin-ext-wdth-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Archivo";font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(fonts/archivo-latin-wdth-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --paper:#FFFFFF; --ink:#000000; --grey:#7A7A7A; --soft:#F1F1EE;
   --duene:#E4561B;                 /* Wüstenorange: einziger Akzent */
@@ -186,6 +195,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .imp{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1) var(--s2);margin-top:var(--s3);padding:var(--s2);background:var(--soft)}
 .imp p{flex:1 1 200px;font-size:13px;color:var(--grey)}
 .imp b{color:#000}
+.imp .btn.line{background:#fff}
 .row .tg{display:flex;justify-content:flex-end}
 .row .tg i{display:block;width:9px;height:9px;border-radius:50%;background:var(--duene)}
 .empty{padding:var(--s3) 0;font-size:18px;font-weight:500;max-width:22em}
@@ -235,6 +245,48 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .fld.chk .fl{font-size:16px;color:#000;font-weight:600}
 .edbox{flex:1 1 100%;display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1) var(--s2);border-top:1px solid #e2e2dd;padding-top:var(--s2);margin-top:var(--s1)}
 .edbox p{flex:1 1 200px;font-size:13px;color:var(--grey)}
+.sunset{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:var(--s2);font-size:14px;font-weight:650}
+.sunset i{width:22px;height:11px;border-radius:22px 22px 0 0;background:var(--duene);box-shadow:0 -2px 10px rgba(228,86,27,.6);border-bottom:2px solid #000}
+.sunset em{font-style:normal;font-weight:500;color:var(--grey);flex-basis:100%}
+.owarn{font-size:13px;font-weight:700;color:var(--duene);margin-top:2px}
+/* Widmung */
+.widmung{position:fixed;inset:0;z-index:90;background:#000;color:#fff;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:calc(48px + env(safe-area-inset-top)) var(--g) calc(48px + env(safe-area-inset-bottom))}
+.widmung[hidden]{display:none}
+.wsun{position:absolute;left:50%;bottom:0;width:min(90vw,620px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 40%,#F7793A,#E4561B 60%);box-shadow:0 0 120px 40px rgba(228,86,27,.35);transform:translate(-50%,62%)}
+.wtxt{position:relative;max-width:22ch}
+.wtxt p{font-variation-settings:"wdth" 68;font-weight:800;font-size:clamp(30px,9vw,64px);line-height:1.02;letter-spacing:-.025em;margin-bottom:.35em}
+.wtxt .w>span{transition-duration:1.3s}
+.wtxt small{display:block;font-size:15px;font-weight:600;color:#bdbdbd;margin-top:var(--s3);opacity:0;transition:opacity 1.2s}
+.wtxt.done small{opacity:1}
+.wgo{position:relative;align-self:flex-start;margin-top:var(--s6);background:var(--duene);color:#fff;font-weight:750;font-size:16px;padding:14px 26px;border-radius:999px;box-shadow:0 0 30px rgba(228,86,27,.7);opacity:0;transform:translateY(16px);transition:opacity .8s,transform .8s cubic-bezier(.2,.9,.2,1)}
+.wtxt.done+.wgo{opacity:1;transform:none}
+.legal{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s3);margin-top:var(--s6)}
+.wlink{font-size:14px;color:var(--grey);text-decoration:underline;text-underline-offset:3px}
+/* Community */
+.cloud{margin-top:var(--s1);padding:var(--s2);background:#000;color:#fff}
+.cloud h3{font-size:18px;font-weight:750;display:flex;align-items:center;gap:10px}
+.cloud h3 i{width:10px;height:10px;border-radius:50%;background:var(--duene);box-shadow:0 0 10px rgba(228,86,27,.8)}
+.cloud p{font-size:14px;color:#cfcfcf;margin:6px 0 var(--s2);max-width:32em}
+.cloud .row2{display:flex;flex-wrap:wrap;gap:var(--s1)}
+.cloud input{flex:1 1 180px;height:48px;font:inherit;font-size:17px;padding:0 14px;background:#1d1d1d;color:#fff;border:0;outline:none}
+.cloud input:focus{box-shadow:0 0 0 2px var(--duene)}
+.cloud .btn{background:#fff;color:#000}.cloud .btn.accent{background:var(--duene);color:#fff}.cloud .btn.ghost{background:#1d1d1d;color:#fff}
+.cloud .stat{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;color:#cfcfcf;margin-bottom:var(--s2)}
+.cloud .stat b{color:#fff}
+.cloud .msg{font-size:13px;color:var(--duene);min-height:1em;margin-top:var(--s1)}
+.sugg{background:#FBE3D6;padding:10px 12px;margin-bottom:var(--s3)}
+.mod{position:fixed;inset:0;z-index:70;background:#fff;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 calc(var(--navh) + var(--s6))}
+.mod[hidden]{display:none}
+.mod .modbar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top)) var(--g) 14px;background:linear-gradient(#fff 75%,rgba(255,255,255,0));font-weight:650}
+.mod h2{font-size:clamp(48px,15vw,120px);padding:0 var(--g);margin-bottom:var(--s3)}
+.mcard{margin:0 var(--g) var(--s3);padding:var(--s2);background:var(--soft)}
+.mcard h4{font-size:18px;font-weight:750}
+.mcard .meta{font-size:12px;color:var(--grey);margin:2px 0 var(--s2)}
+.mcard .old{font-size:14px;color:var(--grey);text-decoration:line-through;margin-bottom:6px;white-space:pre-wrap}
+.mcard .new{font-size:16px;line-height:1.45;white-space:pre-wrap}
+.mcard img{width:100%;max-height:60svh;object-fit:contain;background:#000;margin-bottom:var(--s1)}
+.mcard .acts{display:flex;gap:var(--s1);margin-top:var(--s2)}
+.mcard .acts .btn{min-height:44px}
 /* Umkreis */
 .um{margin-top:var(--s3)}
 .umopen{display:flex;align-items:center;gap:10px;min-height:48px;font-size:16px;font-weight:700}
@@ -545,8 +597,9 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
       <li><button data-view="register"><b>01</b><span><em>Lesen</em>Beiträge auf dieser Seite, alle Güter im Register, nach Region und Ort geordnet.</span></button></li>
       <li><button data-view="karte"><b>02</b><span><em>Finden</em>Auf der Karte oder mit „Von hier aus erreichbar“: alles, was in einer halben Stunde zu schaffen ist.</span></button></li>
       <li><button data-view="merkliste"><b>03</b><span><em>Planen</em>Güter merken, auf Tage verteilen, Reihenfolge und Fahrzeiten rechnet die App.</span></button></li>
-      <li><button data-view="register"><b>04</b><span><em>Erinnern</em>Eigene Fotos zu jedem Gut ablegen. Notizen und Bilder bleiben auf deinem Gerät.</span></button></li>
+      <li><button data-view="register" data-memo><b>04</b><span><em>Erinnern</em>Eigene Fotos zu jedem Gut ablegen. Notizen und Bilder bleiben auf deinem Gerät.</span></button></li>
     </ol>
+    <p class="legal"><button class="wlink" id="wshow">Widmung</button><a class="wlink" href="rechtliches.html#impressum">Impressum</a><a class="wlink" href="rechtliches.html#datenschutz">Datenschutz</a><a class="wlink" href="rechtliches.html#nutzung">Nutzungsbedingungen</a><a class="wlink" href="rechtliches.html#lizenzen">Lizenzen</a></p>
   </section>
 </div>
 
@@ -561,6 +614,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
     <div class="chips rchips" id="rchips" role="group" aria-label="Nach Region filtern"></div>
     <div class="um" data-um></div>
     <p class="count" id="count" aria-live="polite"></p>
+    <div class="cloud" id="cloudbox" hidden></div>
     <div class="imp" id="imp"></div>
     <div id="groups"></div>
   </section>
@@ -597,6 +651,8 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
   <button data-tab="merkliste" aria-label="Planung"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.6" fill="#fff"/></svg><span class="badge" id="badge"></span></button>
 </nav>
 
+<div class="widmung" id="widmung" hidden role="dialog" aria-modal="true" aria-label="Widmung"><div class="wsun"></div><div class="wtxt" id="wtxt"></div><button class="wgo" id="wgo">Öffnen</button></div>
+<div class="mod" id="mod" hidden role="dialog" aria-modal="true"></div>
 <div class="scrim" id="scrim"></div>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Galerie"><div class="lbtrack" id="lbtrack"></div><div class="lbtop"><span id="lbcount"></span><button id="lbclose">Schließen</button></div><div class="lbbot"><div class="dots" id="lbdots"></div><p class="lbcap" id="lbcap"></p><div class="lbacts" id="lbacts"></div></div></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Eintrag"><div class="sinner" id="sinner"></div></div>
@@ -605,6 +661,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 <script src="texte.js"></script>
 <script src="texte-i18n.js"></script>
 <script src="geo.js"></script>
+<script src="config.js"></script>
 <script>
 /* =========================================================
    SPRACHE: Deutsch ist die Quelle, Englisch und Afrikaans per Wörterbuch
@@ -664,7 +721,6 @@ const GEBIETE={
 };
 const DETAIL=[
  {id:"delaire",name:"Delaire Graff",gebiet:"helshoogte",ort:"Helshoogte-Pass",lat:-33.920,lng:18.922,
-  bild:"https://afar.brightspotcdn.com/dims4/default/7b6c89b/2147483647/strip/true/crop/1800x900+0+73/resize/1440x720!/quality/90/?url=https%3A%2F%2Fk3-prod-afar-media.s3.us-west-2.amazonaws.com%2Fbrightspot%2F82%2Fff%2F59c8c7d3a37ec3f2f858922d7e40%2Foriginal-fa60c4f5feef4592aa7be285fa40c2ad.jpg",
   lead:"Ein Gut wie eine Galerie mit Aussicht. Hoch am Helshoogte-Pass treffen zeitgenössische Bauten auf eine der großen Kunstsammlungen des Landes.",
   architektur:"Zeitgenössische Baukörper, die sich in den Hang legen und den Blick über das Tal rahmen.",
   kunst:"Im Garten stehen Skulpturen von Anton Smit und Dylan Lewis. In Lounge und Restaurants hängen unter anderem Werke von William Kentridge und Deborah Bell.",
@@ -672,7 +728,6 @@ const DETAIL=[
   kueche:"Mehrere Restaurants auf dem Gut. Ein Tisch sollte vorab reserviert werden.",
   adresse:"Helshoogte Pass (R310), Stellenbosch",zeiten:TBD,reservierung:"Empfohlen",kinder:TBD},
  {id:"tokara",name:"Tokara",gebiet:"helshoogte",ort:"Kuppe des Helshoogte-Passes",lat:-33.915,lng:18.913,
-  bild:"https://media.timeout.com/images/106003665/image.jpg",
   lead:"Klare Glasarchitektur ganz oben am Pass, mit Blick zurück über das Tal und einer Kunstsammlung, die schon am Eingang beginnt.",
   architektur:"Große Glasflächen geben den Blick in die Kellerei frei. Das Haus öffnet sich zum Tal.",
   kunst:"Das Restaurant hat eine eigene Galerie. Im Garten stehen großformatige Skulpturen.",
@@ -680,7 +735,6 @@ const DETAIL=[
   kueche:"Tokara Restaurant mit Weinlounge.",
   adresse:"Helshoogte Pass (R310), Stellenbosch",zeiten:TBD,reservierung:"Empfohlen",kinder:TBD},
  {id:"spier",name:"Spier",gebiet:"west",ort:"Lynedoch",lat:-33.973,lng:18.783,
-  bild:"https://afar.brightspotcdn.com/dims4/default/b691135/2147483647/strip/true/crop/1800x900+0+150/resize/1440x720!/quality/90/?url=https%3A%2F%2Fk3-prod-afar-media.s3.us-west-2.amazonaws.com%2Fbrightspot%2F91%2Fbb%2F46f60b84fd9daa975088ba5b4354%2Foriginal-bc0a1983a731b28f21aa908e4a837978.jpg",
   lead:"Eines der ältesten Güter der Region, gegründet 1692. Gekalkte Bauten unter Eichen, eine eigene Sammlung und viel Platz zum Draußensein.",
   architektur:"Historische kapholländische Gebäude mit gekalkten Wänden und geschwungenen Giebeln.",
   kunst:"Die Spier Art Collection: Skulpturen und Arbeiten sind über das ganze Gelände verteilt.",
@@ -694,7 +748,6 @@ const DETAIL=[
   kueche:"Unkomplizierte Küche und Pairings.",
   adresse:"Blaauwklippen Road (R44), Stellenbosch",zeiten:TBD,reservierung:TBD,kinder:"Ja, ausdrücklich familienfreundlich"},
  {id:"lanzerac",name:"Lanzerac",gebiet:"jonkershoek",ort:"Eingang zum Jonkershoek-Tal",lat:-33.938,lng:18.893,
-  bild:"https://www.sleepermagazine.com/wp-content/uploads/2016/09/Lanzerac-2.jpg",
   lead:"Das klassische Bild der Winelands: ein kapholländisches Herrenhaus unter Eichen, eingerahmt von den Jonkershoek-Bergen.",
   architektur:"Gekalkte Wände, geschwungene Giebel, grüne Fensterläden.",
   garten:"Hotelgärten mit altem Baumbestand vor der Bergkulisse.",
@@ -706,7 +759,6 @@ const DETAIL=[
   kueche:"Bekannt für das Pairing mit Schokolade.",
   adresse:"Blaauwklippen Road, Stellenbosch",zeiten:TBD,reservierung:TBD,kinder:TBD},
  {id:"cavalli",name:"Cavalli",gebiet:"helderberg",ort:"Richtung Somerset West",lat:-34.022,lng:18.850,
-  bild:"https://mapmyway.co.za/wp-content/uploads/2023/03/southern_guild_cavalli_estate_on_lines_and_lineage.jpg",
   lead:"Ein junges Gut mit Pferdezucht, ruhiger moderner Architektur und einer Galerie für südafrikanische Kunst.",
   architektur:"Klare, flache Baukörper in der offenen Landschaft.",
   kunst:"Die Galerie ist architektonisch von Cy Twomblys Galerie in Houston inspiriert. Gezeigt wird südafrikanische Kunst.",
@@ -728,7 +780,9 @@ let RI=0,ROUTE=[];
 /* ---------- Hilfen ---------- */
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const f=n=>Math.round(n*10)/10;
-const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+/* Nur echte Web-Adressen verlinken (keine javascript:- oder data:-Links aus Beiträgen) */
+const safeUrl=u=>/^https?:\/\/[^\s"'<>]+$/i.test(String(u||"").trim())?String(u).trim():"";
 const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
 const pad=(n,l=3)=>String(n).padStart(l,"0");
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),ease=p=>1-Math.pow(1-p,3),lerp=(a,b,t)=>a+(b-a)*t;
@@ -755,8 +809,12 @@ function addEstate(name,web,reg){
   ESTATES.push(e);seen[k]=e;return e}
 BASE.forEach(([n,w,g])=>addEstate(n,w,g));
 DETAIL.forEach(d=>{if(!seen[norm(d.name)])addEstate(d.name,"",d.gebiet in GEBIETE?d.gebiet:"stellenbosch")});
+/* Freigegebene Beiträge der Community (zwischengespeichert, damit es auch offline geht) */
+let COMM={c:[],p:[],e:[],names:{},at:0};try{COMM=Object.assign(COMM,JSON.parse(localStorage.getItem("werf-community")||"{}"))}catch(_){}
+const CFG=window.WERF_CFG||{};const CLOUD_ON=!!(CFG.url&&CFG.anon);
+if(CLOUD_ON)(COMM.e||[]).forEach(x=>{if(x.lat!=null&&x.lng!=null){window.GEO=window.GEO||{};window.GEO[x.name.trim()]=[x.lat,x.lng]}const e=addEstate(String(x.name).slice(0,100),safeUrl(x.web),slugify(x.town||""));if(e)e.neu=true});
 if(IMPORT?.rows)IMPORT.rows.forEach(x=>{const e=addEstate(x.n,x.w,x.g?slugify(x.g):"");if(!e)return;
-  if(x.w)e.web=x.w;e.besuchen=!!x.b;e.bekannt=!!x.k;e.notiz=x.no||"";e.datum=x.d||"";e.status=x.s||""});
+  if(safeUrl(x.w))e.web=x.w;e.besuchen=!!x.b;e.bekannt=!!x.k;e.notiz=x.no||"";e.datum=x.d||"";e.status=x.s||""});
 /* Eigene Texte und Angaben, direkt im Eintrag geschrieben (nur auf diesem Gerät) */
 let EDITS={};try{EDITS=JSON.parse(localStorage.getItem("werf-edits")||"{}")||{}}catch(_){EDITS={}}
 function applyEdits(e){const ed=EDITS[e.id];if(!ed)return;e._orig=e._orig||{};
@@ -764,6 +822,10 @@ function applyEdits(e){const ed=EDITS[e.id];if(!ed)return;e._orig=e._orig||{};
     if(k==="abschnitte"){if(e.abschnitte){if(!e._orig.abschnitte)e._orig.abschnitte=e.abschnitte.map(a=>a.p);e.abschnitte=e.abschnitte.map((a,i)=>({t:a.t,p:v[i]??a.p}))}continue}
     if(!(k in e._orig))e._orig[k]=e[k]??"";e[k]=v}
   e.edAt=ed._at;e.nurDE=false}
+function applyCommunity(e){if(!CLOUD_ON)return;let rows=(COMM.c||[]).filter(r=>r.estate_id===e.id&&r.lang===LANG);
+  if(!rows.length&&LANG!=="de"&&!e.lead){rows=(COMM.c||[]).filter(r=>r.estate_id===e.id&&r.lang==="de");if(rows.length)e.nurDE=true}else if(rows.length)e.nurDE=false;
+  rows.sort((a,b)=>a.created_at<b.created_at?-1:1).forEach(r=>{if(r.field==="abschnitte"){if(e.abschnitte&&Array.isArray(r.value))e.abschnitte=e.abschnitte.map((a,i)=>({t:a.t,p:r.value[i]??a.p}))}else e[r.field]=r.value;e.commAt=r.created_at})}
+ESTATES.forEach(applyCommunity);
 ESTATES.forEach(applyEdits);
 ESTATES.sort((a,b)=>a.name.localeCompare(b.name,"de"));
 function refreshDerived(e){e.ressorts=Object.keys(RESSORTS).filter(k=>e[k]);e.test=!e.lead;e.key=norm(e.name+" "+GEBIETE[e.gebiet].name+" "+(e.notiz||""))}
@@ -1063,7 +1125,7 @@ $("#groups").addEventListener("click",ev=>{if(ev.target.id==="reset"){filter="al
 function renderImp(){const n=IMPORT?.rows?.length;
   $("#imp").innerHTML=(IMPORT?`<p>${tt("<b>Deine Tabelle ist geladen</b> ({n} Zeilen, {d}). Notizen und Besuche bleiben auf diesem Gerät.",{n,d:esc(new Date(IMPORT.at).toLocaleDateString(LOC))})}</p><label class="btn line filebtn">${tt("Neu laden")}<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label><button class="btn line" id="impDel">${tt("Entfernen")}</button>`
   :`<p>${tt("Lade die Excel-Tabelle, um Notizen, Besuche und „Will ich hin“ zu sehen. Sie wird nur auf diesem Gerät gespeichert.")}</p><label class="btn filebtn">${tt("Tabelle laden")}<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label>`)+edBox()}
-function loadSheetJS(){return window.XLSX?Promise.resolve():new Promise((res,rej)=>{const sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";sc.onload=res;sc.onerror=()=>rej("netz");document.head.appendChild(sc)})}
+function loadSheetJS(){return window.XLSX?Promise.resolve():new Promise((res,rej)=>{const sc=document.createElement("script");sc.src="lib/xlsx-0.18.5.full.min.js";sc.onload=res;sc.onerror=()=>rej("netz");document.head.appendChild(sc)})}
 function parseRows(rows){
   const hi=rows.findIndex(r=>r.some(c=>norm(String(c??"")).trim()==="weingut"));if(hi<0)throw "kopf";
   const H=rows[hi].map(c=>norm(String(c??"")).trim()),col=n=>H.findIndex(h=>h.startsWith(n));
@@ -1216,7 +1278,7 @@ const toMin=t=>{const [h,m]=t.split(":").map(Number);return h*60+m};
 let PLAN={days:[],active:null};
 try{const p=JSON.parse(localStorage.getItem("werf-plan")||"null");if(p&&Array.isArray(p.days))PLAN=p}catch(_){}
 PLAN.days.forEach(d=>d.stops=d.stops.filter(s=>byId[s.id]));
-function savePlan(){try{localStorage.setItem("werf-plan",JSON.stringify(PLAN))}catch(_){}}
+function savePlan(){try{localStorage.setItem("werf-plan",JSON.stringify(PLAN))}catch(_){}window.cloudDirty?.()}
 const activeDay=()=>PLAN.days.find(d=>d.id===PLAN.active)||PLAN.days[0]||null;
 function newDay(date){const last=PLAN.days[PLAN.days.length-1];
   const d={id:"d"+Date.now().toString(36)+Math.floor(Math.random()*99),date:date||(last?addDaysISO(last.date,1):isoToday()),start:"09:30",stops:[]};
@@ -1226,8 +1288,31 @@ function planLabel(id){const d=dayOf(id);return d?tt("Eingeplant: {d}",{d:DE_DAY
 /* Fahrzeit grob aus Luftlinie: Umwegfaktor 1,35, Landstraße ~45 km/h, plus 4 Min. Parken */
 function hav(a,b){const R=6371,r=Math.PI/180,dLa=(b.lat-a.lat)*r,dLo=(b.lng-a.lng)*r,x=Math.sin(dLa/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(x))}
 const legOf=(a,b)=>{const km=hav(a,b)*1.35;return{km,min:Math.max(5,Math.round(km/45*60+4))}};
+/* Fahrzeiten zwischen den Stationen: mit Netz über Straßen (OSRM), sonst geschätzt */
+const LEGS={};try{Object.assign(LEGS,JSON.parse(localStorage.getItem("werf-legs")||"{}"))}catch(_){}
+const legKey=(a,b)=>a.id+">"+b.id;
+function legBest(a,b){const c=LEGS[legKey(a,b)];return c?{min:c.min,km:c.km,road:true}:Object.assign(legOf(a,b),{road:false})}
+let legBusy=false;
+async function fetchLegs(d){if(legBusy||!navigator.onLine||d.stops.length<2)return;const pts=d.stops.map(s=>byId[s.id]);
+  const need=pts.slice(1).some((e,i)=>!LEGS[legKey(pts[i],e)]&&e.genau&&pts[i].genau);if(!need)return;legBusy=true;
+  try{const url=`https://router.project-osrm.org/route/v1/driving/${pts.map(e=>e.lng.toFixed(5)+","+e.lat.toFixed(5)).join(";")}?overview=false`;
+    const r=await fetch(url);const j=await r.json();if(j.code!=="Ok")throw 0;
+    j.routes[0].legs.forEach((l,i)=>{const a=pts[i],b=pts[i+1];if(a.genau&&b.genau)LEGS[legKey(a,b)]={min:Math.max(2,Math.round(l.duration/60)+3),km:l.distance/1000}});
+    try{localStorage.setItem("werf-legs",JSON.stringify(LEGS))}catch(_){}
+    if(view==="merkliste"&&activeDay()===d)renderPlan({draw:false})}catch(_){}
+  legBusy=false}
+/* Öffnungszeiten: Ruhetag, zu früh, zu spät */
+function openWarn(e,date,arr,dur){const oe=e.oeffnung;if(!oe)return "";
+  if(oe.zu?.includes(parseISO(date).getDay()))return tt("An diesem Tag geschlossen ({x})",{x:tt(oe.zuText)});
+  if(arr<toMin(oe.t[0]))return tt("öffnet {z}",{z:oe.t[0]});if(arr+dur>toMin(oe.t[1]))return tt("schließt {z}",{z:oe.t[1]});return ""}
 function schedule(d){let t=toMin(d.start);const out=[];d.stops.forEach((s,i)=>{const e=byId[s.id];let leg=null;
-  if(i>0){leg=legOf(byId[d.stops[i-1].id],e);t+=leg.min}out.push({s,e,arr:t,leg});t+=s.dur});return{rows:out,end:t}}
+  if(i>0){leg=legBest(byId[d.stops[i-1].id],e);t+=leg.min}out.push({s,e,arr:t,leg,warn:openWarn(e,d.date,t,s.dur)});t+=s.dur});return{rows:out,end:t}}
+/* Sonnenuntergang am Kap (NOAA-Näherung), Ortszeit SAST = UTC+2 */
+function sunset(dateISO,lat=-33.93,lng=18.86){const d=parseISO(dateISO),N=Math.round((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(d.getFullYear(),0,0))/864e5);
+  const g=2*Math.PI/365*(N-1),eq=229.18*(.000075+.001868*Math.cos(g)-.032077*Math.sin(g)-.014615*Math.cos(2*g)-.040849*Math.sin(2*g)),
+    dec=.006918-.399912*Math.cos(g)+.070257*Math.sin(g)-.006758*Math.cos(2*g)+.000907*Math.sin(2*g)-.002697*Math.cos(3*g)+.00148*Math.sin(3*g),
+    r=Math.PI/180,ha=Math.acos(Math.cos(90.833*r)/(Math.cos(lat*r)*Math.cos(dec))-Math.tan(lat*r)*Math.tan(dec))/r;
+  return 720-4*(lng-ha)-eq+120}
 function addToDay(id,dayId){let d=dayId?PLAN.days.find(x=>x.id===dayId):activeDay();if(!d)d=newDay();
   const prev=dayOf(id);if(prev)prev.stops=prev.stops.filter(s=>s.id!==id);
   d.stops.push({id,dur:60});if(!saved.includes(id))saved=[...saved,id];PLAN.active=d.id;savePlan();return d}
@@ -1272,17 +1357,19 @@ function renderPlan(opts={}){
     const sc=schedule(d);
     h+=`<div class="dayhead"><label class="when"><b>${esc(DE_LONG.format(parseISO(d.date)))}</b><span>${tt("Datum ändern")}</span><input type="date" id="dDate" value="${d.date}" aria-label="${tt("Datum")}"></label></div>
     <div class="dayctl"><label><small>${tt("Start")}</small><b>${d.start}</b><input type="time" id="dStart" value="${d.start}" step="900" aria-label="${tt("Startzeit")}"></label>
-      <div class="sum"><small>${tt("Ende ca.")}</small><b>${d.stops.length?hhmm(sc.end):"–"}</b></div></div>`;
+      <div class="sum"><small>${tt("Ende ca.")}</small><b>${d.stops.length?hhmm(sc.end):"–"}</b></div></div>
+    <p class="sunset"><i></i>${tt("Sonnenuntergang {z}",{z:hhmm(sunset(d.date))})}${d.stops.length&&sc.end>sunset(d.date)?` <em>${tt("Der Tag endet nach Sonnenuntergang.")}</em>`:""}</p>`;
     h+=miniMap(d);
     if(!d.stops.length)h+=`<p class="empty">${tt("Noch keine Stationen an diesem Tag. Tippe unten bei einem gemerkten Gut auf „+“ oder in einem Eintrag auf „Zum Tag hinzufügen“.")}</p>`;
-    else{h+=`<ol class="tl" id="tl">`+sc.rows.map((r,i)=>`${r.leg?`<li class="leg" aria-hidden="true">${tt("{m} Min. Fahrt, {k} km",{m:r.leg.min,k:r.leg.km.toFixed(0)})}</li>`:""}<li class="st" data-i="${i}" data-id="${r.e.id}">
+    else{h+=`<ol class="tl" id="tl">`+sc.rows.map((r,i)=>`${r.leg?`<li class="leg" aria-hidden="true">${r.leg.road?"":"≈ "}${tt("{m} Min. Fahrt, {k} km",{m:r.leg.min,k:r.leg.km.toFixed(0)})}</li>`:""}<li class="st" data-i="${i}" data-id="${r.e.id}">
         <div class="tm">${hhmm(r.arr)}<small>${tt("bis {z}",{z:hhmm(r.arr+r.s.dur)})}</small></div>
-        <div><button class="nm" data-open="${r.e.id}">${esc(r.e.name)}</button><div class="sub"><button class="dur" data-dur="${i}" aria-label="${tt("Aufenthalt ändern")}">${r.s.dur} Min.</button><button class="rm" data-rm="${i}">${tt("Entfernen")}</button></div></div>
+        <div><button class="nm" data-open="${r.e.id}">${esc(r.e.name)}</button>${r.warn?`<p class="owarn">${esc(r.warn)}</p>`:""}<div class="sub"><button class="dur" data-dur="${i}" aria-label="${tt("Aufenthalt ändern")}">${r.s.dur} Min.</button><button class="rm" data-rm="${i}">${tt("Entfernen")}</button></div></div>
         <div class="grip" data-grip="${i}" role="button" aria-label="${tt("Ziehen zum Verschieben")}"><i></i></div></li>`).join("")+`</ol>
       <div class="endrow"><b>${hhmm(sc.end)}</b><span>${tt("Ende des Tages")}</span></div>
       ${regionNote(d)}${nearby(d)}
       <div class="planacts">${d.stops.length>2?`<button class="btn line" id="pOpt">${tt("Reihenfolge optimieren")}</button>`:""}<a class="btn" href="${mapsUrl(d)}" target="_blank" rel="noopener">${tt("Route in Karten öffnen")}</a></div>`}
     h+=`<button class="daydel" id="dayDel">${tt("Diesen Tag löschen")}</button>`;
+    setTimeout(()=>fetchLegs(d),50);
   }
   const planned=new Set(PLAN.days.flatMap(x=>x.stops.map(s=>s.id)));
   const pool=saved.filter(id=>byId[id]&&!planned.has(id));
@@ -1333,7 +1420,7 @@ $("#plan").addEventListener("click",e=>{const t=e.target;const d=activeDay();
   if(t.id==="pOpt"&&d){optimize(d);renderPlan({stagger:true});toast(tt("Kürzeste Reihenfolge gesetzt"));return}
 });
 const badgeS=new Spring(1,{eps:.002,onUpdate:v=>$("#badge").style.setProperty("--b",v)});
-function persist(bump){try{localStorage.setItem("werf-merkliste",JSON.stringify(saved))}catch(_){}$("#badge").textContent=saved.length||"";
+function persist(bump){try{localStorage.setItem("werf-merkliste",JSON.stringify(saved))}catch(_){}if(bump!==undefined)window.cloudDirty?.();$("#badge").textContent=saved.length||"";
   if(bump&&!RM){badgeS.set(1.7).to(1,{response:.45,damping:.45})}}
 
 /* =========================================================
@@ -1408,12 +1495,12 @@ function buildSheet(id){
     ${e.edAt?`<p class="small grey" style="margin:-12px 0 var(--s3)">${tt("Von dir bearbeitet am {d}.",{d:new Date(e.edAt).toLocaleDateString(LOC,{day:"numeric",month:"long",year:"numeric"})})}</p>`:e.quelle==="web"?`<p class="small grey" style="margin:-12px 0 var(--s3)">${tt("Kurz zusammengefasst nach der Website des Guts, noch nicht geprüft.")}</p>`:""}
     ${e.nurDE?`<p class="small grey" style="margin:-12px 0 var(--s3)">${tt("Dieser Text liegt bisher nur auf Deutsch vor.")}</p>`:""}
     ${mine(e)}
-    <dl class="tbl">${[[tt("Gegend"),GEBIETE[e.gebiet].name],[tt("Adresse"),e.adresse],[tt("Öffnungszeiten"),e.zeiten],[tt("Reservierung"),e.reservierung],[tt("Mit Kindern"),e.kinder]].filter(([,v])=>v&&v!==TBD).map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}${e.web?`<div><dt>${tt("Website")}</dt><dd><a href="${esc(e.web)}" target="_blank" rel="noopener">${esc(e.web.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))}</a></dd></div>`:""}</dl>
+    <dl class="tbl">${[[tt("Gegend"),GEBIETE[e.gebiet].name],[tt("Adresse"),e.adresse],[tt("Öffnungszeiten"),e.zeiten],[tt("Reservierung"),e.reservierung],[tt("Mit Kindern"),e.kinder]].filter(([,v])=>v&&v!==TBD).map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}${safeUrl(e.web)?`<div><dt>${tt("Website")}</dt><dd><a href="${esc(safeUrl(e.web))}" target="_blank" rel="noopener noreferrer">${esc(safeUrl(e.web).replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))}</a></dd></div>`:""}</dl>
     <div class="planbtn"><button class="btn accent" id="addDay">${planLabel(id)}</button><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.name+", "+GEBIETE[e.gebiet].name+", South Africa")}" target="_blank" rel="noopener">${tt("In Karten öffnen")}</a><button class="btn line" data-edit>${tt("Bearbeiten")}</button></div>
     ${galHTML(e)}
     ${e.abschnitte?`<article class="beitrag">${e.abschnitte.map(a=>`<section class="sect"><h3>${esc(a.t)}</h3><p>${esc(a.p)}</p></section>`).join("")}</article>
     ${e.steckbrief?`<div class="steck"><h3>${tt("Steckbrief")}</h3><dl class="tbl">${e.steckbrief.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>`:""}
-    ${e.quellen?`<div class="quellen"><h3>${tt("Quellen")}</h3><ul>${e.quellen.map(q=>`<li><a href="${esc(q.u)}" target="_blank" rel="noopener">${esc(q.t)}</a></li>`).join("")}</ul></div>`:""}`
+    ${e.quellen?`<div class="quellen"><h3>${tt("Quellen")}</h3><ul>${e.quellen.filter(q=>safeUrl(q.u)).map(q=>`<li><a href="${esc(safeUrl(q.u))}" target="_blank" rel="noopener noreferrer">${esc(q.t)}</a></li>`).join("")}</ul></div>`:""}`
     :e.ressorts.map(k=>`<div class="sect"><h3>${RESSORTS[k]}</h3><p>${esc(e[k])}</p></div>`).join("")}
     <div class="bild">
       <h3>${tt("Bildwandler")}</h3>
@@ -1578,12 +1665,13 @@ function webPics(e){return (window.WEBBILDER||{})[e.id]||[]}
 function galItems(e){
   const own=(GAL[e.id]||[]).slice().sort((a,b)=>b.date-a.date).map(g=>({kind:"own",gid:g.gid,src:g.url||(g.url=URL.createObjectURL(g.blob)),cap:g.date?`${tt("Eigenes Foto")}, ${DE_DATE.format(new Date(g.date))}`:tt("Eigenes Foto")}));
   const web=webPics(e).map(w=>({kind:"web",src:COMMONS(w.f),cap:w.t||tt("Wikimedia Commons"),file:w.f}));
-  return own.concat(web)}
+  const comm=CLOUD_ON?(COMM.p||[]).filter(p=>p.estate_id===e.id).map(p=>({kind:"comm",src:`${CFG.url}/storage/v1/object/public/fotos/${p.path}`,cap:tt("Foto: {x}",{x:(COMM.names||{})[p.user_id]||tt("Community")}),pid:p.id})):[];
+  return own.concat(comm,web)}
 function galLinks(e){const q=e.name+" "+(GEBIETE[e.gebiet]?.name||"");const tag=norm(e.name).replace(/\b(wine estate|estate|wines?|vineyards?|winery|family)\b/g,"").replace(/[^a-z0-9]/g,"");
   return `<div class="gallinks"><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q+", South Africa")}" target="_blank" rel="noopener">${tt("Fotos in Google Maps")}</a><a href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(q+" wine estate")}" target="_blank" rel="noopener">${tt("Bildersuche")}</a>${tag?`<a href="https://www.instagram.com/explore/tags/${tag}/" target="_blank" rel="noopener">#${tag}</a>`:""}</div>`}
 function galHTML(e){const it=galItems(e),own=(GAL[e.id]||[]).length;
   return `<section class="gal" id="gal"><div class="galhead"><h3>${tt("Galerie")}</h3><span class="small grey">${it.length?tt(it.length===1?"{n} Foto":"{n} Fotos",{n:it.length}):""}</span></div>
-  <div class="strip" id="strip">${it.map((g,i)=>`<button class="tile" data-lb="${i}" aria-label="${tt("Foto {n} öffnen",{n:i+1})}"><img src="${esc(g.src)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="cap${g.kind==="web"?" web":""}">${g.kind==="web"?tt("Vorab"):esc(g.cap.replace(tt("Eigenes Foto")+", ",""))}</span></button>`).join("")}<label class="tile add"><span><b>+</b>${own?tt("Weitere Fotos"):tt("Eigene Fotos")}</span><input type="file" accept="image/*" multiple id="gFile" aria-label="${tt("Eigene Fotos hinzufügen")}"></label></div>
+  <div class="strip" id="strip">${it.map((g,i)=>`<button class="tile" data-lb="${i}" aria-label="${tt("Foto {n} öffnen",{n:i+1})}"><img src="${esc(g.src)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="cap${g.kind!=="own"?" web":""}">${g.kind==="web"?tt("Vorab"):g.kind==="comm"?esc(g.cap):esc(g.cap.replace(tt("Eigenes Foto")+", ",""))}</span></button>`).join("")}<label class="tile add"><span><b>+</b>${own?tt("Weitere Fotos"):tt("Eigene Fotos")}</span><input type="file" accept="image/*" multiple id="gFile" aria-label="${tt("Eigene Fotos hinzufügen")}"></label></div>
   ${it.length?"":`<p class="galnote">${tt("Noch keine Fotos. Schau vorab, wie es dort aussieht, und leg nach dem Besuch deine eigenen Bilder ab. Sie bleiben auf diesem Gerät.")}</p>`}
   ${galLinks(e)}</section>`}
 function refreshGal(){const g=$("#gal");if(!g||!current)return;const sx=$("#strip")?.scrollLeft||0;g.outerHTML=galHTML(byId[current]);const st=$("#strip");if(st)st.scrollLeft=sx}
@@ -1614,6 +1702,7 @@ async function addPhotos(id,files){
   for(const f of files){try{const date=await exifDate(f)||f.lastModified||Date.now();const blob=await shrink(f);if(!blob)throw 0;
     const gid=id+"-"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const ok=await DB.galPut(gid,{estate:id,blob,date});
     (GAL[id]=GAL[id]||[]).push({gid,blob,date,mem:!ok});n++}catch(_){fail++}}
+  window.cloudDirty?.();
   if(current===id){refreshGal();const st=$("#strip");if(st&&!RM){st.scrollTo({left:0,behavior:"smooth"});st.querySelectorAll(".tile").forEach((t,i)=>{if(i<n)t.animate([{transform:"translateY(40px) scale(.9)",opacity:0},{transform:"none",opacity:1}],{duration:700,delay:i*70,easing:"cubic-bezier(.2,.9,.1,1.15)",fill:"backwards"})})}}
   toast(fail?tt("{n} abgelegt, {f} konnte der Browser nicht öffnen",{n,f:fail}):n===1?tt("Foto in der Galerie abgelegt"):tt("{n} Fotos in der Galerie abgelegt",{n}))}
 sheet.addEventListener("change",ev=>{if(ev.target.id!=="gFile"||!current)return;const files=[...ev.target.files];ev.target.value="";if(files.length)addPhotos(current,files)});
@@ -1628,7 +1717,7 @@ function lbInfo(){const g=LB.items[LB.i];if(!g)return;
   $("#lbdots").innerHTML=LB.items.length>1&&LB.items.length<16?LB.items.map((_,j)=>`<i class="${j===LB.i?"on":""}"></i>`).join(""):"";
   $("#lbcap").innerHTML=g.kind==="web"?tt("Freies Foto von {a}, Urheber und Lizenz dort",{a:`<a href="${COMMONS_PAGE(g.file)}" target="_blank" rel="noopener">Wikimedia Commons</a>`}):esc(g.cap);
   LB.arm=false;
-  $("#lbacts").innerHTML=g.kind==="own"?`<button data-lbact="titel">${tt("Als Titelbild")}</button><button data-lbact="del">${tt("Löschen")}</button>`:`<button data-lbact="titel">${tt("Als Titelbild")}</button>`}
+  $("#lbacts").innerHTML=g.kind==="own"?`<button data-lbact="titel">${tt("Als Titelbild")}</button>${window.CLOUD?.user?`<button data-lbact="teilen">${tt("Für alle vorschlagen")}</button>`:""}<button data-lbact="del">${tt("Löschen")}</button>`:`<button data-lbact="titel">${tt("Als Titelbild")}</button>`}
 function lbGo(i,v=0){LB.i=clamp(i,0,LB.items.length-1);lbX.to(-LB.i*innerWidth,{velocity:v,response:.42,damping:.9});lbInfo()}
 function openLB(i,fromEl){
   const e=byId[current];LB.items=galItems(e);LB.id=current;LB.i=i;LB.from=fromEl;if(!LB.items.length)return;
@@ -1668,11 +1757,13 @@ lb.addEventListener("click",async ev=>{const t=ev.target;
   if(t.id==="lbclose"){closeLB();return}
   const act=t.closest("[data-lbact]")?.dataset.lbact,g=LB.items[LB.i];if(!act||!g)return;
   if(act==="del"){if(!LB.arm){LB.arm=true;t.textContent=tt("Wirklich löschen?");t.classList.add("warn");return}
-    await DB.galDel(g.gid);GAL[LB.id]=(GAL[LB.id]||[]).filter(x=>x.gid!==g.gid);refreshGal();
+    await DB.galDel(g.gid);GAL[LB.id]=(GAL[LB.id]||[]).filter(x=>x.gid!==g.gid);refreshGal();window.cloudDirty?.();
     LB.items=galItems(byId[LB.id]);if(!LB.items.length){lb.classList.remove("open");lbtrack.innerHTML="";toast(tt("Foto gelöscht"));return}
     const sl=lbtrack.children[LB.i];sl.animate([{opacity:1,transform:"scale(1)"},{opacity:0,transform:"scale(.85)"}],{duration:260,easing:"ease-in"}).onfinish=()=>{sl.remove();lbX.set(-Math.min(LB.i,LB.items.length-1)*innerWidth);lbGo(Math.min(LB.i,LB.items.length-1))};toast(tt("Foto gelöscht"));return}
+  if(act==="teilen"){const rec=(GAL[LB.id]||[]).find(x=>x.gid===g.gid);t.disabled=true;t.textContent=tt("Wird gesendet …");
+    const ok=await window.cloudSuggestPhoto?.(LB.id,rec);t.textContent=ok?tt("Vorgeschlagen"):tt("Hat nicht geklappt");if(ok)toast(tt("Danke. Das Foto erscheint nach der Prüfung für alle."));return}
   if(act==="titel"){const id=LB.id;
-    if(g.kind==="web"){closeLB();await setImage(id,{src:g.src},tt("Titelbild übernommen."));toast(tt("Als Titelbild übernommen"));return}
+    if(g.kind==="web"||g.kind==="comm"){closeLB();await setImage(id,{src:g.src},tt("Titelbild übernommen."));toast(tt("Als Titelbild übernommen"));return}
     try{const blob=(GAL[id]||[]).find(x=>x.gid===g.gid)?.blob;WZ.base=await loadPhoto(blob);closeLB();
       $("#wd").hidden=false;redraw();say(tt("Wähle einen Stil für das Titelbild. Foto lässt es, wie es ist."));
       setTimeout(()=>$("#wd").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"}),450)}catch(_){toast(tt("Dieses Foto lässt sich nicht verwenden"))}}});
@@ -1683,7 +1774,7 @@ addEventListener("resize",()=>{if(lb.classList.contains("open"))lbX.set(-LB.i*in
 /* =========================================================
    BEARBEITEN: Texte, Praktisches und Persönliches direkt im Eintrag
    ========================================================= */
-function persistEdits(){try{localStorage.setItem("werf-edits",JSON.stringify(EDITS));return true}catch(_){return false}}
+function persistEdits(){try{localStorage.setItem("werf-edits",JSON.stringify(EDITS));window.cloudDirty?.();return true}catch(_){return false}}
 const origOf=(e,k)=>e._orig&&k in e._orig?e._orig[k]:(e[k]??"");
 function fld(e,k,label,type="area"){const v=e[k]??"",o=origOf(e,k),changed=e._orig&&k in e._orig&&String(o)!==String(v);
   const head=`<span class="fl">${label}${changed&&o!==""?`<button class="lnk" data-edorig="${k}">${tt("Original")}</button>`:""}</span>`;
@@ -1697,7 +1788,8 @@ function buildEditor(id){const e=byId[id];
   sinner.innerHTML=`<div class="sbar edbar"><button data-edcancel>${tt("Abbrechen")}</button><b>${tt("Bearbeiten")}</b><button class="edsave" data-edsave>${tt("Sichern")}</button></div>
   <div class="wrap sbody ed">
     <h2 class="cond" style="--n:${Math.max(...e.name.split(/\s+/).map(w=>w.length))}">${esc(e.name)}</h2>
-    <p class="small grey ednote">${tt("Deine Änderungen bleiben auf diesem Gerät. Im Register kannst du sie als Datei sichern und weitergeben.")}</p>
+    <p class="small grey ednote">${window.CLOUD?.user?tt("Deine Änderungen gelten sofort für dich. Mit dem Schalter schlägst du Texte und Angaben auch für alle vor."):tt("Deine Änderungen bleiben auf diesem Gerät. Im Register kannst du sie als Datei sichern und weitergeben.")}</p>
+    ${window.CLOUD?.user?`<label class="fld chk sugg"><input type="checkbox" id="edSuggest" checked><i></i><span class="fl">${tt("Für alle vorschlagen ({l})",{l:LANG.toUpperCase()})}</span></label>`:CLOUD_ON?`<p class="small grey ednote">${tt("Melde dich im Register an, um deine Texte für alle vorzuschlagen.")}</p>`:""}
     <fieldset><legend>${tt("Text")}</legend>${fld(e,"lead",tt("Einleitung"))}${sec}</fieldset>
     <fieldset><legend>${tt("Praktisches")}</legend>${fld(e,"adresse",tt("Adresse"),"text")}${fld(e,"zeiten",tt("Öffnungszeiten"))}${fld(e,"reservierung",tt("Reservierung"),"text")}${fld(e,"kinder",tt("Mit Kindern"),"text")}${fld(e,"web",tt("Website"),"url")}</fieldset>
     <fieldset><legend>${tt("Persönlich")}</legend>${fld(e,"besuchen",tt("Will ich hin"),"check")}${fld(e,"bekannt",tt("Schon dort"),"check")}${fld(e,"datum",tt("Besucht am"),"date")}${fld(e,"notiz",tt("Notiz"))}</fieldset>
@@ -1710,7 +1802,7 @@ sheet.addEventListener("input",ev=>{if(ev.target.matches(".ed textarea"))grow(ev
 function openEditor(id){sheet.scrollTo({top:0,behavior:"auto"});
   if(RM){buildEditor(id);return}
   sinner.animate([{opacity:1,transform:"none"},{opacity:0,transform:"translateY(16px) scale(.985)"}],{duration:180,easing:"ease-in"}).onfinish=()=>{buildEditor(id);sinner.animate([{opacity:0,transform:"translateY(-10px)"},{opacity:1,transform:"none"}],{duration:420,easing:"cubic-bezier(.2,.9,.2,1)"})}}
-function saveEditor(id){const e=byId[id],ed={};
+function saveEditor(id){const e=byId[id],ed={};const suggest=!!$("#edSuggest")?.checked;
   sinner.querySelectorAll("[data-ed]").forEach(el=>{const k=el.dataset.ed,v=el.type==="checkbox"?el.checked:el.value.trim();
     if(k.startsWith("abschnitte:")){const i=+k.split(":")[1],o=e._orig?.abschnitte?.[i]??e.abschnitte[i].p;if(v!==o){ed.abschnitte=ed.abschnitte||[];ed.abschnitte[i]=v}return}
     const o=origOf(e,k);if(el.type==="checkbox"?!!o!==v:String(o??"")!==v)ed[k]=v});
@@ -1718,6 +1810,9 @@ function saveEditor(id){const e=byId[id],ed={};
   if(e._orig){for(const [k,v] of Object.entries(e._orig)){if(k==="abschnitte")e.abschnitte=e.abschnitte.map((a,i)=>({t:a.t,p:v[i]}));else e[k]=v}}
   delete e._orig;delete e.edAt;
   if(Object.keys(ed).length){ed._at=Date.now();EDITS[id]=ed}else delete EDITS[id];
+  if(suggest&&Object.keys(ed).length){const pub={};for(const k of ["lead","architektur","kunst","garten","kueche","adresse","zeiten","reservierung","kinder","web"])if(k in ed)pub[k]=ed[k];
+    if(ed.abschnitte&&e.abschnitte)pub.abschnitte=e.abschnitte.map((a,i)=>ed.abschnitte[i]??(e._orig?.abschnitte?.[i]??a.p));
+    if(Object.keys(pub).length)window.cloudSuggest?.(id,pub)}
   applyEdits(e);refreshDerived(e);const ok=persistEdits();
   buildSheet(id);sheet.scrollTo({top:0});
   if(!RM)sinner.animate([{opacity:0,transform:"translateY(10px)"},{opacity:1,transform:"none"}],{duration:420,easing:"cubic-bezier(.2,.9,.2,1)"});
@@ -1746,6 +1841,29 @@ document.addEventListener("change",async ev=>{if(ev.target.id!=="edImport"||!ev.
     for(const [id,ed] of Object.entries(j.edits)){if(!byId[id])continue;if(!EDITS[id]||(ed._at||0)>(EDITS[id]._at||0)){EDITS[id]=ed;n++}}
     persistEdits();toast(tt("{n} Güter übernommen. Die App lädt neu …",{n}));setTimeout(()=>location.reload(),900)}
   catch(_){toast(tt("Diese Datei enthält keine werf-Texte"))}});
+
+/* =========================================================
+   WIDMUNG: einmal beim ersten Öffnen, danach über „Widmung“ unten
+   Text hier austauschen. Zeilen erscheinen nacheinander.
+   ========================================================= */
+const WIDMUNG={zeilen:["Für dich.","Du hast die Liste geschrieben.","Ich habe ihr ein Zuhause gebaut.","Jetzt fehlt nur noch die Reise."],von:"Julian"};
+function showWidmung(){const w=$("#widmung"),tx=$("#wtxt");
+  tx.innerHTML=WIDMUNG.zeilen.map(z=>`<p class="rv">${esc(z)}</p>`).join("")+`<small>${esc(WIDMUNG.von)}</small>`;tx.classList.remove("done");
+  w.hidden=false;document.body.style.overflow="hidden";const sun=w.querySelector(".wsun");
+  if(RM){tx.querySelectorAll(".rv").forEach(el=>{split(el);el.classList.add("in")});tx.classList.add("done");return}
+  sun.animate([{transform:"translate(-50%,100%)"},{transform:"translate(-50%,62%)"}],{duration:3200,easing:"cubic-bezier(.25,0,.1,1)",fill:"both"});
+  const ps=[...tx.querySelectorAll(".rv")];ps.forEach(split);
+  ps.forEach((p,i)=>setTimeout(()=>p.classList.add("in"),1200+i*1300));
+  setTimeout(()=>tx.classList.add("done"),1200+ps.length*1300+400)}
+function closeWidmung(){const w=$("#widmung");try{localStorage.setItem("werf-widmung","1")}catch(_){}
+  const done=()=>{w.hidden=true;document.body.style.overflow=""};
+  if(RM){done();return}w.animate([{opacity:1},{opacity:0}],{duration:600,easing:"ease-in"}).onfinish=done}
+$("#wgo").addEventListener("click",closeWidmung);
+$("#widmung").addEventListener("click",ev=>{if($("#wtxt").classList.contains("done")&&ev.target.id!=="wgo")closeWidmung()});
+$("#wshow").addEventListener("click",showWidmung);
+/* Nur für den Beschenkten: erscheint, wenn die App über den persönlichen Link mit ?fuer geöffnet wird */
+{let ok=false,seen=false;try{if(/[?&]fuer\b/.test(location.search))localStorage.setItem("werf-widmung-ok","1");ok=localStorage.getItem("werf-widmung-ok")==="1";seen=localStorage.getItem("werf-widmung")==="1"}catch(_){}
+  $("#wshow").hidden=!ok;if(ok&&!seen)showWidmung()}
 
 /* =========================================================
    SPRACHUMSCHALTER
@@ -1821,9 +1939,11 @@ addEventListener("resize",()=>{layout();sunS.set(centers()[TABS.indexOf(view)]);
 document.fonts?.ready.then(()=>{layout();sunS.set(centers()[TABS.indexOf(view)]);requestTick()});
 
 /* Start */
-persist(false);renderAusgabe();go("ausgabe");sunS.set(centers()[0]);reveal();
+if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+persist();renderAusgabe();go("ausgabe");sunS.set(centers()[0]);reveal();
 {let v=null;try{v=sessionStorage.getItem("werf-view");sessionStorage.removeItem("werf-view")}catch(_){}if(v&&v!=="ausgabe"&&TABS.includes(v))go(v)}
 DB.open().then(()=>DB.galAll()).then(list=>{list.forEach(g=>(GAL[g.estate]=GAL[g.estate]||[]).push(g));if(current)refreshGal()}).then(()=>DB.all()).then(all=>{if(Object.keys(all).length){for(const [k,v] of Object.entries(all))IMG[k]=typeof v==="string"?{src:v}:v;renderAusgabe();requestTick()}});
 </script>
+<script src="cloud.js"></script>
 </body>
 </html>
