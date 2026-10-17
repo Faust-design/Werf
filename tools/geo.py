@@ -24,10 +24,10 @@ def hav(a, b, c, d):
     x = math.sin((c - a) * p / 2) ** 2 + math.cos(a * p) * math.cos(c * p) * math.sin((d - b) * p / 2) ** 2
     return 2 * R * math.asin(math.sqrt(x))
 def get(url, data=None):
-    for i in range(4):
+    for i in range(2):
         try:
             r = urllib.request.Request(url, data=data, headers={"User-Agent": UA})
-            return json.loads(urllib.request.urlopen(r, timeout=180).read().decode())
+            return json.loads(urllib.request.urlopen(r, timeout=60).read().decode())
         except Exception as e:
             print("retry", url[:80], e); time.sleep(5 * (i + 1))
     return None

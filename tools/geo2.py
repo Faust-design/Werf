@@ -6,6 +6,10 @@ s, w, n, e = -34.70, 18.10, -33.10, 20.60
 exec(open("tools/geo.py").read().split("s, w, n, e = BBOX")[0])  # BASE, GEB, norm, core, dom, hav, get
 WEB = {nm: web for nm, web, reg in BASE}; REGN = {nm: reg for nm, web, reg in BASE}
 todo = [x.strip() for x in open("tools/todo.txt", encoding="utf-8") if x.strip()]
+SH, NS = int(os.environ.get("SHARD", 0)), int(os.environ.get("SHARDS", 1))
+todo = todo[SH::NS]
+EP = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter", "https://overpass.private.coffee/api/interpreter"][SH % 3]
+OUT = f"tools/geo2-{SH}.json"
 BAD_PLACE = {"city", "town", "suburb", "neighbourhood", "village", "quarter", "county", "region", "state", "island"}
 def score(t, d, c, nm):
     if "highway" in t or "boundary" in t or "waterway" in t or "railway" in t or "route" in t: return -9
@@ -28,8 +32,8 @@ for name in todo:
     rx = ".*".join(words)
     parts = [f'nwr["name"~"{rx}",i]({s},{w},{n},{e});']
     if d: parts += [f'nwr["website"~"{re.escape(d.split(".")[0])}",i]({s},{w},{n},{e});', f'nwr["contact:website"~"{re.escape(d.split(".")[0])}",i]({s},{w},{n},{e});']
-    q = "[out:json][timeout:60];(" + "".join(parts) + ");out center tags 40;"
-    r = get("https://overpass-api.de/api/interpreter", urllib.parse.urlencode({"data": q}).encode()) or {"elements": []}
+    q = "[out:json][timeout:40];(" + "".join(parts) + ");out center tags 40;"
+    r = get(EP, urllib.parse.urlencode({"data": q}).encode()) or {"elements": []}
     best = None
     for el in r.get("elements", []):
         t = el.get("tags", {}); nm = t.get("name", "")
@@ -43,7 +47,7 @@ for name in todo:
         if not best or cand[:2] > best[:2]: best = cand
     if best:
         out[name] = dict(lat=round(best[2], 5), lng=round(best[3], 5), src="osm-suche", osm=best[4], score=best[0], km=round(-best[1], 1), tags=best[5])
-    print(name, "->", out.get(name, {}).get("osm"))
-    time.sleep(1.5)
-json.dump(out, open("tools/geo2.json", "w"), ensure_ascii=False, indent=1, sort_keys=True)
+    print(name, "->", out.get(name, {}).get("osm"), flush=True)
+    json.dump(out, open(OUT, "w"), ensure_ascii=False, indent=1, sort_keys=True)
+    time.sleep(1)
 print("found", len(out), "of", len(todo))
