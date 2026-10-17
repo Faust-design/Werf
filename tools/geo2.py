@@ -8,7 +8,7 @@ WEB = {nm: web for nm, web, reg in BASE}; REGN = {nm: reg for nm, web, reg in BA
 todo = [x.strip() for x in open("tools/todo.txt", encoding="utf-8") if x.strip()]
 SH, NS = int(os.environ.get("SHARD", 0)), int(os.environ.get("SHARDS", 1))
 todo = todo[SH::NS]
-EP = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter", "https://overpass.private.coffee/api/interpreter"][SH % 3]
+EP = ["https://overpass.kumi.systems/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://overpass-api.de/api/interpreter"][SH % 3]
 OUT = f"tools/geo2-{SH}.json"
 BAD_PLACE = {"city", "town", "suburb", "neighbourhood", "village", "quarter", "county", "region", "state", "island"}
 def score(t, d, c, nm):
