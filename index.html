@@ -265,6 +265,33 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .wlink{font-size:14px;color:var(--grey);text-decoration:underline;text-underline-offset:3px}
 /* Community */
 .cloud{margin-top:var(--s3);padding:var(--s2);background:#000;color:#fff}
+.sbr{display:flex;gap:var(--s3)}
+.sbar .dotm.vis{border-radius:3px}
+.mapbox .dot.vis circle.v{fill:var(--duene)!important;stroke:var(--duene)!important;stroke-dasharray:none!important}
+.report{margin-top:var(--s4)}
+.vcount{font-size:15px;margin:var(--s1) 0}.vcount b{font-size:44px;font-weight:800;font-variation-settings:"wdth" 68;letter-spacing:-.02em;margin-right:6px;color:var(--duene)}
+.vmap{display:block;width:100%;height:auto;background:#000;margin-top:var(--s1)}
+.vmap .vclu{fill:rgba(228,86,27,.08);stroke:rgba(255,255,255,.35);stroke-width:.25}
+.vmap .vd{fill:#555}.vmap .vv{fill:var(--duene);filter:drop-shadow(0 0 1.2px rgba(228,86,27,.9));cursor:pointer}
+.vmap .vlab{fill:#fff;font-size:2.6px;font-weight:700;letter-spacing:.02em;pointer-events:none}
+.vlist button{width:100%;display:flex;justify-content:space-between;gap:var(--s1);padding:12px 0;border-bottom:1px solid #e2e2dd;text-align:left;font-weight:600}
+.vlist small{color:var(--grey);font-weight:400;white-space:nowrap}
+.tripbar{background:#000;color:#fff;padding:var(--s2);margin:var(--s2) 0 var(--s3)}
+.tripbar b{display:block;font-size:17px;font-weight:750}.tripbar p{font-size:14px;color:#cfcfcf;margin:4px 0 var(--s2)}
+.tripbar .row2{display:flex;flex-wrap:wrap;gap:var(--s1)}
+.tripbar .btn{background:#fff;color:#000}.tripbar .btn.accent{background:var(--duene);color:#fff}.tripbar .btn.ghost{background:#1d1d1d;color:#fff}
+.tripbar .who2{display:flex;gap:6px;margin:6px 0 var(--s2)}.tripbar .who2 i{width:30px;height:30px;border-radius:50%;background:var(--duene);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:13px}
+.kfl{display:block;font-size:13px;color:var(--grey);margin:var(--s2) 0 6px}
+.krow2{display:flex;flex-wrap:wrap;gap:var(--s1)}
+.krow2 input{flex:1 1 200px;height:48px;font:inherit;font-size:17px;padding:0 14px;background:var(--soft);border:0;outline:none}
+.krow2 input:focus{box-shadow:0 0 0 2px var(--duene)}
+.konto .msg{font-size:13px;color:var(--duene);min-height:1em;margin-top:var(--s1)}
+.kfoot2{display:flex;gap:var(--s3);margin-top:var(--s2);padding-top:var(--s2);border-top:1px solid #e2e2dd}
+.commlist{margin-top:var(--s6);border-top:1px solid #000;padding-top:var(--s2)}
+.commlist h3{font-size:13px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin-bottom:var(--s1)}
+.crow{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s2);padding:12px 0;border-bottom:1px solid #e2e2dd}
+.crow b{display:block;font-size:14px}.crow small{display:block;font-size:12px;color:var(--grey)}.crow p{font-size:14px;color:#333;margin-top:4px}
+.crow .wlink.arm{color:var(--duene)}
 .ksec{font-size:13px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin:var(--s6) 0 var(--s1);padding-bottom:8px;border-bottom:1px solid #000}
 .krow{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);padding:14px 0;border-bottom:1px solid #e2e2dd}
 .krow b{display:block;font-weight:700}.krow small{display:block;font-size:13px;color:var(--grey)}
@@ -649,10 +676,10 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
   <section class="wrap page konto">
     <h1 class="cond rv">Konto</h1>
     <div class="cloud" id="cloudbox" hidden></div>
-    <h2 class="ksec">Einstellungen</h2>
-    <div class="krow"><span><b>Sprache</b><small>Deutsch, English, Afrikaans</small></span><span class="lang" data-langsw></span></div>
-    <h2 class="ksec">Auf diesem Gerät</h2>
-    <div class="imp" id="imp"></div>
+    <h2 class="ksec">Deine Güter</h2>
+    <div id="kVisited"></div>
+    <div id="kSettings" hidden><h2 class="ksec">Einstellungen</h2><div id="kSet"></div></div>
+    <div id="kDevice" hidden><h2 class="ksec">Für Editoren</h2><div class="imp" id="imp"></div></div>
     <h2 class="ksec">Rechtliches</h2>
     <div class="klinks"><a href="rechtliches.html#impressum">Impressum</a><a href="rechtliches.html#datenschutz">Datenschutz</a><a href="rechtliches.html#nutzung">Nutzungsbedingungen</a><a href="rechtliches.html#lizenzen">Lizenzen</a></div>
   </section>
@@ -987,6 +1014,12 @@ document.addEventListener("error",ev=>{const im=ev.target;if(im.tagName==="IMG"&
 
 /* ---------- Speicher ---------- */
 let saved=[];
+/* Besuchte Güter: Datum je Gut, nur auf dem Gerät und im eigenen Konto */
+let VISITED={};try{const v=JSON.parse(localStorage.getItem("werf-besucht")||"{}");if(v&&typeof v==="object")VISITED=v}catch(_){}
+const visitedOf=e=>e?(VISITED[e.id]||(e.bekannt?(e.datum||"ja"):null)):null;
+function saveVisited(){try{localStorage.setItem("werf-besucht",JSON.stringify(VISITED))}catch(_){}window.cloudDirty?.();
+  if(mapBuilt)$$("#map .dot").forEach(d=>d.classList.toggle("vis",!!visitedOf(byId[d.dataset.pick])));renderVisited()}
+function needLogin(msg){if(sheet.classList.contains("open"))closeSheet(true);go("konto");setTimeout(()=>window.cloudLoginHint?.(msg),350)}
 try{saved=JSON.parse(localStorage.getItem("werf-merkliste")||"[]")}catch(_){saved=[]}
 const DB={db:null,
   open(){return new Promise(res=>{try{const r=indexedDB.open("werf",3);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains("bilder"))r.result.createObjectStore("bilder");if(!r.result.objectStoreNames.contains("galerie"))r.result.createObjectStore("galerie")};r.onsuccess=()=>{this.db=r.result;res()};r.onerror=()=>res();r.onblocked=()=>res()}catch(_){res()}})},
@@ -1150,6 +1183,22 @@ $("#groups").addEventListener("click",ev=>{if(ev.target.id==="reset"){filter="al
 /* =========================================================
    EIGENE TABELLE: wird nur auf diesem Gerät gelesen und gespeichert
    ========================================================= */
+/* Deine Güter: Zähler, eigene Karte, Liste */
+function renderVisited(){const el=$("#kVisited");if(!el)return;
+  const vis=ESTATES.filter(e=>visitedOf(e)).sort((a,b)=>String(visitedOf(b)).localeCompare(String(visitedOf(a))));
+  const xs=CLUSTERS.flatMap(r=>[r.box[0],r.box[2]]),ys=CLUSTERS.flatMap(r=>[r.box[1],r.box[3]]);
+  const x0=Math.min(...xs)-4,y0=Math.min(...ys)-4,w=Math.max(...xs)+4-x0,hh=Math.max(...ys)+4-y0;
+  const P=pt=>f(pt[0]-x0)+" "+f(pt[1]-y0);
+  let svg=`<svg class="vmap" viewBox="0 0 ${f(w)} ${f(hh)}" role="img" aria-label="${tt("Karte deiner besuchten Güter")}">`;
+  svg+=CLUSTERS.map(r=>`<path class="vclu" d="M${r.poly.map(P).join("L")}Z"/>`).join("");
+  svg+=ESTATES.map(e=>{const k=toKm(e.lat,e.lng);return visitedOf(e)?"":`<circle class="vd" cx="${f(k[0]-x0)}" cy="${f(k[1]-y0)}" r=".45"/>`}).join("");
+  svg+=vis.map(e=>{const k=toKm(e.lat,e.lng);return `<circle class="vv" data-open="${e.id}" cx="${f(k[0]-x0)}" cy="${f(k[1]-y0)}" r="1.25"/>`}).join("");
+  svg+=CLUSTERS.map(r=>{const n=ESTATES.filter(e=>regionOf(e).k===r.k&&visitedOf(e)).length;return `<text class="vlab" x="${f(r.c[0]-x0)}" y="${f(r.c[1]-y0)}" text-anchor="middle">${esc(r.kurz||r.name)}${n?` · ${n}`:""}</text>`}).join("");
+  svg+="</svg>";
+  const fmt=v=>/^\d{4}-\d{2}-\d{2}$/.test(v)?new Date(v).toLocaleDateString(LOC,{day:"numeric",month:"short",year:"numeric"}):"";
+  el.innerHTML=`<p class="vcount"><b>${vis.length}</b> ${tt("von {n} Gütern besucht",{n:ESTATES.length})}</p>${svg}
+   ${vis.length?`<div class="vlist">${vis.slice(0,40).map(e=>`<button data-open="${e.id}"><span>${esc(e.name)}</span><small>${fmt(visitedOf(e))||esc(GEBIETE[e.gebiet].name)}</small></button>`).join("")}</div>`
+   :`<p class="small grey" style="margin-top:var(--s1)">${tt("Tippe in einem Eintrag oben auf „Besucht?“. Jedes Gut erscheint dann als oranger Punkt auf deiner Karte.")}</p>`}`}
 function renderImp(){const n=IMPORT?.rows?.length;
   $("#imp").innerHTML=(IMPORT?`<p>${tt("<b>Deine Tabelle ist geladen</b> ({n} Zeilen, {d}). Notizen und Besuche bleiben auf diesem Gerät.",{n,d:esc(new Date(IMPORT.at).toLocaleDateString(LOC))})}</p><label class="btn line filebtn">${tt("Neu laden")}<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label><button class="btn line" id="impDel">${tt("Entfernen")}</button>`
   :`<p>${tt("Lade die Excel-Tabelle, um Notizen, Besuche und „Will ich hin“ zu sehen. Sie wird nur auf diesem Gerät gespeichert.")}</p><label class="btn filebtn">${tt("Tabelle laden")}<input type="file" id="impFile" accept=".xlsx,.xls,.csv"></label>`)+edBox()}
@@ -1176,7 +1225,7 @@ document.addEventListener("change",async ev=>{if(ev.target.id!=="impFile"||!ev.t
   catch(err){p.textContent=err==="netz"?tt("Zum ersten Laden braucht die App einmal Internet. Versuche es mit Netz erneut."):err==="kopf"?tt("In der Tabelle fehlt die Spalte „Weingut“. Prüfe die Kopfzeile."):tt("Die Tabelle ließ sich nicht lesen. Speichere sie als .xlsx und versuche es erneut.")}});
 document.addEventListener("click",ev=>{if(ev.target.id!=="impDel")return;if(!confirm(tt("Deine Tabelle von diesem Gerät entfernen? Notizen und Besuche verschwinden aus der App, die Tabelle selbst bleibt unberührt.")))return;
   localStorage.removeItem("werf-import");location.reload()});
-renderImp();
+renderImp();renderVisited();
 
 /* =========================================================
    KARTE: Höhenlinien, mit dem Finger verschiebbar, mit Schwung
@@ -1195,7 +1244,7 @@ function buildMap(){
   s+=`<g id="umk"></g>`;
   s+=`<g id="rings"></g>`;
   ESTATES.slice().sort((a,b)=>!a.test-!b.test).forEach(e=>{const x=f(X(e.lng)),y=f(Y(e.lat)),det=!e.test;
-    s+=`<g class="dot${det?" det":""}${e.genau?"":" est"}" data-pick="${e.id}" role="button" tabindex="0" aria-label="${esc(e.name)}"><g><g class="inv"><circle class="hit" cx="${x}" cy="${y}" r="15" fill="transparent"/><circle class="v" cx="${x}" cy="${y}" r="${det?6.5:4.5}"/></g></g></g>`});
+    s+=`<g class="dot${det?" det":""}${e.genau?"":" est"}${visitedOf(e)?" vis":""}" data-pick="${e.id}" role="button" tabindex="0" aria-label="${esc(e.name)}"><g><g class="inv"><circle class="hit" cx="${x}" cy="${y}" r="15" fill="transparent"/><circle class="v" cx="${x}" cy="${y}" r="${det?6.5:4.5}"/></g></g></g>`});
   REGIONS.forEach(rg=>{const x=f(rg.c[0]*PXKM),y=f((rg.c[1]-rg.R*.55)*PXKM);
     const sm=" sm";s+=`<g class="town inv2${sm}"><rect x="${f(rg.c[0]*PXKM-3)}" y="${f(rg.c[1]*PXKM-3)}" width="6" height="6"/></g><text class="area inv2${sm}" x="${x}" y="${y}" text-anchor="middle">${esc(GEBIETE[rg.k].name)}</text>`});
   /* Beschriftungen der Regionen auseinanderschieben, damit sie sich in der Übersicht nicht überdecken */
@@ -1379,7 +1428,7 @@ function nearby(d){const last=byId[d.stops[d.stops.length-1]?.id];if(!last)retur
 function renderPlan(opts={}){
   const box=$("#plan");const d=activeDay();
   const dayBtns=PLAN.days.map(x=>`<button class="day" data-day="${x.id}" aria-pressed="${d&&x.id===d.id}"><b>${esc(DE_DAY.format(parseISO(x.date)))}</b><small>${tt(x.stops.length===1?"{n} Gut":"{n} Güter",{n:x.stops.length})}</small></button>`).join("");
-  let h=`<div class="days" role="group" aria-label="${tt("Tage")}">${dayBtns}<button class="day add" id="dayAdd">${tt("+ Tag")}</button></div>`;
+  let h=(window.tripBar?.()||"")+(PLAN.days.length?`<div class="days" role="group" aria-label="${tt("Tage")}">${dayBtns}<button class="day add" id="dayAdd">${tt("+ Tag")}</button></div>`:"");
   if(!d){h+=`<p class="empty">${tt("Plane deine Reise Tag für Tag. Lege einen Tag an und füge gemerkte Güter hinzu.")}<br><button class="btn" id="dayAdd2">${tt("Ersten Tag anlegen")}</button></p>`}
   else{
     const sc=schedule(d);
@@ -1437,7 +1486,7 @@ $("#plan").addEventListener("click",e=>{const t=e.target;const d=activeDay();
   if(t.id==="dayAdd"||t.id==="dayAdd2"){newDay();renderPlan();const b=$$("#plan .day:not(.add)").find(x=>x.getAttribute("aria-pressed")==="true");
     b?.scrollIntoView({inline:"center",behavior:RM?"auto":"smooth",block:"nearest"});if(b&&!RM)b.animate([{transform:"scale(.6)",opacity:0},{transform:"scale(1.06)",offset:.7},{transform:"none",opacity:1}],{duration:480,easing:"ease-out"});return}
   if(t.id==="dayDel"&&d){if(d.stops.length&&!confirm(tt("{d} mit {n} Stationen löschen?",{d:DE_LONG.format(parseISO(d.date)),n:d.stops.length})))return;
-    PLAN.days=PLAN.days.filter(x=>x!==d);PLAN.active=PLAN.days[0]?.id||null;savePlan();renderPlan();toast(tt("Tag gelöscht"));return}
+    window.tripDayDeleted?.(d.id);PLAN.days=PLAN.days.filter(x=>x!==d);PLAN.active=PLAN.days[0]?.id||null;savePlan();renderPlan();toast(tt("Tag gelöscht"));return}
   const du=t.closest("[data-dur]");if(du&&d){const s=d.stops[+du.dataset.dur],o=[45,60,90,120,180];s.dur=o[(o.indexOf(s.dur)+1)%o.length];savePlan();renderPlan({draw:false});
     if(!RM)$$("#plan .tm").forEach(el=>el.animate([{opacity:.3},{opacity:1}],{duration:300}));return}
   const rm=t.closest("[data-rm]");if(rm&&d){const i=+rm.dataset.rm,row=$$("#tl .st")[i];
@@ -1484,7 +1533,7 @@ function go(v,opts={}){
   if(!opts.keepSun)sunS.to(centers()[TABS.indexOf(v)],{damping:.8});
   $("#topTitle").textContent=TITLES[v];unpick();
   scrollTo(0,0);
-  if(v==="register")renderRegister();if(v==="merkliste")renderPlan({stagger:true});if(v==="ausgabe")layout();
+  if(v==="register")renderRegister();if(v==="merkliste")renderPlan({stagger:true});if(v==="konto")renderVisited();if(v==="ausgabe")layout();
   reveal($("#v-"+v));
   if(v==="karte"&&prev!=="karte")requestAnimationFrame(enterMap);
   if(prev!==v&&!RM)$("#v-"+v).animate([{opacity:0,transform:"scale(.985)",filter:"blur(8px)"},{opacity:1,transform:"none",filter:"blur(0)"}],{duration:480,easing:"cubic-bezier(.2,.8,.2,1)"});
@@ -1513,7 +1562,7 @@ function buildSheet(id){
   const seq=(view==="register"&&visibleIds.includes(id))?visibleIds:ESTATES.map(x=>x.id);
   const i=seq.indexOf(id),prev=byId[seq[(i-1+seq.length)%seq.length]],next=byId[seq[(i+1)%seq.length]];
   const on=saved.includes(id);
-  sinner.innerHTML=`<div class="sbar"><span class="grab"></span><button data-close>${tt("Schließen")}</button><button data-save aria-pressed="${on}"><span class="dotm"></span><span>${on?tt("Gemerkt"):tt("Merken")}</span></button></div>
+  sinner.innerHTML=`<div class="sbar"><span class="grab"></span><button data-close>${tt("Schließen")}</button><span class="sbr"><button data-visit aria-pressed="${!!visitedOf(e)}"><span class="dotm vis"></span><span>${visitedOf(e)?tt("Besucht"):tt("Besucht?")}</span></button><button data-save aria-pressed="${on}"><span class="dotm"></span><span>${on?tt("Gemerkt"):tt("Merken")}</span></button></span></div>
   <div class="smedia" id="smedia">${media(e)}</div>
   <div class="wrap sbody">
     <div class="loc"><span class="grey">${pad(e.nr)}</span><span>${esc(GEBIETE[e.gebiet].name)}${e.stufe==="beitrag"?`<b class="kick">${tt("Beitrag")}</b>`:""}</span></div>
@@ -1546,6 +1595,8 @@ function buildSheet(id){
       <div class="urlrow"><input type="url" id="bUrl" placeholder="${tt("Oder Bildlink einfügen: https://…")}" aria-label="${tt("Bildlink")}"><button class="btn line" id="bUrlOk">${tt("Übernehmen")}</button></div>
       <p class="status" id="bStatus" aria-live="polite"></p>
     </div>
+    ${window.cloudCommList?.(id)||""}
+    ${window.CLOUD?.ready?`<p class="report"><button class="wlink" data-report>${tt("Fehler oder Verstoß melden")}</button></p>`:""}
     <div class="pager"><button data-page="-1" data-id="${prev.id}"><small>${tt("Vorheriges")}</small>${esc(prev.name)}</button><button data-page="1" data-id="${next.id}"><small>${tt("Nächstes")}</small>${esc(next.name)}</button></div>
     <p class="swipehint">${tt("Seitlich wischen zum Blättern, nach unten ziehen zum Schließen")}</p>
   </div>`;
@@ -1745,7 +1796,7 @@ function lbInfo(){const g=LB.items[LB.i];if(!g)return;
   $("#lbdots").innerHTML=LB.items.length>1&&LB.items.length<16?LB.items.map((_,j)=>`<i class="${j===LB.i?"on":""}"></i>`).join(""):"";
   $("#lbcap").innerHTML=g.kind==="web"?tt("Freies Foto von {a}, Urheber und Lizenz dort",{a:`<a href="${COMMONS_PAGE(g.file)}" target="_blank" rel="noopener">Wikimedia Commons</a>`}):esc(g.cap);
   LB.arm=false;
-  $("#lbacts").innerHTML=g.kind==="own"?`<button data-lbact="titel">${tt("Als Titelbild")}</button>${window.CLOUD?.user?`<button data-lbact="teilen">${tt("Für alle vorschlagen")}</button>`:""}<button data-lbact="del">${tt("Löschen")}</button>`:`<button data-lbact="titel">${tt("Als Titelbild")}</button>`}
+  $("#lbacts").innerHTML=g.kind==="own"?`<button data-lbact="titel">${tt("Als Titelbild")}</button>${window.CLOUD?.user?`<button data-lbact="teilen">${tt("Für alle vorschlagen")}</button>`:""}<button data-lbact="del">${tt("Löschen")}</button>`:`<button data-lbact="titel">${tt("Als Titelbild")}</button>${g.kind==="comm"?(window.CLOUD?.editor?`<button data-lbact="entf">${tt("Für alle entfernen")}</button>`:`<button data-lbact="melden">${tt("Melden")}</button>`):""}`}
 function lbGo(i,v=0){LB.i=clamp(i,0,LB.items.length-1);lbX.to(-LB.i*innerWidth,{velocity:v,response:.42,damping:.9});lbInfo()}
 function openLB(i,fromEl){
   const e=byId[current];LB.items=galItems(e);LB.id=current;LB.i=i;LB.from=fromEl;if(!LB.items.length)return;
@@ -1790,6 +1841,8 @@ lb.addEventListener("click",async ev=>{const t=ev.target;
     const sl=lbtrack.children[LB.i];sl.animate([{opacity:1,transform:"scale(1)"},{opacity:0,transform:"scale(.85)"}],{duration:260,easing:"ease-in"}).onfinish=()=>{sl.remove();lbX.set(-Math.min(LB.i,LB.items.length-1)*innerWidth);lbGo(Math.min(LB.i,LB.items.length-1))};toast(tt("Foto gelöscht"));return}
   if(act==="teilen"){const rec=(GAL[LB.id]||[]).find(x=>x.gid===g.gid);t.disabled=true;t.textContent=tt("Wird gesendet …");
     const ok=await window.cloudSuggestPhoto?.(LB.id,rec);t.textContent=ok==="live"?tt("Geteilt"):ok?tt("Vorgeschlagen"):tt("Hat nicht geklappt");if(ok)toast(ok==="live"?tt("Für alle veröffentlicht"):tt("Danke. Das Foto erscheint nach der Prüfung für alle."));return}
+  if(act==="melden"){closeLB();window.cloudReport?.("photo",String(g.pid),LB.id);return}
+  if(act==="entf"){if(!LB.arm){LB.arm=true;t.textContent=tt("Wirklich entfernen?");t.classList.add("warn");return}closeLB();window.cloudRemovePhoto?.(g.pid);return}
   if(act==="titel"){const id=LB.id;
     if(g.kind==="web"||g.kind==="comm"){closeLB();await setImage(id,{src:g.src},tt("Titelbild übernommen."));toast(tt("Als Titelbild übernommen"));return}
     try{const blob=(GAL[id]||[]).find(x=>x.gid===g.gid)?.blob;WZ.base=await loadPhoto(blob);closeLB();
@@ -1847,7 +1900,8 @@ function saveEditor(id){const e=byId[id],ed={};const suggest=!!$("#edSuggest")?.
   toast(ok?(EDITS[id]?tt("Gesichert, auf diesem Gerät"):tt("Keine Änderungen")):tt("Speichern ist in dieser Ansicht nicht möglich"));
   renderImp();if(view==="register")renderRegister();if(FEATURED.includes(id))renderAusgabe()}
 sheet.addEventListener("click",ev=>{const t=ev.target;if(!current)return;
-  if(t.closest("[data-edit]")){openEditor(current);return}
+  if(t.closest("[data-edit]")){if(window.CLOUD?.ready&&!window.CLOUD.user){needLogin(tt("Melde dich an, um Texte für alle zu schreiben."));return}openEditor(current);return}
+  if(t.closest("[data-report]")&&current){window.cloudReport?.("estate",current,current);return}
   if(t.closest("[data-edcancel]")){buildSheet(current);sheet.scrollTo({top:0});return}
   if(t.closest("[data-edsave]")){saveEditor(current);return}
   const o=t.closest("[data-edorig]");if(o){ev.preventDefault();const k=o.dataset.edorig,e=byId[current],el=sinner.querySelector(`[data-ed="${k}"]`);
@@ -1917,6 +1971,11 @@ document.addEventListener("click",async ev=>{
   const a=t.closest("[data-area]");if(a){go("register",{area:a.dataset.area});return}
   const cl=t.closest("#legend [data-clu]");if(cl){$("#mapbox").scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});fitCluster(cl.dataset.clu);return}
   if(t.closest("[data-close]")){closeSheet();return}
+  const vs=t.closest("[data-visit]");
+  if(vs&&current){const was=!!VISITED[current];if(was)delete VISITED[current];else VISITED[current]=isoToday();saveVisited();
+    const on=!!visitedOf(byId[current]);vs.setAttribute("aria-pressed",on);vs.lastElementChild.textContent=on?tt("Besucht"):tt("Besucht?");
+    if(!was&&!RM)vs.querySelector(".dotm").animate([{transform:"scale(2.2)"},{transform:"none"}],{duration:420,easing:"cubic-bezier(.2,.9,.2,1)"});
+    toast(was?tt("Nicht mehr als besucht markiert"):tt("Als besucht markiert. Deine Karte findest du unter Konto."));return}
   const sv=t.closest("[data-save]");
   if(sv&&current){const was=saved.includes(current);saved=was?saved.filter(x=>x!==current):[...saved,current];const on=!was;
     sv.setAttribute("aria-pressed",on);sv.lastElementChild.textContent=on?tt("Gemerkt"):tt("Merken");
