@@ -95,13 +95,15 @@ addEventListener("online",()=>{if(user&&localAt()>syncedAt())push();refreshCommu
 /* ---------- Vorschläge ---------- */
 window.cloudSuggest=async(id,pub)=>{if(!user)return false;
   const rows=Object.entries(pub).map(([field,value])=>({estate_id:id,lang:LANG,field,value}));
-  const {error}=await sb.from("contributions").insert(rows);
+  const {data,error}=await sb.from("contributions").insert(rows).select("status");
   if(error){toast(tt("Vorschlag konnte nicht gesendet werden"));return false}
-  setTimeout(()=>toast(tt("Danke. Dein Vorschlag erscheint nach der Prüfung für alle.")),1400);await loadStats();render();return true};
+  const live=(data||[]).every(r=>r.status==="approved");
+  setTimeout(()=>toast(live?tt("Für alle veröffentlicht"):tt("Danke. Dein Vorschlag erscheint nach der Prüfung für alle.")),1400);await loadStats();render();if(live)refreshCommunity();return true};
 window.cloudSuggestPhoto=async(estate,rec)=>{if(!user||!rec?.blob)return false;
   const path=`${user.id}/${estate}-${rec.gid}.jpg`;
   const up=await sb.storage.from("fotos").upload(path,rec.blob,{contentType:"image/jpeg",upsert:true});if(up.error)return false;
-  const {error}=await sb.from("photos").insert({estate_id:estate,path,taken_at:rec.date?new Date(rec.date).toISOString():null});return !error};
+  const {data,error}=await sb.from("photos").insert({estate_id:estate,path,taken_at:rec.date?new Date(rec.date).toISOString():null}).select("status").single();
+  if(error)return false;await loadStats();render();if(data?.status==="approved"){refreshCommunity();return "live"}return "pending"};
 
 /* ---------- Oberfläche unter „Konto“ ---------- */
 function render(state){if(!box)return;
@@ -155,8 +157,8 @@ async function sendNew(){const name=$("#nName").value.trim(),web=$("#nWeb").valu
   const town=Object.entries(GEBIETE).find(([,G])=>norm(G.name)===norm(townName))?.[0]||slugify(townName)||"";
   let lat=null,lng=null;
   if($("#nGps").checked){try{const p=await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{timeout:12000}));lat=p.coords.latitude;lng=p.coords.longitude}catch(_){m.textContent=tt("Der Standort ließ sich nicht bestimmen. Wähle einen Ort oder ein Gut.");return}}
-  const {error}=await sb.from("estates").insert({id:slugify(name),name,web,town,lat,lng});
-  m.textContent=error?tt("Vorschlag konnte nicht gesendet werden"):tt("Danke. Das Gut erscheint nach der Prüfung für alle.")}
+  const {data,error}=await sb.from("estates").insert({id:slugify(name),name,web,town,lat,lng}).select("status").single();
+  m.textContent=error?tt("Vorschlag konnte nicht gesendet werden"):data?.status==="approved"?tt("Für alle veröffentlicht. Das Gut erscheint beim nächsten Start der App."):tt("Danke. Das Gut erscheint nach der Prüfung für alle.");if(data?.status==="approved")refreshCommunity()}
 
 /* ---------- Freigaben für Editoren ---------- */
 const FLD={lead:"Einleitung",architektur:"Architektur",kunst:"Kunst",garten:"Garten",kueche:"Küche",abschnitte:"Text",adresse:"Adresse",zeiten:"Öffnungszeiten",reservierung:"Reservierung",kinder:"Mit Kindern",web:"Website"};

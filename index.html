@@ -1789,7 +1789,7 @@ lb.addEventListener("click",async ev=>{const t=ev.target;
     LB.items=galItems(byId[LB.id]);if(!LB.items.length){lb.classList.remove("open");lbtrack.innerHTML="";toast(tt("Foto gelöscht"));return}
     const sl=lbtrack.children[LB.i];sl.animate([{opacity:1,transform:"scale(1)"},{opacity:0,transform:"scale(.85)"}],{duration:260,easing:"ease-in"}).onfinish=()=>{sl.remove();lbX.set(-Math.min(LB.i,LB.items.length-1)*innerWidth);lbGo(Math.min(LB.i,LB.items.length-1))};toast(tt("Foto gelöscht"));return}
   if(act==="teilen"){const rec=(GAL[LB.id]||[]).find(x=>x.gid===g.gid);t.disabled=true;t.textContent=tt("Wird gesendet …");
-    const ok=await window.cloudSuggestPhoto?.(LB.id,rec);t.textContent=ok?tt("Vorgeschlagen"):tt("Hat nicht geklappt");if(ok)toast(tt("Danke. Das Foto erscheint nach der Prüfung für alle."));return}
+    const ok=await window.cloudSuggestPhoto?.(LB.id,rec);t.textContent=ok==="live"?tt("Geteilt"):ok?tt("Vorgeschlagen"):tt("Hat nicht geklappt");if(ok)toast(ok==="live"?tt("Für alle veröffentlicht"):tt("Danke. Das Foto erscheint nach der Prüfung für alle."));return}
   if(act==="titel"){const id=LB.id;
     if(g.kind==="web"||g.kind==="comm"){closeLB();await setImage(id,{src:g.src},tt("Titelbild übernommen."));toast(tt("Als Titelbild übernommen"));return}
     try{const blob=(GAL[id]||[]).find(x=>x.gid===g.gid)?.blob;WZ.base=await loadPhoto(blob);closeLB();

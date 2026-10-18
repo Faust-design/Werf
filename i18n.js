@@ -1,6 +1,9 @@
 /* Oberfläche auf Englisch und Afrikaans. Schlüssel ist der deutsche Text. */
 window.I18N={
 en:{
+"Für alle veröffentlicht":"Published for everyone",
+"Für alle veröffentlicht. Das Gut erscheint beim nächsten Start der App.":"Published for everyone. The estate appears the next time you open the app.",
+"Geteilt":"Shared",
 "Konto":"Account",
 "Einstellungen":"Settings",
 "Sprache":"Language",
@@ -186,6 +189,9 @@ en:{
 "montags":"Mondays","sonntags (Museum)":"Sundays (museum)","montags (Galerie)":"Mondays (gallery)"
 },
 af:{
+"Für alle veröffentlicht":"Vir almal gepubliseer",
+"Für alle veröffentlicht. Das Gut erscheint beim nächsten Start der App.":"Vir almal gepubliseer. Die landgoed verskyn die volgende keer dat jy die app oopmaak.",
+"Geteilt":"Gedeel",
 "Konto":"Rekening",
 "Einstellungen":"Instellings",
 "Sprache":"Taal",
