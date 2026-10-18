@@ -167,24 +167,30 @@ const tripLink=()=>location.origin+location.pathname+"?reise="+encodeURIComponen
 const rerenderPlan=()=>{if(view==="merkliste")renderPlan({draw:false})};
 window.tripBar=()=>{if(!window.CLOUD.ready)return "";
   if(!user)return (saved.length||PLAN.days.length)?`<div class="tripbar"><b>${tt("Sichere deine Reise und melde dich an")}</b><p>${tt("Ohne Konto liegt deine Planung nur in diesem Browser. Safari löscht solche Daten, wenn du die Seite eine Woche nicht öffnest. Mit Konto ist sie gesichert, auf jedem Gerät da und lässt sich mit anderen teilen.")}</p><div class="row2"><button class="btn accent" data-tb="login">${tt("Anmelden")}</button></div></div>`:"";
-  if(TRIP){const names=tripMembers.map(m=>m.name||"?");
-    return `<div class="tripbar"><b>${tt("Gemeinsame Reise")}</b><div class="who2">${names.map(n=>`<i title="${esc(n)}">${esc(n.charAt(0).toUpperCase())}</i>`).join("")}</div><p>${names.length>1?tt("Ihr plant gemeinsam: {x}. Änderungen sehen alle sofort.",{x:names.map(esc).join(", ")}):tt("Noch plant niemand mit. Schick den Link an deine Mitreisenden.")}</p><div class="row2"><button class="btn accent" data-tb="share">${tt("Link teilen")}</button><button class="btn ghost" data-tb="leave">${tt("Reise verlassen")}</button></div></div>`}
+  if(TRIP){const nameOf=id=>{const m=tripMembers.find(x=>x.id===id);return m?(m.me?tt("dir"):m.name):null};
+    const rows=tripMembers.map(m=>`<li><i>${esc(m.name.charAt(0).toUpperCase())}</i><span><b>${esc(m.name)}${m.me?` <em>${tt("(du)")}</em>`:""}</b><small>${m.id===tripMeta.owner?tt("hat die Reise angelegt"):tt("dabei seit {d}",{d:new Date(m.since).toLocaleDateString(LOC,{day:"numeric",month:"short"})})}</small></span></li>`).join("");
+    const last=tripMeta.at&&nameOf(tripMeta.by)?`<p class="tlast">${tt("Zuletzt geändert von {x}, {t}",{x:esc(nameOf(tripMeta.by)),t:new Date(tripMeta.at).toLocaleString(LOC,{weekday:"short",hour:"2-digit",minute:"2-digit"})})}</p>`:"";
+    return `<div class="tripbar"><b>${tt("Gemeinsame Reise")}</b><p>${tripMembers.length>1?tt("{n} Personen planen mit. Änderungen sehen alle sofort.",{n:tripMembers.length}):tt("Noch plant niemand mit. Schick den Link an deine Mitreisenden.")}</p><ul class="tmembers">${rows}</ul>${last}<div class="row2"><button class="btn accent" data-tb="share">${tt("Link teilen")}</button><button class="btn ghost" data-tb="leave">${tt("Reise verlassen")}</button></div></div>`}
   if(PLAN.days.length)return `<div class="tripbar"><b>${tt("Gemeinsam planen")}</b><p>${tt("Teile diese Reise. Wer den Link öffnet und sich anmeldet, sieht und ändert die Planung mit.")}</p><div class="row2"><button class="btn accent" data-tb="create">${tt("Reise teilen")}</button></div></div>`;
   return ""};
 async function tripShare(){const url=tripLink();
   try{if(navigator.share){await navigator.share({title:"werf",text:tt("Plan die Reise mit mir in werf"),url});return}}catch(e){if(e?.name==="AbortError")return}
   try{await navigator.clipboard.writeText(url);toast(tt("Link kopiert"))}catch(_){prompt(tt("Link zum Teilen"),url)}}
-async function tripMembersLoad(){if(!TRIP)return;const {data}=await sb.from("trip_members").select("user_id").eq("trip_id",TRIP.id);
-  const ids=(data||[]).map(x=>x.user_id);if(!ids.length){tripMembers=[];return}
-  const n=await sb.from("profiles").select("id,name").in("id",ids);const nm={};(n.data||[]).forEach(x=>nm[x.id]=x.name);
-  tripMembers=ids.map(id=>({id,name:id===user?.id?tt("Du"):(nm[id]||tt("Unbekannt"))}))}
+let tripMeta={owner:null,by:null,at:0};
+async function tripMembersLoad(){if(!TRIP)return;const {data}=await sb.from("trip_members").select("user_id,joined_at").eq("trip_id",TRIP.id);
+  const rows=(data||[]).slice().sort((a,b)=>String(a.joined_at).localeCompare(String(b.joined_at)));if(!rows.length){tripMembers=[];return}
+  const n=await sb.from("profiles").select("id,name").in("id",rows.map(r=>r.user_id));const nm={};(n.data||[]).forEach(x=>nm[x.id]=x.name);
+  const before=new Set(tripMembers.map(m=>m.id));
+  tripMembers=rows.map(r=>({id:r.user_id,me:r.user_id===user?.id,name:(nm[r.user_id]||"").trim()||tt("Unbekannt"),since:r.joined_at}));
+  if(before.size)tripMembers.filter(m=>!before.has(m.id)&&!m.me).forEach(m=>toast(tt("{x} plant jetzt mit",{x:m.name})))}
 function tripSub(){if(tripChan){sb.removeChannel?.(tripChan);tripChan=null}if(!TRIP||!sb.channel)return;
   tripChan=sb.channel("trip-"+TRIP.id).on("postgres_changes",{event:"UPDATE",schema:"public",table:"trips",filter:"id=eq."+TRIP.id},p=>{if(p.new?.updated_by!==user?.id)tripPull()}).subscribe()}
 function applyTripData(d){if(!d||!Array.isArray(d.days))return;
   PLAN.days=d.days.map(x=>({...x,stops:(x.stops||[]).filter(s=>byId[s.id])}));if(!PLAN.days.some(x=>x.id===PLAN.active))PLAN.active=PLAN.days[0]?.id||null;
   W("werf-plan",JSON.stringify(PLAN))}
 async function tripPull(force){if(!TRIP||!user||!navigator.onLine)return;
-  const {data,error}=await sb.from("trips").select("data,updated_at").eq("id",TRIP.id).maybeSingle();if(error)return;
+  const {data,error}=await sb.from("trips").select("data,updated_at,updated_by,owner").eq("id",TRIP.id).maybeSingle();if(error)return;
+  if(data)tripMeta={owner:data.owner,by:data.updated_by,at:Date.parse(data.updated_at)||0};
   if(!data){TRIP=null;saveTrip();toast(tt("Die gemeinsame Reise gibt es nicht mehr. Deine Tage bleiben bei dir."));rerenderPlan();return}
   const at=Date.parse(data.updated_at)||0,n=tripMembers.length;await tripMembersLoad();
   if(force||at>tripAt){applyTripData(data.data);tripAt=at;W("werf-trip-at",String(at));rerenderPlan()}else if(tripMembers.length!==n)rerenderPlan()}
@@ -194,11 +200,11 @@ async function tripPush(){if(!TRIP||!user||!navigator.onLine)return;
   let days=PLAN.days;if(cur.data&&(Date.parse(cur.data.updated_at)||0)>tripAt){const mine=new Set(days.map(d=>d.id)),gone=new Set(TRIP.deleted||[]);
     days=[...days,...(cur.data.data?.days||[]).filter(d=>!mine.has(d.id)&&!gone.has(d.id))].sort((a,b)=>a.date.localeCompare(b.date));applyTripData({days})}
   const {data,error}=await sb.from("trips").update({data:{days:days.map(({id,date,start,stops})=>({id,date,start,stops}))}}).eq("id",TRIP.id).select("updated_at").maybeSingle();
-  if(!error&&data){tripAt=Date.parse(data.updated_at)||Date.now();W("werf-trip-at",String(tripAt));TRIP.deleted=[];saveTrip()}rerenderPlan()}
+  if(!error&&data){tripAt=Date.parse(data.updated_at)||Date.now();tripMeta.by=user.id;tripMeta.at=tripAt;W("werf-trip-at",String(tripAt));TRIP.deleted=[];saveTrip()}rerenderPlan()}
 const tripDirty=()=>{if(!TRIP)return;clearTimeout(tripPushT);tripPushT=setTimeout(tripPush,1200)};
 async function tripCreate(){const {data,error}=await sb.rpc("create_trip",{d:{days:PLAN.days}});
   const row=Array.isArray(data)?data[0]:data;if(error||!row){toast(tt("Das hat nicht geklappt."));return}
-  TRIP={id:row.id,code:row.code,deleted:[]};saveTrip();tripAt=Date.now();W("werf-trip-at",String(tripAt));tripSub();await tripMembersLoad();rerenderPlan();tripShare()}
+  TRIP={id:row.id,code:row.code,deleted:[]};saveTrip();tripAt=Date.now();tripMeta={owner:user.id,by:user.id,at:tripAt};W("werf-trip-at",String(tripAt));tripSub();await tripMembersLoad();rerenderPlan();tripShare()}
 async function tripJoin(code){if(TRIP?.code===code){try{localStorage.removeItem("werf-join")}catch(_){}go("merkliste");return}
   if(PLAN.days.length&&!confirm(tt("Einer gemeinsamen Reise beitreten? Deine bisherige Planung wird durch die gemeinsame ersetzt.")))  {try{localStorage.removeItem("werf-join")}catch(_){}return}
   const {data,error}=await sb.rpc("join_trip",{c:code});try{localStorage.removeItem("werf-join")}catch(_){}
@@ -214,6 +220,7 @@ document.getElementById("plan")?.addEventListener("click",ev=>{const b=ev.target
   if(a==="login"){go("konto");setTimeout(()=>window.cloudLoginHint?.(tt("Melde dich an, um deine Reise zu sichern.")),350)}
   if(a==="create")tripCreate();if(a==="share")tripShare();if(a==="leave")tripLeave()});
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")tripPull()});
+setInterval(()=>{if(TRIP&&user&&view==="merkliste"&&document.visibilityState==="visible")tripPull()},30000);
 /* Einladungslink: ?reise=CODE */
 try{const m=location.search.match(/[?&]reise=([0-9a-f]{16,64})/i);if(m){W("werf-join",m[1]);history.replaceState(null,"",location.pathname+location.hash)}}catch(_){}
 function checkJoin(){const code=S("werf-join");if(!code)return;

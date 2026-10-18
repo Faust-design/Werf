@@ -1,6 +1,13 @@
 /* Oberfläche auf Englisch und Afrikaans. Schlüssel ist der deutsche Text. */
 window.I18N={
 en:{
+"dir":"you",
+"(du)":"(you)",
+"hat die Reise angelegt":"started the trip",
+"dabei seit {d}":"joined {d}",
+"Zuletzt geändert von {x}, {t}":"Last changed by {x}, {t}",
+"{n} Personen planen mit. Änderungen sehen alle sofort.":"{n} people are planning. Everyone sees changes right away.",
+"{x} plant jetzt mit":"{x} has joined the trip",
 "Deine Güter":"Your estates",
 "Für Editoren":"For editors",
 "Karte deiner besuchten Güter":"Map of the estates you visited",
@@ -245,6 +252,13 @@ en:{
 "montags":"Mondays","sonntags (Museum)":"Sundays (museum)","montags (Galerie)":"Mondays (gallery)"
 },
 af:{
+"dir":"jou",
+"(du)":"(jy)",
+"hat die Reise angelegt":"het die reis begin",
+"dabei seit {d}":"sedert {d} by",
+"Zuletzt geändert von {x}, {t}":"Laas verander deur {x}, {t}",
+"{n} Personen planen mit. Änderungen sehen alle sofort.":"{n} mense beplan saam. Almal sien veranderinge dadelik.",
+"{x} plant jetzt mit":"{x} beplan nou saam",
 "Deine Güter":"Jou landgoedere",
 "Für Editoren":"Vir redakteurs",
 "Karte deiner besuchten Güter":"Kaart van die landgoedere wat jy besoek het",
